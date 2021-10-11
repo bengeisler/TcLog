@@ -1,0 +1,532 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="TcLogCore" Id="{81f82071-4a6c-4f57-9a56-0ade3c0c9c94}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcLogCore IMPLEMENTS ILogCore
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	{attribute 'hide'} 
+	LoggingSingleton			:	TcLog;									// Logger-Singleton: Required to provide Singleton-functionality for TcLog.
+        
+	{attribute 'hide'} 			
+	timeAsFileTime  			: 	T_FILETIME;								// Actual time as filetime, corrected to local time zone
+	{attribute 'hide'} 			
+	utcTimeAsFileTime  			: 	T_FILETIME;								// Actual time as filetime
+	{attribute 'hide'} 
+    timeAsSystemTime    		: 	TIMESTRUCT;								// Actual time as timestring
+	{attribute 'hide'} 
+	timeAsString				: 	STRING;									// Actual time as string
+	{attribute 'hide'} 
+	LogCache					:	DynamicStringBuffer;					// Dynamic string buffer to cache logs to be processed
+	{attribute 'hide'} 
+	startLoggingConfiguration 	: 	BOOL;									// Aux variable to provide fluent interface.
+	{attribute 'hide'} 
+	internalErrorOccured		:	BOOL;									// Aux variable to log internal errors to Error-property.
+	{attribute 'hide'}                                                        				
+	_config						:	ST_LoggingConfiguration;				// Logging configuration. Is set by invoking configuration methods.
+	{attribute 'hide'} 
+	_error						:	ST_Error;								// Contains information about internal error.
+END_VAR                                                     				
+VAR CONSTANT                                                	
+	DEFAULT_BUFFER_SIZE 		: UDINT := 1000;							// Default buffer size for FIFO.
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Nothing to be done here. Logger works by invoking its methods.
+// "RunLogger" contains all the implementation that has to be processed cyclically.]]></ST>
+    </Implementation>
+    <Method Name="BuildLoggingConfiguration" Id="{eddda5b2-7aed-4925-82c6-d1cc02972392}">
+      <Declaration><![CDATA[// Builds logging configuration.
+// Required to provide a fluent interface.
+// Has to be called at the begin of each method that configures the logger.
+{attribute 'hide'}
+METHOD PRIVATE BuildLoggingConfiguration : BOOL		
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT startLoggingConfiguration THEN
+	startLoggingConfiguration := TRUE;
+	
+	_config.RollingInterval := E_RollingInterval.DAILY;
+	_config.WriteToAds := FALSE;
+	_config.FileName := '';
+	_config.FilePath := 'c:\';
+	_config.MinimumLevel := E_LogLevel.DEBUG;
+	_config.Delimiter := '|';
+	_config.IncludeInstancePath := FALSE;
+	_config.LogFileLifespan := 0;
+	_config.TimestampFormat := 'YYYYMMDD_hhmm_';
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Configuration" Id="{05d13daa-5623-41b4-ae7a-41103edd188e}">
+      <Declaration><![CDATA[// Returns the current configuration of the logger.
+PROPERTY Configuration : ST_LoggingConfiguration]]></Declaration>
+      <Get Name="Get" Id="{7fd81f24-ea07-4e82-8550-f6e8c4f01f6e}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Configuration := _config;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="DeleteLogFilesAfterDays" Id="{474486bd-99ed-4f8f-b78b-4c4c8ea5cfc8}">
+      <Declaration><![CDATA[// Configuration method.
+// Sets the lifespan of log files. Once exceeded, they will be deleted.
+METHOD DeleteLogFilesAfterDays : REFERENCE TO TcLogCore
+VAR_INPUT
+	Lifespan	:	UINT;	// Lifespan of logfiles in days. Once exceeded, log files will be deleted.
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[BuildLoggingConfiguration();
+
+_config.LogFileLifespan := Lifespan;
+
+DeleteLogFilesAfterDays REF= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Error" Id="{6fb536cf-61ab-4968-94e7-6a0e9727441d}">
+      <Declaration><![CDATA[// Returns information about internal errors.
+PROPERTY Error : REFERENCE TO ST_Error]]></Declaration>
+      <Get Name="Get" Id="{8cae9ed2-7297-4ac6-8c06-f53f0a38a91c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Error REF= _error;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="FB_init" Id="{2d60871a-4b97-4f7f-9afb-379a9cace715}">
+      <Declaration><![CDATA[{attribute 'hide'} 
+METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+END_VAR
+VAR
+	x: TestFB;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[LoggingSingleton.Init(THIS^);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_reinit" Id="{7a4a2895-bc8f-4c5f-ae34-d121f2978f2a}">
+      <Declaration><![CDATA[{attribute 'hide'} 
+METHOD FB_reinit : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[LoggingSingleton.Init(THIS^);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FlushCache" Id="{d85421f8-abe8-45dc-a84c-3e5e5c8a80e5}">
+      <Declaration><![CDATA[METHOD FlushCache : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[LogCache.FlushCache();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="IncludeInstancePath" Id="{a3af0de9-912d-4997-ab67-451214c74322}">
+      <Declaration><![CDATA[// Configuration method.
+// Specifies, if instance path should be included in log file.
+METHOD IncludeInstancePath : REFERENCE TO TcLogCore
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[BuildLoggingConfiguration();
+
+_config.IncludeInstancePath := TRUE;
+
+IncludeInstancePath REF= This^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="LogCustomFormat" Id="{b807e7a1-f0a7-4c3d-8d69-25482e8e77ab}">
+      <Declaration><![CDATA[// Logger method.
+// Logs data in custom format. No additional formatting will be done.
+METHOD LogCustomFormat : BOOL
+VAR_INPUT
+	Data			:	T_MaxString;		// Data to be logged. No additional formatting will be done.
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _config.WriteToAds THEN 
+	ADSLOGSTR(ADSLOG_MSGTYPE_LOG OR ADSLOG_MSGTYPE_HINT, Data, ''); 
+END_IF
+
+IF _config.FileName <> '' THEN 
+	LogCache.AddLine(Data);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="LogStandardFormat" Id="{4daf0b25-d1e4-454d-aade-383a8ce5cffd}">
+      <Declaration><![CDATA[// Logger method.
+// Logs in the standard format. This includes
+// - timestamp
+// - log level
+// - log message
+// - instance path of logging source (optional)
+// The message will only be logged if the logging level exceeds the configured minimum logging level.
+METHOD LogStandardFormat : BOOL
+VAR_INPUT
+	Data			:	T_MaxString;	// Data to be logged. Additional formatting wil be done.
+	InstancePath	:	T_MaxString;	// Instance path of calling logger to locate source of logging message.
+	LogLevel		:	E_LogLevel;		// Log level of message.
+END_VAR
+VAR_INST
+	_StringBuilder	:	StringBuilder;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF LogLevel >= _config.MinimumLevel THEN
+	IF _config.WriteToAds THEN 
+		ADSLOGSTR(
+			ADSLOG_MSGTYPE_LOG OR LogLevel_To_AdsLogMsgType(LogLevel), 
+			_StringBuilder
+				.Reset()
+				.AppendIf(_config.IncludeInstancePath, InstancePath)
+				.AppendIf(_config.IncludeInstancePath, _config.Delimiter)
+				.Append(Data)
+				.ToString(), 
+			''
+		); 
+	END_IF
+	
+	IF _config.FileName <> '' THEN 
+		LogCache.AddLine(
+			_StringBuilder
+					.Reset()
+					.Append(timeAsString)
+					.Append(_config.Delimiter)
+					.Append(TO_STRING(LogLevel))
+					.AppendIf(_config.IncludeInstancePath, _config.Delimiter)
+					.AppendIf(_config.IncludeInstancePath, InstancePath)
+					.Append(_config.Delimiter)
+					.Append(Data)
+					.ToString()
+		);
+	END_IF
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MinimumLevel" Id="{2c064562-d9e7-47af-9d8e-602f3edf874f}">
+      <Declaration><![CDATA[// Configuration method.
+// Sets the minimum log level. Log messages below this level 
+// will not be logged.
+METHOD MinimumLevel : REFERENCE TO TcLogCore
+VAR_INPUT 
+	Level : E_LogLevel;		// Minimum log level to be logged.
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[BuildLoggingConfiguration();
+
+_config.MinimumLevel := Level;
+
+MinimumLevel REF=THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RollingIntervalReached" Id="{46ff7d34-a17e-4357-ab5f-b5dd39bd8821}">
+      <Declaration><![CDATA[// Checks the specified rolling interval for the file name.
+// Generates new file name if rolling intervall exceeded.
+{attribute 'hide'}
+METHOD PRIVATE RollingIntervalReached : BOOL
+VAR_INPUT
+	actualTime		:	TIMESTRUCT;
+	rollingInterval	:	E_RollingInterval;
+END_VAR
+VAR_INST	
+	rTrigNewHour	:	R_TRIG;
+	rTrigNewDay 	: 	R_TRIG;
+	rTrigNewMonth	:	R_TRIG;
+	
+	newHour : BOOL;
+	newDay 	: BOOL;
+	newMonth: BOOL;	
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[rTrigNewHour(CLK := (actualTime.wMinute = 0 AND actualTime.wSecond = 0), 
+	Q => newHour);
+rTrigNewDay(CLK := (newHour AND actualTime.wHour = 0), 
+	Q => newDay);
+rTrigNewMonth(CLK := (newDay AND actualTime.wDay = 1), 
+	Q => newMonth);
+
+RollingIntervalReached := 	(newHour 	AND rollingInterval = E_RollingInterval.Hourly) OR
+							(newDay 	AND rollingInterval = E_RollingInterval.Daily) 	OR
+							(newMonth 	AND rollingInterval = E_RollingInterval.Monthly);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RunLogger" Id="{46efeb58-43e6-49ca-b3ab-11723675a9a3}">
+      <Declaration><![CDATA[// Cyclic method of Logger.
+// This method has to be executed in every plc cycle and runs 
+// all internal methods that have to be executed cyclically.
+METHOD RunLogger : BOOL
+VAR_INPUT
+END_VAR
+VAR_INST
+	rTrigNewDay 			: 	R_TRIG;
+	TimeData				:	GenerateTimeData;
+	DeleteExpiredLogFiles	:	DeleteOldFiles;
+	_StringBuilder			:	StringBuilder;
+	timeStamp 				: 	STRING;	// Timestamp used for filename
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Generate time data (shared state)
+TimeData(
+	timeAsFileTime 		=> timeAsFileTime,
+	timeAsSystemTime 	=> timeAsSystemTime,
+	timeAsString		=> timeAsString
+	);
+
+// Generate new timestamp for filename
+IF RollingIntervalReached(timeAsSystemTime, _config.RollingInterval) OR TimeData.Done THEN
+	timeStamp := TimeData.ToString(_config.TimestampFormat);
+END_IF
+
+// Delete expired log files
+rTrigNewDay(CLK := timeAsSystemTime.wHour = 0);
+DeleteExpiredLogFiles(
+	StartScan 			:= 	rTrigNewDay.Q,
+	ExpirationInDays 	:=	_config.LogFileLifespan,
+	FilePath			:=	_config.FilePath,
+	FileName 			:=	_config.FileName,
+	ActualTime 			:= 	utcTimeAsFileTime	
+	);
+IF DeleteExpiredLogFiles.Error.Active THEN
+	internalErrorOccured := TRUE;
+	_error := DeleteExpiredLogFiles.Error;
+END_IF
+		
+// Persist logging messages to file
+LogCache.PersistToFile(
+	_StringBuilder
+		.Reset()
+		.Append(_config.FilePath)
+		.AppendIf(RIGHT(_config.FilePath, 1) <> '\', '\')
+		.Append(timeStamp)
+		.Append(_config.FileName)
+		.ToString()
+);
+IF LogCache.Error.Active THEN
+	internalErrorOccured := TRUE;
+	_error := LogCache.Error;
+END_IF
+
+// Reset Logging configuration: neccesary in order to provide fluent interface
+startLoggingConfiguration := FALSE;
+
+// Reset error flag each cycle to automatically confirm errors once they are gone.
+IF NOT internalErrorOccured THEN
+	_error.Active := FALSE;
+	_error.Code := E_ErrorCode.None;
+	_error.Info := '';
+END_IF
+internalErrorOccured := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetDelimiter" Id="{dc4c96e1-55b5-4273-91d7-557c2f84a7f0}">
+      <Declaration><![CDATA[// Configuration method
+// Sets delimiter between different columns of log file.
+METHOD SetDelimiter : REFERENCE TO TcLogCore
+VAR_INPUT
+	Delimiter : STRING(1);		// Delimiter between different columns of log file.
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[BuildLoggingConfiguration();
+
+_config.Delimiter := Delimiter;
+
+SetDelimiter REF=THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetRollingInterval" Id="{ccb17be1-b0a9-460e-b8ac-cfc6fa396397}">
+      <Declaration><![CDATA[// Configuration method
+// Sets the rolling interval of the log file. Once the rolling interval
+// expires, a file name with a new timestamp will be generated.
+METHOD SetRollingInterval : REFERENCE TO TcLogCore
+VAR_INPUT
+	Interval : E_RollingInterval;	// Rolling interval for log file. Once exceeded, a new log file will be created.
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[BuildLoggingConfiguration();
+
+_config.RollingInterval := Interval;
+
+SetRollingInterval REF= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TimestampFormat" Id="{ae9acdda-63d0-4143-b862-4bb5f08b434d}">
+      <Declaration><![CDATA[// Configuration method
+// Sets the format of the timestamp in the file name.
+METHOD TimestampFormat : REFERENCE TO TcLogCore
+VAR_INPUT
+	Format	:	STRING;		// Format the timestamp should have
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[BuildLoggingConfiguration();
+
+_config.TimestampFormat := Format;
+
+TimestampFormat REF= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WriteToAds" Id="{0ac63c1b-765b-40a5-b132-bcc3d18f2f34}">
+      <Declaration><![CDATA[// Configuration method.
+// Writes logdata to ADS log.
+METHOD WriteToAds : REFERENCE TO TcLogCore	
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[BuildLoggingConfiguration();
+
+_config.WriteToAds := TRUE;
+
+WriteToAds REF= This^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WriteToFile" Id="{c27c86ab-078c-40d8-8991-697cd72b869c}">
+      <Declaration><![CDATA[// Configuration method.
+// Writes log message to file.
+METHOD WriteToFile : REFERENCE TO TcLogCore
+VAR_INPUT
+	Path	 : T_MAXSTRING;		// File path to be written to. Has to end with '\'.
+	FileName : STRING;			// File name to be written to. Will automatically be prefixed by timestamp.
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[BuildLoggingConfiguration();
+
+_config.FilePath := Path;
+_config.FileName := FileName;
+
+WriteToFile REF= This^;]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="TcLogCore">
+      <LineId Id="109" Count="0" />
+      <LineId Id="139" Count="0" />
+    </LineIds>
+    <LineIds Name="TcLogCore.BuildLoggingConfiguration">
+      <LineId Id="6" Count="10" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="TcLogCore.Configuration.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcLogCore.DeleteLogFilesAfterDays">
+      <LineId Id="5" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+    <LineIds Name="TcLogCore.Error.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcLogCore.FB_init">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="TcLogCore.FB_reinit">
+      <LineId Id="7" Count="0" />
+    </LineIds>
+    <LineIds Name="TcLogCore.FlushCache">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="TcLogCore.IncludeInstancePath">
+      <LineId Id="6" Count="2" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="TcLogCore.LogCustomFormat">
+      <LineId Id="29" Count="4" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="TcLogCore.LogStandardFormat">
+      <LineId Id="9" Count="1" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="87" Count="1" />
+      <LineId Id="92" Count="4" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="14" Count="2" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="74" Count="4" />
+      <LineId Id="112" Count="1" />
+      <LineId Id="79" Count="1" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="19" Count="1" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="TcLogCore.MinimumLevel">
+      <LineId Id="5" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="TcLogCore.RollingIntervalReached">
+      <LineId Id="16" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="24" Count="1" />
+      <LineId Id="49" Count="1" />
+      <LineId Id="23" Count="0" />
+    </LineIds>
+    <LineIds Name="TcLogCore.RunLogger">
+      <LineId Id="242" Count="49" />
+      <LineId Id="72" Count="0" />
+    </LineIds>
+    <LineIds Name="TcLogCore.SetDelimiter">
+      <LineId Id="5" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="TcLogCore.SetRollingInterval">
+      <LineId Id="7" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="TcLogCore.TimestampFormat">
+      <LineId Id="6" Count="3" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="TcLogCore.WriteToAds">
+      <LineId Id="6" Count="0" />
+      <LineId Id="8" Count="1" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="TcLogCore.WriteToFile">
+      <LineId Id="7" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

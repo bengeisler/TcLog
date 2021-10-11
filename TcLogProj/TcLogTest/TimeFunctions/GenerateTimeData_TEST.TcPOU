@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="GenerateTimeData_TEST" Id="{7d8824eb-9fb9-4da8-9874-6ae610f7d88c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK GenerateTimeData_TEST EXTENDS TcUnit.FB_TestSuite
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CheckStringFormat();]]></ST>
+    </Implementation>
+    <Method Name="CheckStringFormat" Id="{5a0ae825-ada9-4cee-957b-1cdb64d42545}">
+      <Declaration><![CDATA[METHOD CheckStringFormat
+VAR_INPUT
+END_VAR
+VAR_INST
+	sut		:	GenerateTimeData;
+	expected:	STRING;
+	result 	: 	STRING;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[sut();
+
+TEST('CheckStringFormat');
+
+expected := CONCAT('-', TO_STRING(sut.timeAsSystemTime.wYear));
+IF sut.timeAsSystemTime.wMonth < 10 THEN expected := CONCAT(expected, '0'); END_IF
+expected := CONCAT(expected, TO_STRING(sut.timeAsSystemTime.wMonth));
+IF sut.timeAsSystemTime.wDay < 10 THEN expected := CONCAT(expected, '0'); END_IF
+expected := CONCAT(expected, TO_STRING(sut.timeAsSystemTime.wDay));
+expected := CONCAT(expected, '-');
+IF sut.timeAsSystemTime.wHour < 10 THEN expected := CONCAT(expected, '0'); END_IF
+expected := CONCAT(expected, TO_STRING(sut.timeAsSystemTime.wHour));
+expected := CONCAT(expected, ':');
+IF sut.timeAsSystemTime.wMinute < 10 THEN expected := CONCAT(expected, '0'); END_IF
+expected := CONCAT(expected, TO_STRING(sut.timeAsSystemTime.wMinute));
+expected := CONCAT(expected, ':');
+IF sut.timeAsSystemTime.wSecond < 10 THEN expected := CONCAT(expected, '0'); END_IF
+expected := CONCAT(expected, TO_STRING(sut.timeAsSystemTime.wSecond));
+expected := CONCAT(expected, '-');
+
+result := sut.ToString('-YYYYMMDD-hh:mm:ss-');
+	
+IF sut.Done THEN
+	AssertEquals(
+		Expected 	:= 	expected,
+		Actual 		:=  result,
+		Message		:=	'Time formatting failed.'
+	);
+
+	TEST_FINISHED();
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="GenerateTimeData_TEST">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="GenerateTimeData_TEST.CheckStringFormat">
+      <LineId Id="5" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="50" Count="3" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="10" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

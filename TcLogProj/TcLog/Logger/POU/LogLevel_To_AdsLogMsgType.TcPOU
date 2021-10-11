@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="LogLevel_To_AdsLogMsgType" Id="{c5255ff0-b51b-42de-ab62-e7b30a9b316a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION INTERNAL LogLevel_To_AdsLogMsgType : DWORD
+VAR_INPUT
+	LogLevel	:	E_LogLevel;
+END_VAR
+VAR
+	retVal : DWORD; 
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE LogLevel OF
+	E_LogLevel.Debug, E_LogLevel.Information:
+		retVal := ADSLOG_MSGTYPE_HINT;
+	E_LogLevel.Warning:
+		retVal := ADSLOG_MSGTYPE_WARN;
+	E_LogLevel.Error, E_LogLevel.Fatal:
+		retVal := ADSLOG_MSGTYPE_ERROR;
+	ELSE
+		retVal := ADSLOG_MSGTYPE_HINT;
+END_CASE
+
+LogLevel_To_AdsLogMsgType := retVal;]]></ST>
+    </Implementation>
+    <LineIds Name="LogLevel_To_AdsLogMsgType">
+      <LineId Id="7" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="19" Count="6" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="26" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

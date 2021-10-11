@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="StringBuilder" Id="{368e5049-935b-4562-a874-cb9be5225f7d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC StringBuilder IMPLEMENTS  IStringBuilder, ILimitedStringBuilder
+VAR
+	{attribute 'hide'}
+	_workString:STRING;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Source: ]]></ST>
+    </Implementation>
+    <Method Name="Append" Id="{3f45997e-6006-457f-9a9a-30ac281e8f8a}">
+      <Declaration><![CDATA[METHOD PUBLIC Append : IStringBuilder // Append text to t current build string.
+VAR_INPUT
+	text:STRING; //Text to append to current build string
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_workString:= Concat(_workString,text);
+Append := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AppendIf" Id="{341a7b9c-f058-4735-b313-3a46f602e9e1}">
+      <Declaration><![CDATA[METHOD PUBLIC AppendIf : IStringBuilder
+VAR_INPUT
+	condition	:	BOOL;
+	text		:	STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF condition THEN
+	_workString:= Concat(_workString,text);
+END_IF
+AppendIf := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="InsertAtLocation" Id="{b2ed9ced-aca1-4991-af8e-c808997da606}">
+      <Declaration><![CDATA[METHOD PUBLIC InsertAtLocation : IStringBuilder
+VAR_INPUT
+	Text:STRING;
+	Position:INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_workString := Tc2_Standard.INSERT(_WorkSTring,Text,Position);
+InsertAtLocation  := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PadLeft" Id="{26c6478b-ece5-418e-9b19-10604dda05cb}">
+      <Declaration><![CDATA[METHOD PadLeft : IStringBuilder
+VAR_INPUT
+	text	:	STRING; 	// Text to append to current build string
+	length	:	INT;		// Total length of text + padding
+	char	:	STRING(1);	// Character to be padded left of text
+END_VAR
+VAR
+	i			:	INT;
+	padLength	: 	INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Add left padding
+padLength := LEN(text) - length;
+FOR i := 1 TO padLength DO
+	_workString:= Concat(_workString, char);
+END_FOR
+
+// Add text
+_workString:= Concat(_workString,text);
+
+PadLeft := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Reset" Id="{f04f2676-7659-44a8-87c7-48fdd5328c04}">
+      <Declaration><![CDATA[METHOD PUBLIC Reset : ILimitedStringBuilder //Reset current build string to an empty string.]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_workString:='';
+Reset := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ToString" Id="{8c20dc6d-f3fa-4203-b887-d1b9b96ecacc}">
+      <Declaration><![CDATA[METHOD PUBLIC ToString : STRING //Returns current build string.]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ToString := _workString;]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="StringBuilder">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="StringBuilder.Append">
+      <LineId Id="9" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="StringBuilder.AppendIf">
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="6" Count="0" />
+    </LineIds>
+    <LineIds Name="StringBuilder.InsertAtLocation">
+      <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="StringBuilder.PadLeft">
+      <LineId Id="18" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="16" Count="1" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="StringBuilder.Reset">
+      <LineId Id="14" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="StringBuilder.ToString">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

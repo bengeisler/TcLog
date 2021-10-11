@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="GenerateTimeData" Id="{a1415746-5629-4121-889a-c1e5c1a14e0f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK GenerateTimeData
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+	timeAsFileTime			: 	T_FILETIME;
+	timeAsSystemTime		:	TIMESTRUCT;
+	timeAsString			:	T_MAXSTRING;
+	utcTimeAsFileTime		:	T_FILETIME;
+END_VAR
+VAR
+	fbSystemTime 			:	FB_LocalSystemTime;
+	fbSystemTime1   		: 	GETSYSTEMTIME;
+	fbTimeZoneInfo			: 	FB_GetTimeZoneInformation;
+	fbLocalTime				: 	FB_SystemTimeToTzSpecificLocalTime;
+	rTrigTimeValid			: 	R_TRIG;
+	fbUTCTime				:   FB_TzSpecificLocalTimeToFileTime;
+END_VAR
+VAR_TEMP
+	utcSystemTime	: TIMESTRUCT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbSystemTime(
+	sNetID	:=	'',
+	bEnable := 	TRUE,
+	dwCycle	:=	1,
+	dwOpt	:=	1,
+	tTimeout:=	DEFAULT_ADS_TIMEOUT
+);
+
+fbTimeZoneInfo(
+	sNetID := '',
+	bExecute := TRUE,
+	tTimeout := DEFAULT_ADS_TIMEOUT);
+
+fbUTCTime(
+	in := SYSTEMTIME_TO_FILETIME(timeAsSystemTime),
+	tzInfo := fbTimeZoneInfo.tzInfo);
+	
+timeAsSystemTime 	:=	fbSystemTime.systemTime;
+timeAsFileTime 		:= 	SYSTEMTIME_TO_FILETIME(timeAsSystemTime);
+timeAsString 		:= 	SYSTEMTIME_TO_STRING(timeAsSystemTime);
+utcTimeAsFileTime	:= 	fbUTCTime.out;
+
+rTrigTimeValid(CLK := fbSystemTime.bValid);
+]]></ST>
+    </Implementation>
+    <Property Name="Done" Id="{8f1defae-bf58-4f56-90d2-4c21f4d99c0d}">
+      <Declaration><![CDATA[PROPERTY Done : BOOL]]></Declaration>
+      <Get Name="Get" Id="{af33a3a4-b3f8-4a12-a02f-9f9071d422ae}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Done := rTrigTimeValid.Q;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ReplaceFormatPlaceholder" Id="{0cd85094-5af1-4c37-9111-0c2d17463a35}">
+      <Declaration><![CDATA[// Replaces placeholders in format string by the actual time values
+METHOD PRIVATE ReplaceFormatPlaceholder : STRING
+VAR_INPUT
+	Format			:	STRING;
+	Length			:	INT;
+	TimeType		:	STRING(1);
+END_VAR
+VAR
+	i				:	INT;
+	replaceString	:	STRING;
+	timeString 		: 	STRING;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF    TimeType = 'Y' 	THEN timeString := TO_STRING(timeAsSystemTime.wYear); 
+ELSIF TimeType = 'M' 	THEN timeString := TO_STRING(timeAsSystemTime.wMonth); 
+ELSIF TimeType = 'D' 	THEN timeString := TO_STRING(timeAsSystemTime.wDay); 
+ELSIF TimeType = 'h' 	THEN timeString := TO_STRING(timeAsSystemTime.wHour); 
+ELSIF TimeType = 'm' 	THEN timeString := TO_STRING(timeAsSystemTime.wMinute); 
+ELSIF TimeType = 's' 	THEN timeString := TO_STRING(timeAsSystemTime.wSecond); 
+ELSIF TimeType = 'i' 	THEN timeString := TO_STRING(timeAsSystemTime.wMilliseconds); 
+END_IF
+
+replaceString := '';
+
+IF Length > LEN(timeString) THEN
+	FOR i:=1 TO Length - LEN(timeString) DO
+		replaceString := CONCAT(replaceString, '0');
+	END_FOR
+	replaceString := CONCAT(replaceString, timeString);
+ELSE
+	replaceString := RIGHT(timeString, Length);
+END_IF
+
+ReplaceFormatPlaceholder := REPLACE(Format, replaceString, Length, FIND(Format, TimeType));]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ToString" Id="{8e5c5f29-5e99-4676-80b8-ceef73719a56}">
+      <Declaration><![CDATA[// Returns a formatted string containing the actual time information 
+//	Y : year
+//	M : month
+// 	D : day
+//  h : hour 
+//  m : minute
+//  s : second
+//  i : millisecond
+// 
+// Example: _YYMMDD-hh:mm:ss:iii_
+// => _20210812-12:30:22:123_
+METHOD ToString : T_MAXSTRING
+VAR_INPUT
+	Format	:	STRING;
+END_VAR
+VAR
+	inputString		:	STRING;
+	char			:	STRING(1);
+	formattedString : 	T_MAXSTRING;
+	
+	year			:	INT := 0;
+	month			:	INT := 0;
+	day				:	INT := 0;
+	hour			:	INT := 0;
+	minute			:	INT := 0;
+	second			:	INT := 0;
+	millisecond		:	INT := 0;
+END_VAR
+VAR CONSTANT
+	VALID_FORMAT : STRING := 'YMDhms';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Parses "Format" and returns a adequatly formatted string containing the time information
+
+inputString := Format;
+
+WHILE LEN(inputString) > 0 DO
+	char := LEFT(inputString, 1);
+	
+	IF    char = 'Y' THEN 	year := year + 1;
+	ELSIF char = 'M' THEN	month := month + 1;
+	ELSIF char = 'D' THEN	day := day + 1;
+	ELSIF char = 'h' THEN	hour := hour + 1;
+	ELSIF char = 'm' THEN	minute := minute + 1;
+	ELSIF char = 's' THEN 	second := second + 1;
+	ELSIF char = 'i' THEN 	millisecond := millisecond + 1;
+	END_IF
+	
+	inputString := DELETE(inputString, 1, 1);
+END_WHILE
+
+formattedString := ReplaceFormatPlaceholder(Format, year, 'Y');
+formattedString := ReplaceFormatPlaceholder(formattedString, month, 'M');
+formattedString := ReplaceFormatPlaceholder(formattedString, day, 'D');
+formattedString := ReplaceFormatPlaceholder(formattedString, hour, 'h');
+formattedString := ReplaceFormatPlaceholder(formattedString, minute, 'm');
+formattedString := ReplaceFormatPlaceholder(formattedString, second, 's');
+formattedString := ReplaceFormatPlaceholder(formattedString, millisecond, 'i');
+
+ToString := formattedString;
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="GenerateTimeData">
+      <LineId Id="48" Count="6" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="91" Count="2" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="82" Count="0" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="90" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="96" Count="0" />
+      <LineId Id="126" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="120" Count="0" />
+    </LineIds>
+    <LineIds Name="GenerateTimeData.Done.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="GenerateTimeData.ReplaceFormatPlaceholder">
+      <LineId Id="30" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="34" Count="4" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="45" Count="1" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="49" Count="2" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="GenerateTimeData.ToString">
+      <LineId Id="5" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="55" Count="2" />
+      <LineId Id="59" Count="3" />
+      <LineId Id="90" Count="0" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="151" Count="5" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="71" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

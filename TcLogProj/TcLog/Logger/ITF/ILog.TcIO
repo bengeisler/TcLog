@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <Itf Name="ILog" Id="{412ad8b8-57e1-419f-af21-e16e50d36d6b}">
+    <Declaration><![CDATA[INTERFACE ILog
+]]></Declaration>
+    <Method Name="SetLogger" Id="{d997efda-3f08-4614-802a-e86242c0eb02}">
+      <Declaration><![CDATA[METHOD SetLogger : BOOL
+VAR_INPUT
+	Ref2Core : ILogCore;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

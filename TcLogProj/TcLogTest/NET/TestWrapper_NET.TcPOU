@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="TestWrapper_NET" Id="{b95f26a9-ba1e-45bd-8717-c0be8c66e163}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TestWrapper_NET
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	CoreLogger	:	TcLogCore;
+	Logger		:	TcLog;
+	error		:	ST_Error;
+	bFlushCache :   BOOL;
+	
+	// Test drivers
+	fbTime: GenerateTimeData;
+	fbSetSystemTime : NT_SetLocalTime;
+	Set_system_time : BOOL;
+	System_time : STRING;
+	ActualTime : STRING;
+	
+	// Exchanged variables with .NET tests
+	filePath	:	STRING;
+	fileName	:	STRING;
+	delimiter	:	STRING(1);
+	
+	Persist_simple_error_message_run : BOOL;
+	Persist_simple_error_message_data: STRING;
+	
+	Do_not_persist_logs_below_log_level_run : BOOL;
+	
+	Log_message_contains_instance_path_run : BOOL;
+	
+	Log_message_uses_correct_delimiter_run : BOOL;
+	Log_message_uses_correct_delimiter_data: STRING;
+	
+	Log_message_contains_custom_formatted_timestamp_run : BOOL;
+	
+	Delete_logs_if_expired_run : BOOL;
+	
+	New_logfile_is_created_if_rolling_interval_rolls_run : BOOL;
+
+	Same_log_file_is_used_until_rolling_interval_rolls : BOOL;	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// ****** U N I T   T E S T S ******
+
+
+
+
+// Set up TcLog
+CoreLogger
+	.IncludeInstancePath()
+	.MinimumLevel(E_LogLevel.Warning)
+	.SetDelimiter(delimiter)
+	.SetRollingInterval(E_RollingInterval.Hourly)
+	.DeleteLogFilesAfterDays(1)
+	.TimestampFormat('_YYMMDD-hh-mm-ss_')
+	.WriteToAds()
+	.WriteToFile(filePath, fileName)
+	.RunLogger();
+
+// For debug purposes only
+error := CoreLogger.Error;
+
+IF bFlushCache THEN CoreLogger.FlushCache(); END_IF
+	
+// Test drivers
+fbTime(timeAsString => ActualTime);
+fbSetSystemTime(
+	NETID 	:= '',
+	TIMESTR := STRING_TO_SYSTEMTIME(System_time),
+	START 	:= Set_system_time,
+	TMOUT	:= T#2S
+	);
+
+// Execute tests
+IF Persist_simple_error_message_run THEN
+	Persist_simple_error_message_run := FALSE;
+	Logger
+		.Error(Persist_simple_error_message_data);
+END_IF
+
+IF Do_not_persist_logs_below_log_level_run THEN
+	Do_not_persist_logs_below_log_level_run := FALSE;
+	Logger
+		.Information('Nothing');
+END_IF
+
+IF Log_message_contains_instance_path_run THEN
+	Log_message_contains_instance_path_run := FALSE;
+	Logger
+		.Error('Nothing');
+END_IF
+
+IF Log_message_uses_correct_delimiter_run THEN
+	Log_message_uses_correct_delimiter_run := FALSE;
+	Logger
+		.Error(Log_message_uses_correct_delimiter_data);
+END_IF
+
+IF Log_message_contains_custom_formatted_timestamp_run THEN
+	Log_message_contains_custom_formatted_timestamp_run := FALSE;
+	Logger
+		.Error('Test message');
+END_IF
+
+IF Delete_logs_if_expired_run THEN
+	Delete_logs_if_expired_run := FALSE;
+	Logger
+		.Error('Test message');
+END_IF
+
+IF New_logfile_is_created_if_rolling_interval_rolls_run THEN
+	New_logfile_is_created_if_rolling_interval_rolls_run := FALSE;
+	Logger
+		.Error('Test message');
+END_IF
+
+IF Same_log_file_is_used_until_rolling_interval_rolls THEN
+	Same_log_file_is_used_until_rolling_interval_rolls := FALSE;
+	Logger
+		.Error('Test message');
+END_IF
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="TestWrapper_NET">
+      <LineId Id="357" Count="0" />
+      <LineId Id="361" Count="0" />
+      <LineId Id="360" Count="0" />
+      <LineId Id="359" Count="0" />
+      <LineId Id="358" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="17" Count="2" />
+      <LineId Id="21" Count="5" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="318" Count="0" />
+      <LineId Id="315" Count="1" />
+      <LineId Id="373" Count="0" />
+      <LineId Id="372" Count="0" />
+      <LineId Id="94" Count="0" />
+      <LineId Id="254" Count="0" />
+      <LineId Id="256" Count="0" />
+      <LineId Id="270" Count="0" />
+      <LineId Id="274" Count="2" />
+      <LineId Id="273" Count="0" />
+      <LineId Id="277" Count="0" />
+      <LineId Id="257" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="71" Count="4" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="80" Count="4" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="89" Count="4" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="116" Count="0" />
+      <LineId Id="102" Count="3" />
+      <LineId Id="100" Count="0" />
+      <LineId Id="168" Count="0" />
+      <LineId Id="161" Count="0" />
+      <LineId Id="166" Count="0" />
+      <LineId Id="164" Count="1" />
+      <LineId Id="160" Count="0" />
+      <LineId Id="177" Count="0" />
+      <LineId Id="191" Count="3" />
+      <LineId Id="190" Count="0" />
+      <LineId Id="365" Count="0" />
+      <LineId Id="367" Count="3" />
+      <LineId Id="364" Count="0" />
+      <LineId Id="246" Count="0" />
+      <LineId Id="250" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

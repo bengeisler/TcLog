@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="DeleteOldFiles" Id="{53f55453-df08-4a77-a3eb-05859cd9b0ad}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK DeleteOldFiles
+VAR_INPUT
+	StartScan			:	BOOL;		//	Rising edge starts scan for out-of-date log files and deletes them.
+	ExpirationInDays	:	UINT;		// 	Files will be deleted if older than n days
+	FilePath			:	T_MAXSTRING;//	Path to files to be deleted
+	FileName			:	T_MAXSTRING;//	Only files which match this filename will be deleted
+	ActualTime			:	T_FILETIME;	// 	Actual Time 
+END_VAR
+VAR_OUTPUT
+	Error				:	ST_Error;	//	Error information
+END_VAR
+VAR CONSTANT
+	STATE_IDLE							:	UINT	:=	0;
+	STATE_SEARCH_NEXT_FILE				:	UINT	:= 	1;
+	STATE_WAIT_UNTIL_EXECUTION_DONE 	:	UINT 	:= 	2;
+	STATE_PROCESS_FOUND_FILES			:	UINT	:= 	3;
+	STATE_CHECK_IF_FILE_IS_DIR			:	UINT	:=	4;
+	STATE_CHECK_FILE_TIME				:	UINT	:= 	5;
+	STATE_DELETE_FILE					:	UINT	:= 	6;
+	STATE_FILE_DELETED					:	UINT	:= 	7;
+	
+	ONE_DAY_IN_SECONDS				:	LREAL 	:=	24*3600.0;
+	MAX_NUMBER_OF_FILES					:	UDINT 	:=	100;
+END_VAR
+VAR
+	fbEnum 				: 	FB_EnumFindFileList;
+	fTrigEnumBusy		:	F_TRIG;
+	fbDeleteFile		:	FB_FileDelete;
+	fTrigDeleteFileBusy	:	F_TRIG;
+	state				:	UINT	:= 0;
+	filesList       	: 	ARRAY[1..100] OF ST_FindFileEntry;
+	deleteFileIndex		:	UDINT;
+	deleteFileName		:	T_MAXSTRING;
+	eEnumCmd			:	E_EnumCmdType;
+	bFileDeleted		:	BOOL;
+END_VAR
+VAR_TEMP
+	timeLastWriteAccess	:	T_ULARGE_INTEGER;
+	fileTimeAsULINT		:	T_ULARGE_INTEGER;
+	fileTimeDifference	:	T_ULARGE_INTEGER;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// State machine to delete all due files.
+// It first enumerates all files in the specified directory
+// and then deletes all files that have overpassed the specified due date
+CASE state OF
+	STATE_IDLE:
+		IF StartScan THEN
+			eEnumCmd:= eEnumCmd_First;
+			deleteFileIndex := 1;
+			state := STATE_SEARCH_NEXT_FILE;
+		END_IF
+		
+	STATE_SEARCH_NEXT_FILE:
+		IF fTrigEnumBusy.Q THEN
+			state := STATE_WAIT_UNTIL_EXECUTION_DONE;
+		END_IF
+		
+	STATE_WAIT_UNTIL_EXECUTION_DONE:
+		IF NOT fbEnum.bError THEN
+			IF NOT fbEnum.bEOE THEN
+				IF fbEnum.nFindFiles < MAX_NUMBER_OF_FILES THEN
+					State := STATE_SEARCH_NEXT_FILE;
+				ELSE
+					eEnumCmd := eEnumCmd_Abort;
+					state := STATE_PROCESS_FOUND_FILES;
+				END_IF
+			ELSE
+				state := STATE_PROCESS_FOUND_FILES;
+			END_IF
+		ELSE
+			state := STATE_IDLE;
+		END_IF
+		
+	STATE_PROCESS_FOUND_FILES:
+		IF deleteFileIndex > fbEnum.nFindFiles THEN
+			state := STATE_IDLE;
+		ELSE
+			state := STATE_CHECK_IF_FILE_IS_DIR;
+		END_IF
+		
+	STATE_CHECK_IF_FILE_IS_DIR:
+		IF NOT filesList[deleteFileIndex].fileAttributes.bDirectory THEN
+			state := STATE_CHECK_FILE_TIME;
+		ELSE
+			deleteFileIndex := deleteFileIndex + 1;
+			state := STATE_PROCESS_FOUND_FILES;
+		END_IF
+		
+	STATE_CHECK_FILE_TIME:		
+		IF GetFileAgeInSeconds(ActualTime, filesList[deleteFileIndex]) > (ExpirationInDays * ONE_DAY_IN_SECONDS) THEN
+			state := STATE_DELETE_FILE;
+		ELSE
+			deleteFileIndex := deleteFileIndex + 1;
+			state := STATE_PROCESS_FOUND_FILES;
+		END_IF
+	
+	STATE_DELETE_FILE:
+		deleteFileName := CONCAT(FilePath, filesList[deleteFileIndex].sFileName);
+		
+		IF fTrigDeleteFileBusy.Q THEN
+			deleteFileIndex := deleteFileIndex + 1;
+			bFileDeleted := TRUE;
+			state := STATE_FILE_DELETED;
+		END_IF
+		IF fbDeleteFile.bError THEN
+			state := STATE_IDLE;
+		END_IF
+		
+	STATE_FILE_DELETED:		
+		// This state is needed to generate a rising edge for FB_FileDelete
+		IF NOT bFileDeleted THEN
+			state := STATE_PROCESS_FOUND_FILES;
+		END_IF
+		bFileDeleted := FALSE;
+
+END_CASE
+
+// Function blocks used in state machine
+
+// Search files in given directory
+fbEnum(	sNetId := '',
+		eCmd := eEnumCmd,
+		sPathName := CONCAT(FilePath, CONCAT('*', FileName)),
+		bExecute := (state = STATE_SEARCH_NEXT_FILE) OR (eEnumCmd = eEnumCmd_Abort AND state <> STATE_IDLE),
+		pFindList := ADR(filesList),
+		cbFindList := SIZEOF(filesList),
+		tTimeout := T#10S);
+
+fTrigEnumBusy(CLK:=fbEnum.bBusy);
+
+// Delete files
+fbDeleteFile(	sNetId := '',
+				sPathName := deleteFileName,
+				bExecute := (state = STATE_DELETE_FILE),
+				tTimeout := T#10S);
+				
+fTrigDeleteFileBusy(CLK := fbDeleteFile.bBusy);
+
+// Error handling
+Error.Active := FALSE;
+Error.Code := E_ErrorCode.None;
+Error.Info := '';
+
+IF fbEnum.bError THEN
+	Error.Active := TRUE;
+	Error.Code := E_ErrorCode.EnumeratingFilesInSpecifiedDirectoryFailed;
+	Error.Info := CONCAT('Enumerating files in specified directory failed. Error thrown by FB_EnumFindFileList. Consult Beckhoff InfoSys. Internal Error: ', UDINT_TO_STRING(fbEnum.nErrId));
+END_IF
+			
+IF fbDeleteFile.bError THEN
+	Error.Active := TRUE;
+	Error.Code := E_ErrorCode.DeletingFileFailed;
+	Error.Info := CONCAT('Deleting expired log file in specified directory failed. Error thrown by FB_FileDelete. Consult Beckhoff InfoSys. Internal Error: ', UDINT_TO_STRING(fbDeleteFile.nErrId));
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="DeleteOldFiles">
+      <LineId Id="10" Count="21" />
+      <LineId Id="278" Count="0" />
+      <LineId Id="32" Count="24" />
+      <LineId Id="63" Count="11" />
+      <LineId Id="330" Count="0" />
+      <LineId Id="75" Count="1" />
+      <LineId Id="318" Count="2" />
+      <LineId Id="322" Count="1" />
+      <LineId Id="329" Count="0" />
+      <LineId Id="324" Count="0" />
+      <LineId Id="326" Count="2" />
+      <LineId Id="77" Count="3" />
+      <LineId Id="236" Count="0" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="238" Count="0" />
+      <LineId Id="86" Count="16" />
+      <LineId Id="152" Count="0" />
+      <LineId Id="154" Count="2" />
+      <LineId Id="103" Count="0" />
+      <LineId Id="105" Count="5" />
+      <LineId Id="112" Count="2" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
