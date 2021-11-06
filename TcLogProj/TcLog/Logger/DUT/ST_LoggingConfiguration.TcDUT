@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="ST_LoggingConfiguration" Id="{e234f20f-faa3-4205-bb61-8b4ba6c5bdfb}">
+    <Declaration><![CDATA[// Configuration of TcLog
+TYPE ST_LoggingConfiguration :
+STRUCT
+	FileName 			: 	STRING;
+	FilePath			:	T_MAXSTRING;
+	IncludeInstancePath : 	BOOL;
+	WriteToAds			: 	BOOL;
+	RollingInterval		:	E_RollingInterval;
+	MinimumLevel		:	E_LogLevel;
+	Delimiter			:	STRING(1);
+	LogFileLifespan		:	UINT;
+	TimestampFormat		:	STRING;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -33,7 +33,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{534B7BB3-9B49-4F2B-86CC-2317930EA23D}" Name="TcLog" PrjFilePath="TcLog\TcLog.plcproj" TmcFilePath="TcLog\TcLog.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcLog\TcLog.tmc">
 					<Name>TcLog Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>

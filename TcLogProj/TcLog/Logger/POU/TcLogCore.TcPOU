@@ -109,7 +109,6 @@ VAR_INPUT
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
 END_VAR
 VAR
-	x: TestFB;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[LoggingSingleton.Init(THIS^);]]></ST>
