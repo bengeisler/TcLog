@@ -9,7 +9,7 @@ And that's pretty much all you can do in TwinCAT when it comes to logging.
 
 Therefore I started the open source project **TcLog**. TcLog is a logging framework that can be integrated as a library in TwinCAT via NuGet. It allows a flexible configuration of the logs as well as the specification of different log targets. 
 
-The source code is available at [GitHub](https://github.com/bengeisler/TcLog) and the precompiled library can be downloaded [here](https://benediktgeisler.de/TcLog.library).
+The source code is available at [GitHub](https://github.com/bengeisler/TcLog) and the precompiled library can be downloaded [here](https://benediktgeisler.de/artifacts/TcLog.library).
 
 
 ## TcLog: Flexible logging framework
