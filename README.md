@@ -37,7 +37,7 @@ Logger.Debug('This is a debug message.');
 Logger.Error('This is an error message.');		
 ```
 
-![Raising an error message](/Error_message.png "Raising an error message")
+![Raising an error message](https://benediktgeisler.de/Error_message.png "Raising an error message")
 
 The first message was triggered with log level *Debug*, but the minimum threshold was set to *Warning*, therefore only the second message is displayed. `TcLog` provides the following message levels: 
 - `E_LogLevel.Debug`
@@ -69,7 +69,7 @@ Logger
 	.Error('');	
 ```
 
-![Using a StringBuilder to generate the message text](/StringBuilder_in_message_text.png "Using a StringBuilder to generate the message text")
+![Using a StringBuilder to generate the message text](https://benediktgeisler.de/StringBuilder_in_message_text.png "Using a StringBuilder to generate the message text")
 
 Thus any amount of information can be appended to the message without having to implement `TcLog` with a large number of input parameters, since TwinCAT does not allow optional input parameters. 
 
@@ -88,7 +88,7 @@ CoreLogger
 Logger.Error('This is an error message.');
 ```
 
-![Including the instance path](/InstancePath.png "Including the instance path")
+![Including the instance path](https://benediktgeisler.de/InstancePath.png "Including the instance path")
 
 ### Conditional logging
 The most common use of logging will be in the form `IF ... THEN log() END_IF`. Therefore this query is already integrated in TcLog:
@@ -135,7 +135,7 @@ rTrigLogger
 	.Error('rTrig Test');
 ```
 
-![Logging to the file system](/LogMessageInFiileSystem.png "Logging to the file system")
+![Logging to the file system](https://benediktgeisler.de/LogMessageInFiileSystem.png "Logging to the file system")
 
 The file name is additionally prefixed with the creation date of the log file. The format of the date can be defined arbitrarily by means of a format string. Example: 
 
@@ -291,7 +291,7 @@ myLog(
 
 As soon as logging is triggered via `bLog`, the csv file and the entries in it are created:
 
-![Custom logging](/CustomLogging.png "Custom logging")
+![Custom logging](https://benediktgeisler.de/CustomLogging.png "Custom logging")
 
 ### Use of custom loggers
 `TcLogCore` implements the `ILogCore` interface which defines the `LogCustomFormat` and `LogStandardFormat` methods. 
@@ -310,7 +310,7 @@ END_VAR
 error := newLogger.Error;
 ```
 
-![ST_Error](/ST_Error.png "ST_Error")
+![ST_Error](https://benediktgeisler.de/ST_Error.png "ST_Error")
 
 ## Unit- and integration tests
 The project on Github contains both unit ([TcUnit](https://tcunit.org)) and integration tests ([xUnit](https://xunit.net)). 
