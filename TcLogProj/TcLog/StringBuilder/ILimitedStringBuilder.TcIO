@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <Itf Name="ILimitedStringBuilder" Id="{194bb722-4e19-4a72-9bf7-057dc58bb68e}">
     <Declaration><![CDATA[INTERFACE ILimitedStringBuilder
 ]]></Declaration>
     <Method Name="Append" Id="{c1fd36d6-9aa3-4352-9719-226e4a16c216}">
       <Declaration><![CDATA[METHOD  Append : IStringBuilder // Append text to t current build string.
 VAR_INPUT
-	text:STRING; //Text to append to current build string
+	text:T_MaxString; //Text to append to current build string
 END_VAR]]></Declaration>
     </Method>
     <Method Name="AppendIf" Id="{027ef3c1-1675-4e50-b32c-f9fdc78e0c5e}">
       <Declaration><![CDATA[METHOD AppendIf : IStringBuilder
 VAR_INPUT
 	condition	:	BOOL;
-	text		:	STRING;
+	text		:	T_MaxString;
 END_VAR
 
 ]]></Declaration>
@@ -22,7 +22,7 @@ END_VAR
       <Declaration><![CDATA[METHOD Reset : ILimitedStringBuilder //Reset current build string to an empty string.]]></Declaration>
     </Method>
     <Method Name="ToString" Id="{9510ec58-ffae-406c-b1a3-226f94c7f534}">
-      <Declaration><![CDATA[METHOD ToString : STRING //Returns current build string.]]></Declaration>
+      <Declaration><![CDATA[METHOD ToString : T_MaxString //Returns current build string.]]></Declaration>
     </Method>
   </Itf>
 </TcPlcObject>

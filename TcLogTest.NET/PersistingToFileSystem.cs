@@ -81,7 +81,7 @@ namespace TcLogTest.NET
         [Fact]
         public async void Persist_long_error_message()
         {
-            string message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquet orci sit amet massa placerat faucibus. Sed interdum fermentum eros. Maecenas accumsan rutrum ex, non varius orci scelerisque ac. Donec quis venenatis sem, sit amet congue orci tellus.";
+            string message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquet orci sit amet massa placerat faucibus. Sed interdum fermentum eros. Maecenas accumsan rutrum ex, non varius orci scelerisque ac. Donec qui.";
             uint hRun = fixture.TcClient.CreateVariableHandle(mut + ".Persist_long_error_message_run");
             uint hData = fixture.TcClient.CreateVariableHandle(mut + ".Persist_long_error_message_data");
 
