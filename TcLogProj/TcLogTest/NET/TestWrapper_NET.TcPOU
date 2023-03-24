@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TestWrapper_NET" Id="{b95f26a9-ba1e-45bd-8717-c0be8c66e163}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TestWrapper_NET
 VAR_INPUT
@@ -26,6 +26,9 @@ VAR
 	
 	Persist_simple_error_message_run : BOOL;
 	Persist_simple_error_message_data: STRING;
+	
+	Persist_long_error_message_run : BOOL;
+	Persist_long_error_message_data: T_MaxString;
 	
 	Do_not_persist_logs_below_log_level_run : BOOL;
 	
@@ -82,6 +85,12 @@ IF Persist_simple_error_message_run THEN
 		.Error(Persist_simple_error_message_data);
 END_IF
 
+IF Persist_long_error_message_run THEN
+	Persist_long_error_message_run := FALSE;
+	Logger
+		.Error(Persist_long_error_message_data);
+END_IF
+
 IF Do_not_persist_logs_below_log_level_run THEN
 	Do_not_persist_logs_below_log_level_run := FALSE;
 	Logger
@@ -126,56 +135,5 @@ END_IF
 
 ]]></ST>
     </Implementation>
-    <LineIds Name="TestWrapper_NET">
-      <LineId Id="357" Count="0" />
-      <LineId Id="361" Count="0" />
-      <LineId Id="360" Count="0" />
-      <LineId Id="359" Count="0" />
-      <LineId Id="358" Count="0" />
-      <LineId Id="11" Count="0" />
-      <LineId Id="17" Count="2" />
-      <LineId Id="21" Count="5" />
-      <LineId Id="32" Count="0" />
-      <LineId Id="318" Count="0" />
-      <LineId Id="315" Count="1" />
-      <LineId Id="373" Count="0" />
-      <LineId Id="372" Count="0" />
-      <LineId Id="94" Count="0" />
-      <LineId Id="254" Count="0" />
-      <LineId Id="256" Count="0" />
-      <LineId Id="270" Count="0" />
-      <LineId Id="274" Count="2" />
-      <LineId Id="273" Count="0" />
-      <LineId Id="277" Count="0" />
-      <LineId Id="257" Count="0" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="67" Count="0" />
-      <LineId Id="36" Count="0" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="71" Count="4" />
-      <LineId Id="70" Count="0" />
-      <LineId Id="80" Count="4" />
-      <LineId Id="79" Count="0" />
-      <LineId Id="89" Count="4" />
-      <LineId Id="88" Count="0" />
-      <LineId Id="116" Count="0" />
-      <LineId Id="102" Count="3" />
-      <LineId Id="100" Count="0" />
-      <LineId Id="168" Count="0" />
-      <LineId Id="161" Count="0" />
-      <LineId Id="166" Count="0" />
-      <LineId Id="164" Count="1" />
-      <LineId Id="160" Count="0" />
-      <LineId Id="177" Count="0" />
-      <LineId Id="191" Count="3" />
-      <LineId Id="190" Count="0" />
-      <LineId Id="365" Count="0" />
-      <LineId Id="367" Count="3" />
-      <LineId Id="364" Count="0" />
-      <LineId Id="246" Count="0" />
-      <LineId Id="250" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

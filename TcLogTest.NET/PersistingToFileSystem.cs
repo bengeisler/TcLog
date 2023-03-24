@@ -79,6 +79,27 @@ namespace TcLogTest.NET
         }
 
         [Fact]
+        public async void Persist_long_error_message()
+        {
+            string message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquet orci sit amet massa placerat faucibus. Sed interdum fermentum eros. Maecenas accumsan rutrum ex, non varius orci scelerisque ac. Donec quis venenatis sem, sit amet congue orci tellus.";
+            uint hRun = fixture.TcClient.CreateVariableHandle(mut + ".Persist_long_error_message_run");
+            uint hData = fixture.TcClient.CreateVariableHandle(mut + ".Persist_long_error_message_data");
+
+            fixture.TcClient.WriteAny(hData, message);
+            fixture.TcClient.WriteAny(hRun, true);
+            await Task.Delay(1000);
+            var files = Directory.GetFiles(path);
+            var fileContent = File.ReadAllLines(files[0]);
+
+            Assert.Contains(message, fileContent[0]);
+            Assert.Contains("Error", fileContent[0]);
+
+            foreach (var f in files) File.Delete(f);
+            fixture.TcClient.DeleteVariableHandle(hRun);
+            fixture.TcClient.DeleteVariableHandle(hData);
+        }
+
+        [Fact]
         public async void Do_not_persist_logs_below_log_level()
         {
             uint hRun = fixture.TcClient.CreateVariableHandle(mut + ".Do_not_persist_logs_below_log_level_run");
