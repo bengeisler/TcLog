@@ -147,6 +147,8 @@ namespace TcLogTest.NET
 
             Assert.Contains(delimiter + message, fileContent[0]);
 
+            delimiter = "";
+            fixture.TcClient.WriteAny(hDelimiter, delimiter);
             foreach (var f in files) File.Delete(f);
             fixture.TcClient.DeleteVariableHandle(hRun);
             fixture.TcClient.DeleteVariableHandle(hData);
