@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="DynamicStringBuffer" Id="{660876ea-7fc3-4366-aa3c-17474f122e75}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK DynamicStringBuffer
 VAR_INPUT
@@ -12,9 +12,6 @@ VAR
 	MemMan						:	FB_DynMem_Manager;						// Memory manager, required by DynMem_Buffer.
 	MemBuf						:	FB_DynMem_Buffer(ipMemMan := MemMan);	// Provides dynamic buffer for Fifo. Is extended automatically if more than the 
 																			// default buffer size is needed.
-END_VAR
-VAR CONSTANT                                                	
-	DEFAULT_BUFFER_SIZE 		: UDINT := 1000;							// Default buffer size for FIFO.
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -44,12 +41,13 @@ Fifo.A_AddTail(putValue := Text); ]]></ST>
     <Method Name="AllocateBuffer" Id="{bc70064d-9855-4df2-8293-04935db0d914}">
       <Declaration><![CDATA[METHOD PRIVATE AllocateBuffer : BOOL	// Allocates buffer for the Fifo.
 VAR_INPUT
+	nbufferSize : UDINT;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[MemBuf.CreateBuffer(nSize:=DEFAULT_BUFFER_SIZE*SIZEOF(BYTE), bReset:=TRUE);
+        <ST><![CDATA[MemBuf.CreateBuffer(nSize:=nbufferSize*SIZEOF(BYTE), bReset:=TRUE);
 Fifo.pBuffer := MemBuf.pBuffer;
-Fifo.cbBuffer := DEFAULT_BUFFER_SIZE*SIZEOF(BYTE);]]></ST>
+Fifo.cbBuffer := nbufferSize*SIZEOF(BYTE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_exit" Id="{410b66b7-6428-4a64-9cb8-9b83e356f18f}">
@@ -62,26 +60,6 @@ END_VAR
         <ST><![CDATA[MemBuf.Clear();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="FB_init" Id="{771f102d-668b-4145-8c28-016b3bbde940}">
-      <Declaration><![CDATA[METHOD FB_init : BOOL
-VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[AllocateBuffer();]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="FB_reinit" Id="{03eb2d50-7f23-4ca8-8fa5-9c07e077aa14}">
-      <Declaration><![CDATA[METHOD FB_reinit : BOOL
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[AllocateBuffer();]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="FlushCache" Id="{fa7baa03-4401-42cd-8818-9657ae6b0935}">
       <Declaration><![CDATA[METHOD FlushCache : BOOL
 VAR_INPUT
@@ -89,6 +67,16 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[Fifo.A_Reset();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Init" Id="{537021d7-4637-4ad9-9438-a76ff90a964b}">
+      <Declaration><![CDATA[METHOD INTERNAL Init : BOOL
+VAR_INPUT
+	nBufferSize : UDINT; // Buffer size for the string buffer
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[AllocateBuffer(nBufferSize);]]></ST>
       </Implementation>
     </Method>
     <Method Name="PersistToFile" Id="{9df1c79b-f420-4db7-a528-f4f3a2facd9b}">
@@ -127,6 +115,7 @@ END_VAR
         <ST><![CDATA[// State machine
 CASE state OF
 	STATE_IDLE:
+		filePutsTriggered := FALSE;
 		IF Fifo.nCount > 0 THEN 
 			filePutsTriggered := FALSE;
 			state := STATE_OPEN_FILE;
@@ -249,17 +238,16 @@ END_IF]]></ST>
     <LineIds Name="DynamicStringBuffer.FB_exit">
       <LineId Id="6" Count="0" />
     </LineIds>
-    <LineIds Name="DynamicStringBuffer.FB_init">
-      <LineId Id="7" Count="0" />
-    </LineIds>
-    <LineIds Name="DynamicStringBuffer.FB_reinit">
-      <LineId Id="5" Count="0" />
-    </LineIds>
     <LineIds Name="DynamicStringBuffer.FlushCache">
       <LineId Id="5" Count="0" />
     </LineIds>
+    <LineIds Name="DynamicStringBuffer.Init">
+      <LineId Id="5" Count="0" />
+    </LineIds>
     <LineIds Name="DynamicStringBuffer.PersistToFile">
-      <LineId Id="6" Count="3" />
+      <LineId Id="6" Count="2" />
+      <LineId Id="199" Count="0" />
+      <LineId Id="9" Count="0" />
       <LineId Id="126" Count="0" />
       <LineId Id="10" Count="6" />
       <LineId Id="18" Count="0" />

@@ -237,18 +237,19 @@ namespace TcLogTest.NET
         }
 
         [Theory]
-        [InlineData(1)]
-        [InlineData(5)]
-        [InlineData(10)]
-        [InlineData(20)]
-        public async void Log_in_consecutive_cycles(int cycleCount)
+        [InlineData(1, 1000)]
+        [InlineData(5, 1000)]
+        [InlineData(10, 1000)]
+        [InlineData(20, 2000)]
+        [InlineData(100, 5000)]
+        public async void Log_in_consecutive_cycles(int cycleCount, int waitTime)
         {
             uint hRun = fixture.TcClient.CreateVariableHandle(mut + ".Log_in_consecutive_cycles");
             uint hCycles = fixture.TcClient.CreateVariableHandle(mut + ".Number_of_log_cycles");
 
             fixture.TcClient.WriteAny(hCycles, cycleCount);
             fixture.TcClient.WriteAny(hRun, true);
-            await Task.Delay(2000);
+            await Task.Delay(waitTime);
             var files = Directory.GetFiles(path);
 
             var fileContent = File.ReadAllLines(files[0]);

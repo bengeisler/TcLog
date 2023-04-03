@@ -7,7 +7,7 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	CoreLogger	:	TcLogCore;
+	CoreLogger	:	TcLogCore(nBufferSize := 100000);
 	Logger		:	TcLog;
 	error		:	ST_Error;
 	bFlushCache :   BOOL;

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="TcLogCore" Id="{81f82071-4a6c-4f57-9a56-0ade3c0c9c94}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcLogCore IMPLEMENTS ILogCore
 VAR_INPUT
@@ -107,21 +107,25 @@ METHOD FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	nBufferSize : DINT;  // Buffer size for string buffer
 END_VAR
 VAR
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[LoggingSingleton.Init(THIS^);]]></ST>
+        <ST><![CDATA[LoggingSingleton.Init(THIS^);
+LogCache.Init(nBufferSize);]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_reinit" Id="{7a4a2895-bc8f-4c5f-ae34-d121f2978f2a}">
       <Declaration><![CDATA[{attribute 'hide'} 
 METHOD FB_reinit : BOOL
 VAR_INPUT
+	nBufferSize : DINT;  // Buffer size for string buffer
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[LoggingSingleton.Init(THIS^);]]></ST>
+        <ST><![CDATA[LoggingSingleton.Init(THIS^);
+LogCache.Init(nBufferSize);]]></ST>
       </Implementation>
     </Method>
     <Method Name="FlushCache" Id="{d85421f8-abe8-45dc-a84c-3e5e5c8a80e5}">
@@ -439,9 +443,11 @@ WriteToFile REF= This^;]]></ST>
     </LineIds>
     <LineIds Name="TcLogCore.FB_init">
       <LineId Id="9" Count="0" />
+      <LineId Id="18" Count="0" />
     </LineIds>
     <LineIds Name="TcLogCore.FB_reinit">
       <LineId Id="7" Count="0" />
+      <LineId Id="12" Count="0" />
     </LineIds>
     <LineIds Name="TcLogCore.FlushCache">
       <LineId Id="5" Count="0" />
