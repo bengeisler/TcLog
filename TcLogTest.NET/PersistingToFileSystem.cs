@@ -236,12 +236,15 @@ namespace TcLogTest.NET
             fixture.TcClient.DeleteVariableHandle(hRun);
         }
 
-        [Fact]
-        public async void Log_in_consecutive_cycles()
+        [Theory]
+        [InlineData(1)]
+        [InlineData(5)]
+        [InlineData(10)]
+        [InlineData(20)]
+        public async void Log_in_consecutive_cycles(int cycleCount)
         {
             uint hRun = fixture.TcClient.CreateVariableHandle(mut + ".Log_in_consecutive_cycles");
             uint hCycles = fixture.TcClient.CreateVariableHandle(mut + ".Number_of_log_cycles");
-            int cycleCount = 50;
 
             fixture.TcClient.WriteAny(hCycles, cycleCount);
             fixture.TcClient.WriteAny(hRun, true);
@@ -253,7 +256,7 @@ namespace TcLogTest.NET
             Assert.Equal<int>(cycleCount, fileContent.Length);
 
             fixture.TcClient.WriteAny(hCycles, 0);
-            //foreach (var f in files) File.Delete(f);
+            foreach (var f in files) File.Delete(f);
             fixture.TcClient.DeleteVariableHandle(hRun);
             fixture.TcClient.DeleteVariableHandle(hCycles);
         }
