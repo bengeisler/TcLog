@@ -235,5 +235,27 @@ namespace TcLogTest.NET
             foreach (var f in files) File.Delete(f);
             fixture.TcClient.DeleteVariableHandle(hRun);
         }
+
+        [Fact]
+        public async void Log_in_consecutive_cycles()
+        {
+            uint hRun = fixture.TcClient.CreateVariableHandle(mut + ".Log_in_consecutive_cycles");
+            uint hCycles = fixture.TcClient.CreateVariableHandle(mut + ".Number_of_log_cycles");
+            int cycleCount = 50;
+
+            fixture.TcClient.WriteAny(hCycles, cycleCount);
+            fixture.TcClient.WriteAny(hRun, true);
+            await Task.Delay(2000);
+            var files = Directory.GetFiles(path);
+
+            var fileContent = File.ReadAllLines(files[0]);
+
+            Assert.Equal<int>(cycleCount, fileContent.Length);
+
+            fixture.TcClient.WriteAny(hCycles, 0);
+            //foreach (var f in files) File.Delete(f);
+            fixture.TcClient.DeleteVariableHandle(hRun);
+            fixture.TcClient.DeleteVariableHandle(hCycles);
+        }
     }
 }

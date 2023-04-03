@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="TestWrapper_NET" Id="{b95f26a9-ba1e-45bd-8717-c0be8c66e163}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TestWrapper_NET
 VAR_INPUT
@@ -18,6 +18,7 @@ VAR
 	Set_system_time : BOOL;
 	System_time : STRING;
 	ActualTime : STRING;
+	Cycles: INT;
 	
 	// Exchanged variables with .NET tests
 	filePath	:	STRING;
@@ -44,6 +45,9 @@ VAR
 	New_logfile_is_created_if_rolling_interval_rolls_run : BOOL;
 
 	Same_log_file_is_used_until_rolling_interval_rolls : BOOL;	
+	
+	Log_in_consecutive_cycles: BOOL;
+	Number_of_log_cycles : DINT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -133,7 +137,30 @@ IF Same_log_file_is_used_until_rolling_interval_rolls THEN
 		.Error('Test message');
 END_IF
 
+IF Log_in_consecutive_cycles THEN
+	Logger
+		.Error(CONCAT('Logging cycle ', INT_TO_STRING(Cycles)));
+	Cycles := Cycles + 1;
+	IF Cycles >= Number_of_log_cycles THEN
+		Cycles := 0;
+		Log_in_consecutive_cycles := FALSE;
+	END_IF
+END_IF
 ]]></ST>
     </Implementation>
+    <LineIds Name="TestWrapper_NET">
+      <LineId Id="3" Count="84" />
+      <LineId Id="133" Count="0" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="137" Count="0" />
+      <LineId Id="139" Count="0" />
+      <LineId Id="148" Count="0" />
+      <LineId Id="142" Count="0" />
+      <LineId Id="144" Count="0" />
+      <LineId Id="146" Count="0" />
+      <LineId Id="145" Count="0" />
+      <LineId Id="138" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>
