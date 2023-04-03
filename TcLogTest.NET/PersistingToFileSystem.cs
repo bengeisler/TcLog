@@ -261,5 +261,31 @@ namespace TcLogTest.NET
             fixture.TcClient.DeleteVariableHandle(hRun);
             fixture.TcClient.DeleteVariableHandle(hCycles);
         }
+
+        [Theory]
+        [InlineData(1, 1000)]
+        [InlineData(5, 1000)]
+        [InlineData(10, 1000)]
+        [InlineData(20, 2000)]
+        [InlineData(100, 5000)]
+        public async void Log_multiple_times_in_one_cycle(int logCount, int waitTime)
+        {
+            uint hRun = fixture.TcClient.CreateVariableHandle(mut + ".Log_multiple_logs_in_one_cycle");
+            uint hLogCount = fixture.TcClient.CreateVariableHandle(mut + ".Number_of_logs_per_cycle");
+
+            fixture.TcClient.WriteAny(hLogCount, logCount);
+            fixture.TcClient.WriteAny(hRun, true);
+            await Task.Delay(waitTime);
+            var files = Directory.GetFiles(path);
+
+            var fileContent = File.ReadAllLines(files[0]);
+
+            Assert.Equal<int>(logCount, fileContent.Length);
+
+            fixture.TcClient.WriteAny(hLogCount, 0);
+            foreach (var f in files) File.Delete(f);
+            fixture.TcClient.DeleteVariableHandle(hRun);
+            fixture.TcClient.DeleteVariableHandle(hLogCount);
+        }
     }
 }

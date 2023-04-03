@@ -19,6 +19,7 @@ VAR
 	System_time : STRING;
 	ActualTime : STRING;
 	Cycles: INT;
+	i: INT;
 	
 	// Exchanged variables with .NET tests
 	filePath	:	STRING;
@@ -48,6 +49,9 @@ VAR
 	
 	Log_in_consecutive_cycles: BOOL;
 	Number_of_log_cycles : DINT;
+	
+	Log_multiple_logs_in_one_cycle: BOOL;
+	Number_of_logs_per_cycle: DINT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -146,6 +150,15 @@ IF Log_in_consecutive_cycles THEN
 		Log_in_consecutive_cycles := FALSE;
 	END_IF
 END_IF
+
+IF Log_multiple_logs_in_one_cycle THEN
+	FOR i:= 1 TO DINT_TO_INT(Number_of_logs_per_cycle) DO
+		Logger.
+			Error(CONCAT('Logging multiple times per cycle. Current step: ', INT_TO_STRING(i))); 
+	END_FOR
+	Log_multiple_logs_in_one_cycle := FALSE;
+END_IF
+
 ]]></ST>
     </Implementation>
     <LineIds Name="TestWrapper_NET">
@@ -160,6 +173,15 @@ END_IF
       <LineId Id="146" Count="0" />
       <LineId Id="145" Count="0" />
       <LineId Id="138" Count="0" />
+      <LineId Id="202" Count="0" />
+      <LineId Id="198" Count="0" />
+      <LineId Id="203" Count="0" />
+      <LineId Id="206" Count="0" />
+      <LineId Id="208" Count="0" />
+      <LineId Id="207" Count="0" />
+      <LineId Id="210" Count="0" />
+      <LineId Id="204" Count="0" />
+      <LineId Id="197" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>
