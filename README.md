@@ -19,7 +19,7 @@ TcLog provides a central static logger `TcLogCore` which can be configured via a
 
 ```
 VAR
-	CoreLogger : TcLogCore;
+	CoreLogger : TcLogCore(nBufferSize := 100000);
 END_VAR
 
 CoreLogger
@@ -28,7 +28,7 @@ CoreLogger
 	.RunLogger();
 ```
 
-It is used via a second block 'TcLog' with which the messages are then triggered. 
+It is used via a second block 'TcLog' with which the messages are then triggered. The parameter `nBufferSize` reflects the size of the string cache that is used to cache all logging calls in one cycle and write to the file afterwards. A buffer size of `100000` has been tested with up to `100` consecutive logging calls.
 
 ```
 VAR
