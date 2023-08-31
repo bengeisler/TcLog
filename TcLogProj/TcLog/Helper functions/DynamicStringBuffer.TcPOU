@@ -143,6 +143,19 @@ CASE state OF
 	
 END_CASE
 
+(* Uncomment for cycle-specific usage of state machine & buffer usage
+
+ADSLOGSTR(ADSLOG_MSGTYPE_LOG, 
+	CONCAT('****DynamicStringBuffer.state:', 
+	CONCAT(UINT_TO_STRING(state),
+	CONCAT(', DynamicStringBuffer.hFile:', UINT_TO_STRING(hFile)))), '');
+
+ADSLOGSTR(ADSLOG_MSGTYPE_LOG, 
+			CONCAT('****Fifo: used ', 
+			CONCAT(UDINT_TO_STRING(Fifo.cbSize),
+			CONCAT(' of ', UDINT_TO_STRING(Fifo.cbBuffer)))), '');
+*)
+
 // Function blocks used in state machine
 fbFileOpen(
 	sNetId := NET_ID, sPathName := FileName, nMode := FOPEN_MODEAPPEND OR FOPEN_MODETEXT, 
@@ -163,6 +176,7 @@ fTrigFileClose(CLK := fbFileClose.bBusy);
 // Timeout writing to file => close file
 tonTimeout(IN := state <> STATE_IDLE, PT:=TIMEOUT);	
 IF tonTimeout.Q THEN state := STATE_IDLE; END_IF
+
 
 // Error handling
 IF fbFileOpen.bError THEN
@@ -185,6 +199,12 @@ ELSE
 	Error.Active := FALSE;
 	Error.Code := E_ErrorCode.None;
 	Error.Info := '';
+END_IF
+
+IF Error.Active THEN
+	ADSLOGSTR(ADSLOG_MSGTYPE_LOG, 
+		CONCAT('****DynamicStringBuffer.Error: ', Error.Info), 
+		'');	
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -257,12 +277,24 @@ END_IF]]></ST>
       <LineId Id="127" Count="0" />
       <LineId Id="19" Count="1" />
       <LineId Id="129" Count="0" />
-      <LineId Id="21" Count="25" />
+      <LineId Id="21" Count="8" />
+      <LineId Id="328" Count="0" />
+      <LineId Id="324" Count="0" />
+      <LineId Id="330" Count="0" />
+      <LineId Id="325" Count="2" />
+      <LineId Id="323" Count="0" />
+      <LineId Id="289" Count="3" />
+      <LineId Id="288" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="329" Count="0" />
+      <LineId Id="31" Count="15" />
       <LineId Id="161" Count="0" />
       <LineId Id="160" Count="0" />
       <LineId Id="163" Count="0" />
       <LineId Id="168" Count="0" />
-      <LineId Id="47" Count="1" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="331" Count="0" />
+      <LineId Id="48" Count="0" />
       <LineId Id="53" Count="3" />
       <LineId Id="59" Count="3" />
       <LineId Id="65" Count="3" />
@@ -270,6 +302,11 @@ END_IF]]></ST>
       <LineId Id="95" Count="0" />
       <LineId Id="100" Count="2" />
       <LineId Id="5" Count="0" />
+      <LineId Id="281" Count="0" />
+      <LineId Id="280" Count="0" />
+      <LineId Id="284" Count="1" />
+      <LineId Id="287" Count="0" />
+      <LineId Id="283" Count="0" />
     </LineIds>
     <LineIds Name="DynamicStringBuffer.PopHead">
       <LineId Id="5" Count="0" />

@@ -299,7 +299,7 @@ END_IF
 // Delete expired log files
 rTrigNewDay(CLK := timeAsSystemTime.wHour = 0);
 DeleteExpiredLogFiles(
-	StartScan 			:= 	rTrigNewDay.Q,
+	StartScan 			:= 	rTrigNewDay.Q AND (_config.LogFileLifespan > 0),
 	ExpirationInDays 	:=	_config.LogFileLifespan,
 	FilePath			:=	_config.FilePath,
 	FileName 			:=	_config.FileName,
