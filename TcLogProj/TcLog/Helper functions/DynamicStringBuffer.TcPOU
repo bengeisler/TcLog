@@ -98,7 +98,6 @@ VAR_INST
 	               	
 	fbFileClose    	 	: 	FB_FileClose;
 	fTrigFileClose		: 	F_TRIG;
-	tonTimeout			:	TON;
 END_VAR
 VAR CONSTANT
 	STATE_IDLE							:	UINT	:=	0;
@@ -143,18 +142,9 @@ CASE state OF
 	
 END_CASE
 
-(* Uncomment for cycle-specific usage of state machine & buffer usage
-
-ADSLOGSTR(ADSLOG_MSGTYPE_LOG, 
-	CONCAT('****DynamicStringBuffer.state:', 
-	CONCAT(UINT_TO_STRING(state),
-	CONCAT(', DynamicStringBuffer.hFile:', UINT_TO_STRING(hFile)))), '');
-
-ADSLOGSTR(ADSLOG_MSGTYPE_LOG, 
-			CONCAT('****Fifo: used ', 
-			CONCAT(UDINT_TO_STRING(Fifo.cbSize),
-			CONCAT(' of ', UDINT_TO_STRING(Fifo.cbBuffer)))), '');
-*)
+// Close file in case of error
+IF fbFileOpen.bError THEN state := STATE_CLOSE_FILE; END_IF
+IF fbFilePuts.bError THEN state := STATE_CLOSE_FILE; END_IF
 
 // Function blocks used in state machine
 fbFileOpen(
@@ -170,12 +160,8 @@ fTrigFilePuts(CLK := fbFilePuts.bBusy);
 
 fbFileClose(
 	sNetId := NET_ID, hFile := hFile, 
-	bExecute := (state = STATE_CLOSE_FILE) OR tonTimeout.Q, tTimeout := TIMEOUT);
+	bExecute := (state = STATE_CLOSE_FILE), tTimeout := TIMEOUT);
 fTrigFileClose(CLK := fbFileClose.bBusy);	
-
-// Timeout writing to file => close file
-tonTimeout(IN := state <> STATE_IDLE, PT:=TIMEOUT);	
-IF tonTimeout.Q THEN state := STATE_IDLE; END_IF
 
 
 // Error handling
@@ -201,11 +187,24 @@ ELSE
 	Error.Info := '';
 END_IF
 
+(* Uncomment for cyclic logging of state machine, buffer usage & errors
+
+ADSLOGSTR(ADSLOG_MSGTYPE_LOG, 
+	CONCAT('****DynamicStringBuffer.state:', 
+	CONCAT(UINT_TO_STRING(state),
+	CONCAT(', DynamicStringBuffer.hFile:', UINT_TO_STRING(hFile)))), '');
+
+ADSLOGSTR(ADSLOG_MSGTYPE_LOG, 
+	CONCAT('****Fifo: used ', 
+	CONCAT(UDINT_TO_STRING(Fifo.cbSize),
+	CONCAT(' of ', UDINT_TO_STRING(Fifo.cbBuffer)))), '');
+	
 IF Error.Active THEN
 	ADSLOGSTR(ADSLOG_MSGTYPE_LOG, 
 		CONCAT('****DynamicStringBuffer.Error: ', Error.Info), 
 		'');	
-END_IF]]></ST>
+END_IF
+*)]]></ST>
       </Implementation>
     </Method>
     <Method Name="PopHead" Id="{1c3e8de3-af72-4def-8aba-61974c7aa041}">
@@ -278,21 +277,12 @@ END_IF]]></ST>
       <LineId Id="19" Count="1" />
       <LineId Id="129" Count="0" />
       <LineId Id="21" Count="8" />
-      <LineId Id="328" Count="0" />
-      <LineId Id="324" Count="0" />
-      <LineId Id="330" Count="0" />
-      <LineId Id="325" Count="2" />
-      <LineId Id="323" Count="0" />
-      <LineId Id="289" Count="3" />
-      <LineId Id="288" Count="0" />
-      <LineId Id="30" Count="0" />
+      <LineId Id="339" Count="0" />
+      <LineId Id="338" Count="0" />
+      <LineId Id="337" Count="0" />
+      <LineId Id="336" Count="0" />
       <LineId Id="329" Count="0" />
-      <LineId Id="31" Count="15" />
-      <LineId Id="161" Count="0" />
-      <LineId Id="160" Count="0" />
-      <LineId Id="163" Count="0" />
-      <LineId Id="168" Count="0" />
-      <LineId Id="47" Count="0" />
+      <LineId Id="31" Count="16" />
       <LineId Id="331" Count="0" />
       <LineId Id="48" Count="0" />
       <LineId Id="53" Count="3" />
@@ -302,11 +292,8 @@ END_IF]]></ST>
       <LineId Id="95" Count="0" />
       <LineId Id="100" Count="2" />
       <LineId Id="5" Count="0" />
-      <LineId Id="281" Count="0" />
-      <LineId Id="280" Count="0" />
-      <LineId Id="284" Count="1" />
-      <LineId Id="287" Count="0" />
-      <LineId Id="283" Count="0" />
+      <LineId Id="341" Count="17" />
+      <LineId Id="340" Count="0" />
     </LineIds>
     <LineIds Name="DynamicStringBuffer.PopHead">
       <LineId Id="5" Count="0" />

@@ -16,9 +16,9 @@
     <Implicit_Jitter_Distribution>{d696fa89-a5b7-4359-9420-e6a3f2f66b93}</Implicit_Jitter_Distribution>
     <LibraryReferences>{e556042a-b034-4e51-bfa4-92060eb4b7b8}</LibraryReferences>
     <Company>Benedikt Geisler</Company>
-    <Released>false</Released>
+    <Released>true</Released>
     <Title>TcLog</Title>
-    <ProjectVersion>0.2.0</ProjectVersion>
+    <ProjectVersion>0.2.1</ProjectVersion>
     <CombineIds>false</CombineIds>
     <DefaultNamespace>TcLog</DefaultNamespace>
     <Author>Benedikt Geisler</Author>

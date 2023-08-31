@@ -7,7 +7,7 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	CoreLogger	:	TcLogCore(nBufferSize := 100000);
+	CoreLogger	:	TcLogCore(nBufferSize := 50*50*280);
 	Logger		:	TcLog;
 	error		:	ST_Error;
 	bFlushCache :   BOOL;
@@ -52,6 +52,10 @@ VAR
 	
 	Log_multiple_logs_in_one_cycle: BOOL;
 	Number_of_logs_per_cycle: DINT;
+	
+	Log_multiple_logs_in_multiple_cycles: BOOL;
+	Number_of_cycles: DINT;
+	_cycleCount: DINT := 1;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -159,6 +163,23 @@ IF Log_multiple_logs_in_one_cycle THEN
 	Log_multiple_logs_in_one_cycle := FALSE;
 END_IF
 
+IF Log_multiple_logs_in_multiple_cycles THEN
+	IF _cycleCount <= Number_of_cycles THEN	
+		FOR i:= 1 TO DINT_TO_INT(Number_of_logs_per_cycle) DO
+			Logger
+				.AppendString('Logging multiple times per cycle. Cycle: ')
+				.AppendString(DINT_TO_STRING(_cycleCount))
+				.AppendString(' / Step: ')
+				.AppendString(INT_TO_STRING(i))
+				.Error('');
+		END_FOR
+		_cycleCount := _cycleCount + 1;
+	ELSE
+		_cycleCount := 1;
+		Log_multiple_logs_in_multiple_cycles := FALSE;
+	END_IF
+END_IF
+
 ]]></ST>
     </Implementation>
     <LineIds Name="TestWrapper_NET">
@@ -181,6 +202,16 @@ END_IF
       <LineId Id="207" Count="0" />
       <LineId Id="210" Count="0" />
       <LineId Id="204" Count="0" />
+      <LineId Id="264" Count="1" />
+      <LineId Id="276" Count="0" />
+      <LineId Id="266" Count="1" />
+      <LineId Id="278" Count="0" />
+      <LineId Id="282" Count="1" />
+      <LineId Id="279" Count="1" />
+      <LineId Id="269" Count="0" />
+      <LineId Id="286" Count="3" />
+      <LineId Id="277" Count="0" />
+      <LineId Id="263" Count="0" />
       <LineId Id="197" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>

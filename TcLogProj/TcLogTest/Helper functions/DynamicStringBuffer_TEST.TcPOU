@@ -23,13 +23,13 @@ VAR
 END_VAR
 
 VAR CONSTANT
-	CYCLES: UDINT := 30;
-	MESSAGES: UDINT := 30;
+	CYCLES: UDINT := 50;
+	MESSAGES: UDINT := 50;
 END_VAR
 
 VAR_INST
 	cycleCount: UDINT := 0;
-	LogsManyMessagesForManyCyclesLogger: TcLogCore(nBufferSize := 30*30*280); // cycles * messages * (max string length + fifo overhead (estimated))
+	LogsManyMessagesForManyCyclesLogger: TcLogCore(nBufferSize := 50*50*280); // cycles * messages * (max string length + fifo overhead (estimated))
 	logger: TcLog;
 END_VAR
 ]]></Declaration>
@@ -65,7 +65,7 @@ IF LEN(LogsManyMessagesForManyCyclesLogger.Error.Info) > 0 THEN
 	result := LogsManyMessagesForManyCyclesLogger.Error.Info;
 END_IF
 
-IF cycleCount > (CYCLES * MESSAGES * 4 + 10) THEN 
+IF cycleCount > (CYCLES * MESSAGES * 5 + 100) THEN 
 	AssertEquals(Expected := expected,
 				 Actual := result,
 				 Message := result);
