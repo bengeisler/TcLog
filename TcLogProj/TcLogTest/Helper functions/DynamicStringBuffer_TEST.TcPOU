@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="DynamicStringBuffer_TEST" Id="{03045c1a-5281-4fe3-bc16-4d9ce12d6b50}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK DynamicStringBuffer_TEST EXTENDS FB_TestSuite
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[LogsManyMessagesForManyCycles();]]></ST>
+    </Implementation>
+    <Method Name="LogsManyMessagesForManyCycles" Id="{e452a053-adba-401f-a1d2-1bba967ad2c0}">
+      <Declaration><![CDATA[METHOD LogsManyMessagesForManyCycles
+VAR_INPUT
+END_VAR
+VAR
+	result: STRING := '';
+	expected: STRING := '';
+	i: UDINT;
+END_VAR
+
+VAR CONSTANT
+	CYCLES: UDINT := 30;
+	MESSAGES: UDINT := 30;
+END_VAR
+
+VAR_INST
+	cycleCount: UDINT := 0;
+	LogsManyMessagesForManyCyclesLogger: TcLogCore(nBufferSize := 30*30*280); // cycles * messages * (max string length + fifo overhead (estimated))
+	logger: TcLog;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('LogsManyMessagesForManyCycles');
+
+LogsManyMessagesForManyCyclesLogger
+	.WriteToFile('c:\logs\', 'test.txt')
+	.RunLogger();
+logger.SetLogger(LogsManyMessagesForManyCyclesLogger);
+
+IF cycleCount < CYCLES THEN
+	FOR i:=0 TO MESSAGES DO
+		logger
+			.AppendString('Cycle: ')
+			.AppendString(UDINT_TO_STRING(cycleCount))
+			.AppendString(', Message: ')
+			.AppendString(UDINT_TO_STRING(i))
+			.Error('');	
+	END_FOR
+END_IF
+cycleCount := cycleCount + 1;
+
+// Length of operations (empirically determined):
+// file open: 		2 cycles
+// pop from fifo: 	1-2 cycle
+// write to file: 	2 cylces
+// close file:		2 cylces
+// => thus for x messages you need 4 * x + 4 cycles
+
+// Catch any occuring error message
+IF LEN(LogsManyMessagesForManyCyclesLogger.Error.Info) > 0 THEN
+	result := LogsManyMessagesForManyCyclesLogger.Error.Info;
+END_IF
+
+IF cycleCount > (CYCLES * MESSAGES * 4 + 10) THEN 
+	AssertEquals(Expected := expected,
+				 Actual := result,
+				 Message := result);
+ 
+	TEST_FINISHED();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="DynamicStringBuffer_TEST">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="DynamicStringBuffer_TEST.LogsManyMessagesForManyCycles">
+      <LineId Id="6" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="80" Count="1" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="36" Count="4" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="45" Count="1" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="47" Count="4" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="86" Count="1" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="10" Count="3" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="44" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
