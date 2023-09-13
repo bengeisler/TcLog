@@ -1,6 +1,7 @@
-This readme is a copy of the [blog post introducing this framework](https://benediktgeisler.de/en/blog/tclog/).
-
+![](TcLog_header.svg "TcLog_header")
 *Logging in TwinCAT with the on-board means is limited to the output as ADS event. The TcLog library presented here enables flexible logging to the file system.*
+
+This readme is a copy of the [blog post introducing this framework](https://benediktgeisler.de/en/blog/tclog/).
 
 ## Logging in TwinCAT
 From time to time it happens that I need a log function in TwinCAT to find sporadic errors or to record user interactions. TwinCAT provides a logging facility in the standard library: [AdsLogStr](https://infosys.beckhoff.com/index.php?content=../content/1031/tcplclibsystem/html/TcPlcLibSys_ADSLOGSTR.htm&id=). This function, which is available for the data types `LREAL`, `DINT` and `STRING`, allows ADS messages to be output as a text box on the screen and to the ADS console. A mask that is passed to the block can be used to configure which log level and which destination (console or text box) the message has. 
