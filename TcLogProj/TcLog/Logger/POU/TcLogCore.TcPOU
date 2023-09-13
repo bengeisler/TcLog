@@ -28,6 +28,8 @@ VAR
 	_config						:	ST_LoggingConfiguration;				// Logging configuration. Is set by invoking configuration methods.
 	{attribute 'hide'} 
 	_error						:	ST_Error;								// Contains information about internal error.
+	{attribute 'hide'} 
+	_busy						:	BOOL;									// Logger is busy, typically with writing logs to the file system.
 END_VAR                                                     				
 VAR CONSTANT                                                	
 	DEFAULT_BUFFER_SIZE 		: UDINT := 1000;							// Default buffer size for FIFO.
@@ -61,8 +63,30 @@ END_VAR
 END_IF]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Busy" Id="{2506cebb-3f61-4c95-90db-f0f540dd9e98}">
+      <Declaration><![CDATA[{attribute 'monitoring':='call'}
+PROPERTY Busy : BOOL]]></Declaration>
+      <Get Name="Get" Id="{addca3d4-1294-4daf-817b-bf0ea7026f56}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Busy := _busy;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{75c50778-a1c9-4233-8355-44379e5bd491}">
+        <Declaration><![CDATA[PRIVATE 
+VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_busy := Busy;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
     <Property Name="Configuration" Id="{05d13daa-5623-41b4-ae7a-41103edd188e}">
       <Declaration><![CDATA[// Returns the current configuration of the logger.
+{attribute 'monitoring':='call'}
 PROPERTY Configuration : ST_LoggingConfiguration]]></Declaration>
       <Get Name="Get" Id="{7fd81f24-ea07-4e82-8550-f6e8c4f01f6e}">
         <Declaration><![CDATA[VAR
@@ -91,6 +115,7 @@ DeleteLogFilesAfterDays REF= THIS^;]]></ST>
     </Method>
     <Property Name="Error" Id="{6fb536cf-61ab-4968-94e7-6a0e9727441d}">
       <Declaration><![CDATA[// Returns information about internal errors.
+{attribute 'monitoring':='call'}
 PROPERTY Error : REFERENCE TO ST_Error]]></Declaration>
       <Get Name="Get" Id="{8cae9ed2-7297-4ac6-8c06-f53f0a38a91c}">
         <Declaration><![CDATA[VAR
@@ -113,7 +138,7 @@ VAR
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[LoggingSingleton.Init(THIS^);
-LogCache.Init(nBufferSize);]]></ST>
+LogCache.Init(DINT_TO_UDINT(nBufferSize));]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_reinit" Id="{7a4a2895-bc8f-4c5f-ae34-d121f2978f2a}">
@@ -125,7 +150,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[LoggingSingleton.Init(THIS^);
-LogCache.Init(nBufferSize);]]></ST>
+LogCache.Init(DINT_TO_UDINT(nBufferSize));]]></ST>
       </Implementation>
     </Method>
     <Method Name="FlushCache" Id="{d85421f8-abe8-45dc-a84c-3e5e5c8a80e5}">
@@ -325,6 +350,9 @@ IF LogCache.Error.Active THEN
 	_error := LogCache.Error;
 END_IF
 
+// Forward busy state of LogCache 
+Busy := LogCache.Busy;
+
 // Reset Logging configuration: neccesary in order to provide fluent interface
 startLoggingConfiguration := FALSE;
 
@@ -428,6 +456,12 @@ WriteToFile REF= This^;]]></ST>
       <LineId Id="23" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
+    <LineIds Name="TcLogCore.Busy.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcLogCore.Busy.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
     <LineIds Name="TcLogCore.Configuration.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
@@ -498,7 +532,11 @@ WriteToFile REF= This^;]]></ST>
       <LineId Id="23" Count="0" />
     </LineIds>
     <LineIds Name="TcLogCore.RunLogger">
-      <LineId Id="242" Count="49" />
+      <LineId Id="242" Count="39" />
+      <LineId Id="308" Count="0" />
+      <LineId Id="306" Count="0" />
+      <LineId Id="305" Count="0" />
+      <LineId Id="282" Count="9" />
       <LineId Id="72" Count="0" />
     </LineIds>
     <LineIds Name="TcLogCore.SetDelimiter">

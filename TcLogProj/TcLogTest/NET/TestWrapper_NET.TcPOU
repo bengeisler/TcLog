@@ -9,7 +9,6 @@ END_VAR
 VAR
 	CoreLogger	:	TcLogCore(nBufferSize := 50*50*280);
 	Logger		:	TcLog;
-	error		:	ST_Error;
 	bFlushCache :   BOOL;
 	
 	// Test drivers
@@ -55,7 +54,11 @@ VAR
 	
 	Log_multiple_logs_in_multiple_cycles: BOOL;
 	Number_of_cycles: DINT;
-	_cycleCount: DINT := 1;
+	CycleCount: DINT := 1;
+	
+	Persistance_time_stays_within_bounds: BOOL;
+	Duration_in_cylces: DINT := 1;
+	Persistance_time_stays_within_bounds_F_TRIG: F_TRIG;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -75,9 +78,6 @@ CoreLogger
 	.WriteToAds()
 	.WriteToFile(filePath, fileName)
 	.RunLogger();
-
-// For debug purposes only
-error := CoreLogger.Error;
 
 IF bFlushCache THEN CoreLogger.FlushCache(); END_IF
 	
@@ -164,55 +164,60 @@ IF Log_multiple_logs_in_one_cycle THEN
 END_IF
 
 IF Log_multiple_logs_in_multiple_cycles THEN
-	IF _cycleCount <= Number_of_cycles THEN	
+	IF CycleCount <= Number_of_cycles THEN	
 		FOR i:= 1 TO DINT_TO_INT(Number_of_logs_per_cycle) DO
 			Logger
 				.AppendString('Logging multiple times per cycle. Cycle: ')
-				.AppendString(DINT_TO_STRING(_cycleCount))
+				.AppendString(DINT_TO_STRING(CycleCount))
 				.AppendString(' / Step: ')
 				.AppendString(INT_TO_STRING(i))
 				.Error('');
 		END_FOR
-		_cycleCount := _cycleCount + 1;
+		CycleCount := CycleCount + 1;
 	ELSE
-		_cycleCount := 1;
+		CycleCount := 1;
 		Log_multiple_logs_in_multiple_cycles := FALSE;
 	END_IF
+END_IF 
+
+Persistance_time_stays_within_bounds_F_TRIG(CLK := (Persistance_time_stays_within_bounds AND CoreLogger.Busy));
+IF Persistance_time_stays_within_bounds_F_TRIG.Q THEN
+	CycleCount := 1;
+	Persistance_time_stays_within_bounds := FALSE;
 END_IF
+IF Persistance_time_stays_within_bounds THEN
+	Duration_in_cylces := Duration_in_cylces + 1;
+	IF CycleCount <= Number_of_cycles THEN	
+		FOR i:= 1 TO DINT_TO_INT(Number_of_logs_per_cycle) DO
+			Logger
+				.AppendString('Logging multiple times per cycle. Cycle: ')
+				.AppendString(DINT_TO_STRING(CycleCount))
+				.AppendString(' / Step: ')
+				.AppendString(INT_TO_STRING(i))
+				.Error('');
+		END_FOR
+		CycleCount := CycleCount + 1;
+	END_IF
+END_IF
+
 
 ]]></ST>
     </Implementation>
     <LineIds Name="TestWrapper_NET">
-      <LineId Id="3" Count="84" />
-      <LineId Id="133" Count="0" />
-      <LineId Id="88" Count="0" />
-      <LineId Id="137" Count="0" />
-      <LineId Id="139" Count="0" />
-      <LineId Id="148" Count="0" />
-      <LineId Id="142" Count="0" />
-      <LineId Id="144" Count="0" />
-      <LineId Id="146" Count="0" />
-      <LineId Id="145" Count="0" />
-      <LineId Id="138" Count="0" />
-      <LineId Id="202" Count="0" />
-      <LineId Id="198" Count="0" />
-      <LineId Id="203" Count="0" />
-      <LineId Id="206" Count="0" />
-      <LineId Id="208" Count="0" />
-      <LineId Id="207" Count="0" />
-      <LineId Id="210" Count="0" />
-      <LineId Id="204" Count="0" />
-      <LineId Id="264" Count="1" />
-      <LineId Id="276" Count="0" />
-      <LineId Id="266" Count="1" />
-      <LineId Id="278" Count="0" />
-      <LineId Id="282" Count="1" />
-      <LineId Id="279" Count="1" />
-      <LineId Id="269" Count="0" />
-      <LineId Id="286" Count="3" />
-      <LineId Id="277" Count="0" />
-      <LineId Id="263" Count="0" />
-      <LineId Id="197" Count="0" />
+      <LineId Id="402" Count="15" />
+      <LineId Id="421" Count="83" />
+      <LineId Id="527" Count="0" />
+      <LineId Id="506" Count="11" />
+      <LineId Id="528" Count="0" />
+      <LineId Id="519" Count="2" />
+      <LineId Id="558" Count="4" />
+      <LineId Id="534" Count="1" />
+      <LineId Id="551" Count="0" />
+      <LineId Id="536" Count="9" />
+      <LineId Id="549" Count="0" />
+      <LineId Id="533" Count="0" />
+      <LineId Id="556" Count="0" />
+      <LineId Id="522" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

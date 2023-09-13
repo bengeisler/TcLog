@@ -28,7 +28,9 @@ CoreLogger
 	.RunLogger();
 ```
 
-It is used via a second block 'TcLog' with which the messages are then triggered. The parameter `nBufferSize` reflects the size of the string cache that is used to cache all logging calls in one cycle and write to the file afterwards. A buffer size of `100000` has been tested with up to `100` consecutive logging calls.
+It is used via a second block `TcLog` with which the messages are then triggered. The parameter `nBufferSize` reflects the size of the string cache that is used to cache all logging calls in one cycle and write to the file afterwards. The buffer will expand dynamically if it is has been set too low. If there is no more memory available, a FIFO overflow error will be set.
+
+The logger can persist up to 100 messages per plc cycle. If you log more than that, the persistance mechanism will spread over several plc cycles. When logging less than 100 messages per cycle, it takes roughly `1.5 * # of consecutive cycles with logging` cycles to persist the messages; when logging more than 100 messages per cycle, multiply that value by a factor of 3. 
 
 ```
 VAR
@@ -55,7 +57,7 @@ This behavior is known as the [Singleton](https://cidesi.repositorioinstituciona
 
 ### Variable design of the message text
 
-TcLog implementiert einen [StringBuilder](https://www.plccoder.com/fluent-code/) und daher lässt sich der Meldungstext flexibel zusammensetzen: 
+TcLog implements a [StringBuilder](https://www.plccoder.com/fluent-code/) which makes it easy to build your own message text: 
 
 ```
 VAR
@@ -157,12 +159,12 @@ A *rolling interval* denotes the interval until a new log file is created. TcLog
 - `E_RollingInterval.None`: Do not create a new log file.
 - `E_RollingInterval.Hourly`: Create a new log file every hour
 - `E_RollingInterval.Daily`: Create a new log file daily
-- E_RollingInterval.Monthly`: Create a new log file every month.
+- `E_RollingInterval.Monthly`: Create a new log file every month.
 
 The log file is only created when a message is triggered. 
 
 ### Delete old log files
-Um keine Schwemme an veralteten Logs zu erzeugen kann eine Lebensdauer von Logs festgelegt werden. Die Methode `DeleteLogsAfterDays(days)` von `TcLogCore` konfiguriert diese. Logdateien, deren Lebenszeit überschritten wurde, werden automatisch um Mitternacht gelöscht. 
+To get rid of old log files, a lifespan of logs can be set with help of the method `DeleteLogsAfterDays(days)` of `TcLogCore`. Log files whose lifespan exceed the specified limit will automatically be deleted at midnight.
 
 ## Customizing the logging
 ### Use of multiple loggers

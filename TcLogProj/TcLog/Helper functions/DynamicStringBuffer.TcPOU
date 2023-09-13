@@ -12,6 +12,8 @@ VAR
 	MemMan						:	FB_DynMem_Manager;						// Memory manager, required by DynMem_Buffer.
 	MemBuf						:	FB_DynMem_Buffer(ipMemMan := MemMan);	// Provides dynamic buffer for Fifo. Is extended automatically if more than the 
 																			// default buffer size is needed.
+	{attribute 'hide'} 														
+	_busy						: 	BOOL;									// Buffer is busy; typically with writing data to the file system.
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -50,6 +52,27 @@ Fifo.pBuffer := MemBuf.pBuffer;
 Fifo.cbBuffer := nbufferSize*SIZEOF(BYTE);]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Busy" Id="{b23806d3-8c54-456d-b666-1c83eaca7b17}">
+      <Declaration><![CDATA[{attribute 'monitoring':='call'}
+PROPERTY Busy : BOOL]]></Declaration>
+      <Get Name="Get" Id="{79b6117a-b0f4-49c4-8f2f-309ee42a8d23}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Busy := _busy;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{6b0f6f5d-2bb7-48c7-aa0b-845c65d65996}">
+        <Declaration><![CDATA[PRIVATE
+VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_busy := Busy;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
     <Method Name="FB_exit" Id="{410b66b7-6428-4a64-9cb8-9b83e356f18f}">
       <Declaration><![CDATA[METHOD FB_exit : BOOL
 VAR_INPUT
@@ -88,18 +111,23 @@ VAR_INST
 	state				:	UINT;		
 		
 	fbFileOpen      	: 	FB_FileOpen;
-	fTrigFileOpened		: 	F_TRIG;
 	hFile          		: 	UINT;
 	               	
-	fbFilePuts			:	FB_FilePuts;
-	fTrigFilePuts		:	F_TRIG;
-	newLogEntry			:	T_MaxString;
-	filePutsTriggered	:	BOOL;
+	fbFileWrite			:	FB_FileWrite;
+	lockFileWriteToForceRisingEdge	:	BOOL;			// filePuts can only be executed every other cycle
+											// since it needs a rising edge to execute.
 	               	
 	fbFileClose    	 	: 	FB_FileClose;
-	fTrigFileClose		: 	F_TRIG;
+	
+	buffer				:	ARRAY[0..CONSTANTS.BUFFER_SIZE] OF BYTE;
+	currentBufferPos	:	UDINT;
+	fifoHeadString		: 	T_MAXSTRING;
+	fifoHeadLength		: 	UDINT;
+	fifoHeadBytes		:	ARRAY[0..MAX_STRING_LENGTH] OF BYTE;
+	i					:	UINT;
 END_VAR
 VAR CONSTANT
+
 	STATE_IDLE							:	UINT	:=	0;
 	STATE_OPEN_FILE						:	UINT	:= 	1;
 	STATE_GET_STRING_FROM_FIFO		 	:	UINT 	:= 	2;
@@ -108,71 +136,107 @@ VAR CONSTANT
 	
 	NET_ID 				: 	STRING := '';
 	TIMEOUT 			: 	TIME := DEFAULT_ADS_TIMEOUT;
+	
+	MAX_LOGS_PER_CYCLE 	:	UINT := DINT_TO_UINT(CONSTANTS.BUFFER_SIZE / UDINT_TO_DINT(MAX_STRING_LENGTH));
+	MAX_BUFFER_POS		:	UDINT := (SIZEOF(buffer) - MAX_STRING_LENGTH);
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[// State machine
-CASE state OF
-	STATE_IDLE:
-		filePutsTriggered := FALSE;
-		IF Fifo.nCount > 0 THEN 
-			filePutsTriggered := FALSE;
-			state := STATE_OPEN_FILE;
-		END_IF
+// Using if-statements instead of case for performance reasons:
+// Some states execute instantly and allow thus the next state 
+// to start within the same plc cycle.
+
+// *** I D L E ***
+IF state = STATE_IDLE THEN
+	lockFileWriteToForceRisingEdge := FALSE;
+	IF Fifo.nCount > 0 THEN 
+		lockFileWriteToForceRisingEdge := FALSE;
+		state := STATE_OPEN_FILE;
+	END_IF
+END_IF
 		
-	STATE_OPEN_FILE:
-		IF fTrigFileOpened.Q THEN state := STATE_GET_STRING_FROM_FIFO; END_IF
-
-	STATE_GET_STRING_FROM_FIFO: 
-		IF NOT filePutsTriggered THEN 
-			Fifo.A_RemoveHead(getValue => newLogEntry);	
-			state := STATE_APPEND_DATA_TO_FILE;
-		END_IF			 
-		filePutsTriggered := FALSE;
-		
-	STATE_APPEND_DATA_TO_FILE:
-		filePutsTriggered := TRUE;		
-		IF fTrigFilePuts.Q THEN 
-			IF Fifo.nCount > 0 THEN state := STATE_GET_STRING_FROM_FIFO; 
-			ELSE state := STATE_CLOSE_FILE; END_IF
-		END_IF
-			
-	STATE_CLOSE_FILE:
-		IF fTrigFileClose.Q THEN state := STATE_IDLE; END_IF
-	
-END_CASE
-
-// Close file in case of error
-IF fbFileOpen.bError THEN state := STATE_CLOSE_FILE; END_IF
-IF fbFilePuts.bError THEN state := STATE_CLOSE_FILE; END_IF
-
-// Function blocks used in state machine
+// *** O P E N   F I L E ***
 fbFileOpen(
 	sNetId := NET_ID, sPathName := FileName, nMode := FOPEN_MODEAPPEND OR FOPEN_MODETEXT, 
 	ePath := PATH_GENERIC, bExecute := (state = STATE_OPEN_FILE), tTimeout := TIMEOUT,
 	hFile => hFile);
-fTrigFileOpened(CLK := fbFileOpen.bBusy);
 
-fbFilePuts(
-	sNetId := NET_ID, hFile := hFile, sLine := newLogEntry,
-	bExecute := (state = STATE_APPEND_DATA_TO_FILE), tTimeout := TIMEOUT);
-fTrigFilePuts(CLK := fbFilePuts.bBusy);	
+IF state = STATE_OPEN_FILE THEN
+	IF fbFileOpen.bError THEN
+		state := STATE_CLOSE_FILE;
+	ELSIF NOT fbFileOpen.bBusy THEN 
+		state := STATE_GET_STRING_FROM_FIFO; 
+	END_IF
+END_IF 
 
+// *** P O P   F R O M   F I F O ***
+IF state = STATE_GET_STRING_FROM_FIFO THEN
+	IF NOT lockFileWriteToForceRisingEdge THEN
+		currentBufferPos := 0;
+		FOR i:=0 TO MAX_LOGS_PER_CYCLE DO
+			IF Fifo.nCount <= 0 THEN EXIT; END_IF
+			IF currentBufferPos >= MAX_BUFFER_POS THEN EXIT; END_IF
+			
+			Fifo.A_RemoveHead(getValue => fifoHeadString);	
+			fifoHeadBytes := MAXSTRING_TO_BYTEARR(fifoHeadString);
+			fifoHeadLength := INT_TO_UDINT(LEN(fifoHeadString));
+			MEMCPY(
+				destAddr 	:= 	ADR(buffer) + SIZEOF(BYTE) * currentBufferPos,
+				srcAddr 	:=	ADR(fifoHeadBytes),
+				n			:=	fifoHeadLength);		
+			currentBufferPos := currentBufferPos + fifoHeadLength; 	
+		END_FOR
+		state := STATE_APPEND_DATA_TO_FILE;
+	END_IF
+	lockFileWriteToForceRisingEdge := FALSE;
+END_IF
+	
+// *** W R I T E   T O   F I L E ***
+fbFileWrite(
+	sNetId := NET_ID, 
+	hFile := hFile, 
+	pWriteBuff := ADR(buffer),
+	cbWriteLen := currentBufferPos,
+	bExecute := state = STATE_APPEND_DATA_TO_FILE, 
+	tTimeout := TIMEOUT);	
+
+IF state = STATE_APPEND_DATA_TO_FILE THEN
+	lockFileWriteToForceRisingEdge := TRUE;		
+	IF fbFileWrite.bError THEN
+		state := STATE_CLOSE_FILE;
+	ELSIF Fifo.nCount > 0 AND NOT fbFileWrite.bBusy THEN
+		state := STATE_GET_STRING_FROM_FIFO; 
+	ELSIF Fifo.nCount = 0 THEN
+		state := STATE_CLOSE_FILE;
+	END_IF
+END_IF
+		
+// *** C L O S E   F I L E ***
 fbFileClose(
 	sNetId := NET_ID, hFile := hFile, 
 	bExecute := (state = STATE_CLOSE_FILE), tTimeout := TIMEOUT);
-fTrigFileClose(CLK := fbFileClose.bBusy);	
 
+IF state = STATE_CLOSE_FILE THEN
+	IF NOT fbFileCLose.bBusy THEN state := STATE_IDLE; END_IF
+END_IF
+
+// Close file in case of error
+IF fbFileOpen.bError THEN state := STATE_CLOSE_FILE; END_IF
+IF fbFileWrite.bError THEN state := STATE_CLOSE_FILE; END_IF
+IF NOT Fifo.bOk AND Fifo.nCount > 0 AND state <> STATE_IDLE THEN 
+	state := STATE_CLOSE_FILE; 
+END_IF
 
 // Error handling
 IF fbFileOpen.bError THEN
 	Error.Active := TRUE;
 	Error.Code := E_ErrorCode.OpeningFileFailed;
 	Error.Info := CONCAT('Opening file failed. Error thrown by FB_FileOpen. Consult Beckhoff InfoSys. Internal Error: ', UDINT_TO_STRING(fbFileOpen.nErrId));
-ELSIF fbFilePuts.bError THEN
+ELSIF fbFileWrite.bError THEN
 	Error.Active := TRUE;
 	Error.Code := E_ErrorCode.WritingToFileFailed;
-	Error.Info := CONCAT('Writing to file failed. Error thrown by FB_FilePuts. Consult Beckhoff InfoSys. Internal Error: ', UDINT_TO_STRING(fbFilePuts.nErrId));
+	Error.Info := CONCAT('Writing to file failed. Error thrown by FB_FileWrite. Consult Beckhoff InfoSys. Internal Error: ', UDINT_TO_STRING(fbFileWrite.nErrId));
 ELSIF fbFileClose.bError THEN
 	Error.Active := TRUE;
 	Error.Code := E_ErrorCode.ClosingFileFailed;
@@ -180,12 +244,15 @@ ELSIF fbFileClose.bError THEN
 ELSIF NOT Fifo.bOk AND Fifo.nCount > 0 THEN
 	Error.Active := TRUE;
 	Error.Code := E_ErrorCode.FifoOverflow;
-	Error.Info := 'FIFO overflow. Check if (a) plc has enough free memory and (b) if no message is written each plc cycle';
+	Error.Info := 'FIFO overflow. Check if plc has enough free memory.';
 ELSE
 	Error.Active := FALSE;
 	Error.Code := E_ErrorCode.None;
 	Error.Info := '';
 END_IF
+
+// Set busy state
+Busy := (state <> STATE_IDLE OR Fifo.nCount > 0);
 
 (* Uncomment for cyclic logging of state machine, buffer usage & errors
 
@@ -254,6 +321,12 @@ END_IF]]></ST>
       <LineId Id="6" Count="1" />
       <LineId Id="5" Count="0" />
     </LineIds>
+    <LineIds Name="DynamicStringBuffer.Busy.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DynamicStringBuffer.Busy.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
     <LineIds Name="DynamicStringBuffer.FB_exit">
       <LineId Id="6" Count="0" />
     </LineIds>
@@ -264,35 +337,20 @@ END_IF]]></ST>
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="DynamicStringBuffer.PersistToFile">
-      <LineId Id="6" Count="2" />
-      <LineId Id="199" Count="0" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="126" Count="0" />
-      <LineId Id="10" Count="6" />
-      <LineId Id="18" Count="0" />
-      <LineId Id="165" Count="0" />
-      <LineId Id="167" Count="0" />
-      <LineId Id="166" Count="0" />
-      <LineId Id="127" Count="0" />
-      <LineId Id="19" Count="1" />
-      <LineId Id="129" Count="0" />
-      <LineId Id="21" Count="8" />
-      <LineId Id="339" Count="0" />
-      <LineId Id="338" Count="0" />
-      <LineId Id="337" Count="0" />
-      <LineId Id="336" Count="0" />
-      <LineId Id="329" Count="0" />
-      <LineId Id="31" Count="16" />
-      <LineId Id="331" Count="0" />
-      <LineId Id="48" Count="0" />
-      <LineId Id="53" Count="3" />
-      <LineId Id="59" Count="3" />
-      <LineId Id="65" Count="3" />
-      <LineId Id="96" Count="3" />
-      <LineId Id="95" Count="0" />
-      <LineId Id="100" Count="2" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="341" Count="17" />
+      <LineId Id="695" Count="0" />
+      <LineId Id="728" Count="1" />
+      <LineId Id="859" Count="0" />
+      <LineId Id="730" Count="32" />
+      <LineId Id="764" Count="0" />
+      <LineId Id="898" Count="0" />
+      <LineId Id="765" Count="3" />
+      <LineId Id="896" Count="0" />
+      <LineId Id="769" Count="13" />
+      <LineId Id="784" Count="23" />
+      <LineId Id="899" Count="2" />
+      <LineId Id="857" Count="0" />
+      <LineId Id="810" Count="8" />
+      <LineId Id="823" Count="33" />
       <LineId Id="340" Count="0" />
     </LineIds>
     <LineIds Name="DynamicStringBuffer.PopHead">

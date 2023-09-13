@@ -289,32 +289,77 @@ namespace TcLogTest.NET
         }
 
         [Theory]
-        [InlineData(5, 5, 5_000)]
-        [InlineData(10, 10, 10_000)]
-        [InlineData(20, 20, 30_000)]
-        [InlineData(50, 50, 180_000)]
+        [InlineData(5, 5, 500)]
+        [InlineData(10, 10, 1_000)]
+        [InlineData(20, 20, 2_000)]
+        [InlineData(50, 50, 5_000)]
+        [InlineData(5, 200, 2_000)]
+        [InlineData(5, 500, 5_000)]
+        [InlineData(20, 200, 10_000)]
         public async void Log_multiple_times_in_multiple_cycles(int cycleCount, int logCount, int waitTime)
         {
             uint hRun = fixture.TcClient.CreateVariableHandle(mut + ".Log_multiple_logs_in_multiple_cycles");
-            uint hCycleCount = fixture.TcClient.CreateVariableHandle(mut + ".Number_of_cycles");
+            uint hCyclesToLog = fixture.TcClient.CreateVariableHandle(mut + ".Number_of_cycles");
             uint hLogCount = fixture.TcClient.CreateVariableHandle(mut + ".Number_of_logs_per_cycle");
 
-            fixture.TcClient.WriteAny(hCycleCount, cycleCount);
+            fixture.TcClient.WriteAny(hCyclesToLog, cycleCount);
             fixture.TcClient.WriteAny(hLogCount, logCount);
             fixture.TcClient.WriteAny(hRun, true);
             await Task.Delay(waitTime);
             var files = Directory.GetFiles(path);
-
             var fileContent = File.ReadAllLines(files[0]);
 
             Assert.Equal<int>(cycleCount * logCount, fileContent.Length);
 
-            fixture.TcClient.WriteAny(hCycleCount, 0);
+            fixture.TcClient.WriteAny(hCyclesToLog, 0);
             fixture.TcClient.WriteAny(hLogCount, 0);
             foreach (var f in files) File.Delete(f);
             fixture.TcClient.DeleteVariableHandle(hRun);
-            fixture.TcClient.DeleteVariableHandle(hCycleCount);
+            fixture.TcClient.DeleteVariableHandle(hCyclesToLog);
             fixture.TcClient.DeleteVariableHandle(hLogCount);
+        }
+
+        [Theory]
+        [InlineData(1, 1, 1_000)]
+        [InlineData(5, 5, 1_000)]
+        [InlineData(10, 1, 1_000)]
+        [InlineData(1, 10, 1_000)]
+        [InlineData(10, 10, 5_000)]
+        [InlineData(20, 20, 5_000)]
+        [InlineData(50, 50, 5_000)]
+        [InlineData(100, 50, 10_000)]
+        [InlineData(5, 200, 2_000)]
+        [InlineData(5, 500, 5_000)]
+        public async void Persistance_time_stays_within_bounds(int cycleCount, int logCount, int waitTime)
+        {
+            const int MAX_LOGS_PER_CYCLE = 100;
+            uint hRun = fixture.TcClient.CreateVariableHandle(mut + ".Persistance_time_stays_within_bounds");
+            uint hCyclesToLog = fixture.TcClient.CreateVariableHandle(mut + ".Number_of_cycles");
+            uint hLogCount = fixture.TcClient.CreateVariableHandle(mut + ".Number_of_logs_per_cycle");
+            uint hDurationInCycles = fixture.TcClient.CreateVariableHandle(mut + ".Duration_in_cylces");
+            int expectedCycles =
+                logCount > MAX_LOGS_PER_CYCLE ?
+                logCount / MAX_LOGS_PER_CYCLE * 3 * cycleCount :
+                cycleCount;
+           
+            fixture.TcClient.WriteAny(hCyclesToLog, cycleCount);
+            fixture.TcClient.WriteAny(hLogCount, logCount);
+            fixture.TcClient.WriteAny(hDurationInCycles, 0);
+            fixture.TcClient.WriteAny(hRun, true);
+            await Task.Delay(waitTime);
+            var files = Directory.GetFiles(path);
+            var durationInCycles = fixture.TcClient.ReadAny<int>(hDurationInCycles);
+
+            Assert.InRange(durationInCycles, expectedCycles, expectedCycles * 1.5 + 2);
+
+            fixture.TcClient.WriteAny(hCyclesToLog, 0);
+            fixture.TcClient.WriteAny(hLogCount, 0);
+            fixture.TcClient.WriteAny(hDurationInCycles, 0);
+            foreach (var f in files) File.Delete(f);
+            fixture.TcClient.DeleteVariableHandle(hRun);
+            fixture.TcClient.DeleteVariableHandle(hCyclesToLog);
+            fixture.TcClient.DeleteVariableHandle(hLogCount);
+            fixture.TcClient.DeleteVariableHandle(hDurationInCycles);
         }
     }
 }

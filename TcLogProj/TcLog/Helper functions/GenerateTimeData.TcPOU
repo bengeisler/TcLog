@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="GenerateTimeData" Id="{a1415746-5629-4121-889a-c1e5c1a14e0f}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK GenerateTimeData
 VAR_INPUT
@@ -49,7 +49,8 @@ rTrigTimeValid(CLK := fbSystemTime.bValid);
 ]]></ST>
     </Implementation>
     <Property Name="Done" Id="{8f1defae-bf58-4f56-90d2-4c21f4d99c0d}">
-      <Declaration><![CDATA[PROPERTY Done : BOOL]]></Declaration>
+      <Declaration><![CDATA[{attribute 'monitoring':='call'}
+PROPERTY Done : BOOL]]></Declaration>
       <Get Name="Get" Id="{af33a3a4-b3f8-4a12-a02f-9f9071d422ae}">
         <Declaration><![CDATA[VAR
 END_VAR
