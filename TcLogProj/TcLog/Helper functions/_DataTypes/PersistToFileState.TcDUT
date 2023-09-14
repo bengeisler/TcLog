@@ -3,7 +3,7 @@
   <DUT Name="PersistToFileState" Id="{f165e319-464b-4a7b-a486-84fad9259575}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE PersistToFileState :
+TYPE INTERNAL PersistToFileState :
 (
 	Idle := 0,
   OpenFile,

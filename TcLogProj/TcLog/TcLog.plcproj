@@ -26,6 +26,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Helper functions" />
+    <Folder Include="Helper functions\_DataTypes" />
     <Folder Include="Logger" />
     <Folder Include="Logger\DUT" />
     <Folder Include="Logger\ITF" />
@@ -41,9 +42,6 @@
     <Compile Include="Helper functions\ANY_TO_STRING2.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Helper functions\DeleteFilesState.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Helper functions\DeleteOldFiles.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -56,7 +54,10 @@
     <Compile Include="Helper functions\GetFileAgeInSeconds.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Helper functions\PersistToFileState.TcDUT">
+    <Compile Include="Helper functions\_DataTypes\DeleteFilesState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Helper functions\_DataTypes\PersistToFileState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Logger\DUT\E_ErrorCode.TcDUT">

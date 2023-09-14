@@ -3,7 +3,7 @@
   <DUT Name="DeleteFilesState" Id="{01a80c6b-14dd-4079-8b88-25b2a5d0c1d3}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE DeleteFilesState :
+TYPE INTERNAL DeleteFilesState :
 (
 	Idle := 0,
   SearchNextFile,
