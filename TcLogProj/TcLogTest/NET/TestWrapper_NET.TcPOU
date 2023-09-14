@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="TestWrapper_NET" Id="{b95f26a9-ba1e-45bd-8717-c0be8c66e163}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TestWrapper_NET
 VAR_INPUT
@@ -203,22 +203,5 @@ END_IF
 
 ]]></ST>
     </Implementation>
-    <LineIds Name="TestWrapper_NET">
-      <LineId Id="402" Count="15" />
-      <LineId Id="421" Count="83" />
-      <LineId Id="527" Count="0" />
-      <LineId Id="506" Count="11" />
-      <LineId Id="528" Count="0" />
-      <LineId Id="519" Count="2" />
-      <LineId Id="558" Count="4" />
-      <LineId Id="534" Count="1" />
-      <LineId Id="551" Count="0" />
-      <LineId Id="536" Count="9" />
-      <LineId Id="549" Count="0" />
-      <LineId Id="533" Count="0" />
-      <LineId Id="556" Count="0" />
-      <LineId Id="522" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

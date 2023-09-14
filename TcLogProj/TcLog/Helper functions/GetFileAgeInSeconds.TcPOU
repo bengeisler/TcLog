@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="GetFileAgeInSeconds" Id="{10d2aa26-8297-4a3b-95d9-c628cba3b409}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION GetFileAgeInSeconds : DINT
 VAR_INPUT
-	ActualTime		: T_FILETIME;
-	FindFileEntry	: ST_FindFileEntry;
+	ActualTime : Tc2_Utilities.T_FILETIME;
+	FindFileEntry	: Tc2_Utilities.ST_FindFileEntry;
 END_VAR
 VAR
-	timeLastWriteAccess	:	T_ULARGE_INTEGER;
-	fileTimeAsULINT		:	T_ULARGE_INTEGER;
-	fileTimeDifference	:	T_ULARGE_INTEGER;
+	timeLastWriteAccess : Tc2_Utilities.T_ULARGE_INTEGER;
+	fileTimeAsULINT : Tc2_Utilities.T_ULARGE_INTEGER;
+	fileTimeDifference : Tc2_Utilities.T_ULARGE_INTEGER;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -24,13 +24,5 @@ fileTimeDifference := UInt64Sub64(fileTimeAsULINT, timeLastWriteAccess);
 
 GetFileAgeInSeconds := LREAL_TO_DINT(UINT64_TO_LREAL(fileTimeDifference)/(1000*1000*10));]]></ST>
     </Implementation>
-    <LineIds Name="GetFileAgeInSeconds">
-      <LineId Id="38" Count="0" />
-      <LineId Id="8" Count="1" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="36" Count="0" />
-      <LineId Id="10" Count="3" />
-      <LineId Id="7" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

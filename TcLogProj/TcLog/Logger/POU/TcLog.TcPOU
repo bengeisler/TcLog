@@ -1,32 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="TcLog" Id="{70fb8269-5067-405b-9fff-7631f944e2d4}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute 'reflection'} 
 FUNCTION_BLOCK TcLog IMPLEMENTS ILog
-VAR_INPUT
-
-END_VAR
-VAR_OUTPUT
-END_VAR
 VAR
 	{attribute 'hide'} 
-	logConditionSatisfied 			: BOOL;							// flag that indicates, whether log condition has been satisfied. 
-																	// Logging will only be carried out it this evaluates to TRUE.
+	logConditionSatisfied : BOOL; // flag that indicates, whether log condition has been satisfied. 
+                                // Logging will only be carried out it this evaluates to TRUE.
 	{attribute 'hide'} 																
-	logDataInitialized 				: BOOL;							// flag that indicate, whether log data has been initialized. 
-																	// Necessary for configuration methods to provide a fluent interface.
+	logDataInitialized : BOOL; // flag that indicate, whether log data has been initialized. 
+                             // Necessary for configuration methods to provide a fluent interface.
 	{attribute 'hide'} 																
-	logData 						: T_MaxString;					// contains message to be logged.
+	logData : Tc2_System.T_MaxString; // contains message to be logged.
 	
 	{attribute 'hide'} 
-	usedLogger						: ILogCore;		// 
+	usedLogger : ILogCore; // 
 	
 	{attribute 'instance-path'} 
-    {attribute 'noinit'} 
-    InstancePath 					: STRING; 						// contains instance path 
+  {attribute 'noinit'} 
+  InstancePath : STRING; // contains instance path 
 END_VAR
 VAR_STAT
-	SingletonInstance 				: ILogCore;						// Wires up TcLogg ("Client") to TcLogCore ("Server") (Singleton-Behaviour)
+	SingletonInstance : ILogCore; // Wires up TcLog ("Client") to TcLogCore ("Server") (Singleton-Behaviour)
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -35,11 +30,11 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[// Appends any given data to the log string. Can be chained.
 METHOD AppendAny : REFERENCE TO TcLog	
 VAR_INPUT
-	Data : ANY;		// Data to be appended to log string.
+	Data : ANY; // Data to be appended to log string.
 END_VAR
 VAR
 	pAnyReal : POINTER TO REAL;
-	pAnyLReal: POINTER TO LREAL;
+	pAnyLReal : POINTER TO LREAL;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -54,12 +49,12 @@ AppendAny REF= THIS^;]]></ST>
       <Declaration><![CDATA[// Appends a string to the log string. Can be chained.
 METHOD AppendString : REFERENCE TO TcLog		
 VAR_INPUT
-	Data : T_MaxString;		// Data to be appended to log string.
+	Data : Tc2_System.T_MaxString; // Data to be appended to log string.
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[InitializeLogData();
 
-logData := CONCAT(logData, Data);
+logData := Tc2_Standard.CONCAT(logData, Data);
 	
 AppendString REF= THIS^;]]></ST>
       </Implementation>
@@ -76,13 +71,13 @@ AppendString REF= THIS^;]]></ST>
 // Logger.AppendVariable(myVarInfo, myInt);
 METHOD AppendVariable : REFERENCE TO TcLog		
 VAR_INPUT
-	VarInfo : 	__SYSTEM.VAR_INFO;		// VARINFO of variable to be appended to log string.
-	Value	:	ANY;					// Value of variable to be appended to log string.
+	VarInfo : 	__SYSTEM.VAR_INFO; // VARINFO of variable to be appended to log string.
+	Value : ANY; // Value of variable to be appended to log string.
 END_VAR
 VAR
-	Format 		: 	FB_FormatString;
-	symbolName 	: 	T_MAXSTRING;
-	typeName 	: 	T_MAXSTRING; 
+	Format : Tc2_Utilities.FB_FormatString;
+	symbolName : Tc2_System.T_MaxString;
+	typeName : Tc2_System.T_MaxString; 
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -93,8 +88,8 @@ typeName := VarInfo.TypeName;
 
 Format(
 	sFormat := '%s [%s] : ',
-	arg1 := F_STRING(symbolName),
-	arg2 := F_STRING(typeName));
+	arg1 := Tc2_Utilities.F_STRING(symbolName),
+	arg2 := Tc2_Utilities.F_STRING(typeName));
 	
 AppendString(Format.sOut);
 AppendAny(Value);
@@ -106,9 +101,8 @@ AppendVariable REF= THIS^;]]></ST>
       <Declaration><![CDATA[//	Logs the log string in DEBUG level
 METHOD Debug : BOOL	
 VAR_INPUT
-	Message	:	T_MaxString;		// Message to be appended to log string.
-END_VAR
-]]></Declaration>
+	Message	:	Tc2_System.T_MaxString; // Message to be appended to log string.
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[InitializeLogData();
 IF logConditionSatisfied THEN
@@ -125,7 +119,7 @@ logDataInitialized := FALSE;]]></ST>
       <Declaration><![CDATA[// Logs the log string in ERROR level
 METHOD Error : BOOL	
 VAR_INPUT
-	Message	:	T_MaxString;		// Message to be appended to log string.
+	Message	:	Tc2_System.T_MaxString; // Message to be appended to log string.
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -145,7 +139,7 @@ logDataInitialized := FALSE;
       <Declaration><![CDATA[// Logs the log string in FATAL level
 METHOD Fatal : BOOL		
 VAR_INPUT
-	Message	:	T_MaxString;		// Message to be appended to log string.
+	Message	:	Tc2_System.T_MaxString; // Message to be appended to log string.
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[InitializeLogData();
@@ -163,7 +157,7 @@ logDataInitialized := FALSE;]]></ST>
       <Declaration><![CDATA[// Logs the log string in INFORMATION level.
 METHOD Information : BOOL
 VAR_INPUT
-	Message	:	T_MaxString;		// Message to be appended to log string.
+	Message	:	Tc2_System.T_MaxString; // Message to be appended to log string.
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -182,7 +176,7 @@ logDataInitialized := FALSE;]]></ST>
       <Declaration><![CDATA[// Initializes the reference to the core logger. Should only be called once from the core logger directly.
 METHOD PUBLIC Init : BOOL		
 VAR_INPUT
-	Ref2Core : ILogCore;	// Reference to TcLoggerCore instance.
+	Ref2Core : ILogCore; // Reference to TcLoggerCore instance.
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -193,10 +187,7 @@ END_VAR
       <Declaration><![CDATA[// Necessary to provide a fluent interface of the function. 
 // Has to be called at the begin of any method that returns a reference to THIS^
 {attribute 'hide'}
-METHOD PRIVATE InitializeLogData : BOOL		
-VAR_INPUT
-END_VAR
-]]></Declaration>
+METHOD PRIVATE InitializeLogData : BOOL		]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF NOT logDataInitialized THEN
 	logConditionSatisfied := TRUE;
@@ -210,7 +201,7 @@ END_IF]]></ST>
       <Declaration><![CDATA[// Conditional execution of the log commant. Only executes logging when Cond = TRUE.
 METHOD OnCondition : REFERENCE TO TcLog
 VAR_INPUT
-	Cond: BOOL;		// Logs data only if this condition evaluates to TRUE.
+	Cond: BOOL; // Logs data only if this condition evaluates to TRUE.
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -225,7 +216,7 @@ OnCondition REF= THIS^;]]></ST>
       <Declaration><![CDATA[// Initializes the reference to the core logger. Should only be called once from the core logger directly.
 METHOD SetLogger : BOOL
 VAR_INPUT
-	Ref2Core : ILogCore;	// Reference to Core Logger
+	Ref2Core : ILogCore; // Reference to Core Logger
 END_VAR
 
 ]]></Declaration>
@@ -237,15 +228,15 @@ END_VAR
       <Declaration><![CDATA[// Helper method. Shortens the instance path by omitting superfluent information
 // such as concrete logger instance and plc/project names.
 {attribute 'hide'}
-METHOD PRIVATE ShortenInstancePath : T_MAXSTRING
+METHOD PRIVATE ShortenInstancePath : Tc2_System.T_MaxString
 VAR_INPUT
-	Path 				:	T_MAXSTRING;	// Instance path to be shortened.
+	Path : Tc2_System.T_MaxString; // Instance path to be shortened.
 END_VAR
 VAR
-	i					:	UINT;
-	shortenedPath		:	T_MAXSTRING;
-	positionInString	:	INT := 0;
-	positionOfLastDot	:	INT := 0;
+	i : UINT;
+	shortenedPath : Tc2_System.T_MaxString;
+	positionInString : INT := 0;
+	positionOfLastDot : INT := 0;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -276,7 +267,7 @@ ShortenInstancePath := shortenedPath;
       <Declaration><![CDATA[// Logs directly to ADS log, ignoring the settings of the base logger.
 METHOD ToAdsLog : BOOL
 VAR_INPUT
-	LogLevel : E_LogLevel;		// Log level in which message should be logged to ADS.
+	LogLevel : E_LogLevel; // Log level in which message should be logged to ADS.
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -293,7 +284,7 @@ logDataInitialized := FALSE;]]></ST>
       <Declaration><![CDATA[// Saves custom formatted log string. No addtitional information will be added.
 METHOD ToCustomFormat : BOOL
 VAR_INPUT
-	Message	:	T_MaxString;	// Message to be appended to log string.
+	Message	:	Tc2_System.T_MaxString; // Message to be appended to log string.
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -312,7 +303,7 @@ logDataInitialized := FALSE;]]></ST>
       <Declaration><![CDATA[// Logs the log string in WARNING level
 METHOD Warning : BOOL	
 VAR_INPUT
-	Message	:	T_MaxString;	// Message to be appended to log string.
+	Message	:	Tc2_System.T_MaxString; // Message to be appended to log string.
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[InitializeLogData();
@@ -326,102 +317,5 @@ END_IF
 logDataInitialized := FALSE;]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="TcLog">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.AppendAny">
-      <LineId Id="40" Count="0" />
-      <LineId Id="123" Count="0" />
-      <LineId Id="122" Count="0" />
-      <LineId Id="58" Count="0" />
-      <LineId Id="7" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.AppendString">
-      <LineId Id="5" Count="0" />
-      <LineId Id="22" Count="0" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="6" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.AppendVariable">
-      <LineId Id="5" Count="0" />
-      <LineId Id="28" Count="0" />
-      <LineId Id="20" Count="0" />
-      <LineId Id="29" Count="1" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="21" Count="2" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="11" Count="0" />
-      <LineId Id="10" Count="0" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="8" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.Debug">
-      <LineId Id="27" Count="3" />
-      <LineId Id="33" Count="3" />
-      <LineId Id="25" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.Error">
-      <LineId Id="18" Count="0" />
-      <LineId Id="17" Count="0" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="10" Count="0" />
-      <LineId Id="29" Count="1" />
-      <LineId Id="28" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="12" Count="0" />
-      <LineId Id="11" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.Fatal">
-      <LineId Id="24" Count="3" />
-      <LineId Id="30" Count="3" />
-      <LineId Id="22" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.Information">
-      <LineId Id="27" Count="3" />
-      <LineId Id="33" Count="3" />
-      <LineId Id="25" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.Init">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.InitializeLogData">
-      <LineId Id="5" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="6" Count="0" />
-      <LineId Id="20" Count="0" />
-      <LineId Id="7" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.OnCondition">
-      <LineId Id="13" Count="3" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.SetLogger">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.ShortenInstancePath">
-      <LineId Id="52" Count="19" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.ToAdsLog">
-      <LineId Id="14" Count="0" />
-      <LineId Id="16" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="8" Count="0" />
-      <LineId Id="7" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.ToCustomFormat">
-      <LineId Id="25" Count="3" />
-      <LineId Id="31" Count="3" />
-      <LineId Id="23" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.Warning">
-      <LineId Id="22" Count="3" />
-      <LineId Id="28" Count="3" />
-      <LineId Id="10" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

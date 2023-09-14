@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="ConvertAnyToString_TEST" Id="{c0c8c635-4bd3-4a6c-aa53-91d1d9ba5250}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ConvertAnyToString_TEST EXTENDS TcUnit.FB_TestSuite
 VAR_INPUT
@@ -505,95 +505,5 @@ AssertEquals(Expected := expected,
 TEST_FINISHED();]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="ConvertAnyToString_TEST">
-      <LineId Id="9" Count="19" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST._FormatResult">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyByteToString">
-      <LineId Id="6" Count="7" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyDateAndTimeToString">
-      <LineId Id="6" Count="7" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyDateToString">
-      <LineId Id="6" Count="7" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyDINTToString">
-      <LineId Id="6" Count="7" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyDTToString">
-      <LineId Id="6" Count="7" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyDWordToString">
-      <LineId Id="6" Count="7" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyINTToString">
-      <LineId Id="6" Count="7" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyLINTToString">
-      <LineId Id="6" Count="7" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyLRealToString">
-      <LineId Id="6" Count="7" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyLWordToString">
-      <LineId Id="6" Count="7" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyRealToString">
-      <LineId Id="6" Count="7" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnySINTToString">
-      <LineId Id="6" Count="7" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyStringToString">
-      <LineId Id="6" Count="7" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyTimeToString">
-      <LineId Id="6" Count="7" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyTODToString">
-      <LineId Id="6" Count="7" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyUDINTToString">
-      <LineId Id="6" Count="7" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyUINTToString">
-      <LineId Id="6" Count="7" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyULINTToString">
-      <LineId Id="6" Count="7" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyUSINTToString">
-      <LineId Id="6" Count="7" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyWordToString">
-      <LineId Id="6" Count="7" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyWStringToString">
-      <LineId Id="6" Count="7" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

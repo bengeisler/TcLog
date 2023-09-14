@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="ANY_TO_STRING2" Id="{28d90234-855d-4077-b80b-97db8a8bae81}" SpecialFunc="None">
     <Declaration><![CDATA[// Converts value of ANY to String.
 FUNCTION ANY_TO_STRING2 : T_MAXSTRING
@@ -58,33 +58,5 @@ ELSE
 	ANY_TO_STRING2 := ANY_TO_STRING(Data.pValue^);
 END_IF]]></ST>
     </Implementation>
-    <LineIds Name="ANY_TO_STRING2">
-      <LineId Id="9" Count="2" />
-      <LineId Id="39" Count="0" />
-      <LineId Id="12" Count="2" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="23" Count="1" />
-      <LineId Id="22" Count="0" />
-      <LineId Id="41" Count="0" />
-      <LineId Id="28" Count="1" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="42" Count="0" />
-      <LineId Id="33" Count="1" />
-      <LineId Id="32" Count="0" />
-      <LineId Id="55" Count="0" />
-      <LineId Id="57" Count="1" />
-      <LineId Id="56" Count="0" />
-      <LineId Id="43" Count="0" />
-      <LineId Id="36" Count="1" />
-      <LineId Id="54" Count="0" />
-      <LineId Id="35" Count="0" />
-      <LineId Id="51" Count="0" />
-      <LineId Id="46" Count="0" />
-      <LineId Id="48" Count="1" />
-      <LineId Id="47" Count="0" />
-      <LineId Id="44" Count="0" />
-      <LineId Id="15" Count="1" />
-      <LineId Id="7" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

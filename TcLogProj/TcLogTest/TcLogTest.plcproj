@@ -5,7 +5,7 @@
     <ProjectGuid>{67a5cd22-d1e6-4601-ac63-4cebe4a64230}</ProjectGuid>
     <SubObjectsSortedByName>True</SubObjectsSortedByName>
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
-    <WriteProductVersion>true</WriteProductVersion>
+    <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
     <Name>TcLogTest</Name>
     <ProgramVersion>3.1.4023.0</ProgramVersion>
@@ -15,6 +15,7 @@
     <Implicit_KindOfTask>{e1bd9ded-0a02-4a11-be2c-80377a5672da}</Implicit_KindOfTask>
     <Implicit_Jitter_Distribution>{13ddf777-9176-46a7-9f0b-b060f7161474}</Implicit_Jitter_Distribution>
     <LibraryReferences>{bd225dc8-4884-4294-9c3c-d3a849af676d}</LibraryReferences>
+    <Released>false</Released>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Helper functions\ConvertAnyToString_TEST.TcPOU">
