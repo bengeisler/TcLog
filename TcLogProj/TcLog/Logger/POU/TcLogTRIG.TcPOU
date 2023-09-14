@@ -1,14 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="TcLogTRIG" Id="{aef804a0-ffc6-4577-b368-1ac5b4e5d860}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcLogTRIG EXTENDS TcLog
-VAR_INPUT
-END_VAR
-VAR_OUTPUT
-END_VAR
-VAR
-END_VAR
-]]></Declaration>
+    <Declaration><![CDATA[FUNCTION_BLOCK TcLogTRIG EXTENDS TcLog]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -16,10 +9,10 @@ END_VAR
       <Declaration><![CDATA[// Logs data on falling edge of CLK.
 METHOD OnFallingEdge : REFERENCE TO TcLog
 VAR_INPUT
-	CLK 	:	BOOL;	// Falling edge logs data.
+	CLK : BOOL;	// Falling edge logs data.
 END_VAR
 VAR_INST
-	fTrig	:	F_TRIG;
+	fTrig	:	Tc2_Standard.F_TRIG;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -34,10 +27,10 @@ OnFallingEdge REF= THIS^;]]></ST>
       <Declaration><![CDATA[// Logs data on rising edge of CLK.
 METHOD OnRisingEdge : REFERENCE TO TcLog
 VAR_INPUT
-	CLK 	:	BOOL;		// Rising edge logs data.
+	CLK : BOOL; // Rising edge logs data.
 END_VAR
 VAR_INST
-	rTrig	:	R_TRIG;
+	rTrig	:	Tc2_Standard.R_TRIG;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -48,19 +41,5 @@ SUPER^.OnCondition(rTrig.Q);
 OnRisingEdge REF= THIS^;]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="TcLogTRIG">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogTRIG.OnFallingEdge">
-      <LineId Id="6" Count="3" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogTRIG.OnRisingEdge">
-      <LineId Id="5" Count="0" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="12" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

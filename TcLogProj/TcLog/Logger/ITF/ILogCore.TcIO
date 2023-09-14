@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1">
   <Itf Name="ILogCore" Id="{80275ac4-af95-4848-b7cc-155c017cbebe}">
     <Declaration><![CDATA[INTERFACE ILogCore
 ]]></Declaration>
@@ -8,7 +8,7 @@
 // Logs data in custom format. No additional formatting will be done.
 METHOD LogCustomFormat : BOOL
 VAR_INPUT
-	Data			:	T_MaxString;		// Data to be logged. No additional formatting will be done.
+	Data : Tc2_System.T_MaxString; // Data to be logged. No additional formatting will be done.
 END_VAR]]></Declaration>
     </Method>
     <Method Name="LogStandardFormat" Id="{4e43729a-c713-4482-8fc8-f098874024f1}">
@@ -21,9 +21,9 @@ END_VAR]]></Declaration>
 // The message will only be logged if the logging level exceeds the configured minimum logging level.
 METHOD LogStandardFormat : BOOL
 VAR_INPUT
-	Data			:	T_MaxString;	// Data to be logged. Additional formatting wil be done.
-	InstancePath	:	T_MaxString;	// Instance path of calling logger to locate source of logging message.
-	LogLevel		:	E_LogLevel;		// Log level of message.
+	Data : Tc2_System.T_MaxString; // Data to be logged. Additional formatting wil be done.
+	InstancePath : Tc2_System.T_MaxString; // Instance path of calling logger to locate source of logging message.
+	LogLevel : E_LogLevel; // Log level of message.
 END_VAR]]></Declaration>
     </Method>
   </Itf>

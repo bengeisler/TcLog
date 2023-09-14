@@ -5,7 +5,7 @@
     <ProjectGuid>{534b7bb3-9b49-4f2b-86cc-2317930ea23d}</ProjectGuid>
     <SubObjectsSortedByName>True</SubObjectsSortedByName>
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
-    <WriteProductVersion>true</WriteProductVersion>
+    <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
     <Name>TcLog</Name>
     <ProgramVersion>3.1.4023.0</ProgramVersion>
@@ -16,7 +16,7 @@
     <Implicit_Jitter_Distribution>{d696fa89-a5b7-4359-9420-e6a3f2f66b93}</Implicit_Jitter_Distribution>
     <LibraryReferences>{e556042a-b034-4e51-bfa4-92060eb4b7b8}</LibraryReferences>
     <Company>Benedikt Geisler</Company>
-    <Released>true</Released>
+    <Released>false</Released>
     <Title>TcLog</Title>
     <ProjectVersion>0.2.2</ProjectVersion>
     <CombineIds>false</CombineIds>
@@ -26,6 +26,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Helper functions" />
+    <Folder Include="Helper functions\_DataTypes" />
     <Folder Include="Logger" />
     <Folder Include="Logger\DUT" />
     <Folder Include="Logger\ITF" />
@@ -51,6 +52,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Helper functions\GetFileAgeInSeconds.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Helper functions\_DataTypes\DeleteFilesState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Helper functions\_DataTypes\PersistToFileState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Logger\DUT\E_ErrorCode.TcDUT">

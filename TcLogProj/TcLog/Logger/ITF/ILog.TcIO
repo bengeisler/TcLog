@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1">
   <Itf Name="ILog" Id="{412ad8b8-57e1-419f-af21-e16e50d36d6b}">
     <Declaration><![CDATA[INTERFACE ILog
 ]]></Declaration>
