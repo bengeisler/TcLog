@@ -1,0 +1,24 @@
+{
+  "fileversion": 1,
+  "solution": "TcLog.sln",
+  "projects": [
+    {
+      "name": "TcLogProj",
+      "plcs": [
+        {
+          "version": "0.2.2",
+          "name": "TcLog",
+          "type": "Library",
+          "frameworks": {},
+          "references": {},
+          "repositories": [],
+          "bindings": {},
+          "patches": {
+            "platform": {},
+            "argument": {}
+          }
+        }
+      ]
+    }
+  ]
+}
