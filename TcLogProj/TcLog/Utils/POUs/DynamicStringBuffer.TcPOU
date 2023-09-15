@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="DynamicStringBuffer" Id="{660876ea-7fc3-4366-aa3c-17474f122e75}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK INTERNAL DynamicStringBuffer
+VAR_OUTPUT
+	Error : Error; // Error information of this FB
+END_VAR
+VAR
+	_fifo : Tc2_Utilities.FB_StringRingBuffer; // Necessary to buffer log data until it has been written to file.
+	_memoryManager : Tc3_DynamicMemory.FB_DynMem_Manager; // Memory manager, required by DynMem_Buffer.
+	_dynamicMemoryBuffer : Tc3_DynamicMemory.FB_DynMem_Buffer(ipMemMan := _memoryManager); // Provides dynamic buffer for Fifo. Is extended automatically if more than the
+                                                                   // default buffer size is needed.
+	{attribute 'hide'} 														
+	_busy : BOOL; // Buffer is busy; typically with writing data to the file system.
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="AddLine" Id="{40352fe7-a10a-404f-8748-bb98576a3241}">
+      <Declaration><![CDATA[METHOD AddLine : BOOL
+VAR_INPUT
+	Text : Tc2_System.T_MaxString; // Text to be added to the buffer
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ResizeFifoBufferIfNecessary();
+_fifo.A_AddTail(putValue := Tc2_Standard.CONCAT(Text, '$N')); ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AddString" Id="{6405c45a-0cb8-4431-a2bb-9cf39dc1e728}">
+      <Declaration><![CDATA[METHOD AddString : BOOL
+VAR_INPUT
+	Text : Tc2_System.T_MaxString; // String to be added to the buffer
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ResizeFifoBufferIfNecessary();
+_fifo.A_AddTail(putValue := Text); ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AllocateBuffer" Id="{bc70064d-9855-4df2-8293-04935db0d914}">
+      <Declaration><![CDATA[METHOD PRIVATE AllocateBuffer : BOOL // Allocates buffer FOR the fifo.
+VAR_INPUT
+	BufferSize : UDINT; // Initial buffer size in BYTEs for fifo buffer.
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_dynamicMemoryBuffer.CreateBuffer(nSize:=BufferSize*SIZEOF(BYTE), bReset:=TRUE);
+_fifo.pBuffer := _dynamicMemoryBuffer.pBuffer;
+_fifo.cbBuffer := BufferSize*SIZEOF(BYTE);]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Busy" Id="{b23806d3-8c54-456d-b666-1c83eaca7b17}">
+      <Declaration><![CDATA[{attribute 'monitoring':='call'}
+PROPERTY Busy : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{79b6117a-b0f4-49c4-8f2f-309ee42a8d23}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Busy := _busy;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{6b0f6f5d-2bb7-48c7-aa0b-845c65d65996}">
+        <Declaration><![CDATA[PRIVATE
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_busy := Busy;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="FB_exit" Id="{410b66b7-6428-4a64-9cb8-9b83e356f18f}">
+      <Declaration><![CDATA[METHOD FB_exit : BOOL
+VAR_INPUT
+	bInCopyCode : BOOL; // if TRUE, the exit method is called for exiting an instance that is copied afterwards (online change).
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_dynamicMemoryBuffer.Clear();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FlushCache" Id="{fa7baa03-4401-42cd-8818-9657ae6b0935}">
+      <Declaration><![CDATA[METHOD FlushCache : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_fifo.A_Reset();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Init" Id="{537021d7-4637-4ad9-9438-a76ff90a964b}">
+      <Declaration><![CDATA[METHOD INTERNAL Init : BOOL
+VAR_INPUT
+	BufferSize : UDINT; // Initial buffer size in BYTEs for fifo buffer.
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[AllocateBuffer(BufferSize);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PersistToFile" Id="{9df1c79b-f420-4db7-a528-f4f3a2facd9b}">
+      <Declaration><![CDATA[METHOD PersistToFile : BOOL
+VAR_INPUT
+	FileName : Tc2_System.T_MaxString; // File name including its path
+END_VAR
+VAR_INST
+	state : PersistToFileState;
+	
+	fileOpen : Tc2_System.FB_FileOpen;
+	fileHandle : UINT;
+	
+	fileWrite : Tc2_System.FB_FileWrite;
+	lockFileWriteToForceRisingEdge : BOOL; // filePuts can only be executed every other cycle
+                                         // since it needs a rising edge to execute.
+	fileClose : Tc2_System.FB_FileClose;
+	
+	buffer : ARRAY[0..CONSTANTS.BufferSize] OF BYTE;
+	currentBufferPos : UDINT;
+	fifoHeadString : Tc2_System.T_MaxString;
+	fifoHeadLength : UDINT;
+	fifoHeadBytes : ARRAY[0..Tc2_System.MAX_STRING_LENGTH] OF BYTE;
+	i : UINT;
+END_VAR
+VAR CONSTANT
+	NetId : STRING := '';
+	Timeout : TIME := DEFAULT_ADS_TIMEOUT;
+	MaxLogsPerCycle : UINT := DINT_TO_UINT(CONSTANTS.BufferSize / UDINT_TO_DINT(MAX_STRING_LENGTH));
+	MaxBufferPosition : UDINT := (SIZEOF(buffer)-MAX_STRING_LENGTH);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// State machine
+// Using if-statements instead of case for performance reasons:
+// Some states execute instantly and allow thus the next state 
+// to start within the same plc cycle.
+
+// *** I D L E ***
+IF state = PersistToFileState.Idle THEN
+	lockFileWriteToForceRisingEdge := FALSE;
+	IF _fifo.nCount > 0 THEN 
+		lockFileWriteToForceRisingEdge := FALSE;
+		state := PersistToFileState.OpenFile;
+	END_IF
+END_IF
+		
+// *** O P E N   F I L E ***
+fileOpen(sNetId := NetId, sPathName := FileName, nMode := FOPEN_MODEAPPEND OR FOPEN_MODETEXT, 
+	         ePath := PATH_GENERIC, bExecute := (state = PersistToFileState.OpenFile), tTimeout := Timeout,
+	         hFile => fileHandle);
+
+IF state = PersistToFileState.OpenFile THEN
+	IF fileOpen.bError THEN
+		state := PersistToFileState.CloseFile;
+	ELSIF NOT fileOpen.bBusy THEN
+		state := PersistToFileState.GetStringFromFifo; 
+	END_IF
+END_IF 
+
+// *** P O P   F R O M   F I F O ***
+IF state = PersistToFileState.GetStringFromFifo THEN
+	IF NOT lockFileWriteToForceRisingEdge THEN
+		currentBufferPos := 0;
+		FOR i:=0 TO MaxLogsPerCycle DO
+			IF _fifo.nCount <= 0 THEN EXIT; END_IF
+			IF currentBufferPos >= MaxBufferPosition THEN EXIT; END_IF
+			
+			_fifo.A_RemoveHead(getValue => fifoHeadString);	
+			fifoHeadBytes := MAXSTRING_TO_BYTEARR(fifoHeadString);
+			fifoHeadLength := INT_TO_UDINT(LEN(fifoHeadString));
+			MEMCPY(
+				destAddr 	:= 	ADR(buffer) + SIZEOF(BYTE) * currentBufferPos,
+				srcAddr 	:=	ADR(fifoHeadBytes),
+				n			:=	fifoHeadLength);		
+			currentBufferPos := currentBufferPos + fifoHeadLength; 	
+		END_FOR
+		state := PersistToFileState.AppendDataToFile;
+	END_IF
+	lockFileWriteToForceRisingEdge := FALSE;
+END_IF
+	
+// *** W R I T E   T O   F I L E ***
+fileWrite(
+	sNetId := NetId, 
+	hFile := fileHandle, 
+	pWriteBuff := ADR(buffer),
+	cbWriteLen := currentBufferPos,
+	bExecute := state = PersistToFileState.AppendDataToFile, 
+	tTimeout := Timeout);	
+
+IF state = PersistToFileState.AppendDataToFile THEN
+	lockFileWriteToForceRisingEdge := TRUE;		
+	IF fileWrite.bError THEN
+		state := PersistToFileState.CloseFile;
+	ELSIF _fifo.nCount > 0 AND NOT fileWrite.bBusy THEN
+		state := PersistToFileState.GetStringFromFifo; 
+	ELSIF _fifo.nCount = 0 THEN
+		state := PersistToFileState.CloseFile;
+	END_IF
+END_IF
+		
+// *** C L O S E   F I L E ***
+fileClose(
+	sNetId := NetId, hFile := fileHandle, 
+	bExecute := (state = PersistToFileState.CloseFile), tTimeout := Timeout);
+
+IF state = PersistToFileState.CloseFile THEN
+	IF NOT fileClose.bBusy THEN state := PersistToFileState.Idle; END_IF
+END_IF
+
+// Close file in case of error
+IF fileOpen.bError THEN state := PersistToFileState.CloseFile; END_IF
+IF fileWrite.bError THEN state := PersistToFileState.CloseFile; END_IF
+IF NOT _fifo.bOk AND _fifo.nCount > 0 AND state <> PersistToFileState.Idle THEN 
+	state := PersistToFileState.CloseFile; 
+END_IF
+
+// Error handling
+IF fileOpen.bError THEN
+	Error.Active := TRUE;
+	Error.Code := ErrorCodes.OpeningFileFailed;
+	Error.Info := Tc2_Standard.CONCAT('Opening file failed. Error thrown by FB_FileOpen. Consult Beckhoff InfoSys. Internal Error: ', UDINT_TO_STRING(fileOpen.nErrId));
+ELSIF fileWrite.bError THEN
+	Error.Active := TRUE;
+	Error.Code := ErrorCodes.WritingToFileFailed;
+	Error.Info := Tc2_Standard.CONCAT('Writing to file failed. Error thrown by FB_FileWrite. Consult Beckhoff InfoSys. Internal Error: ', UDINT_TO_STRING(fileWrite.nErrId));
+ELSIF fileClose.bError THEN
+	Error.Active := TRUE;
+	Error.Code := ErrorCodes.ClosingFileFailed;
+	Error.Info := Tc2_Standard.CONCAT('Closing file failed. Error thrown by FB_FileClose. Consult Beckhoff InfoSys. Internal Error: ', UDINT_TO_STRING(fileClose.nErrId));
+ELSIF NOT _fifo.bOk AND _fifo.nCount > 0 THEN
+	Error.Active := TRUE;
+	Error.Code := ErrorCodes.FifoOverflow;
+	Error.Info := 'FIFO overflow. Check if plc has enough free memory.';
+ELSE
+	Error.Active := FALSE;
+	Error.Code := ErrorCodes.None;
+	Error.Info := '';
+END_IF
+
+// Set busy state
+Busy := (state <> PersistToFileState.Idle OR _fifo.nCount > 0);
+
+(* Uncomment for cyclic logging of state machine, buffer usage & errors
+
+ADSLOGSTR(ADSLOG_MSGTYPE_LOG, 
+	Tc2_Standard.CONCAT('****DynamicStringBuffer.state:', 
+	Tc2_Standard.CONCAT(UINT_TO_STRING(state),
+	Tc2_Standard.CONCAT(', DynamicStringBuffer.hFile:', UINT_TO_STRING(hFile)))), '');
+
+ADSLOGSTR(ADSLOG_MSGTYPE_LOG, 
+	Tc2_Standard.CONCAT('****Fifo: used ', 
+	Tc2_Standard.CONCAT(UDINT_TO_STRING(Fifo.cbSize),
+	Tc2_Standard.CONCAT(' of ', UDINT_TO_STRING(Fifo.cbBuffer)))), '');
+	
+IF Error.Active THEN
+	ADSLOGSTR(ADSLOG_MSGTYPE_LOG, 
+		Tc2_Standard.CONCAT('****DynamicStringBuffer.Error: ', Error.Info), 
+		'');	
+END_IF
+*)]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PopHead" Id="{1c3e8de3-af72-4def-8aba-61974c7aa041}">
+      <Declaration><![CDATA[METHOD PopHead : Tc2_System.T_MaxString
+VAR_INST
+	headString : Tc2_System.T_MaxString;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_fifo.A_RemoveHead(getValue => headString);
+PopHead := headString;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ResizeFifoBufferIfNecessary" Id="{743741a9-70d0-433f-8900-11f7ea020fe9}">
+      <Declaration><![CDATA[// Resizes the buffer for the FIFO if necessary
+METHOD PRIVATE ResizeFifoBufferIfNecessary : BOOL
+VAR
+	requiredSize : UDINT;
+	newSize : DINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[requiredSize := _fifo.cbSize + Tc2_System.MAX_STRING_LENGTH;
+
+IF requiredSize > _fifo.cbBuffer THEN
+	_dynamicMemoryBuffer.Resize(nSize := requiredSize*SIZEOF(BYTE), bPreserve:=TRUE, bReset:=TRUE);
+	_fifo.pBuffer := _dynamicMemoryBuffer.pBuffer;
+	_fifo.cbBuffer := requiredSize;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="DynamicStringBuffer">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DynamicStringBuffer.AddLine">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DynamicStringBuffer.AddString">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DynamicStringBuffer.AllocateBuffer">
+      <LineId Id="13" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DynamicStringBuffer.Busy.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DynamicStringBuffer.Busy.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DynamicStringBuffer.FB_exit">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DynamicStringBuffer.FlushCache">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DynamicStringBuffer.Init">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DynamicStringBuffer.PersistToFile">
+      <LineId Id="1123" Count="127" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DynamicStringBuffer.PopHead">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DynamicStringBuffer.ResizeFifoBufferIfNecessary">
+      <LineId Id="3" Count="5" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,3 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <FileVersion>1.0.0.0</FileVersion>
@@ -18,10 +19,16 @@
     <Released>false</Released>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Helper functions\ConvertAnyToString_TEST.TcPOU">
+    <Compile Include="MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Helper functions\DynamicStringBuffer_TEST.TcPOU">
+    <Compile Include="TwinCAT\ConvertAnyToString_TEST.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TwinCAT\DateTime_TEST.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TwinCAT\DynamicStringBuffer_TEST.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="NET\TestWrapper_NET.TcPOU">
@@ -30,18 +37,10 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\MAIN.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="TimeFunctions\GenerateTimeData_TEST.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="NET" />
-    <Folder Include="Helper functions" />
-    <Folder Include="TimeFunctions" />
-    <Folder Include="POUs" />
+    <Folder Include="TwinCAT" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_Standard">

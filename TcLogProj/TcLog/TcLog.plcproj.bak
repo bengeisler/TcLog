@@ -25,58 +25,72 @@
     <Description>TcLog provides logging functionality to TwinCAT.</Description>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Utils" />
-    <Folder Include="Utils\DataTypes" />
+    <Folder Include="Helper functions" />
+    <Folder Include="Helper functions\_DataTypes" />
     <Folder Include="Logger" />
-    <Folder Include="Logger\DataTypes" />
-    <Folder Include="Logger\Interfaces" />
-    <Folder Include="Logger\POUs" />
+    <Folder Include="Logger\DUT" />
+    <Folder Include="Logger\ITF" />
+    <Folder Include="Logger\POU" />
     <Folder Include="StringBuilder" />
-    <Folder Include="Utils\POUs" />
     <Folder Include="Version" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants.TcGVL">
+    <Compile Include="CONSTANTS.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="Utils\DataTypes\DeleteFilesState.TcDUT">
+    <Compile Include="Helper functions\ANY_TO_STRING2.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Utils\DataTypes\PersistToFileState.TcDUT">
+    <Compile Include="Helper functions\DeleteOldFiles.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logger\DataTypes\ErrorCodes.TcDUT">
+    <Compile Include="Helper functions\DynamicStringBuffer.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logger\DataTypes\LogLevels.TcDUT">
+    <Compile Include="Helper functions\GenerateTimeData.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logger\DataTypes\RollingIntervals.TcDUT">
+    <Compile Include="Helper functions\GetFileAgeInSeconds.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logger\DataTypes\Error.TcDUT">
+    <Compile Include="Helper functions\_DataTypes\DeleteFilesState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logger\DataTypes\LoggingConfiguration.TcDUT">
+    <Compile Include="Helper functions\_DataTypes\PersistToFileState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logger\Interfaces\ILog.TcIO">
+    <Compile Include="Logger\DUT\E_ErrorCode.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logger\Interfaces\ILogCore.TcIO">
+    <Compile Include="Logger\DUT\E_LogLevel.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logger\POUs\LogLevelToAdsLogMsgType.TcPOU">
+    <Compile Include="Logger\DUT\E_RollingInterval.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logger\POUs\TcLog.TcPOU">
+    <Compile Include="Logger\DUT\ST_Error.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logger\POUs\TcLogCore.TcPOU">
+    <Compile Include="Logger\DUT\ST_LoggingConfiguration.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logger\POUs\TcLogTRIG.TcPOU">
+    <Compile Include="Logger\ITF\ILog.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logger\ITF\ILogCore.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logger\POU\LogLevel_To_AdsLogMsgType.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logger\POU\TcLog.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logger\POU\TcLogCore.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logger\POU\TcLogTRIG.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="StringBuilder\ILimitedStringBuilder.TcIO">
@@ -86,21 +100,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="StringBuilder\StringBuilder.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Utils\POUs\AnyToString.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Utils\POUs\DateTime.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Utils\POUs\DeleteOldFiles.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Utils\POUs\DynamicStringBuffer.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Utils\POUs\GetFileAgeInSeconds.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Version\Global_Version.TcGVL">

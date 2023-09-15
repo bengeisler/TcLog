@@ -2,47 +2,37 @@
 <TcPlcObject Version="1.1.0.1">
   <POU Name="DynamicStringBuffer_TEST" Id="{03045c1a-5281-4fe3-bc16-4d9ce12d6b50}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK DynamicStringBuffer_TEST EXTENDS FB_TestSuite
-VAR_INPUT
-END_VAR
-VAR_OUTPUT
-END_VAR
-VAR
-END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[LogsManyMessagesForManyCycles();]]></ST>
     </Implementation>
     <Method Name="LogsManyMessagesForManyCycles" Id="{e452a053-adba-401f-a1d2-1bba967ad2c0}">
       <Declaration><![CDATA[METHOD LogsManyMessagesForManyCycles
-VAR_INPUT
-END_VAR
 VAR
-	result: STRING := '';
-	expected: STRING := '';
-	i: UDINT;
+	result : STRING := '';
+	expected : STRING := '';
+	i : UDINT;
 END_VAR
-
 VAR CONSTANT
-	CYCLES: UDINT := 50;
-	MESSAGES: UDINT := 50;
+	Cycles : UDINT := 50;
+	Messages : UDINT := 50;
 END_VAR
-
 VAR_INST
-	cycleCount: UDINT := 0;
-	LogsManyMessagesForManyCyclesLogger: TcLogCore(nBufferSize := 50*50*280); // cycles * messages * (max string length + fifo overhead (estimated))
-	logger: TcLog;
+	cycleCount : UDINT := 0;
+	logsManyMessagesForManyCyclesLogger : TcLogCore(BufferSize:=50 * 50 * 280); // Cycles * Messages * (max string length + fifo overhead (estimated))
+	logger : TcLog;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('LogsManyMessagesForManyCycles');
 
-LogsManyMessagesForManyCyclesLogger
-	.WriteToFile('c:\logs\', 'test.txt')
+logsManyMessagesForManyCyclesLogger
+	.WriteToFile('c:\UnitTest\', 'test.txt')
 	.RunLogger();
-logger.SetLogger(LogsManyMessagesForManyCyclesLogger);
+logger.SetLogger(logsManyMessagesForManyCyclesLogger);
 
-IF cycleCount < CYCLES THEN
-	FOR i:=0 TO MESSAGES DO
+IF cycleCount < Cycles THEN
+	FOR i:=0 TO Messages DO
 		logger
 			.AppendString('Cycle: ')
 			.AppendString(UDINT_TO_STRING(cycleCount))
@@ -53,19 +43,12 @@ IF cycleCount < CYCLES THEN
 END_IF
 cycleCount := cycleCount + 1;
 
-// Length of operations (empirically determined):
-// file open: 		2 cycles
-// pop from fifo: 	1-2 cycle
-// write to file: 	2 cylces
-// close file:		2 cylces
-// => thus for x messages you need 4 * x + 4 cycles
-
 // Catch any occuring error message
-IF LEN(LogsManyMessagesForManyCyclesLogger.Error.Info) > 0 THEN
-	result := LogsManyMessagesForManyCyclesLogger.Error.Info;
+IF LEN(logsManyMessagesForManyCyclesLogger.Error.Info) > 0 THEN
+	result := logsManyMessagesForManyCyclesLogger.Error.Info;
 END_IF
 
-IF cycleCount > (CYCLES * MESSAGES * 5 + 100) THEN 
+IF cycleCount > (Cycles * Messages * 2 + 4) THEN 
 	AssertEquals(Expected := expected,
 				 Actual := result,
 				 Message := result);
@@ -74,5 +57,13 @@ IF cycleCount > (CYCLES * MESSAGES * 5 + 100) THEN
 END_IF]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="DynamicStringBuffer_TEST">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DynamicStringBuffer_TEST.LogsManyMessagesForManyCycles">
+      <LineId Id="3" Count="18" />
+      <LineId Id="29" Count="10" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

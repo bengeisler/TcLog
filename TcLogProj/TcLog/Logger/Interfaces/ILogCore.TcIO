@@ -8,8 +8,9 @@
 // Logs data in custom format. No additional formatting will be done.
 METHOD LogCustomFormat : BOOL
 VAR_INPUT
-	Data : Tc2_System.T_MaxString; // Data to be logged. No additional formatting will be done.
-END_VAR]]></Declaration>
+    Data : Tc2_System.T_MaxString; // Data to be logged. No additional formatting will be done.
+END_VAR
+]]></Declaration>
     </Method>
     <Method Name="LogStandardFormat" Id="{4e43729a-c713-4482-8fc8-f098874024f1}">
       <Declaration><![CDATA[// Logger method.
@@ -21,10 +22,11 @@ END_VAR]]></Declaration>
 // The message will only be logged if the logging level exceeds the configured minimum logging level.
 METHOD LogStandardFormat : BOOL
 VAR_INPUT
-	Data : Tc2_System.T_MaxString; // Data to be logged. Additional formatting wil be done.
-	InstancePath : Tc2_System.T_MaxString; // Instance path of calling logger to locate source of logging message.
-	LogLevel : E_LogLevel; // Log level of message.
-END_VAR]]></Declaration>
+    Data : Tc2_System.T_MaxString; // Data to be logged. Additional formatting wil be done.
+    InstancePath : Tc2_System.T_MaxString; // Instance path of calling logger to locate source of logging message.
+    LogLevel : LogLevels; // Log level of message.
+END_VAR
+]]></Declaration>
     </Method>
   </Itf>
 </TcPlcObject>

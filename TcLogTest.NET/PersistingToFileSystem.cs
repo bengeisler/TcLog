@@ -10,7 +10,7 @@ namespace TcLogTest.NET
     public class PersistingToFileSystem : IDisposable
     {
         PlcFixture fixture;
-        readonly string mut = "MAIN.testWrapper";
+        readonly string mut = "MAIN.TestWrapper";
         readonly string path = "C:\\UnitTest\\";
         readonly string filename = "UnitTest.txt";
         readonly uint hPath;
@@ -23,9 +23,9 @@ namespace TcLogTest.NET
         public PersistingToFileSystem(PlcFixture fixture)
         {
             this.fixture = fixture;
-
-            hPath = fixture.TcClient.CreateVariableHandle(mut + ".filePath");
-            hFileName = fixture.TcClient.CreateVariableHandle(mut + ".fileName");
+            
+            hPath = fixture.TcClient.CreateVariableHandle(mut + ".FilePath");
+            hFileName = fixture.TcClient.CreateVariableHandle(mut + ".FileName");
             fixture.TcClient.WriteAny(hPath, path);
             fixture.TcClient.WriteAny(hFileName, filename);
 
@@ -33,9 +33,9 @@ namespace TcLogTest.NET
             var files = Directory.GetFiles(path);
             foreach (var f in files) File.Delete(f);
 
-            hSystemTime = fixture.TcClient.CreateVariableHandle(mut + ".System_time");
-            hSetSystemTime = fixture.TcClient.CreateVariableHandle(mut + ".Set_system_time");
-            hTime = fixture.TcClient.CreateVariableHandle(mut + ".ActualTime");
+            hSystemTime = fixture.TcClient.CreateVariableHandle(mut + ".NewLocalSystemTimeToBeSet");
+            hSetSystemTime = fixture.TcClient.CreateVariableHandle(mut + ".TriggerNewLocalSystemTime");
+            hTime = fixture.TcClient.CreateVariableHandle(mut + ".LocalTimeAsString");
         }
 
         public void Dispose()

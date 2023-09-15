@@ -2,115 +2,46 @@
   <PropertyGroup>
     <FileVersion>1.0.0.0</FileVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{534b7bb3-9b49-4f2b-86cc-2317930ea23d}</ProjectGuid>
+    <ProjectGuid>{67a5cd22-d1e6-4601-ac63-4cebe4a64230}</ProjectGuid>
     <SubObjectsSortedByName>True</SubObjectsSortedByName>
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
     <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
-    <Name>TcLog</Name>
+    <Name>TcLogTest</Name>
     <ProgramVersion>3.1.4023.0</ProgramVersion>
-    <Application>{b17b6069-df5e-455f-9777-ca2592ee6113}</Application>
-    <TypeSystem>{827c7b48-6b19-4663-8b59-fefb0b436024}</TypeSystem>
-    <Implicit_Task_Info>{39cb5e76-4fe2-46f6-ae40-1fcb2a6531eb}</Implicit_Task_Info>
-    <Implicit_KindOfTask>{74ded4cd-273e-4f0f-8a1f-4c4d89389741}</Implicit_KindOfTask>
-    <Implicit_Jitter_Distribution>{d696fa89-a5b7-4359-9420-e6a3f2f66b93}</Implicit_Jitter_Distribution>
-    <LibraryReferences>{e556042a-b034-4e51-bfa4-92060eb4b7b8}</LibraryReferences>
-    <Company>Benedikt Geisler</Company>
+    <Application>{52251088-d347-4476-bbc7-23fde6e8d23d}</Application>
+    <TypeSystem>{1c7f7d07-287f-4a51-b3cf-59c3170ec015}</TypeSystem>
+    <Implicit_Task_Info>{5ea0a77b-9d3a-43a7-baf8-d3dd93164ec5}</Implicit_Task_Info>
+    <Implicit_KindOfTask>{e1bd9ded-0a02-4a11-be2c-80377a5672da}</Implicit_KindOfTask>
+    <Implicit_Jitter_Distribution>{13ddf777-9176-46a7-9f0b-b060f7161474}</Implicit_Jitter_Distribution>
+    <LibraryReferences>{bd225dc8-4884-4294-9c3c-d3a849af676d}</LibraryReferences>
     <Released>false</Released>
-    <Title>TcLog</Title>
-    <ProjectVersion>0.2.2</ProjectVersion>
-    <CombineIds>false</CombineIds>
-    <DefaultNamespace>TcLog</DefaultNamespace>
-    <Author>Benedikt Geisler</Author>
-    <Description>TcLog provides logging functionality to TwinCAT.</Description>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Utils" />
-    <Folder Include="Utils\DataTypes" />
-    <Folder Include="Logger" />
-    <Folder Include="Logger\DataTypes" />
-    <Folder Include="Logger\Interfaces" />
-    <Folder Include="Logger\POUs" />
-    <Folder Include="StringBuilder" />
-    <Folder Include="Utils\POUs" />
-    <Folder Include="Version" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Constants.TcGVL">
-      <SubType>Code</SubType>
-      <LinkAlways>true</LinkAlways>
-    </Compile>
-    <Compile Include="Utils\DataTypes\DeleteFilesState.TcDUT">
+    <Compile Include="Helper functions\ConvertAnyToString_TEST.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Utils\DataTypes\PersistToFileState.TcDUT">
+    <Compile Include="Helper functions\DynamicStringBuffer_TEST.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logger\DataTypes\ErrorCodes.TcDUT">
+    <Compile Include="NET\TestWrapper_NET.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logger\DataTypes\LogLevels.TcDUT">
+    <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logger\DataTypes\RollingIntervals.TcDUT">
+    <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logger\DataTypes\Error.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Logger\DataTypes\LoggingConfiguration.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Logger\Interfaces\ILog.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Logger\Interfaces\ILogCore.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Logger\POUs\LogLevelToAdsLogMsgType.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Logger\POUs\TcLog.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Logger\POUs\TcLogCore.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Logger\POUs\TcLogTRIG.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="StringBuilder\ILimitedStringBuilder.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="StringBuilder\IStringBuilder.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="StringBuilder\StringBuilder.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Utils\POUs\AnyToString.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Utils\POUs\DateTime.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Utils\POUs\DeleteOldFiles.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Utils\POUs\DynamicStringBuffer.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Utils\POUs\GetFileAgeInSeconds.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Version\Global_Version.TcGVL">
+    <Compile Include="TimeFunctions\GenerateTimeData_TEST.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <LibraryReference Include="Base Interfaces,newest,System">
-      <Namespace>IBaseLibrary</Namespace>
-    </LibraryReference>
+    <Folder Include="NET" />
+    <Folder Include="Helper functions" />
+    <Folder Include="TimeFunctions" />
+    <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_Standard">
@@ -125,19 +56,28 @@
       <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Utilities</Namespace>
     </PlaceholderReference>
-    <PlaceholderReference Include="Tc3_DynamicMemory">
-      <DefaultResolution>Tc3_DynamicMemory, * (Beckhoff Automation GmbH)</DefaultResolution>
-      <Namespace>Tc3_DynamicMemory</Namespace>
-    </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
+    <PlaceholderReference Include="TcLog">
+      <DefaultResolution>TcLog, * (Benedikt Geisler)</DefaultResolution>
+      <Namespace>TcLog</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="TcUnit">
+      <DefaultResolution>TcUnit, * (www.tcunit.org)</DefaultResolution>
+      <Namespace>TcUnit</Namespace>
+    </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="TcLog.tmc">
+    <None Include="TcLogTest.tmc">
       <SubType>Content</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PlaceholderResolution Include="TcLog">
+      <Resolution>TcLog, * (Benedikt Geisler)</Resolution>
+    </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
