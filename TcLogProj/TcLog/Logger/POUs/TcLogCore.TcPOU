@@ -282,10 +282,10 @@ RollingIntervalReached := 	(hourRolled 	AND RollingInterval = RollingIntervals.H
 // all internal methods that have to be executed cyclically.
 METHOD RunLogger : BOOL
 VAR_INST
-	newDay : Tc2_Standard.R_TRIG;
+	newDay : Tc2_Standard.R_TRIG; 
 	dateTime : DateTime;
 	deleteExpiredLogFiles : DeleteOldFiles;
-	stringBuilder : StringBuilder;
+	fileNameStringBuilder : StringBuilder;
 	timeStamp : STRING; // Timestamp used for filename
 END_VAR
 ]]></Declaration>
@@ -318,7 +318,7 @@ END_IF
 		
 // Persist logging messages to file
 _logCache.PersistToFile(
-	stringBuilder
+	fileNameStringBuilder
 		.Reset()
 		.Append(_config.FilePath)
 		.AppendIf(Tc2_Standard.RIGHT(_config.FilePath, 1) <> '\', '\')
@@ -482,7 +482,7 @@ WriteToFile REF= This^;]]></ST>
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="TcLogCore.RunLogger">
-      <LineId Id="221" Count="52" />
+      <LineId Id="296" Count="52" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="TcLogCore.SetDelimiter">

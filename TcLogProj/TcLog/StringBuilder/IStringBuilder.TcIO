@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <Itf Name="IStringBuilder" Id="{cc6d396c-ab11-4512-b217-fcaa420ac27e}">
-    <Declaration><![CDATA[INTERFACE INTERNAL
-]]></Declaration>
+    <Declaration><![CDATA[INTERFACE INTERNAL IStringBuilder]]></Declaration>
     <Method Name="Append" Id="{39f6182f-ddaa-4a04-88e3-b41671a4f64d}">
       <Declaration><![CDATA[METHOD Append : IStringBuilder // Append text TO t current build STRING.
 VAR_INPUT

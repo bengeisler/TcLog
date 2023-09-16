@@ -3,19 +3,19 @@
   <PropertyGroup>
     <FileVersion>1.0.0.0</FileVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{67a5cd22-d1e6-4601-ac63-4cebe4a64230}</ProjectGuid>
+    <ProjectGuid>{4d70d393-c90d-46c3-86ae-bdc75c79053f}</ProjectGuid>
     <SubObjectsSortedByName>True</SubObjectsSortedByName>
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
     <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
     <Name>TcLogTest</Name>
     <ProgramVersion>3.1.4023.0</ProgramVersion>
-    <Application>{52251088-d347-4476-bbc7-23fde6e8d23d}</Application>
-    <TypeSystem>{1c7f7d07-287f-4a51-b3cf-59c3170ec015}</TypeSystem>
-    <Implicit_Task_Info>{5ea0a77b-9d3a-43a7-baf8-d3dd93164ec5}</Implicit_Task_Info>
-    <Implicit_KindOfTask>{e1bd9ded-0a02-4a11-be2c-80377a5672da}</Implicit_KindOfTask>
-    <Implicit_Jitter_Distribution>{13ddf777-9176-46a7-9f0b-b060f7161474}</Implicit_Jitter_Distribution>
-    <LibraryReferences>{bd225dc8-4884-4294-9c3c-d3a849af676d}</LibraryReferences>
+    <Application>{0cbede17-3f7f-4622-9cfd-62e3bf399640}</Application>
+    <TypeSystem>{b0c972a6-08d3-46e9-98b7-a4ef4e8d9b31}</TypeSystem>
+    <Implicit_Task_Info>{9b71c67e-f119-4640-ba0b-98e46c60e097}</Implicit_Task_Info>
+    <Implicit_KindOfTask>{f7393b00-9f97-44d7-89c9-7038336b8b0d}</Implicit_KindOfTask>
+    <Implicit_Jitter_Distribution>{a4da123a-4ea3-4422-b5d4-7ae1d2501723}</Implicit_Jitter_Distribution>
+    <LibraryReferences>{d9ddb8a1-a1e0-4318-9382-2fb0cbf99920}</LibraryReferences>
     <Released>false</Released>
   </PropertyGroup>
   <ItemGroup>
