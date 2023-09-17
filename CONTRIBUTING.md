@@ -39,12 +39,8 @@ These tests are complemented by [XUnit](https://xunit.net/) tests in the .NET pr
 
 The project uses the [TcBlack](https://github.com/Roald87/TcBlack) formatter for TwinCAT code. Please make sure to format your code accordingly before creating a pull request. 
 
-The .NET code is formatted using the default Visual Studio formatter.
-
 #### Naming conventions
 
 This project uses [Zeugwerk naming conventions](https://doc.zeugwerk.dev/contribute/contribute_code.html#naming-conventions) for the TwinCAT code.
 
 Unfortunately, the Beckhoff PLC Static Analysis does not support checking custom naming conventions yet. Therefore, please make sure to check your code manually before creating a pull request.
-
-The .NET code follows the default .NET naming conventions.

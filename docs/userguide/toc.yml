@@ -1,12 +1,16 @@
 - name: Installation
   href: installation.md
-- name: Examples
+- name: User Guide
+  href: getting_started.md
+- name: User guide
   items: 
-  - name: Example 1
-    href: example1.md
-  - name: Example 2
-    href: example2.md
+  - name: Getting started
+    href: getting_started.md
+  - name: Logging
+    href: logging.md
+  - name: Configuration
+    href: configuration.md
+  - name: Customization
+    href: customization.md
 - name: License
   href: license.md
-- name: Notices
-  href: notices.md  
