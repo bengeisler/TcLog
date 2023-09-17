@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="DynamicStringBuffer" Id="{660876ea-7fc3-4366-aa3c-17474f122e75}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK INTERNAL DynamicStringBuffer
+    <Declaration><![CDATA[{attribute 'hide_all_locals'}
+FUNCTION_BLOCK INTERNAL DynamicStringBuffer
 VAR_OUTPUT
 	Error : Error; // Error information of this FB
 END_VAR
@@ -9,8 +10,7 @@ VAR
 	_fifo : Tc2_Utilities.FB_StringRingBuffer; // Necessary to buffer log data until it has been written to file.
 	_memoryManager : Tc3_DynamicMemory.FB_DynMem_Manager; // Memory manager, required by DynMem_Buffer.
 	_dynamicMemoryBuffer : Tc3_DynamicMemory.FB_DynMem_Buffer(ipMemMan := _memoryManager); // Provides dynamic buffer for Fifo. Is extended automatically if more than the
-                                                                   // default buffer size is needed.
-	{attribute 'hide'} 														
+                                                                   // default buffer size is needed.									
 	_busy : BOOL; // Buffer is busy; typically with writing data to the file system.
 END_VAR
 ]]></Declaration>
@@ -20,33 +20,33 @@ END_VAR
     <Method Name="AddLine" Id="{40352fe7-a10a-404f-8748-bb98576a3241}">
       <Declaration><![CDATA[METHOD AddLine : BOOL
 VAR_INPUT
-	Text : Tc2_System.T_MaxString; // Text to be added to the buffer
+	text : Tc2_System.T_MaxString; // Text to be added to the buffer
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[ResizeFifoBufferIfNecessary();
-_fifo.A_AddTail(putValue := Tc2_Standard.CONCAT(Text, '$N')); ]]></ST>
+_fifo.A_AddTail(putValue := Tc2_Standard.CONCAT(text, '$N')); ]]></ST>
       </Implementation>
     </Method>
     <Method Name="AddString" Id="{6405c45a-0cb8-4431-a2bb-9cf39dc1e728}">
       <Declaration><![CDATA[METHOD AddString : BOOL
 VAR_INPUT
-	Text : Tc2_System.T_MaxString; // String to be added to the buffer
+	text : Tc2_System.T_MaxString; // String to be added to the buffer
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[ResizeFifoBufferIfNecessary();
-_fifo.A_AddTail(putValue := Text); ]]></ST>
+_fifo.A_AddTail(putValue := text); ]]></ST>
       </Implementation>
     </Method>
     <Method Name="AllocateBuffer" Id="{bc70064d-9855-4df2-8293-04935db0d914}">
       <Declaration><![CDATA[METHOD PRIVATE AllocateBuffer : BOOL // Allocates buffer FOR the fifo.
 VAR_INPUT
-	BufferSize : UDINT; // Initial buffer size in BYTEs for fifo buffer.
+	bufferSize : UDINT; // Initial buffer size in BYTEs for fifo buffer.
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_dynamicMemoryBuffer.CreateBuffer(nSize:=BufferSize*SIZEOF(BYTE), bReset:=TRUE);
+        <ST><![CDATA[_dynamicMemoryBuffer.CreateBuffer(nSize:=bufferSize*SIZEOF(BYTE), bReset:=TRUE);
 _fifo.pBuffer := _dynamicMemoryBuffer.pBuffer;
 _fifo.cbBuffer := BufferSize*SIZEOF(BYTE);]]></ST>
       </Implementation>
@@ -89,17 +89,18 @@ END_VAR
     <Method Name="Init" Id="{537021d7-4637-4ad9-9438-a76ff90a964b}">
       <Declaration><![CDATA[METHOD INTERNAL Init : BOOL
 VAR_INPUT
-	BufferSize : UDINT; // Initial buffer size in BYTEs for fifo buffer.
+	bufferSize : UDINT; // Initial buffer size in BYTEs for fifo buffer.
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[AllocateBuffer(BufferSize);]]></ST>
+        <ST><![CDATA[AllocateBuffer(bufferSize);]]></ST>
       </Implementation>
     </Method>
     <Method Name="PersistToFile" Id="{9df1c79b-f420-4db7-a528-f4f3a2facd9b}">
-      <Declaration><![CDATA[METHOD PersistToFile : BOOL
+      <Declaration><![CDATA[{attribute 'hide_all_locals'}
+METHOD PersistToFile : BOOL
 VAR_INPUT
-	FileName : Tc2_System.T_MaxString; // File name including its path
+	fileName : Tc2_System.T_MaxString; // File name including its path
 END_VAR
 VAR_INST
 	state : PersistToFileState;
@@ -142,7 +143,7 @@ IF state = PersistToFileState.Idle THEN
 END_IF
 		
 // *** O P E N   F I L E ***
-fileOpen(sNetId := NetId, sPathName := FileName, nMode := FOPEN_MODEAPPEND OR FOPEN_MODETEXT, 
+fileOpen(sNetId := NetId, sPathName := fileName, nMode := FOPEN_MODEAPPEND OR FOPEN_MODETEXT, 
 	         ePath := PATH_GENERIC, bExecute := (state = PersistToFileState.OpenFile), tTimeout := Timeout,
 	         hFile => fileHandle);
 

@@ -1,16 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="TcLogTRIG" Id="{aef804a0-ffc6-4577-b368-1ac5b4e5d860}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcLogTRIG EXTENDS TcLog
+  <POU Name="TcLogTrig" Id="{aef804a0-ffc6-4577-b368-1ac5b4e5d860}" SpecialFunc="None">
+    <Declaration><![CDATA[/// This function block can be used to log on rising or falling edges.
+/// For each signal that should be watched, a separate instance of `TcLogTrig` 
+/// must be created.
+FUNCTION_BLOCK TcLogTrig EXTENDS TcLog
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="OnFallingEdge" Id="{a776a649-e65d-434f-b5b2-64de81890120}">
-      <Declaration><![CDATA[// Logs data on falling edge of CLK.
+      <Declaration><![CDATA[/// Logs data on falling edge of `CLK`.
+{attribute 'hide_all_locals'}
 METHOD OnFallingEdge : REFERENCE TO TcLog
 VAR_INPUT
-    CLK : BOOL; // Falling edge logs data.
+  /// Falling edge triggers logging the data.
+  CLK : BOOL; 
 END_VAR
 VAR_INST
     fTrig : Tc2_Standard.F_TRIG;
@@ -25,10 +30,12 @@ OnFallingEdge REF= THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnRisingEdge" Id="{e0a21764-11de-45ad-894f-c14b1933c3ef}">
-      <Declaration><![CDATA[// Logs data on rising edge of CLK.
+      <Declaration><![CDATA[/// Logs data on rising edge of `CLK`.
+{attribute 'hide_all_locals'}
 METHOD OnRisingEdge : REFERENCE TO TcLog
 VAR_INPUT
-    CLK : BOOL; // Rising edge logs data.
+  /// Rising edge logs data.
+  CLK : BOOL; 
 END_VAR
 VAR_INST
     rTrig : Tc2_Standard.R_TRIG;
@@ -42,5 +49,16 @@ SUPER^.OnCondition(rTrig.Q);
 OnRisingEdge REF= THIS^;]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="TcLogTrig">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcLogTrig.OnFallingEdge">
+      <LineId Id="3" Count="3" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="TcLogTrig.OnRisingEdge">
+      <LineId Id="3" Count="3" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

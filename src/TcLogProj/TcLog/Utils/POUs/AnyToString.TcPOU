@@ -4,7 +4,7 @@
     <Declaration><![CDATA[// Converts value of ANY to String.
 FUNCTION AnyToString : Tc2_System.T_MaxString
 VAR_INPUT
-	Data : ANY;
+	data : ANY;
 END_VAR
 VAR
 	_anyReal : POINTER TO REAL;
@@ -20,42 +20,42 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_REAL THEN
-	_anyReal := Data.pValue;
+      <ST><![CDATA[IF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_REAL THEN
+	_anyReal := data.pValue;
 	AnyToString := REAL_TO_STRING(_anyReal^);
 	
-ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_LREAL THEN
-	_anyLReal := Data.pValue;
+ELSIF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_LREAL THEN
+	_anyLReal := data.pValue;
 	AnyToString := LREAL_TO_STRING(_anyLReal^);
 	
-ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_DATEANDTIME THEN
-	_anyDateAndTime := Data.pValue;
+ELSIF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_DATEANDTIME THEN
+	_anyDateAndTime := data.pValue;
 	AnyToString := DT_TO_STRING(_anyDateAndTime^);	
 	
-ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_DATE THEN
-	_anyDate := Data.pValue;
+ELSIF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_DATE THEN
+	_anyDate := data.pValue;
 	AnyToString := DATE_TO_STRING(_anyDate^);
 	
-ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_TIME THEN
-	_anyTime := Data.pValue;
+ELSIF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_TIME THEN
+	_anyTime := data.pValue;
 	AnyToString := TIME_TO_STRING(_anyTime^);
 	
-ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_STRING THEN
-	_anyString := Data.pValue;
+ELSIF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_STRING THEN
+	_anyString := data.pValue;
 	AnyToString := _anyString^;
 	
-ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_WSTRING THEN
-	_anyWString := Data.pValue;
+ELSIF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_WSTRING THEN
+	_anyWString := data.pValue;
 	_wString := _anyWString^;
 	Tc2_Utilities.WSTRING_TO_STRING2(ADR(_string), ADR(_wString), SIZEOF(_wString));
 	AnyToString := _string;
 	
-ELSIF Data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_TIMEOFDAY THEN
-	_anyTOD := Data.pValue;
+ELSIF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_TIMEOFDAY THEN
+	_anyTOD := data.pValue;
 	AnyToString := TOD_TO_STRING(_anyTOD^);
 	
 ELSE
-	AnyToString := ANY_TO_STRING(Data.pValue^);
+	AnyToString := ANY_TO_STRING(data.pValue^);
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="AnyToString">

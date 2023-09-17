@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="DeleteOldFiles" Id="{53f55453-df08-4a77-a3eb-05859cd9b0ad}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK INTERNAL DeleteOldFiles
+    <Declaration><![CDATA[{attribute 'hide_all_locals'}
+FUNCTION_BLOCK INTERNAL DeleteOldFiles
 VAR_INPUT
 	StartScan : BOOL; // Rising edge starts scan for out-of-date log files and deletes them.
 	ExpirationInDays : UINT; // Files will be deleted if older than n days
@@ -28,11 +29,6 @@ VAR
 	_fileNameToDelete : Tc2_System.T_MaxString;
 	_commandType : Tc2_Utilities.E_EnumCmdType;
 	_fileDeleted : BOOL;
-END_VAR
-VAR_TEMP
-	timeLastWriteAccess : Tc2_Utilities.T_ULARGE_INTEGER;
-	fileTimeAsULINT : Tc2_Utilities.T_ULARGE_INTEGER;
-	fileTimeDifference : Tc2_Utilities.T_ULARGE_INTEGER;
 END_VAR
 ]]></Declaration>
     <Implementation>

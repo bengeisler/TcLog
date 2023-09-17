@@ -13,7 +13,7 @@ END_VAR
     <Method Name="Append" Id="{3f45997e-6006-457f-9a9a-30ac281e8f8a}">
       <Declaration><![CDATA[METHOD PUBLIC Append : IStringBuilder // Append text TO t current build STRING.
 VAR_INPUT
-	Text : Tc2_System.T_MaxString; //Text to append to current build string
+	text : Tc2_System.T_MaxString; //text to append to current build string
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -24,8 +24,8 @@ Append := THIS^;]]></ST>
     <Method Name="AppendIf" Id="{341a7b9c-f058-4735-b313-3a46f602e9e1}">
       <Declaration><![CDATA[METHOD PUBLIC AppendIf : IStringBuilder
 VAR_INPUT
-	Condition : BOOL;
-	Text : Tc2_System.T_MaxString;
+	condition : BOOL;
+	text : Tc2_System.T_MaxString;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -38,21 +38,21 @@ AppendIf := THIS^;]]></ST>
     <Method Name="InsertAtLocation" Id="{b2ed9ced-aca1-4991-af8e-c808997da606}">
       <Declaration><![CDATA[METHOD PUBLIC InsertAtLocation : IStringBuilder
 VAR_INPUT
-	Text : Tc2_System.T_MaxString;
-	Position : INT;
+	text : Tc2_System.T_MaxString;
+	position : INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_workString := Tc2_Standard.INSERT(_workSTring,Text,Position);
+        <ST><![CDATA[_workString := Tc2_Standard.INSERT(_workSTring,text,position);
 InsertAtLocation  := THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="PadLeft" Id="{26c6478b-ece5-418e-9b19-10604dda05cb}">
       <Declaration><![CDATA[METHOD PadLeft : IStringBuilder
 VAR_INPUT
-	Text : Tc2_System.T_MaxString; // Text to append to current build string
-	Length : INT; // Total length of text + padding
-	Char : STRING(1); // Character to be padded left of text
+	text : Tc2_System.T_MaxString; // Text to append to current build string
+	length : INT; // Total length of text + padding
+	char : STRING(1); // Character to be padded left of text
 END_VAR
 VAR
 	i : INT;

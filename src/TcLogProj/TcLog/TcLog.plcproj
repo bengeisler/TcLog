@@ -76,7 +76,7 @@
     <Compile Include="Logger\POUs\TcLogCore.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logger\POUs\TcLogTRIG.TcPOU">
+    <Compile Include="Logger\POUs\TcLogTrig.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="StringBuilder\ILimitedStringBuilder.TcIO">

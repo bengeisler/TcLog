@@ -3,14 +3,14 @@
   <POU Name="LogLevelToAdsLogMsgType" Id="{c5255ff0-b51b-42de-ab62-e7b30a9b316a}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION INTERNAL LogLevelToAdsLogMsgType : DWORD
 VAR_INPUT
-	LogLevel : LogLevels;
+	logLevel : LogLevels;
 END_VAR
 VAR
 	_retVal : DWORD;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[CASE LogLevel OF
+      <ST><![CDATA[CASE logLevel OF
 	LogLevels.Debug, LogLevels.Information:
 		_retVal := Tc2_System.ADSLOG_MSGTYPE_HINT;
 	LogLevels.Warning:
