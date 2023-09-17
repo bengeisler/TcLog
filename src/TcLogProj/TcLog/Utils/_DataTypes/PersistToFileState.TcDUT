@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <DUT Name="PersistToFileState" Id="{f165e319-464b-4a7b-a486-84fad9259575}">
-    <Declaration><![CDATA[{attribute 'qualified_only'}
+    <Declaration><![CDATA[// States for state machine used in `DynamicStringBuffer.PersistToFile`
+{attribute 'qualified_only'}
 {attribute 'strict'}
 TYPE INTERNAL PersistToFileState :
 (

@@ -1,11 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <DUT Name="Error" Id="{23c996c0-f051-4322-bcdc-8cc9475229f8}">
-    <Declaration><![CDATA[TYPE Error :
+    <Declaration><![CDATA[/// This is the error type used in this library.
+TYPE Error :
 STRUCT
-	Active : BOOL; // TRUE = error is active
-	Code : INT; // Error return code => E_ErrorCode
-	Info : Tc2_System.T_MaxString; // Error message
+  /// `TRUE` signals an active error
+	Active : BOOL;
+  /// Error code of type `ErrorCodes`
+	Code : INT;
+  /// Plain text error message
+	Info : Tc2_System.T_MaxString;
 END_STRUCT
 END_TYPE
 ]]></Declaration>
