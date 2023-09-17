@@ -21,32 +21,32 @@ As wrapper we use an function block that encapsulates `TcLog` and enforces the d
 ```
 FUNCTION_BLOCK UserLog IMPLEMENTS ILog
 VAR_INPUT
-	Condition: BOOL;
-	Identification: STRING;
-	Value: REAL;
-	Unit: STRING;
+  Condition: BOOL;
+  Identification: STRING;
+  Value: REAL;
+  Unit: STRING;
 END_VAR
 VAR
-	_getTimeData: DateTime;
-	_timestamp: STRING;
+  _getTimeData: DateTime;
+  _timestamp: STRING;
 END_VAR
 VAR_STAT
-	_logger: TcLog;	
+  _logger: TcLog; 
 END_VAR
 
 _getTimeData();
 _timestamp := _getTimeData.ToString('hh:mm:ss');
 
 _logger
-	.OnCondition(Condition)
-	.AppendString(_timestamp)
-	.AppendString(';')
-	.AppendString(Identification)
-	.AppendString(';')
-	.AppendAny(Value)
-	.AppendString(';')
-	.AppendString(Unit)
-	.ToCustomFormat('');
+  .OnCondition(Condition)
+  .AppendString(_timestamp)
+  .AppendString(';')
+  .AppendString(Identification)
+  .AppendString(';')
+  .AppendAny(Value)
+  .AppendString(';')
+  .AppendString(Unit)
+  .ToCustomFormat('');
 ```
 
 We can use the helper function `GenerateTimeData`, which returns the current date and time formatted via the `.ToString(Format)` method. With its help we generate the timestamp of the sensor data. 
@@ -60,7 +60,7 @@ The interface is implemented by passing the logger reference to the `TcLog` inst
 ```
 METHOD SetLogger : BOOL
 VAR_INPUT
-	ref2Core : REFERENCE TO TcLogCore;
+  ref2Core : REFERENCE TO TcLogCore;
 END_VAR
 
 _logger.SetLogger(ref2Core);
@@ -72,35 +72,35 @@ Somewhere in our program `TcLogCore` is called cyclically. If there is more than
 
 ```
 VAR
-	_newLogger: TcLogCore;
-	_rTrigLog : R_TRIG;
-	_log : BOOL;
-	_myLog : UserLog;
-	_myValue: REAL := 1.0;
-	_myValue2: REAL := 2.0;
+  _newLogger: TcLogCore;
+  _rTrigLog : R_TRIG;
+  _log : BOOL;
+  _myLog : UserLog;
+  _myValue: REAL := 1.0;
+  _myValue2: REAL := 2.0;
 END_VAR
 
 _newLogger
-	.MinimumLevel(LogLevels.Information)
-	.SetRollingInterval(RollingIntervals.Hourly)
-	.WriteToFile('c:\logs\', 'sensor.csv')
-	.DeleteLogFilesAfterDays(1)
-	.RunLogger();
-	
+  .MinimumLevel(LogLevels.Information)
+  .SetRollingInterval(RollingIntervals.Hourly)
+  .WriteToFile('c:\logs\', 'sensor.csv')
+  .DeleteLogFilesAfterDays(1)
+  .RunLogger();
+  
 _myLog.SetLogger(_newLogger);
 _rTrigLog(CLK := _log);
 
 _myLog(
-	Condition := _rTrigLog.Q,
+  Condition := _rTrigLog.Q,
     Identification := '+CC1-B31',
-	Value := _myValue,
-	Unit := '°C');
-	
+  Value := _myValue,
+  Unit := '°C');
+  
 _myLog(
-	Condition := _rTrigLog.Q,
-	Identification := '+CC1-B32',
-	Value := _myValue2,
-	Unit := '°C');
+  Condition := _rTrigLog.Q,
+  Identification := '+CC1-B32',
+  Value := _myValue2,
+  Unit := '°C');
 ```
 
 As soon as logging is triggered via `_log`, the csv file and the entries in it are created:

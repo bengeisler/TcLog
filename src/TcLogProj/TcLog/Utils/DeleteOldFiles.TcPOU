@@ -4,31 +4,31 @@
     <Declaration><![CDATA[{attribute 'hide_all_locals'}
 FUNCTION_BLOCK INTERNAL DeleteOldFiles
 VAR_INPUT
-	StartScan : BOOL; // Rising edge starts scan for out-of-date log files and deletes them.
-	ExpirationInDays : UINT; // Files will be deleted if older than n days
-	FilePath : Tc2_System.T_MaxString; // Path to files to be deleted
-	FileName : Tc2_System.T_MaxString; // Only files which match this filename will be deleted
-	CurrentUtcTime : Tc2_Utilities.T_FILETIME; // Current time  as UTC
+  StartScan : BOOL; // Rising edge starts scan for out-of-date log files and deletes them.
+  ExpirationInDays : UINT; // Files will be deleted if older than n days
+  FilePath : Tc2_System.T_MaxString; // Path to files to be deleted
+  FileName : Tc2_System.T_MaxString; // Only files which match this filename will be deleted
+  CurrentUtcTime : Tc2_Utilities.T_FILETIME; // Current time  as UTC
 END_VAR
 VAR_OUTPUT
-	Error : Error; // Error information
+  Error : Error; // Error information
 END_VAR
 VAR CONSTANT
-	OneDayInSeconds : LREAL := 24*3600.0;
-	MaxNumberOfFiles : UDINT := 100;
+  OneDayInSeconds : LREAL := 24*3600.0;
+  MaxNumberOfFiles : UDINT := 100;
 END_VAR
 VAR
-	_state : DeleteFilesState := DeleteFilesState.Idle;
-	
-	_enumFindFileList : Tc2_Utilities.FB_EnumFindFileList;
-	_enumBusy : Tc2_Standard.F_TRIG;
-	_fileDelete : Tc2_System.FB_FileDelete;
-	_fileDeleteBusy : Tc2_Standard.F_TRIG;
-	_listOfFiles : ARRAY[1..100] OF Tc2_Utilities.ST_FindFileEntry;
-	_deleteFileIndex : UDINT;
-	_fileNameToDelete : Tc2_System.T_MaxString;
-	_commandType : Tc2_Utilities.E_EnumCmdType;
-	_fileDeleted : BOOL;
+  _state : DeleteFilesState := DeleteFilesState.Idle;
+  
+  _enumFindFileList : Tc2_Utilities.FB_EnumFindFileList;
+  _enumBusy : Tc2_Standard.F_TRIG;
+  _fileDelete : Tc2_System.FB_FileDelete;
+  _fileDeleteBusy : Tc2_Standard.F_TRIG;
+  _listOfFiles : ARRAY[1..100] OF Tc2_Utilities.ST_FindFileEntry;
+  _deleteFileIndex : UDINT;
+  _fileNameToDelete : Tc2_System.T_MaxString;
+  _commandType : Tc2_Utilities.E_EnumCmdType;
+  _fileDeleted : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -36,75 +36,75 @@ END_VAR
 // It first enumerates all files in the specified directory
 // and then deletes all files that have overpassed the specified due date
 CASE _state OF
-	DeleteFilesState.Idle:
-		IF StartScan THEN
-			_commandType:= eEnumCmd_First;
-			_deleteFileIndex := 1;
-			_state := DeleteFilesState.SearchNextFile;
-		END_IF
-		
-	DeleteFilesState.SearchNextFile:
-		IF _enumBusy.Q THEN
-			_state := DeleteFilesState.WaitUntilExecutionDone;
-		END_IF
-		
-	DeleteFilesState.WaitUntilExecutionDone:
-		IF NOT _enumFindFileList.bError THEN
-			IF NOT _enumFindFileList.bEOE THEN
-				IF _enumFindFileList.nFindFiles < MaxNumberOfFiles THEN
-					_state := DeleteFilesState.SearchNextFile;
-				ELSE
-					_commandType := eEnumCmd_Abort;
-					_state := DeleteFilesState.ProcessFoundFiles;
-				END_IF
-			ELSE
-				_state := DeleteFilesState.ProcessFoundFiles;
-			END_IF
-		ELSE
-			_state := DeleteFilesState.Idle;
-		END_IF
-		
-	DeleteFilesState.ProcessFoundFiles:
-		IF _deleteFileIndex > _enumFindFileList.nFindFiles THEN
-			_state := DeleteFilesState.Idle;
-		ELSE
-			_state := DeleteFilesState.CheckIfFileIsDirectory;
-		END_IF
-		
-	DeleteFilesState.CheckIfFileIsDirectory:
-		IF NOT _listOfFiles[_deleteFileIndex].fileAttributes.bDirectory THEN
-			_state := DeleteFilesState.CheckFileTime;
-		ELSE
-			_deleteFileIndex := _deleteFileIndex + 1;
-			_state := DeleteFilesState.ProcessFoundFiles;
-		END_IF
-		
-	DeleteFilesState.CheckFileTime:		
-		IF GetFileAgeInSeconds(CurrentUtcTime, _listOfFiles[_deleteFileIndex]) > (ExpirationInDays * OneDayInSeconds) THEN
-			_state := DeleteFilesState.DeleteFile;
-		ELSE
-			_deleteFileIndex := _deleteFileIndex + 1;
-			_state := DeleteFilesState.ProcessFoundFiles;
-		END_IF
-	
-	DeleteFilesState.DeleteFile:
-		_fileNameToDelete := Tc2_Standard.CONCAT(FilePath, _listOfFiles[_deleteFileIndex].sFileName);
-		
-		IF _fileDeleteBusy.Q THEN
-			_deleteFileIndex := _deleteFileIndex + 1;
-			_fileDeleted := TRUE;
-			_state := DeleteFilesState.FileDeleted;
-		END_IF
-		IF _fileDelete.bError THEN
-			_state := DeleteFilesState.Idle;
-		END_IF
-		
-	DeleteFilesState.FileDeleted:		
-		// This state is needed to generate a rising edge for FB_FileDelete
-		IF NOT _fileDeleted THEN
-			_state := DeleteFilesState.ProcessFoundFiles;
-		END_IF
-		_fileDeleted := FALSE;
+  DeleteFilesState.Idle:
+    IF StartScan THEN
+      _commandType:= eEnumCmd_First;
+      _deleteFileIndex := 1;
+      _state := DeleteFilesState.SearchNextFile;
+    END_IF
+    
+  DeleteFilesState.SearchNextFile:
+    IF _enumBusy.Q THEN
+      _state := DeleteFilesState.WaitUntilExecutionDone;
+    END_IF
+    
+  DeleteFilesState.WaitUntilExecutionDone:
+    IF NOT _enumFindFileList.bError THEN
+      IF NOT _enumFindFileList.bEOE THEN
+        IF _enumFindFileList.nFindFiles < MaxNumberOfFiles THEN
+          _state := DeleteFilesState.SearchNextFile;
+        ELSE
+          _commandType := eEnumCmd_Abort;
+          _state := DeleteFilesState.ProcessFoundFiles;
+        END_IF
+      ELSE
+        _state := DeleteFilesState.ProcessFoundFiles;
+      END_IF
+    ELSE
+      _state := DeleteFilesState.Idle;
+    END_IF
+    
+  DeleteFilesState.ProcessFoundFiles:
+    IF _deleteFileIndex > _enumFindFileList.nFindFiles THEN
+      _state := DeleteFilesState.Idle;
+    ELSE
+      _state := DeleteFilesState.CheckIfFileIsDirectory;
+    END_IF
+    
+  DeleteFilesState.CheckIfFileIsDirectory:
+    IF NOT _listOfFiles[_deleteFileIndex].fileAttributes.bDirectory THEN
+      _state := DeleteFilesState.CheckFileTime;
+    ELSE
+      _deleteFileIndex := _deleteFileIndex + 1;
+      _state := DeleteFilesState.ProcessFoundFiles;
+    END_IF
+    
+  DeleteFilesState.CheckFileTime:   
+    IF GetFileAgeInSeconds(CurrentUtcTime, _listOfFiles[_deleteFileIndex]) > (ExpirationInDays * OneDayInSeconds) THEN
+      _state := DeleteFilesState.DeleteFile;
+    ELSE
+      _deleteFileIndex := _deleteFileIndex + 1;
+      _state := DeleteFilesState.ProcessFoundFiles;
+    END_IF
+  
+  DeleteFilesState.DeleteFile:
+    _fileNameToDelete := Tc2_Standard.CONCAT(FilePath, _listOfFiles[_deleteFileIndex].sFileName);
+    
+    IF _fileDeleteBusy.Q THEN
+      _deleteFileIndex := _deleteFileIndex + 1;
+      _fileDeleted := TRUE;
+      _state := DeleteFilesState.FileDeleted;
+    END_IF
+    IF _fileDelete.bError THEN
+      _state := DeleteFilesState.Idle;
+    END_IF
+    
+  DeleteFilesState.FileDeleted:   
+    // This state is needed to generate a rising edge for FB_FileDelete
+    IF NOT _fileDeleted THEN
+      _state := DeleteFilesState.ProcessFoundFiles;
+    END_IF
+    _fileDeleted := FALSE;
 
 END_CASE
 
@@ -126,7 +126,7 @@ _fileDelete(sNetId := '',
              sPathName := _fileNameToDelete,
              bExecute := (_state = DeleteFilesState.DeleteFile),
              tTimeout := T#10S);
-				
+        
 _fileDeleteBusy(CLK := _fileDelete.bBusy);
 
 // Error handling
@@ -135,15 +135,15 @@ Error.Code := ErrorCodes.None;
 Error.Info := '';
 
 IF _enumFindFileList.bError THEN
-	Error.Active := TRUE;
-	Error.Code := ErrorCodes.EnumeratingFilesInSpecifiedDirectoryFailed;
-	Error.Info := Tc2_Standard.CONCAT('Enumerating files in specified directory failed. Error thrown by FB_EnumFindFileList. Consult Beckhoff InfoSys. Internal Error: ', UDINT_TO_STRING(_enumFindFileList.nErrId));
+  Error.Active := TRUE;
+  Error.Code := ErrorCodes.EnumeratingFilesInSpecifiedDirectoryFailed;
+  Error.Info := Tc2_Standard.CONCAT('Enumerating files in specified directory failed. Error thrown by FB_EnumFindFileList. Consult Beckhoff InfoSys. Internal Error: ', UDINT_TO_STRING(_enumFindFileList.nErrId));
 END_IF
-			
+      
 IF _fileDelete.bError THEN
-	Error.Active := TRUE;
-	Error.Code := ErrorCodes.DeletingFileFailed;
-	Error.Info := Tc2_Standard.CONCAT('Deleting expired log file in specified directory failed. Error thrown by FB_FileDelete. Consult Beckhoff InfoSys. Internal Error: ', UDINT_TO_STRING(_fileDelete.nErrId));
+  Error.Active := TRUE;
+  Error.Code := ErrorCodes.DeletingFileFailed;
+  Error.Info := Tc2_Standard.CONCAT('Deleting expired log file in specified directory failed. Error thrown by FB_FileDelete. Consult Beckhoff InfoSys. Internal Error: ', UDINT_TO_STRING(_fileDelete.nErrId));
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="DeleteOldFiles">

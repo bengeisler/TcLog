@@ -5,35 +5,35 @@
 {attribute: 'hide_all_locals'}
 FUNCTION_BLOCK DateTime
 VAR
-	_localSystemTime : Tc2_Utilities.FB_LocalSystemTime;
-	_getSystemTime : Tc2_System.GETSYSTEMTIME;
-	_timeZoneInfo : Tc2_Utilities.FB_GetTimeZoneInformation;
-	_localTime : Tc2_Utilities.FB_SystemTimeToTzSpecificLocalTime;
-	_localSystemTimeValid : Tc2_Standard.R_TRIG;
-	_utcTime : Tc2_Utilities.FB_TzSpecificLocalTimeToFileTime;
+  _localSystemTime : Tc2_Utilities.FB_LocalSystemTime;
+  _getSystemTime : Tc2_System.GETSYSTEMTIME;
+  _timeZoneInfo : Tc2_Utilities.FB_GetTimeZoneInformation;
+  _localTime : Tc2_Utilities.FB_SystemTimeToTzSpecificLocalTime;
+  _localSystemTimeValid : Tc2_Standard.R_TRIG;
+  _utcTime : Tc2_Utilities.FB_TzSpecificLocalTimeToFileTime;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[// Get local system time
 _localSystemTime(
-	sNetID	:=	'',
-	bEnable := 	TRUE,
-	dwCycle	:=	1,
-	dwOpt	:=	1,
-	tTimeout:=	DEFAULT_ADS_TIMEOUT
+  sNetID  :=  '',
+  bEnable :=  TRUE,
+  dwCycle :=  1,
+  dwOpt :=  1,
+  tTimeout:=  DEFAULT_ADS_TIMEOUT
 );
 
 // Get timezone information
 _timeZoneInfo(
-	sNetID := '',
-	bExecute := TRUE,
-	tTimeout := DEFAULT_ADS_TIMEOUT);
+  sNetID := '',
+  bExecute := TRUE,
+  tTimeout := DEFAULT_ADS_TIMEOUT);
 
 // Convert local time to utc time
 _utcTime(
-	in := THIS^.AsLocalFileTime,
-	tzInfo := _timeZoneInfo.tzInfo);
-	
+  in := THIS^.AsLocalFileTime,
+  tzInfo := _timeZoneInfo.tzInfo);
+  
 // Finished retrieving time data
 _localSystemTimeValid(CLK := _localSystemTime.bValid);
 ]]></ST>
@@ -104,29 +104,29 @@ PROPERTY Done : BOOL
 {attribute 'hide_all_locals'}
 METHOD PRIVATE ReplaceFormatPlaceholder : STRING
 VAR_INPUT
-	format : STRING;
-	length : INT;
-	timeType : STRING(1);
+  format : STRING;
+  length : INT;
+  timeType : STRING(1);
 END_VAR
 VAR_INST
-	i : INT;
-	replaceString : STRING;
-	timeString : STRING;
+  i : INT;
+  replaceString : STRING;
+  timeString : STRING;
 END_VAR
 VAR
-	localSystemTime : Tc2_Utilities.TIMESTRUCT;
+  localSystemTime : Tc2_Utilities.TIMESTRUCT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[localSystemTime := THIS^.AsLocalSystemTime;
 
-IF    timeType = 'Y' 	THEN timeString := TO_STRING(localSystemTime.wYear); 
-ELSIF timeType = 'M' 	THEN timeString := TO_STRING(localSystemTime.wMonth); 
-ELSIF timeType = 'D' 	THEN timeString := TO_STRING(localSystemTime.wDay); 
-ELSIF timeType = 'h' 	THEN timeString := TO_STRING(localSystemTime.wHour); 
-ELSIF timeType = 'm' 	THEN timeString := TO_STRING(localSystemTime.wMinute); 
-ELSIF timeType = 's' 	THEN timeString := TO_STRING(localSystemTime.wSecond); 
-ELSIF timeType = 'i' 	THEN timeString := TO_STRING(localSystemTime.wMilliseconds); 
+IF    timeType = 'Y'  THEN timeString := TO_STRING(localSystemTime.wYear); 
+ELSIF timeType = 'M'  THEN timeString := TO_STRING(localSystemTime.wMonth); 
+ELSIF timeType = 'D'  THEN timeString := TO_STRING(localSystemTime.wDay); 
+ELSIF timeType = 'h'  THEN timeString := TO_STRING(localSystemTime.wHour); 
+ELSIF timeType = 'm'  THEN timeString := TO_STRING(localSystemTime.wMinute); 
+ELSIF timeType = 's'  THEN timeString := TO_STRING(localSystemTime.wSecond); 
+ELSIF timeType = 'i'  THEN timeString := TO_STRING(localSystemTime.wMilliseconds); 
 ELSE
   timeString:='';
 END_IF
@@ -134,12 +134,12 @@ END_IF
 replaceString := '';
 
 IF length > Tc2_Standard.LEN(timeString) THEN
-	FOR i:=1 TO length - Tc2_Standard.LEN(timeString) DO
-		replaceString := Tc2_Standard.CONCAT(replaceString, '0');
-	END_FOR
-	replaceString := Tc2_Standard.CONCAT(replaceString, timeString);
+  FOR i:=1 TO length - Tc2_Standard.LEN(timeString) DO
+    replaceString := Tc2_Standard.CONCAT(replaceString, '0');
+  END_FOR
+  replaceString := Tc2_Standard.CONCAT(replaceString, timeString);
 ELSE
-	replaceString := Tc2_Standard.RIGHT(timeString, length);
+  replaceString := Tc2_Standard.RIGHT(timeString, length);
 END_IF
 
 ReplaceFormatPlaceholder := Tc2_Standard.REPLACE(format, replaceString, length, Tc2_Standard.FIND(format, timeType));]]></ST>
@@ -147,8 +147,8 @@ ReplaceFormatPlaceholder := Tc2_Standard.REPLACE(format, replaceString, length, 
     </Method>
     <Method Name="ToFormatString" Id="{8e5c5f29-5e99-4676-80b8-ceef73719a56}">
       <Declaration><![CDATA[/// Returns a formatted string containing the actual time information 
-///	Y : year
-///	M : month
+/// Y : year
+/// M : month
 /// D : day
 /// h : hour 
 /// m : minute
@@ -161,24 +161,24 @@ ReplaceFormatPlaceholder := Tc2_Standard.REPLACE(format, replaceString, length, 
 METHOD ToFormatString : Tc2_System.T_MaxString
 VAR_INPUT
   /// Format the timestamp should have.
-	format : STRING;
+  format : STRING;
 END_VAR
 VAR_INST
-	inputString : STRING;
-	char : STRING(1);
-	formattedString : Tc2_System.T_MaxString;
+  inputString : STRING;
+  char : STRING(1);
+  formattedString : Tc2_System.T_MaxString;
 END_VAR
 VAR
-	year : INT := 0;
-	month : INT := 0;
-	day : INT := 0;
-	hour : INT := 0;
-	minute : INT := 0;
-	second : INT := 0;
-	millisecond : INT := 0;
+  year : INT := 0;
+  month : INT := 0;
+  day : INT := 0;
+  hour : INT := 0;
+  minute : INT := 0;
+  second : INT := 0;
+  millisecond : INT := 0;
 END_VAR
 VAR CONSTANT
-	ValidFormat : STRING := 'YMDhms';
+  ValidFormat : STRING := 'YMDhms';
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -186,18 +186,18 @@ END_VAR
 inputString := format;
 
 WHILE Tc2_Standard.LEN(inputString) > 0 DO
-	char := Tc2_Standard.LEFT(inputString, 1);
-	
-	IF    char = 'Y' THEN 	year := year + 1;
-	ELSIF char = 'M' THEN	month := month + 1;
-	ELSIF char = 'D' THEN	day := day + 1;
-	ELSIF char = 'h' THEN	hour := hour + 1;
-	ELSIF char = 'm' THEN	minute := minute + 1;
-	ELSIF char = 's' THEN 	second := second + 1;
-	ELSIF char = 'i' THEN 	millisecond := millisecond + 1;
-	END_IF
-	
-	inputString := Tc2_Standard.DELETE(inputString, 1, 1);
+  char := Tc2_Standard.LEFT(inputString, 1);
+  
+  IF    char = 'Y' THEN   year := year + 1;
+  ELSIF char = 'M' THEN month := month + 1;
+  ELSIF char = 'D' THEN day := day + 1;
+  ELSIF char = 'h' THEN hour := hour + 1;
+  ELSIF char = 'm' THEN minute := minute + 1;
+  ELSIF char = 's' THEN   second := second + 1;
+  ELSIF char = 'i' THEN   millisecond := millisecond + 1;
+  END_IF
+  
+  inputString := Tc2_Standard.DELETE(inputString, 1, 1);
 END_WHILE
 
 formattedString := ReplaceFormatPlaceholder(format, year, 'Y');

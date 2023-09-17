@@ -6,29 +6,29 @@ It's usage is as simple as this:
 Configure the core logger in your project:
 ```
 VAR
-	_coreLogger : TcLogCore(bufferSize := 100 * SIZEOF(BYTE) * MAX_STRINGLENGTH);
+  _coreLogger : TcLogCore(bufferSize := 100 * SIZEOF(BYTE) * MAX_STRINGLENGTH);
 END_VAR
 
 _coreLogger
-	.WriteToAds()
-	.WriteToFile('c:\logs\', 'sensor_data.txt')
-	.MinimumLevel(LogLevels.Debug)
-	.RunLogger();
+  .WriteToAds()
+  .WriteToFile('c:\logs\', 'sensor_data.txt')
+  .MinimumLevel(LogLevels.Debug)
+  .RunLogger();
 ```
 Then, maybe in a different POU, use `TcLog` to log messages:
 ```
 VAR
     _logger: TcLog;
-	_myInt : INT := 10;
-	_myVarInfo : __SYSTEM.VAR_INFO := __VARINFO(_myInt);
+  _myInt : INT := 10;
+  _myVarInfo : __SYSTEM.VAR_INFO := __VARINFO(_myInt);
 END_VAR
 
 _logger
-	.AppendString('Let´s log some values: ')
-	.AppendAny(_myInt)
-	.AppendString(' - or some symbols: ')
-	.AppendVariable(_myVarInfo, _myInt)
-	.Error('');	
+  .AppendString('Let´s log some values: ')
+  .AppendAny(_myInt)
+  .AppendString(' - or some symbols: ')
+  .AppendVariable(_myVarInfo, _myInt)
+  .Error(''); 
 ```
 This will log both messages to both the ADS output and the file system.
 

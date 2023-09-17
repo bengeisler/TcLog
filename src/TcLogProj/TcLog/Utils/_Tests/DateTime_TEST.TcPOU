@@ -9,12 +9,12 @@
     <Method Name="CheckStringFormat" Id="{eeedfcd3-9548-4730-bde7-8f00a6d4c7e6}">
       <Declaration><![CDATA[METHOD CheckStringFormat
 VAR_INST
-	sut : DateTime;
-	expected : STRING;
-	result : STRING;
+  sut : DateTime;
+  expected : STRING;
+  result : STRING;
 END_VAR
 VAR
-	localSystemTime : Tc2_Utilities.TIMESTRUCT;
+  localSystemTime : Tc2_Utilities.TIMESTRUCT;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -41,15 +41,15 @@ expected := Tc2_Standard.CONCAT(expected, TO_STRING(localSystemTime.wSecond));
 expected := Tc2_Standard.CONCAT(expected, '-');
 
 result := sut.ToFormatString('-YYYYMMDD-hh:mm:ss-');
-	
+  
 IF sut.Done THEN
-	AssertEquals(
-		Expected 	:= 	expected,
-		Actual 		:=  result,
-		Message		:=	'Time formatting failed.'
-	);
+  AssertEquals(
+    Expected  :=  expected,
+    Actual    :=  result,
+    Message   :=  'Time formatting failed.'
+  );
 
-	TEST_FINISHED();
+  TEST_FINISHED();
 END_IF
 
 ]]></ST>

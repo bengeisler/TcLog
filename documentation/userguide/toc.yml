@@ -1,7 +1,5 @@
 - name: Installation
   href: installation.md
-- name: User Guide
-  href: getting_started.md
 - name: User guide
   items: 
   - name: Getting started

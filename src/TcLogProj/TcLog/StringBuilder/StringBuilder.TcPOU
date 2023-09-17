@@ -3,8 +3,8 @@
   <POU Name="StringBuilder" Id="{368e5049-935b-4562-a874-cb9be5225f7d}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK INTERNAL StringBuilder IMPLEMENTS IStringBuilder, ILimitedStringBuilder
 VAR
-	{attribute 'hide'}
-	_workString : Tc2_System.T_MaxString;
+  {attribute 'hide'}
+  _workString : Tc2_System.T_MaxString;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -13,7 +13,7 @@ END_VAR
     <Method Name="Append" Id="{3f45997e-6006-457f-9a9a-30ac281e8f8a}">
       <Declaration><![CDATA[METHOD PUBLIC Append : IStringBuilder // Append text TO t current build STRING.
 VAR_INPUT
-	text : Tc2_System.T_MaxString; //text to append to current build string
+  text : Tc2_System.T_MaxString; //text to append to current build string
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -24,13 +24,13 @@ Append := THIS^;]]></ST>
     <Method Name="AppendIf" Id="{341a7b9c-f058-4735-b313-3a46f602e9e1}">
       <Declaration><![CDATA[METHOD PUBLIC AppendIf : IStringBuilder
 VAR_INPUT
-	condition : BOOL;
-	text : Tc2_System.T_MaxString;
+  condition : BOOL;
+  text : Tc2_System.T_MaxString;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF condition THEN
-	_workString:= Tc2_Standard.CONCAT(_workString,text);
+  _workString:= Tc2_Standard.CONCAT(_workString,text);
 END_IF
 AppendIf := THIS^;]]></ST>
       </Implementation>
@@ -38,8 +38,8 @@ AppendIf := THIS^;]]></ST>
     <Method Name="InsertAtLocation" Id="{b2ed9ced-aca1-4991-af8e-c808997da606}">
       <Declaration><![CDATA[METHOD PUBLIC InsertAtLocation : IStringBuilder
 VAR_INPUT
-	text : Tc2_System.T_MaxString;
-	position : INT;
+  text : Tc2_System.T_MaxString;
+  position : INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -50,20 +50,20 @@ InsertAtLocation  := THIS^;]]></ST>
     <Method Name="PadLeft" Id="{26c6478b-ece5-418e-9b19-10604dda05cb}">
       <Declaration><![CDATA[METHOD PadLeft : IStringBuilder
 VAR_INPUT
-	text : Tc2_System.T_MaxString; // Text to append to current build string
-	length : INT; // Total length of text + padding
-	char : STRING(1); // Character to be padded left of text
+  text : Tc2_System.T_MaxString; // Text to append to current build string
+  length : INT; // Total length of text + padding
+  char : STRING(1); // Character to be padded left of text
 END_VAR
 VAR
-	i : INT;
-	padLength : INT;
+  i : INT;
+  padLength : INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Add left padding
 padLength := Tc2_Standard.LEN(text) - length;
 FOR i := 1 TO padLength DO
-	_workString:= Tc2_Standard.CONCAT(_workString, char);
+  _workString:= Tc2_Standard.CONCAT(_workString, char);
 END_FOR
 
 // Add text
