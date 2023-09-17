@@ -18,7 +18,7 @@ _coreLogger
 Then, maybe in a different POU, use `TcLog` to log messages:
 ```
 VAR
-    _logger: TcLog;
+  _logger: TcLog;
   _myInt : INT := 10;
   _myVarInfo : __SYSTEM.VAR_INFO := __VARINFO(_myInt);
 END_VAR
