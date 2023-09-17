@@ -14,9 +14,6 @@ It features the following:
 
 The library is fully unit- and integration-tested.
 
-## License
-The library is licensed under the [MIT License](../LICENSE).
-
 ## Install TcLog
 See here how to install TcLog:
 <button onClick="location.href='userguide/installation.html'" type="button">Install TcLog.</button>
@@ -28,3 +25,6 @@ Get quickly up and running with TcLog:
 ## Documentation
 Find the full API reference here:
 <button onClick="location.href='reference/TcLog/Constants.html'" type="button">Read the docs.</button>
+
+## License
+The library is licensed under the [MIT License](../LICENSE).
