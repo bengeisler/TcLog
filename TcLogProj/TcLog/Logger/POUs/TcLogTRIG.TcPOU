@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="TcLogTRIG" Id="{aef804a0-ffc6-4577-b368-1ac5b4e5d860}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcLogTRIG EXTENDS TcLog]]></Declaration>
+    <Declaration><![CDATA[FUNCTION_BLOCK TcLogTRIG EXTENDS TcLog
+]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -9,10 +10,10 @@
       <Declaration><![CDATA[// Logs data on falling edge of CLK.
 METHOD OnFallingEdge : REFERENCE TO TcLog
 VAR_INPUT
-	CLK : BOOL;	// Falling edge logs data.
+    CLK : BOOL; // Falling edge logs data.
 END_VAR
 VAR_INST
-	fTrig	:	Tc2_Standard.F_TRIG;
+    fTrig : Tc2_Standard.F_TRIG;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -27,10 +28,10 @@ OnFallingEdge REF= THIS^;]]></ST>
       <Declaration><![CDATA[// Logs data on rising edge of CLK.
 METHOD OnRisingEdge : REFERENCE TO TcLog
 VAR_INPUT
-	CLK : BOOL; // Rising edge logs data.
+    CLK : BOOL; // Rising edge logs data.
 END_VAR
 VAR_INST
-	rTrig	:	Tc2_Standard.R_TRIG;
+    rTrig : Tc2_Standard.R_TRIG;
 END_VAR
 ]]></Declaration>
       <Implementation>

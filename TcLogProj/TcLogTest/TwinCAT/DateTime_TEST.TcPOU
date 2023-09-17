@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="DateTime_TEST" Id="{7d8824eb-9fb9-4da8-9874-6ae610f7d88c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK DateTime_TEST EXTENDS TcUnit.FB_TestSuite
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CheckStringFormat();]]></ST>
+    </Implementation>
+    <Method Name="CheckStringFormat" Id="{5a0ae825-ada9-4cee-957b-1cdb64d42545}">
+      <Declaration><![CDATA[METHOD CheckStringFormat
+VAR_INST
+	sut : DateTime;
+	expected : STRING;
+	result : STRING;
+END_VAR
+VAR
+	localSystemTime : Tc2_Utilities.TIMESTRUCT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[sut();
+
+TEST('CheckStringFormat');
+
+localSystemTime := sut.AsLocalSystemTime;
+
+expected := Tc2_Standard.CONCAT('-', TO_STRING(localSystemTime.wYear));
+IF localSystemTime.wMonth < 10 THEN expected := Tc2_Standard.CONCAT(expected, '0'); END_IF
+expected := Tc2_Standard.CONCAT(expected, TO_STRING(localSystemTime.wMonth));
+IF localSystemTime.wDay < 10 THEN expected := Tc2_Standard.CONCAT(expected, '0'); END_IF
+expected := Tc2_Standard.CONCAT(expected, TO_STRING(localSystemTime.wDay));
+expected := Tc2_Standard.CONCAT(expected, '-');
+IF localSystemTime.wHour < 10 THEN expected := Tc2_Standard.CONCAT(expected, '0'); END_IF
+expected := Tc2_Standard.CONCAT(expected, TO_STRING(localSystemTime.wHour));
+expected := Tc2_Standard.CONCAT(expected, ':');
+IF localSystemTime.wMinute < 10 THEN expected := Tc2_Standard.CONCAT(expected, '0'); END_IF
+expected := Tc2_Standard.CONCAT(expected, TO_STRING(localSystemTime.wMinute));
+expected := Tc2_Standard.CONCAT(expected, ':');
+IF localSystemTime.wSecond < 10 THEN expected := Tc2_Standard.CONCAT(expected, '0'); END_IF
+expected := Tc2_Standard.CONCAT(expected, TO_STRING(localSystemTime.wSecond));
+expected := Tc2_Standard.CONCAT(expected, '-');
+
+result := sut.ToFormatString('-YYYYMMDD-hh:mm:ss-');
+	
+IF sut.Done THEN
+	AssertEquals(
+		Expected 	:= 	expected,
+		Actual 		:=  result,
+		Message		:=	'Time formatting failed.'
+	);
+
+	TEST_FINISHED();
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="DateTime_TEST">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DateTime_TEST.CheckStringFormat">
+      <LineId Id="3" Count="2" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="7" Count="27" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

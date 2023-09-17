@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="GetFileAgeInSeconds" Id="{10d2aa26-8297-4a3b-95d9-c628cba3b409}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION INTERNAL GetFileAgeInSeconds : DINT
+VAR_INPUT
+	CurrentUtcTime : Tc2_Utilities.T_FILETIME;
+	FindFileEntry : Tc2_Utilities.ST_FindFileEntry;
+END_VAR
+VAR
+	_timeLastWriteAccess : Tc2_Utilities.T_ULARGE_INTEGER;
+	_fileTimeAsULINT : Tc2_Utilities.T_ULARGE_INTEGER;
+	_fileTimeDifference : Tc2_Utilities.T_ULARGE_INTEGER;
+END_VAR
+VAR CONSTANT
+	OneSecondInOneHundredNanoSecondsIntervals : LREAL := 1000*1000*10;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Local file time
+_fileTimeAsULINT.dwLowPart := CurrentUtcTime.dwLowDateTime;
+_fileTimeAsULINT.dwHighPart := CurrentUtcTime.dwHighDateTime;
+
+// Write access is UTC
+_timeLastWriteAccess.dwLowPart := FindFileEntry.lastWriteTime.dwLowDateTime;
+_timeLastWriteAccess.dwHighPart := FindFileEntry.lastWriteTime.dwHighDateTime;
+_fileTimeDifference := UInt64Sub64(_fileTimeAsULINT, _timeLastWriteAccess);
+
+GetFileAgeInSeconds := LREAL_TO_DINT(UINT64_TO_LREAL(_fileTimeDifference)/(OneSecondInOneHundredNanoSecondsIntervals));]]></ST>
+    </Implementation>
+    <LineIds Name="GetFileAgeInSeconds">
+      <LineId Id="93" Count="8" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

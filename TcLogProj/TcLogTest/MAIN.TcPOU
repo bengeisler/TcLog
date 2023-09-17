@@ -3,16 +3,20 @@
   <POU Name="MAIN" Id="{899b5391-5363-4fd8-835e-d1662fef51af}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	fbGenerateTimeData_TEST	:	GenerateTimeData_TEST;
-	fbHelperFunctions_TEST: ConvertAnyToString_TEST;
-	fbDynamicStringBuffer_TEST: DynamicStringBuffer_TEST;
-	testWrapper	:	TestWrapper_NET();
+	DateTime_TEST : DateTime_TEST;
+	HelperFunctions_TEST : ConvertAnyToString_TEST;
+	DynamicStringBuffer_TEST : DynamicStringBuffer_TEST;
+	TestWrapper : TestWrapper_NET();
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[TcUnit.RUN();
 
-testWrapper();]]></ST>
+TestWrapper();]]></ST>
     </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

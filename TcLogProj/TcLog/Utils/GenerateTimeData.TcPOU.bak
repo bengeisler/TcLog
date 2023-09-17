@@ -9,19 +9,19 @@ VAR_OUTPUT
 	utcTimeAsFileTime : Tc2_Utilities.T_FILETIME;
 END_VAR
 VAR
-	fbSystemTime : Tc2_Utilities.FB_LocalSystemTime;
-	fbSystemTime1 : Tc2_System.GETSYSTEMTIME;
-	fbTimeZoneInfo : Tc2_Utilities.FB_GetTimeZoneInformation;
-	fbLocalTime : Tc2_Utilities.FB_SystemTimeToTzSpecificLocalTime;
-	rTrigTimeValid : Tc2_Standard.R_TRIG;
-	fbUTCTime : Tc2_Utilities.FB_TzSpecificLocalTimeToFileTime;
+	_localSystemTime : Tc2_Utilities.FB_LocalSystemTime;
+	_getSystemTime : Tc2_System.GETSYSTEMTIME;
+	_timeZoneInfo : Tc2_Utilities.FB_GetTimeZoneInformation;
+	_localTime : Tc2_Utilities.FB_SystemTimeToTzSpecificLocalTime;
+	_localSystemTimeValid : Tc2_Standard.R_TRIG;
+	_utcTime : Tc2_Utilities.FB_TzSpecificLocalTimeToFileTime;
 END_VAR
 VAR_TEMP
 	utcSystemTime : Tc2_Utilities.TIMESTRUCT;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fbSystemTime(
+      <ST><![CDATA[_localSystemTime(
 	sNetID	:=	'',
 	bEnable := 	TRUE,
 	dwCycle	:=	1,
@@ -29,32 +29,31 @@ END_VAR
 	tTimeout:=	DEFAULT_ADS_TIMEOUT
 );
 
-fbTimeZoneInfo(
+_timeZoneInfo(
 	sNetID := '',
 	bExecute := TRUE,
 	tTimeout := DEFAULT_ADS_TIMEOUT);
 
-fbUTCTime(
+_UtcTime(
 	in := SYSTEMTIME_TO_FILETIME(timeAsSystemTime),
-	tzInfo := fbTimeZoneInfo.tzInfo);
+	tzInfo := _timeZoneInfo.tzInfo);
 	
-timeAsSystemTime 	:=	fbSystemTime.systemTime;
+timeAsSystemTime 	:=	_localSystemTime.systemTime;
 timeAsFileTime 		:= 	SYSTEMTIME_TO_FILETIME(timeAsSystemTime);
 timeAsString 		:= 	SYSTEMTIME_TO_STRING(timeAsSystemTime);
-utcTimeAsFileTime	:= 	fbUTCTime.out;
+utcTimeAsFileTime	:= 	_utcTime.out;
 
-rTrigTimeValid(CLK := fbSystemTime.bValid);
+_localSystemTimeValid(CLK := _localSystemTime.bValid);
 ]]></ST>
     </Implementation>
     <Property Name="Done" Id="{8f1defae-bf58-4f56-90d2-4c21f4d99c0d}">
       <Declaration><![CDATA[{attribute 'monitoring':='call'}
-PROPERTY Done : BOOL]]></Declaration>
-      <Get Name="Get" Id="{af33a3a4-b3f8-4a12-a02f-9f9071d422ae}">
-        <Declaration><![CDATA[VAR
-END_VAR
+PROPERTY Done : BOOL
 ]]></Declaration>
+      <Get Name="Get" Id="{af33a3a4-b3f8-4a12-a02f-9f9071d422ae}">
+        <Declaration><![CDATA[]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Done := rTrigTimeValid.Q;]]></ST>
+          <ST><![CDATA[Done := _localSystemTimeValid.Q;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -70,7 +69,8 @@ VAR_INST
 	i : INT;
 	replaceString : STRING;
 	timeString : STRING;
-END_VAR]]></Declaration>
+END_VAR
+]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF    TimeType = 'Y' 	THEN timeString := TO_STRING(timeAsSystemTime.wYear); 
 ELSIF TimeType = 'M' 	THEN timeString := TO_STRING(timeAsSystemTime.wMonth); 
@@ -87,9 +87,9 @@ replaceString := '';
 
 IF Length > LEN(timeString) THEN
 	FOR i:=1 TO Length - LEN(timeString) DO
-		replaceString := CONCAT(replaceString, '0');
+		replaceString := Tc2_Standard.CONCAT(replaceString, '0');
 	END_FOR
-	replaceString := CONCAT(replaceString, timeString);
+	replaceString := Tc2_Standard.CONCAT(replaceString, timeString);
 ELSE
 	replaceString := RIGHT(timeString, Length);
 END_IF
@@ -116,7 +116,7 @@ END_VAR
 VAR_INST
 	inputString : STRING;
 	char : STRING(1);
-  formattedString : Tc2_System.T_MaxString;  
+	formattedString : Tc2_System.T_MaxString;
 END_VAR
 VAR
 	year : INT := 0;
@@ -129,7 +129,8 @@ VAR
 END_VAR
 VAR CONSTANT
 	VALID_FORMAT : STRING := 'YMDhms';
-END_VAR]]></Declaration>
+END_VAR
+]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Parses "Format" and returns a adequatly formatted string containing the time information
 inputString := Format;
@@ -163,5 +164,20 @@ ToString := formattedString;
 ]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="GenerateTimeData">
+      <LineId Id="221" Count="22" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="GenerateTimeData.Done.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="GenerateTimeData.ReplaceFormatPlaceholder">
+      <LineId Id="3" Count="21" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="GenerateTimeData.ToString">
+      <LineId Id="3" Count="28" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>
