@@ -5,7 +5,7 @@ on:
       - main
     paths:
       - 'docs/**'
-      - 'TcLog/**'
+      - 'src/**'
   pull_request:
   workflow_dispatch:
 jobs:
