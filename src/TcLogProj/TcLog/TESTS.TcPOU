@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="MAIN" Id="{899b5391-5363-4fd8-835e-d1662fef51af}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM MAIN
+  <POU Name="TESTS" Id="{9fa91a1a-0294-47df-b5f4-55b91ebaa63a}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM TESTS
 VAR
 	DateTime_TEST : DateTime_TEST;
 	HelperFunctions_TEST : ConvertAnyToString_TEST;
@@ -14,7 +14,7 @@ END_VAR
 
 TestWrapper();]]></ST>
     </Implementation>
-    <LineIds Name="MAIN">
+    <LineIds Name="TESTS">
       <LineId Id="3" Count="1" />
       <LineId Id="2" Count="0" />
     </LineIds>

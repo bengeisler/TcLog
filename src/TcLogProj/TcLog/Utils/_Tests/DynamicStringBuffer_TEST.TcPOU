@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="DynamicStringBuffer_TEST" Id="{03045c1a-5281-4fe3-bc16-4d9ce12d6b50}" SpecialFunc="None">
+  <POU Name="DynamicStringBuffer_TEST" Id="{865cfb1b-63ab-44d3-b4a2-6567c09ec439}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK DynamicStringBuffer_TEST EXTENDS FB_TestSuite
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[LogsManyMessagesForManyCycles();]]></ST>
     </Implementation>
-    <Method Name="LogsManyMessagesForManyCycles" Id="{e452a053-adba-401f-a1d2-1bba967ad2c0}">
+    <Method Name="LogsManyMessagesForManyCycles" Id="{6b88134d-05db-4f48-b04c-63dc5fbbc234}">
       <Declaration><![CDATA[METHOD LogsManyMessagesForManyCycles
 VAR
 	result : STRING := '';

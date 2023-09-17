@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="DateTime_TEST" Id="{7d8824eb-9fb9-4da8-9874-6ae610f7d88c}" SpecialFunc="None">
+  <POU Name="DateTime_TEST" Id="{5cec2056-1949-4f6f-b2b8-e6d4752d21ea}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK DateTime_TEST EXTENDS TcUnit.FB_TestSuite
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[CheckStringFormat();]]></ST>
     </Implementation>
-    <Method Name="CheckStringFormat" Id="{5a0ae825-ada9-4cee-957b-1cdb64d42545}">
+    <Method Name="CheckStringFormat" Id="{eeedfcd3-9548-4730-bde7-8f00a6d4c7e6}">
       <Declaration><![CDATA[METHOD CheckStringFormat
 VAR_INST
 	sut : DateTime;

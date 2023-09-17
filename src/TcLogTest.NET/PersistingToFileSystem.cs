@@ -10,7 +10,7 @@ namespace TcLogTest.NET
     public class PersistingToFileSystem : IDisposable
     {
         PlcFixture fixture;
-        readonly string mut = "MAIN.TestWrapper";
+        readonly string mut = "TESTS.TestWrapper";
         readonly string path = "C:\\UnitTest\\";
         readonly string filename = "UnitTest.txt";
         readonly uint hPath;
@@ -81,7 +81,7 @@ namespace TcLogTest.NET
         [Fact]
         public async void Persist_long_error_message()
         {
-            string message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquet orci sit amet massa placerat faucibus. Sed interdum fermentum eros. Maecenas accumsan rutrum ex, non varius orci scelerisque ac. Donec qui.";
+            string message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquet orci sit amet massa placerat faucibus. Sed interdum fermentum eros. Maecenas accumsan rutrum ex, non varius orci scelerisque ac. Donec qui";
             uint hRun = fixture.TcClient.CreateVariableHandle(mut + ".Persist_long_error_message_run");
             uint hData = fixture.TcClient.CreateVariableHandle(mut + ".Persist_long_error_message_data");
 
@@ -94,7 +94,7 @@ namespace TcLogTest.NET
             Assert.Contains(message, fileContent[0]);
             Assert.Contains("Error", fileContent[0]);
 
-            foreach (var f in files) File.Delete(f);
+            //foreach (var f in files) File.Delete(f);
             fixture.TcClient.DeleteVariableHandle(hRun);
             fixture.TcClient.DeleteVariableHandle(hData);
         }
