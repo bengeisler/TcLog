@@ -1,0 +1,551 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="ConvertAnyToString_TEST" Id="{8723bf95-47c2-4342-9746-8c558da116aa}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ConvertAnyToString_TEST EXTENDS TcUnit.FB_TestSuite
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[ConvertAnyByteToString();
+ConvertAnyDateAndTimeToString();
+ConvertAnyDateToString();
+ConvertAnyDINTToString();
+ConvertAnyDTToString();
+ConvertAnyINTToString();
+ConvertAnyLINTToString();
+ConvertAnyLRealToString();
+ConvertAnyLWordToString();
+ConvertAnyRealToString();
+ConvertAnySINTToString();
+ConvertAnyStringToString();
+ConvertAnyTimeToString();
+ConvertAnyTODToString();
+ConvertAnyUDINTToString();
+ConvertAnyUINTToString();
+ConvertAnyULINTToString();
+ConvertAnyUSINTToString();
+ConvertAnyWordToString();
+ConvertAnyWStringToString();]]></ST>
+    </Implementation>
+    <Method Name="ConvertAnyByteToString" Id="{6a4de533-1ff4-4300-bd1b-aa9dee141478}">
+      <Declaration><![CDATA[METHOD ConvertAnyByteToString : BOOL
+VAR
+	input : BYTE := 1;
+	result : STRING;
+	expected : STRING := '1';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('ConvertAnyByteToString');
+ 
+result := AnyToString(input);
+ 
+AssertEquals(Expected := expected,
+             Actual := result,
+             Message := FormatResult(expected, result));
+ 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConvertAnyDateAndTimeToString" Id="{9ec8d9a4-8741-4865-a722-ba411337f891}">
+      <Declaration><![CDATA[METHOD ConvertAnyDateAndTimeToString : BOOL
+VAR
+	input : DATE_AND_TIME := DT#1970-01-01-00:00;
+	result : STRING;
+	expected : STRING := 'DT#1970-01-01-00:00:00';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('ConvertAnyDateAndTimeToString');
+ 
+result := AnyToString(input);
+ 
+AssertEquals(Expected := expected,
+             Actual := result,
+             Message := FormatResult(expected, result));
+ 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConvertAnyDateToString" Id="{01dc3069-8329-4d56-baac-d69a1aaef399}">
+      <Declaration><![CDATA[METHOD ConvertAnyDateToString : BOOL
+VAR
+	input : DATE := D#1970-01-01;
+	result : STRING;
+	expected : STRING := 'D#1970-01-01';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('ConvertAnyDateToString');
+ 
+result := AnyToString(input);
+ 
+AssertEquals(Expected := expected,
+             Actual := result,
+             Message := FormatResult(expected, result));
+ 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConvertAnyDINTToString" Id="{9bf59e16-f1e6-45ac-a807-e1d1de1d7a2c}">
+      <Declaration><![CDATA[METHOD ConvertAnyDINTToString : BOOL
+VAR
+	input : DINT := 1;
+	result : STRING;
+	expected : STRING := '1';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('ConvertAnyDINTToString');
+ 
+result := AnyToString(input);
+ 
+AssertEquals(Expected := expected,
+             Actual := result,
+             Message := FormatResult(expected, result));
+ 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConvertAnyDTToString" Id="{6f1e9768-4e40-4c59-bb14-df57394138b5}">
+      <Declaration><![CDATA[METHOD ConvertAnyDTToString : BOOL
+VAR
+	input : DT := DT#1970-01-01-00:00;
+	result : STRING;
+	expected : STRING := 'DT#1970-01-01-00:00:00';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('ConvertAnyDTToString');
+ 
+result := AnyToString(input);
+ 
+AssertEquals(Expected := expected,
+             Actual := result,
+             Message := FormatResult(expected, result));
+ 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConvertAnyDWordToString" Id="{4f8362c2-1bc1-4575-a937-4e7d8af79721}">
+      <Declaration><![CDATA[METHOD ConvertAnyDWordToString : BOOL
+VAR
+	input : DWORD := 1;
+	result : STRING;
+	expected : STRING := '1';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('ConvertAnyDWordToString');
+ 
+result := AnyToString(input);
+ 
+AssertEquals(Expected := expected,
+             Actual := result,
+             Message := FormatResult(expected, result));
+ 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConvertAnyINTToString" Id="{03af596d-48bd-41ed-bda7-49b17c1fbeb2}">
+      <Declaration><![CDATA[METHOD ConvertAnyINTToString : BOOL
+VAR
+	input : INT := 1;
+	result : STRING;
+	expected : STRING := '1';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('ConvertAnyINTToString');
+ 
+result := AnyToString(input);
+ 
+AssertEquals(Expected := expected,
+             Actual := result,
+             Message := FormatResult(expected, result));
+ 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConvertAnyLINTToString" Id="{8e7df9bc-31be-419d-beb5-aa1f224ebdc7}">
+      <Declaration><![CDATA[METHOD ConvertAnyLINTToString : BOOL
+VAR
+	input : LINT := 1;
+	result : STRING;
+	expected : STRING := '1';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('ConvertAnyLINTToString');
+ 
+result := AnyToString(input);
+ 
+AssertEquals(Expected := expected,
+             Actual := result,
+             Message := FormatResult(expected, result));
+ 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConvertAnyLRealToString" Id="{42351668-e462-4446-aac6-670516acb622}">
+      <Declaration><![CDATA[METHOD ConvertAnyLRealToString : BOOL
+VAR
+	input : REAL := 1.0;
+	result : STRING;
+	expected : STRING := '1.0';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('ConvertAnyRealToString');
+ 
+result := AnyToString(input);
+ 
+AssertEquals(Expected := expected,
+             Actual := result,
+             Message := FormatResult(expected, result));
+ 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConvertAnyLWordToString" Id="{db8455a2-4fe9-44ea-81da-61701a6999c0}">
+      <Declaration><![CDATA[METHOD ConvertAnyLWordToString : BOOL
+VAR
+	input : LWORD := 1;
+	result : STRING;
+	expected : STRING := '1';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('ConvertAnyLWordToString');
+ 
+result := AnyToString(input);
+ 
+AssertEquals(Expected := expected,
+             Actual := result,
+             Message := FormatResult(expected, result));
+ 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConvertAnyRealToString" Id="{7dde6cfd-c6ff-45c1-80bc-3da59350d708}">
+      <Declaration><![CDATA[METHOD ConvertAnyRealToString : BOOL
+VAR
+	input : LREAL := 1.0;
+	result : STRING;
+	expected : STRING := '1.0';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('ConvertAnyLRealToString');
+ 
+result := AnyToString(input);
+ 
+AssertEquals(Expected := expected,
+             Actual := result,
+             Message := FormatResult(expected, result));
+ 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConvertAnySINTToString" Id="{0e12c253-d6dc-43ca-ad90-0a44d459c5a8}">
+      <Declaration><![CDATA[METHOD ConvertAnySINTToString : BOOL
+VAR
+	input : SINT := 1;
+	result : STRING;
+	expected : STRING := '1';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('ConvertAnySINTToString');
+ 
+result := AnyToString(input);
+ 
+AssertEquals(Expected := expected,
+             Actual := result,
+             Message := FormatResult(expected, result));
+ 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConvertAnyStringToString" Id="{878de958-8cc9-40c7-86f0-88d52c3b1291}">
+      <Declaration><![CDATA[METHOD ConvertAnyStringToString : BOOL
+VAR
+	input : STRING := 'Hallo';
+	result : STRING;
+	expected : STRING := 'Hallo';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('ConvertAnyStringToString');
+ 
+result := AnyToString(input);
+ 
+AssertEquals(Expected := expected,
+             Actual := result,
+             Message := FormatResult(expected, result));
+ 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConvertAnyTimeToString" Id="{a7ef71a7-444f-4dc1-955b-c0574355c4c6}">
+      <Declaration><![CDATA[METHOD ConvertAnyTimeToString : BOOL
+VAR
+	input : TIME := T#49D17H2M47S295MS;
+	result : STRING;
+	expected : STRING := 'T#49d17h2m47s295ms';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('ConvertAnyTimeToString');
+ 
+result := AnyToString(input);
+ 
+AssertEquals(Expected := expected,
+             Actual := result,
+             Message := FormatResult(expected, result));
+ 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConvertAnyTODToString" Id="{e06cf1c5-87e8-426a-9089-bc21534675bb}">
+      <Declaration><![CDATA[METHOD ConvertAnyTODToString : BOOL
+VAR
+	input : TOD := TOD#11:02:47.295;
+	result : STRING;
+	expected : STRING := 'TOD#11:02:47.295';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('ConvertAnyTODToString');
+ 
+result := AnyToString(input);
+ 
+AssertEquals(Expected := expected,
+             Actual := result,
+             Message := FormatResult(expected, result));
+ 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConvertAnyUDINTToString" Id="{3229ca76-3df9-44f7-aacd-19b8138d5651}">
+      <Declaration><![CDATA[METHOD ConvertAnyUDINTToString : BOOL
+VAR
+	input : UDINT := 1;
+	result : STRING;
+	expected : STRING := '1';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('ConvertAnyUDINTToString');
+ 
+result := AnyToString(input);
+ 
+AssertEquals(Expected := expected,
+             Actual := result,
+             Message := FormatResult(expected, result));
+ 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConvertAnyUINTToString" Id="{ba193657-134b-49fe-8445-16bf4f0f5139}">
+      <Declaration><![CDATA[METHOD ConvertAnyUINTToString : BOOL
+VAR
+	input : UINT := 1;
+	result : STRING;
+	expected : STRING := '1';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('ConvertAnyUINTToString');
+ 
+result := AnyToString(input);
+ 
+AssertEquals(Expected := expected,
+             Actual := result,
+             Message := FormatResult(expected, result));
+ 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConvertAnyULINTToString" Id="{2eef74a8-d2ce-40e5-ada9-a977392f50d2}">
+      <Declaration><![CDATA[METHOD ConvertAnyULINTToString : BOOL
+VAR
+	input : ULINT := 1;
+	result : STRING;
+	expected : STRING := '1';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('ConvertAnyULINTToString');
+ 
+result := AnyToString(input);
+ 
+AssertEquals(Expected := expected,
+             Actual := result,
+             Message := FormatResult(expected, result));
+ 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConvertAnyUSINTToString" Id="{54e44617-410b-411f-9440-d611d1294e71}">
+      <Declaration><![CDATA[METHOD ConvertAnyUSINTToString : BOOL
+VAR
+	input : USINT := 1;
+	result : STRING;
+	expected : STRING := '1';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('ConvertAnyUSINTToString');
+ 
+result := AnyToString(input);
+ 
+AssertEquals(Expected := expected,
+             Actual := result,
+             Message := FormatResult(expected, result));
+ 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConvertAnyWordToString" Id="{58d7c7a1-012a-4615-9b88-6f8dbc3301fc}">
+      <Declaration><![CDATA[METHOD ConvertAnyWordToString : BOOL
+VAR
+	input : WORD := 1;
+	result : STRING;
+	expected : STRING := '1';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('ConvertAnyWordToString');
+ 
+result := AnyToString(input);
+ 
+AssertEquals(Expected := expected,
+             Actual := result,
+             Message := FormatResult(expected, result));
+ 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConvertAnyWStringToString" Id="{4a04c330-3f68-4390-83b8-8e7e709d4d25}">
+      <Declaration><![CDATA[METHOD ConvertAnyWStringToString : BOOL
+VAR
+	input : WSTRING := "Hallo";
+	result : STRING;
+	expected : STRING := 'Hallo';
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('ConvertAnyWStringToString');
+ 
+result := AnyToString(input);
+ 
+AssertEquals(Expected := expected,
+             Actual := result,
+             Message := FormatResult(expected, result));
+ 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FormatResult" Id="{dfc117b2-1e90-4366-99ce-6966d5be1d1d}">
+      <Declaration><![CDATA[METHOD PRIVATE FormatResult : STRING
+VAR_INPUT
+	Expected : STRING;
+	Result : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FormatResult := Tc2_Standard.CONCAT('Conversion failed. Expected: ', Tc2_Standard.CONCAT(Expected, Tc2_Standard.CONCAT(' - Result: ', Result)));]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="ConvertAnyToString_TEST">
+      <LineId Id="3" Count="18" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyByteToString">
+      <LineId Id="17" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyDateAndTimeToString">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyDateToString">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyDINTToString">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyDTToString">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyDWordToString">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyINTToString">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyLINTToString">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyLRealToString">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyLWordToString">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyRealToString">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.ConvertAnySINTToString">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyStringToString">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyTimeToString">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyTODToString">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyUDINTToString">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyUINTToString">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyULINTToString">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyUSINTToString">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyWordToString">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyWStringToString">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ConvertAnyToString_TEST.FormatResult">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,16 @@
+- name: Installation
+  href: installation.md
+- name: User Guide
+  href: getting_started.md
+- name: User guide
+  items: 
+  - name: Getting started
+    href: getting_started.md
+  - name: Logging
+    href: logging.md
+  - name: Configuration
+    href: configuration.md
+  - name: Customization
+    href: customization.md
+- name: License
+  href: license.md

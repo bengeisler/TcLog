@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="DynamicStringBuffer_TEST" Id="{865cfb1b-63ab-44d3-b4a2-6567c09ec439}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK DynamicStringBuffer_TEST EXTENDS FB_TestSuite
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[LogsManyMessagesForManyCycles();]]></ST>
+    </Implementation>
+    <Method Name="LogsManyMessagesForManyCycles" Id="{6b88134d-05db-4f48-b04c-63dc5fbbc234}">
+      <Declaration><![CDATA[METHOD LogsManyMessagesForManyCycles
+VAR
+	result : STRING := '';
+	expected : STRING := '';
+	i : UDINT;
+END_VAR
+VAR CONSTANT
+	Cycles : UDINT := 50;
+	Messages : UDINT := 50;
+END_VAR
+VAR_INST
+	cycleCount : UDINT := 0;
+	logsManyMessagesForManyCyclesLogger : TcLogCore(BufferSize:=50 * 50 * 280); // Cycles * Messages * (max string length + fifo overhead (estimated))
+	logger : TcLog;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('LogsManyMessagesForManyCycles');
+
+logsManyMessagesForManyCyclesLogger
+	.WriteToFile('c:\UnitTest\', 'test.txt')
+	.RunLogger();
+logger.SetLogger(logsManyMessagesForManyCyclesLogger);
+
+IF cycleCount < Cycles THEN
+	FOR i:=0 TO Messages DO
+		logger
+			.AppendString('Cycle: ')
+			.AppendString(UDINT_TO_STRING(cycleCount))
+			.AppendString(', Message: ')
+			.AppendString(UDINT_TO_STRING(i))
+			.Error('');	
+	END_FOR
+END_IF
+cycleCount := cycleCount + 1;
+
+// Catch any occuring error message
+IF LEN(logsManyMessagesForManyCyclesLogger.Error.Info) > 0 THEN
+	result := logsManyMessagesForManyCyclesLogger.Error.Info;
+END_IF
+
+IF cycleCount > (Cycles * Messages * 2 + 4) THEN 
+	AssertEquals(Expected := expected,
+				 Actual := result,
+				 Message := result);
+ 
+	TEST_FINISHED();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="DynamicStringBuffer_TEST">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DynamicStringBuffer_TEST.LogsManyMessagesForManyCycles">
+      <LineId Id="3" Count="18" />
+      <LineId Id="29" Count="10" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="LoggingConfiguration" Id="{e234f20f-faa3-4205-bb61-8b4ba6c5bdfb}">
+    <Declaration><![CDATA[/// Configuration of TcLogCore
+TYPE LoggingConfiguration :
+STRUCT
+  /// File name where the logs should be written to. Should not include path.
+	FileName : Tc2_System.T_MaxString;
+  /// File path where the logs should be written to. Will be prefixed to `FileName`
+	FilePath : Tc2_System.T_MaxString;
+  /// Whether to include the instance path of TcLog into the log message or not.
+	IncludeInstancePath : BOOL;
+  /// Whether to write the logs to ADS output or not.
+	WriteToAds : BOOL;
+  /// Rolling interval: when to create a new log file.
+	RollingInterval : RollingIntervals;
+  /// What is the minimum log level that gets logged?
+	MinimumLevel : LogLevels;
+  /// Which delimiter should be used between the different parts of the log string?
+	Delimiter : STRING(1);
+  /// When should old log files be deleted? Unit: days. Set it to `0` if log files should never be deleted. 
+	LogFileLifespan : UINT;
+  /// Format of timestamp. See `TcLogCore.TimestampFormat` for formatting options.
+	TimestampFormat : STRING;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

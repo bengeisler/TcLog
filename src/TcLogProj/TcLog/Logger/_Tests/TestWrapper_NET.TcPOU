@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TestWrapper_NET" Id="{32780ead-f361-4f91-ae5e-047717d14d80}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TestWrapper_NET
+VAR
+	_coreLogger : TcLogCore(BufferSize:=50 * 50 * 280);
+	_logger : TcLog;
+	_flushCache : BOOL;
+	
+	// Test drivers
+	_getDateTime : DateTime;
+	_setLocalSystemTime : NT_SetLocalTime;
+	_cycles : INT;
+	_i : INT;
+	_persistenceTimeStaysWithinBounds : F_TRIG;
+	
+	// Exchanged variables with .NET tests
+	FilePath : STRING;
+	FileName : STRING;
+	Delimiter : STRING(1);
+	NewLocalSystemTimeToBeSet : STRING;
+	TriggerNewLocalSystemTime : BOOL;
+	LocalTimeAsString : STRING;
+	
+	Persist_simple_error_message_run : BOOL;
+	Persist_simple_error_message_data : STRING;
+	
+	Persist_long_error_message_run : BOOL;
+	Persist_long_error_message_data : T_MaxString;
+	
+	Do_not_persist_logs_below_log_level_run : BOOL;
+	
+	Log_message_contains_instance_path_run : BOOL;
+	
+	Log_message_uses_correct_delimiter_run : BOOL;
+	Log_message_uses_correct_delimiter_data : STRING;
+	
+	Log_message_contains_custom_formatted_timestamp_run : BOOL;
+	
+	Delete_logs_if_expired_run : BOOL;
+	
+	New_logfile_is_created_if_rolling_interval_rolls_run : BOOL;
+	
+	Same_log_file_is_used_until_rolling_interval_rolls : BOOL;
+	
+	Log_in_consecutive_cycles : BOOL;
+	Number_of_log_cycles : DINT;
+	
+	Log_multiple_logs_in_one_cycle : BOOL;
+	Number_of_logs_per_cycle : DINT;
+	
+	Log_multiple_logs_in_multiple_cycles : BOOL;
+	Number_of_cycles : DINT;
+	CycleCount : DINT := 1;
+	
+	Persistance_time_stays_within_bounds : BOOL;
+	Duration_in_cylces : DINT := 1;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// ****** U N I T   T E S T S ******
+
+// Set up TcLog
+_coreLogger
+	.IncludeInstancePath()
+	.MinimumLevel(LogLevels.Warning)
+	.SetDelimiter(Delimiter)
+	.SetRollingInterval(RollingIntervals.Hourly)
+	.DeleteLogFilesAfterDays(1)
+	.TimestampFormat('_YYMMDD-hh-mm-ss_')
+	.WriteToAds()
+	.WriteToFile(FilePath, FileName)
+	.RunLogger();
+
+IF _flushCache THEN _coreLogger.FlushCache(); END_IF
+	
+// Test drivers
+_getDateTime();
+LocalTimeAsString := _getDateTime.AsLocalSystemTimeString;
+
+_setLocalSystemTime(
+	NETID 	:= '',
+	TIMESTR := STRING_TO_SYSTEMTIME(NewLocalSystemTimeToBeSet),
+	START 	:= TriggerNewLocalSystemTime,
+	TMOUT	:= T#2S
+	);
+
+// Execute tests
+IF Persist_simple_error_message_run THEN
+	Persist_simple_error_message_run := FALSE;
+	_logger
+		.Error(Persist_simple_error_message_data);
+END_IF
+
+IF Persist_long_error_message_run THEN
+	Persist_long_error_message_run := FALSE;
+	_logger
+		.Error(Persist_long_error_message_data);
+END_IF
+
+IF Do_not_persist_logs_below_log_level_run THEN
+	Do_not_persist_logs_below_log_level_run := FALSE;
+	_logger
+		.Information('Nothing');
+END_IF
+
+IF Log_message_contains_instance_path_run THEN
+	Log_message_contains_instance_path_run := FALSE;
+	_logger
+		.Error('Nothing');
+END_IF
+
+IF Log_message_uses_correct_delimiter_run THEN
+	Log_message_uses_correct_delimiter_run := FALSE;
+	_logger
+		.Error(Log_message_uses_correct_delimiter_data);
+END_IF
+
+IF Log_message_contains_custom_formatted_timestamp_run THEN
+	Log_message_contains_custom_formatted_timestamp_run := FALSE;
+	_logger
+		.Error('Test message');
+END_IF
+
+IF Delete_logs_if_expired_run THEN
+	Delete_logs_if_expired_run := FALSE;
+	_logger
+		.Error('Test message');
+END_IF
+
+IF New_logfile_is_created_if_rolling_interval_rolls_run THEN
+	New_logfile_is_created_if_rolling_interval_rolls_run := FALSE;
+	_logger
+		.Error('Test message');
+END_IF
+
+IF Same_log_file_is_used_until_rolling_interval_rolls THEN
+	Same_log_file_is_used_until_rolling_interval_rolls := FALSE;
+	_logger
+		.Error('Test message');
+END_IF
+
+IF Log_in_consecutive_cycles THEN
+	_logger
+		.Error(Tc2_Standard.CONCAT('Logging cycle ', INT_TO_STRING(_cycles)));
+	_cycles := _cycles + 1;
+	IF _cycles >= Number_of_log_cycles THEN
+		_cycles := 0;
+		Log_in_consecutive_cycles := FALSE;
+	END_IF
+END_IF
+
+IF Log_multiple_logs_in_one_cycle THEN
+	FOR _i:= 1 TO DINT_TO_INT(Number_of_logs_per_cycle) DO
+		_logger.
+			Error(Tc2_Standard.CONCAT('Logging multiple times per cycle. Current step: ', INT_TO_STRING(_i))); 
+	END_FOR
+	Log_multiple_logs_in_one_cycle := FALSE;
+END_IF
+
+IF Log_multiple_logs_in_multiple_cycles THEN
+	IF CycleCount <= Number_of_cycles THEN	
+		FOR _i:= 1 TO DINT_TO_INT(Number_of_logs_per_cycle) DO
+			_logger
+				.AppendString('Logging multiple times per cycle. Cycle: ')
+				.AppendString(DINT_TO_STRING(CycleCount))
+				.AppendString(' / Step: ')
+				.AppendString(INT_TO_STRING(_i))
+				.Error('');
+		END_FOR
+		CycleCount := CycleCount + 1;
+	ELSE
+		CycleCount := 1;
+		Log_multiple_logs_in_multiple_cycles := FALSE;
+	END_IF
+END_IF 
+
+_persistenceTimeStaysWithinBounds(CLK := (Persistance_time_stays_within_bounds AND _coreLogger.Busy));
+IF _persistenceTimeStaysWithinBounds.Q THEN
+	CycleCount := 1;
+	Persistance_time_stays_within_bounds := FALSE;
+END_IF
+IF Persistance_time_stays_within_bounds THEN
+	Duration_in_cylces := Duration_in_cylces + 1;
+	IF CycleCount <= Number_of_cycles THEN	
+		FOR _i:= 1 TO DINT_TO_INT(Number_of_logs_per_cycle) DO
+			_logger
+				.AppendString('Logging multiple times per cycle. Cycle: ')
+				.AppendString(DINT_TO_STRING(CycleCount))
+				.AppendString(' / Step: ')
+				.AppendString(INT_TO_STRING(_i))
+				.Error('');
+		END_FOR
+		CycleCount := CycleCount + 1;
+	END_IF
+END_IF
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="TestWrapper_NET">
+      <LineId Id="2616" Count="16" />
+      <LineId Id="2754" Count="0" />
+      <LineId Id="2633" Count="119" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
