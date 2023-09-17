@@ -1,0 +1,419 @@
+{
+  "homepages": [],
+  "source_base_path": "C:/jenkins/workspace/jobs/doc/documentation",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "source_relative_path": "images/TcLog_header.svg",
+      "output": {
+        "resource": {
+          "relative_path": "images/TcLog_header.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "Cn+IG+DJgPViT1ofcyJUaebUsi0xveeqfWnR6EXItHk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/TcLog/Constants.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/TcLog/Constants.html",
+          "hash": "8pvKOaabZJCMJYHVviwx8TUxAI+RNWR8KuISfEnAelM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/TcLog/Logger/LogLevelToAdsLogMsgType.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/TcLog/Logger/LogLevelToAdsLogMsgType.html",
+          "hash": "ENO2vfosaJaJVObVDftFtMwT+wdAnr5xPpRJozbQnD0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/TcLog/Logger/TcLog.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/TcLog/Logger/TcLog.html",
+          "hash": "Hsc16PcssUpB0u4qogyTc29JAf9SO/YR3Duf59hq4qM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/TcLog/Logger/TcLogCore.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/TcLog/Logger/TcLogCore.html",
+          "hash": "4IJs6eoS38GJVGQngQhCe9T/L8Iwz2ZUl9tkWV70xMA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/TcLog/Logger/TcLogTrig.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/TcLog/Logger/TcLogTrig.html",
+          "hash": "A4r/3J9yFFFNE+/wLwac96kIVhWSr16ghCLDof09Qn8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/TcLog/Logger/_DataTypes/Error.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/TcLog/Logger/_DataTypes/Error.html",
+          "hash": "e6ehxodDr2kk/vVfjzRnUzgayOEYgS0ole/GaYO6wTM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/TcLog/Logger/_DataTypes/ErrorCodes.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/TcLog/Logger/_DataTypes/ErrorCodes.html",
+          "hash": "MZ3jpzgz34ewRlmrw/ShJDOlQeIabfXFV0A5+kMQkdQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/TcLog/Logger/_DataTypes/LogLevels.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/TcLog/Logger/_DataTypes/LogLevels.html",
+          "hash": "ZRaOKDn4p6DuurvOxbcQQz/82/mtZomUdeIIgvoQ4Sc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/TcLog/Logger/_DataTypes/LoggingConfiguration.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/TcLog/Logger/_DataTypes/LoggingConfiguration.html",
+          "hash": "SVa5+6st5xrXX/SNja6m1/nyQ7jTERiJT3jXRRMYG7w="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/TcLog/Logger/_DataTypes/RollingIntervals.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/TcLog/Logger/_DataTypes/RollingIntervals.html",
+          "hash": "EwS4gp1SgsoVR5dSaCYiY6ty4XNZS8HgFchOf4H4t1M="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/TcLog/Logger/_Interfaces/ILog.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/TcLog/Logger/_Interfaces/ILog.html",
+          "hash": "lxehkFSvRz+4PO6oin/rxDB/YoOl43JTriayh05zAX0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/TcLog/Logger/_Interfaces/ILogCore.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/TcLog/Logger/_Interfaces/ILogCore.html",
+          "hash": "v1AzLObKjDvz3xLOi3k18Bdpn8awtPxcRVSfIH5chHY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/TcLog/PlcTask.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/TcLog/PlcTask.html",
+          "hash": "mckXMSDfU3MYTTO/anCxBWYtU+j294Ccd55LY2EBgFY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/TcLog/StringBuilder/_Interfaces/ILimitedStringBuilder.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/TcLog/StringBuilder/_Interfaces/ILimitedStringBuilder.html",
+          "hash": "bXik+TYVneiZcu5Jv2xN4c9AzYBVZ8rHIJU1kVzgRww="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/TcLog/StringBuilder/_Interfaces/IStringBuilder.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/TcLog/StringBuilder/_Interfaces/IStringBuilder.html",
+          "hash": "SP5UEj6qpfbpH54oThSmfYije/CBeAV+qDVj0OEAefM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/TcLog/TESTS.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/TcLog/TESTS.html",
+          "hash": "214rxl4Gb67dZp40FDMdqiEBXNhZZH1gCdy+mlSBn8I="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/TcLog/Utils/AnyToString.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/TcLog/Utils/AnyToString.html",
+          "hash": "Ziwkfez6KokpIkohx6Iw0ad+e1ZUoyoE+JrCvGL16fo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/TcLog/Utils/DateTime.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/TcLog/Utils/DateTime.html",
+          "hash": "nB4t/v1FjLa0CQQT8OxWCKGrIEWYwbdKlAYOwYgOoU4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/TcLog/Utils/GetFileAgeInSeconds.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/TcLog/Utils/GetFileAgeInSeconds.html",
+          "hash": "OYjjG5uuAbQe36j1rS8RM+K4TnkmYDI//amcQ9B/RG4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/TcLog/Version/Global_Version.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/TcLog/Version/Global_Version.html",
+          "hash": "7lhgw0xM/+AO8yx7PnCqP3NDzHcP09wJ8d6MZkqyk5E="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "userguide/configuration.md",
+      "output": {
+        ".html": {
+          "relative_path": "userguide/configuration.html",
+          "hash": "cpNQnS2lXJlrcsrazfwQgD0b8sDpixxCFSFFMefLGaM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "userguide/customization.md",
+      "output": {
+        ".html": {
+          "relative_path": "userguide/customization.html",
+          "hash": "BcJLLPCsqBOwuTUds8cQmaNq1byPhU2+iLBWIuSxOZg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "userguide/getting_started.md",
+      "output": {
+        ".html": {
+          "relative_path": "userguide/getting_started.html",
+          "hash": "hLJaQkOwPFGV7o6GnaFN0FK9F6ln9pyFyPSZQQMURYg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "userguide/installation.md",
+      "output": {
+        ".html": {
+          "relative_path": "userguide/installation.html",
+          "hash": "jPLwm2fAVOXD3HjvpohdTOYFHpcMY+JVOF9sKIlpI+g="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "userguide/introduction.md",
+      "output": {
+        ".html": {
+          "relative_path": "userguide/introduction.html",
+          "hash": "8wUWv5iFtBORench9D50I8aU9PwOsbDdVUu+OSXNHs4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "userguide/license.md",
+      "output": {
+        ".html": {
+          "relative_path": "userguide/license.html",
+          "hash": "9HFud/U9euuZFjY4txBca6rKLTwtBl8JbxRbnNkhmHs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "userguide/logging.md",
+      "output": {
+        ".html": {
+          "relative_path": "userguide/logging.html",
+          "hash": "OvRiz4d0BT1+OivK9zyUDLSrFXmwYlb//49JSS9aQhk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "userguide/performance.md",
+      "output": {
+        ".html": {
+          "relative_path": "userguide/performance.html",
+          "hash": "nuiR10dxBIEYdp8xzdg5Q6CAb6VlQGXzDw04sZ9bjoA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 29,
+          "skipped_file_count": 0
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

@@ -1,0 +1,271 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Logging | html </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Logging | html ">
+    <meta name="generator" content="docfx 2.58.9.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/highlight-default.css">
+    <link rel="stylesheet" href="../styles/featherlight.min.css" type="text/css">
+    <meta property="docfx:navrel" content="../toc">
+    <meta property="docfx:tocrel" content="toc">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+                
+                <ul class="nav level1 navbar-nav">
+                      <li>
+                          <a href="../userguide/installation.html" title="User guide">User guide</a>
+                      </li>
+                      <li>
+                          <a href="../reference/TcLog/Constants.html" title="API Reference">API Reference</a>
+                      </li>
+                </ul>    </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div>
+              <div class="sidefilter">
+                <form class="toc-filter">
+                  <span class="glyphicon glyphicon-filter filter-icon"></span>
+                  <input type="text" id="toc_filter_input" placeholder="Enter here to filter..." onkeypress="if(event.keyCode==13) {return false;}">
+                </form>
+              </div>
+              <div class="sidetoc">
+                <div class="toc" id="toc">
+                  
+                  <ul class="nav level1">
+                    <li class="">
+                      <a href="installation.html" title="Installation" class="">Installation</a>
+                    </li>
+                    <li class="">
+                      <a href="getting_started.html" title="User Guide" class="">User Guide</a>
+                    </li>
+                    <li class="">
+                      <span class="expand-stub"></span>
+                      <a class="">User guide</a>
+                        
+                        <ul class="nav level2">
+                          <li class="">
+                            <a href="getting_started.html" title="Getting started" class="">Getting started</a>
+                          </li>
+                          <li class="active">
+                            <a href="logging.html" title="Logging" class="active">Logging</a>
+                          </li>
+                          <li class="">
+                            <a href="configuration.html" title="Configuration" class="">Configuration</a>
+                          </li>
+                          <li class="">
+                            <a href="customization.html" title="Customization" class="">Customization</a>
+                          </li>
+                        </ul>  </li>
+                    <li class="">
+                      <a href="license.html" title="License" class="">License</a>
+                    </li>
+                  </ul>        </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="logging">Logging</h1>
+
+<h2 id="flexible-logging">Flexible logging</h2>
+<p>TcLog implements a <a href="https://www.plccoder.com/fluent-code/">StringBuilder</a> which makes it easy to build your own message text:</p>
+<pre><code>VAR
+    _logger: TcLog;
+	_myInt : INT := 10;
+	_myVarInfo : __SYSTEM.VAR_INFO := __VARINFO(_myInt);
+END_VAR
+
+_logger
+	.AppendString('Let´s log some values: ')
+	.AppendAny(_myInt)
+	.AppendString(' - or some symbols: ')
+	.AppendVariable(_myVarInfo, _myInt)
+	.Error('');	
+</code></pre>
+<p><img src="https://benediktgeisler.de/StringBuilder_in_message_text.png" alt="Using a StringBuilder to generate the message text" title="Using a StringBuilder to generate the message text"></p>
+<p>Thus any amount of information can be appended to the message without having to implement <code>TcLog</code> with a large number of input parameters, since TwinCAT (at least in version before build 4026.0) does not allow optional input parameters.</p>
+<p>The methods <code>AppendString</code>, <code>AppendAny</code> and <code>AppendVariable</code> append the passed in data to the message text.</p>
+<p>The methods <code>Debug</code>, <code>Info</code>, <code>Warning</code>, <code>Error</code> and <code>Fatal</code> log the message with the respective log level. If you only want to log a simple string, you can pass it directly to the respective method, e.g. <code>_logger.Debug('This is a debug message.')</code>.</p>
+<h2 id="conditional-logging">Conditional logging</h2>
+<p>The most common use of logging will be in the form <code>IF ... THEN log() END_IF</code>. Therefore this query is already integrated in TcLog:</p>
+<pre><code>VAR
+    _logger: TcLog;
+	_triggerLogging : R_TRIG;
+	_log : BOOL;
+END_VAR
+
+_triggerLogging(CLK := _log);
+_logger
+	.OnCondition(_triggerLogging.Q)
+	.Error('Only logs when OnCondition evaluates to TRUE.');	
+</code></pre>
+<h2 id="logging-on-risingfalling-edges">Logging on rising/falling edges</h2>
+<p>Since a log message is usually to be sent once in the event of a <em>status change</em>, TcLog also provides a block for this purpose: <code>TcLogTrig</code>. In contrast to <code>TcLog</code>, a separate instance must be created for each use of this block, since the edge state is stored internally. The conditional execution can thus be further simplified:</p>
+<pre><code>VAR
+	_loggerTrig : TcLogTRIG;
+    _log : BOOL;
+END_VAR
+
+_loggerTrig
+	.OnRisingEdge(_log)
+	.Error('rTrig Test');
+</code></pre>
+<p>Likewise, logging can be triggered on falling edges with <code>OnFallingEdge(cond)</code>.</p>
+<h2 id="use-of-multiple-loggers">Use of multiple loggers</h2>
+<p>Even though the logger was primarily designed as a singleton, it is possible to use multiple loggers. For example, sensor data can be collected cyclically and stored in a separate log file. To add another logger, an instance of <code>TcLogCore</code> must be created. This is then bound to the desired <code>TcLog</code> instance:</p>
+<pre><code>VAR
+	_newLogger: TcLogCore;
+	_logger: TcLog;
+	_myInt : INT := 10;
+END_VAR
+
+_newLogger
+	.MinimumLevel(LogLevels.Information)
+	.SetRollingInterval(RollingIntervals.Hourly)
+	.WriteToFile('c:\logs\', 'sensor_data.txt')
+	.DeleteLogFilesAfterDays(7)
+	.RunLogger();
+	
+// Bind the new logger to the TcLog instance
+_logger.SetLogger(_newLogger);
+
+_logger.AppendString('Sensor xy: ')
+	.AppendAny(_myInt)
+	.Information('');	
+</code></pre>
+<p>From now on <code>_logger</code> considers the configuration of <code>_newLogger</code>.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Powered by <a href='https://zeugwerk.at'>Zeugwerk GmbH</a>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+          
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    
+    <!-- mermaid & featherlight & highlight support -->
+    <script type="text/javascript" src="../styles/mermaid.min.js"></script>
+    <script type="text/javascript" src="../styles/highlight.pack.js"></script>
+    <script type="text/javascript" src="../styles/highlight-iecst.min.js"></script>
+    <script type="text/javascript" src="../styles/jquery-latest.js"></script>
+    <script type="text/javascript" src="../styles/featherlight.min.js" charset="utf-8"></script>
+    <script>    
+        mermaid.initialize({
+            startOnLoad:false,
+            flowchart:{
+                useMaxWidth:true,
+                htmlLabels:true
+            },
+            sequence:{
+                useMaxWidth:true
+            },        
+        });
+    
+        $(document).ready(function() {
+            hljs.highlightAll(); 
+        
+            const elements = document.getElementsByClassName("lang-mermaid");
+            let index = 0;
+    
+            while (elements.length != 0) {
+                let element = elements[0];
+                mermaid.render('graph'+index, element.innerText, (svgGraph) => {                    
+                    element.parentElement.outerHTML = "<div class='mermaid'>" + svgGraph + "</div>";
+                });
+                $('#graph'+index).height("100%");
+                ++index;
+            }
+    
+            // featherlight initialization
+            // find all images, but not the logo, and add the lightbox
+            $('.gallery img').each(function(){
+                var $img = $(this);
+                var filename = $img.attr('src')
+                //add cursor
+                $img.css('cursor','zoom-in');
+                $img.css('cursor','-moz-zoom-in');
+                $img.css('cursor','-webkit-zoom-in');
+    
+                //add featherlight
+                $img.attr('alt', filename);
+                $img.featherlight(filename);
+            });
+        });
+    </script>
+    
+  </body>
+</html>

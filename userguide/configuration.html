@@ -1,0 +1,293 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Configuration | html </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Configuration | html ">
+    <meta name="generator" content="docfx 2.58.9.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/highlight-default.css">
+    <link rel="stylesheet" href="../styles/featherlight.min.css" type="text/css">
+    <meta property="docfx:navrel" content="../toc">
+    <meta property="docfx:tocrel" content="toc">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+                
+                <ul class="nav level1 navbar-nav">
+                      <li>
+                          <a href="../userguide/installation.html" title="User guide">User guide</a>
+                      </li>
+                      <li>
+                          <a href="../reference/TcLog/Constants.html" title="API Reference">API Reference</a>
+                      </li>
+                </ul>    </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div>
+              <div class="sidefilter">
+                <form class="toc-filter">
+                  <span class="glyphicon glyphicon-filter filter-icon"></span>
+                  <input type="text" id="toc_filter_input" placeholder="Enter here to filter..." onkeypress="if(event.keyCode==13) {return false;}">
+                </form>
+              </div>
+              <div class="sidetoc">
+                <div class="toc" id="toc">
+                  
+                  <ul class="nav level1">
+                    <li class="">
+                      <a href="installation.html" title="Installation" class="">Installation</a>
+                    </li>
+                    <li class="">
+                      <a href="getting_started.html" title="User Guide" class="">User Guide</a>
+                    </li>
+                    <li class="">
+                      <span class="expand-stub"></span>
+                      <a class="">User guide</a>
+                        
+                        <ul class="nav level2">
+                          <li class="">
+                            <a href="getting_started.html" title="Getting started" class="">Getting started</a>
+                          </li>
+                          <li class="">
+                            <a href="logging.html" title="Logging" class="">Logging</a>
+                          </li>
+                          <li class="active">
+                            <a href="configuration.html" title="Configuration" class="active">Configuration</a>
+                          </li>
+                          <li class="">
+                            <a href="customization.html" title="Customization" class="">Customization</a>
+                          </li>
+                        </ul>  </li>
+                    <li class="">
+                      <a href="license.html" title="License" class="">License</a>
+                    </li>
+                  </ul>        </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="configuration">Configuration</h1>
+
+<p><code>TcLogCore</code>  is used to build the logging configuration and to run the persistence mechanism.</p>
+<h2 id="message-format">Message format</h2>
+<p>The message format can be adapted with several methods of <code>TcLogCore</code> that are described in the following.</p>
+<h3 id="delimiter">Delimiter</h3>
+<p><code>TcLogCore</code> can be configured to use an arbitrary delimiter between the components of the log entry with <code>.SetDelimiter('|')</code>.</p>
+<h3 id="including-the-instance-path-in-the-log-message">Including the instance path in the log message</h3>
+<p>TcLog offers with <code>.IncludeInstancePath()</code> the possibility to include the location where the message was triggered into the message text:</p>
+<pre><code>_coreLogger
+	.WriteToAds()
+	.IncludeInstancePath()
+	.MinimumLevel(LogLevels.Warning)
+	.RunLogger();
+	
+_logger.Error('This is an error message.');
+</code></pre>
+<p><img src="https://benediktgeisler.de/InstancePath.png" alt="Including the instance path" title="Including the instance path"></p>
+<h2 id="log-to-ads-output">Log to ADS output</h2>
+<p>When adding the method <code>.WriteToAds()</code> to <code>TcLogCore</code>, the log messages are sent to the ADS output:</p>
+<pre><code>_coreLogger
+    .WriteToAds()
+    .RunLogger();
+</code></pre>
+<h2 id="log-to-file-system">Log to file system</h2>
+<p>TcLog brings the option to store logs in the file system in the form of text files. This option can be applied to <code>TcLogCore</code> via the method <code>.WriteToFile(path, filename)</code>:</p>
+<pre><code>_coreLogger
+	.IncludeInstancePath()
+	.MinimumLevel(LogLevels.Warning)
+	.WriteToFile('c:\logs\', 'test.txt')
+	.RunLogger();
+	
+_loggerTrig
+	.OnRisingEdge(_log)
+	.Error('rTrig Test');
+</code></pre>
+<p><img src="https://benediktgeisler.de/LogMessageInFiileSystem.png" alt="Logging to the file system" title="Logging to the file system"></p>
+<h3 id="timestamp">Timestamp</h3>
+<p>The file name is additionally prefixed with the creation date of the log file. The format of the date can be defined arbitrarily by means of a format string. Example:</p>
+<p><em>YYMMDD-hh:mm:ss:iii</em></p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Upper and lower case must be maintained, furthermore the same letters must always be placed one after the other. Blocks of identical letters are not permitted: <del><em>YYMMDD-YYYY</em></del></p>
+</div>
+<p>This format is passed to <code>TcLogCore</code> via the method <code>.TimestampFormat('YYMMDD-hh:mm:ss:iii')</code>.</p>
+<h2 id="minimum-log-level">Minimum log level</h2>
+<p>With the method <code>.MinimumLevel(level)</code> of <code>TcLogCore</code> the minimum log level can be specified. All messages with a lower log level are ignored.</p>
+<p>TcLog supports the following log levels:</p>
+<ul>
+<li><code>LogLevels.Debug</code></li>
+<li><code>LogLevels.Information</code></li>
+<li><code>LogLevels.Warning</code></li>
+<li><code>LogLevels.Error</code></li>
+<li><code>LogLevels.Fatal</code></li>
+</ul>
+<h2 id="rolling-interval">Rolling interval</h2>
+<p>A <em>rolling interval</em> denotes the interval until a new log file is created. TcLog offers the possibility to create a new logfile in regular intervals. This <em>rolling interval</em> is specified to <code>TcLogCore</code> via <code>SetRollingInterval(..)</code>:</p>
+<ul>
+<li><code>RollingIntervals.None</code>: Do not create a new log file.</li>
+<li><code>RollingIntervals.Hourly</code>: Create a new log file every hour</li>
+<li><code>RollingIntervals.Daily</code>: Create a new log file daily</li>
+<li><code>RollingIntervals.Monthly</code>: Create a new log file every month.</li>
+</ul>
+<p>The log file is only created when a message is triggered.</p>
+<h2 id="delete-old-log-files">Delete old log files</h2>
+<p>To get rid of old log files, a lifespan of logs can be set with help of the method <code>DeleteLogsAfterDays(days)</code> of <code>TcLogCore</code>. Log files whose lifespan exceed the specified limit will automatically be deleted at midnight.</p>
+<h2 id="starting-the-logger">Starting the logger</h2>
+<p>After the configuration is complete, the logger is started with the method <code>RunLogger()</code> of <code>TcLogCore</code>.</p>
+<h2 id="using-different-verbosity-levels">Using different verbosity levels</h2>
+<p>Different scenarios may require different logging strategies. For example, you may want to log all messages with a log level of <code>Error</code> or higher in production, but all messages with a log level of <code>Debug</code> or higher in development. You can achieve this like this:</p>
+<pre><code>VAR
+    _coreLogger : TcLogCore(bufferSize := 100 * SIZEOF(BYTE) * MAX_STRINGLENGTH);
+    _logger : TcLog;
+    _isDevelopment : BOOL := TRUE;
+END_VAR
+
+_coreLogger
+    .WriteToAds()
+    .WriteToFile('c:\logs\', 'sensor_data.txt');
+
+IF _isDevelopment THEN
+    _coreLogger.MinimumLevel(LogLevels.Debug);
+ELSE
+    _coreLogger.MinimumLevel(LogLevels.Error);
+END_IF
+
+_coreLogger.RunLogger();
+
+_logger.Debug('This is a debug message.');
+_logger.Error('This is an error message.');
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Powered by <a href='https://zeugwerk.at'>Zeugwerk GmbH</a>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+          
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    
+    <!-- mermaid & featherlight & highlight support -->
+    <script type="text/javascript" src="../styles/mermaid.min.js"></script>
+    <script type="text/javascript" src="../styles/highlight.pack.js"></script>
+    <script type="text/javascript" src="../styles/highlight-iecst.min.js"></script>
+    <script type="text/javascript" src="../styles/jquery-latest.js"></script>
+    <script type="text/javascript" src="../styles/featherlight.min.js" charset="utf-8"></script>
+    <script>    
+        mermaid.initialize({
+            startOnLoad:false,
+            flowchart:{
+                useMaxWidth:true,
+                htmlLabels:true
+            },
+            sequence:{
+                useMaxWidth:true
+            },        
+        });
+    
+        $(document).ready(function() {
+            hljs.highlightAll(); 
+        
+            const elements = document.getElementsByClassName("lang-mermaid");
+            let index = 0;
+    
+            while (elements.length != 0) {
+                let element = elements[0];
+                mermaid.render('graph'+index, element.innerText, (svgGraph) => {                    
+                    element.parentElement.outerHTML = "<div class='mermaid'>" + svgGraph + "</div>";
+                });
+                $('#graph'+index).height("100%");
+                ++index;
+            }
+    
+            // featherlight initialization
+            // find all images, but not the logo, and add the lightbox
+            $('.gallery img').each(function(){
+                var $img = $(this);
+                var filename = $img.attr('src')
+                //add cursor
+                $img.css('cursor','zoom-in');
+                $img.css('cursor','-moz-zoom-in');
+                $img.css('cursor','-webkit-zoom-in');
+    
+                //add featherlight
+                $img.attr('alt', filename);
+                $img.featherlight(filename);
+            });
+        });
+    </script>
+    
+  </body>
+</html>
