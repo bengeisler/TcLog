@@ -11,7 +11,7 @@ END_VAR
 
 _coreLogger
 	.WriteToAds()
-    .WriteToFile('c:\logs\', 'sensor_data.txt')
+	.WriteToFile('c:\logs\', 'sensor_data.txt')
 	.MinimumLevel(LogLevels.Debug)
 	.RunLogger();
 ```
@@ -32,7 +32,8 @@ _logger
 ```
 This will log both messages to both the ADS output and the file system.
 
-**Features**
+🚀 **Features** 🚀
+
 - Log to ADS output
 - Log to file system
 - Fluent interface for easy configuration and usage
@@ -43,16 +44,18 @@ This will log both messages to both the ADS output and the file system.
 - Log messages with or without timestamp
 - Custom log message formatting
 
+🧪 **Tests** 🧪
+
 The project contains both unit ([TcUnit](https://tcunit.org)) and integration tests ([xUnit](https://xunit.net)).
 
 ## Install TcLog
-See the [installation guide](docs/userguide/installation.html) for instructions on how to install TcLog.
+See the [installation guide](https://bengeisler.github.io/TcLog/userguide/installation.html) for instructions on how to install TcLog.
 
 ## Getting started
-Get quickly up and running with TcLog: [Get Started](docs/userguide/getting_started.html)
+Get quickly up and running with TcLog: [Get Started](https://bengeisler.github.io/TcLog/userguide/getting_started.html)
 
 ## API reference
-Find the full API reference [here](docs/reference/TcLog/Constants.html).
+Find the full API reference [here](https://bengeisler.github.io/TcLog/reference/TcLog/Constants.html).
 
 ## License
 The library is licensed under the [MIT License](LICENSE).
