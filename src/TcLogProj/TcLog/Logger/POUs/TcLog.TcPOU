@@ -14,9 +14,8 @@
 /// The last method to call after the log message has been built is one of ´[Debug|Information|Warning|Error|Fatal]`. 
 /// This sets the log level of the message and sends it off to the log message queue of `TcLogCore` where it will
 /// be processed according to its configuration.
-
+{attribute 'hide_all_locals'}
 {attribute 'reflection'} 
-{attribute 'hide_all_locals}
 FUNCTION_BLOCK TcLog IMPLEMENTS ILog
 VAR
 	_logConditionSatisfied : BOOL; // flag that indicates, whether log condition has been satisfied.
@@ -30,6 +29,7 @@ VAR
 	_instancePath : STRING; // contains instance path
 END_VAR
 VAR_STAT
+  {attribute 'hide'}
 	_loggerSingletonInstance : ILogCore; // Wires up TcLog ("Client") to TcLogCore ("Server") (Singleton-Behaviour)
 END_VAR
 VAR CONSTANT
