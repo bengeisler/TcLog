@@ -85,9 +85,6 @@
                       <a href="installation.html" title="Installation" class="">Installation</a>
                     </li>
                     <li class="">
-                      <a href="getting_started.html" title="User Guide" class="">User Guide</a>
-                    </li>
-                    <li class="">
                       <span class="expand-stub"></span>
                       <a class="">User guide</a>
                         
@@ -130,32 +127,32 @@
 <p>As wrapper we use an function block that encapsulates <code>TcLog</code> and enforces the data input with the help of the inputs. Furthermore it implements the interface <code>ILog</code> which establishes the link between logger and base logger.</p>
 <pre><code>FUNCTION_BLOCK UserLog IMPLEMENTS ILog
 VAR_INPUT
-	Condition: BOOL;
-	Identification: STRING;
-	Value: REAL;
-	Unit: STRING;
+  Condition: BOOL;
+  Identification: STRING;
+  Value: REAL;
+  Unit: STRING;
 END_VAR
 VAR
-	_getTimeData: DateTime;
-	_timestamp: STRING;
+  _getTimeData: DateTime;
+  _timestamp: STRING;
 END_VAR
 VAR_STAT
-	_logger: TcLog;	
+  _logger: TcLog; 
 END_VAR
 
 _getTimeData();
 _timestamp := _getTimeData.ToString('hh:mm:ss');
 
 _logger
-	.OnCondition(Condition)
-	.AppendString(_timestamp)
-	.AppendString(';')
-	.AppendString(Identification)
-	.AppendString(';')
-	.AppendAny(Value)
-	.AppendString(';')
-	.AppendString(Unit)
-	.ToCustomFormat('');
+  .OnCondition(Condition)
+  .AppendString(_timestamp)
+  .AppendString(';')
+  .AppendString(Identification)
+  .AppendString(';')
+  .AppendAny(Value)
+  .AppendString(';')
+  .AppendString(Unit)
+  .ToCustomFormat('');
 </code></pre>
 <p>We can use the helper function <code>GenerateTimeData</code>, which returns the current date and time formatted via the <code>.ToString(Format)</code> method. With its help we generate the timestamp of the sensor data.</p>
 <p>The <code>.ToCustomFormat('')</code> method at the end of the chain causes the message to be logged unchanged. No additional information like further timestamps or instance path will be appended.</p>
@@ -163,7 +160,7 @@ _logger
 <p>The interface is implemented by passing the logger reference to the <code>TcLog</code> instance:</p>
 <pre><code>METHOD SetLogger : BOOL
 VAR_INPUT
-	ref2Core : REFERENCE TO TcLogCore;
+  ref2Core : REFERENCE TO TcLogCore;
 END_VAR
 
 _logger.SetLogger(ref2Core);
@@ -171,35 +168,35 @@ _logger.SetLogger(ref2Core);
 <h3 id="calling-the-wrapper">Calling the wrapper</h3>
 <p>Somewhere in our program <code>TcLogCore</code> is called cyclically. If there is more than one instance of it, we can tell our logger which instance we want via <code>.SetLogger(Instance)</code>. Otherwise the configuration of the logger singleton is used.</p>
 <pre><code>VAR
-	_newLogger: TcLogCore;
-	_rTrigLog : R_TRIG;
-	_log : BOOL;
-	_myLog : UserLog;
-	_myValue: REAL := 1.0;
-	_myValue2: REAL := 2.0;
+  _newLogger: TcLogCore;
+  _rTrigLog : R_TRIG;
+  _log : BOOL;
+  _myLog : UserLog;
+  _myValue: REAL := 1.0;
+  _myValue2: REAL := 2.0;
 END_VAR
 
 _newLogger
-	.MinimumLevel(LogLevels.Information)
-	.SetRollingInterval(RollingIntervals.Hourly)
-	.WriteToFile('c:\logs\', 'sensor.csv')
-	.DeleteLogFilesAfterDays(1)
-	.RunLogger();
-	
+  .MinimumLevel(LogLevels.Information)
+  .SetRollingInterval(RollingIntervals.Hourly)
+  .WriteToFile('c:\logs\', 'sensor.csv')
+  .DeleteLogFilesAfterDays(1)
+  .RunLogger();
+  
 _myLog.SetLogger(_newLogger);
 _rTrigLog(CLK := _log);
 
 _myLog(
-	Condition := _rTrigLog.Q,
+  Condition := _rTrigLog.Q,
     Identification := '+CC1-B31',
-	Value := _myValue,
-	Unit := '°C');
-	
+  Value := _myValue,
+  Unit := '°C');
+  
 _myLog(
-	Condition := _rTrigLog.Q,
-	Identification := '+CC1-B32',
-	Value := _myValue2,
-	Unit := '°C');
+  Condition := _rTrigLog.Q,
+  Identification := '+CC1-B32',
+  Value := _myValue2,
+  Unit := '°C');
 </code></pre>
 <p>As soon as logging is triggered via <code>_log</code>, the csv file and the entries in it are created:</p>
 <p><img src="https://benediktgeisler.de/CustomLogging.png" alt="Custom logging" title="Custom logging"></p>

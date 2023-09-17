@@ -84,9 +84,6 @@
                     <li class="">
                       <a href="installation.html" title="Installation" class="">Installation</a>
                     </li>
-                    <li class="active">
-                      <a href="getting_started.html" title="User Guide" class="active">User Guide</a>
-                    </li>
                     <li class="">
                       <span class="expand-stub"></span>
                       <a class="">User guide</a>
@@ -127,22 +124,22 @@
 <h2 id="example-usage">Example usage</h2>
 <p>Configure the core logger in your project:</p>
 <pre><code>VAR
-	_coreLogger : TcLogCore(bufferSize := 100 * SIZEOF(BYTE) * MAX_STRINGLENGTH);
+  _coreLogger : TcLogCore(bufferSize := 100 * SIZEOF(BYTE) * MAX_STRINGLENGTH);
 END_VAR
 
 _coreLogger
-	.WriteToAds()
+  .WriteToAds()
     .WriteToFile('c:\logs\', 'sensor_data.txt')
-	.MinimumLevel(LogLevels.Debug)
-	.RunLogger();
+  .MinimumLevel(LogLevels.Debug)
+  .RunLogger();
 </code></pre>
 <p>Then, maybe in a different POU, use <code>TcLog</code> to log messages:</p>
 <pre><code>VAR
-	_logger : TcLog;
+  _logger : TcLog;
 END_VAR
 
-_logger.Debug('This is a debug message.');	
-_logger.Error('This is an error message.');		
+_logger.Debug('This is a debug message.');  
+_logger.Error('This is an error message.');   
 </code></pre>
 <p>This will log both messages to both the ADS output and the file system.</p>
 <p>Next, see how to <a href="configuration.html">configure TcLog</a> and how to <a href="logging.html">use TcLog in detail</a>.</p>

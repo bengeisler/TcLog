@@ -85,9 +85,6 @@
                       <a href="installation.html" title="Installation" class="">Installation</a>
                     </li>
                     <li class="">
-                      <a href="getting_started.html" title="User Guide" class="">User Guide</a>
-                    </li>
-                    <li class="">
                       <span class="expand-stub"></span>
                       <a class="">User guide</a>
                         
@@ -122,16 +119,16 @@
 <p>TcLog implements a <a href="https://www.plccoder.com/fluent-code/">StringBuilder</a> which makes it easy to build your own message text:</p>
 <pre><code>VAR
     _logger: TcLog;
-	_myInt : INT := 10;
-	_myVarInfo : __SYSTEM.VAR_INFO := __VARINFO(_myInt);
+  _myInt : INT := 10;
+  _myVarInfo : __SYSTEM.VAR_INFO := __VARINFO(_myInt);
 END_VAR
 
 _logger
-	.AppendString('Let´s log some values: ')
-	.AppendAny(_myInt)
-	.AppendString(' - or some symbols: ')
-	.AppendVariable(_myVarInfo, _myInt)
-	.Error('');	
+  .AppendString('Let´s log some values: ')
+  .AppendAny(_myInt)
+  .AppendString(' - or some symbols: ')
+  .AppendVariable(_myVarInfo, _myInt)
+  .Error(''); 
 </code></pre>
 <p><img src="https://benediktgeisler.de/StringBuilder_in_message_text.png" alt="Using a StringBuilder to generate the message text" title="Using a StringBuilder to generate the message text"></p>
 <p>Thus any amount of information can be appended to the message without having to implement <code>TcLog</code> with a large number of input parameters, since TwinCAT (at least in version before build 4026.0) does not allow optional input parameters.</p>
@@ -141,48 +138,48 @@ _logger
 <p>The most common use of logging will be in the form <code>IF ... THEN log() END_IF</code>. Therefore this query is already integrated in TcLog:</p>
 <pre><code>VAR
     _logger: TcLog;
-	_triggerLogging : R_TRIG;
-	_log : BOOL;
+  _triggerLogging : R_TRIG;
+  _log : BOOL;
 END_VAR
 
 _triggerLogging(CLK := _log);
 _logger
-	.OnCondition(_triggerLogging.Q)
-	.Error('Only logs when OnCondition evaluates to TRUE.');	
+  .OnCondition(_triggerLogging.Q)
+  .Error('Only logs when OnCondition evaluates to TRUE.');  
 </code></pre>
 <h2 id="logging-on-risingfalling-edges">Logging on rising/falling edges</h2>
 <p>Since a log message is usually to be sent once in the event of a <em>status change</em>, TcLog also provides a block for this purpose: <code>TcLogTrig</code>. In contrast to <code>TcLog</code>, a separate instance must be created for each use of this block, since the edge state is stored internally. The conditional execution can thus be further simplified:</p>
 <pre><code>VAR
-	_loggerTrig : TcLogTRIG;
+  _loggerTrig : TcLogTRIG;
     _log : BOOL;
 END_VAR
 
 _loggerTrig
-	.OnRisingEdge(_log)
-	.Error('rTrig Test');
+  .OnRisingEdge(_log)
+  .Error('rTrig Test');
 </code></pre>
 <p>Likewise, logging can be triggered on falling edges with <code>OnFallingEdge(cond)</code>.</p>
 <h2 id="use-of-multiple-loggers">Use of multiple loggers</h2>
 <p>Even though the logger was primarily designed as a singleton, it is possible to use multiple loggers. For example, sensor data can be collected cyclically and stored in a separate log file. To add another logger, an instance of <code>TcLogCore</code> must be created. This is then bound to the desired <code>TcLog</code> instance:</p>
 <pre><code>VAR
-	_newLogger: TcLogCore;
-	_logger: TcLog;
-	_myInt : INT := 10;
+  _newLogger: TcLogCore;
+  _logger: TcLog;
+  _myInt : INT := 10;
 END_VAR
 
 _newLogger
-	.MinimumLevel(LogLevels.Information)
-	.SetRollingInterval(RollingIntervals.Hourly)
-	.WriteToFile('c:\logs\', 'sensor_data.txt')
-	.DeleteLogFilesAfterDays(7)
-	.RunLogger();
-	
+  .MinimumLevel(LogLevels.Information)
+  .SetRollingInterval(RollingIntervals.Hourly)
+  .WriteToFile('c:\logs\', 'sensor_data.txt')
+  .DeleteLogFilesAfterDays(7)
+  .RunLogger();
+  
 // Bind the new logger to the TcLog instance
 _logger.SetLogger(_newLogger);
 
 _logger.AppendString('Sensor xy: ')
-	.AppendAny(_myInt)
-	.Information('');	
+  .AppendAny(_myInt)
+  .Information(''); 
 </code></pre>
 <p>From now on <code>_logger</code> considers the configuration of <code>_newLogger</code>.</p>
 </article>

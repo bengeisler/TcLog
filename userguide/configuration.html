@@ -85,9 +85,6 @@
                       <a href="installation.html" title="Installation" class="">Installation</a>
                     </li>
                     <li class="">
-                      <a href="getting_started.html" title="User Guide" class="">User Guide</a>
-                    </li>
-                    <li class="">
                       <span class="expand-stub"></span>
                       <a class="">User guide</a>
                         
@@ -126,11 +123,11 @@
 <h3 id="including-the-instance-path-in-the-log-message">Including the instance path in the log message</h3>
 <p>TcLog offers with <code>.IncludeInstancePath()</code> the possibility to include the location where the message was triggered into the message text:</p>
 <pre><code>_coreLogger
-	.WriteToAds()
-	.IncludeInstancePath()
-	.MinimumLevel(LogLevels.Warning)
-	.RunLogger();
-	
+  .WriteToAds()
+  .IncludeInstancePath()
+  .MinimumLevel(LogLevels.Warning)
+  .RunLogger();
+  
 _logger.Error('This is an error message.');
 </code></pre>
 <p><img src="https://benediktgeisler.de/InstancePath.png" alt="Including the instance path" title="Including the instance path"></p>
@@ -143,14 +140,14 @@ _logger.Error('This is an error message.');
 <h2 id="log-to-file-system">Log to file system</h2>
 <p>TcLog brings the option to store logs in the file system in the form of text files. This option can be applied to <code>TcLogCore</code> via the method <code>.WriteToFile(path, filename)</code>:</p>
 <pre><code>_coreLogger
-	.IncludeInstancePath()
-	.MinimumLevel(LogLevels.Warning)
-	.WriteToFile('c:\logs\', 'test.txt')
-	.RunLogger();
-	
+  .IncludeInstancePath()
+  .MinimumLevel(LogLevels.Warning)
+  .WriteToFile('c:\logs\', 'test.txt')
+  .RunLogger();
+  
 _loggerTrig
-	.OnRisingEdge(_log)
-	.Error('rTrig Test');
+  .OnRisingEdge(_log)
+  .Error('rTrig Test');
 </code></pre>
 <p><img src="https://benediktgeisler.de/LogMessageInFiileSystem.png" alt="Logging to the file system" title="Logging to the file system"></p>
 <h3 id="timestamp">Timestamp</h3>
