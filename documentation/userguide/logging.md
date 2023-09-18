@@ -1,20 +1,22 @@
 # Logging
+Next, we will look at the logging options of TcLog.
+
 ## Flexible logging
 TcLog implements a [StringBuilder](https://www.plccoder.com/fluent-code/) which makes it easy to build your own message text: 
 
 ```
 VAR
     _logger: TcLog;
-  _myInt : INT := 10;
-  _myVarInfo : __SYSTEM.VAR_INFO := __VARINFO(_myInt);
+	_myInt : INT := 10;
+	_myVarInfo : __SYSTEM.VAR_INFO := __VARINFO(_myInt);
 END_VAR
 
 _logger
-  .AppendString('Let´s log some values: ')
-  .AppendAny(_myInt)
-  .AppendString(' - or some symbols: ')
-  .AppendVariable(_myVarInfo, _myInt)
-  .Error(''); 
+	.AppendString('Let´s log some values: ')
+	.AppendAny(_myInt)
+	.AppendString(' - or some symbols: ')
+	.AppendVariable(_myVarInfo, _myInt)
+	.Error('');	
 ```
 ![Using a StringBuilder to generate the message text](https://benediktgeisler.de/StringBuilder_in_message_text.png "Using a StringBuilder to generate the message text")
 
@@ -30,14 +32,14 @@ The most common use of logging will be in the form `IF ... THEN log() END_IF`. T
 ```
 VAR
     _logger: TcLog;
-  _triggerLogging : R_TRIG;
-  _log : BOOL;
+	_triggerLogging : R_TRIG;
+	_log : BOOL;
 END_VAR
 
 _triggerLogging(CLK := _log);
 _logger
-  .OnCondition(_triggerLogging.Q)
-  .Error('Only logs when OnCondition evaluates to TRUE.');  
+	.OnCondition(_triggerLogging.Q)
+	.Error('Only logs when OnCondition evaluates to TRUE.');	
 ```
 
 ## Logging on rising/falling edges
@@ -45,13 +47,13 @@ Since a log message is usually to be sent once in the event of a *status change*
 
 ```
 VAR
-  _loggerTrig : TcLogTRIG;
+	_loggerTrig : TcLogTRIG;
     _log : BOOL;
 END_VAR
 
 _loggerTrig
-  .OnRisingEdge(_log)
-  .Error('rTrig Test');
+	.OnRisingEdge(_log)
+	.Error('rTrig Test');
 ```
 
 Likewise, logging can be triggered on falling edges with `OnFallingEdge(cond)`. 
@@ -61,24 +63,24 @@ Even though the logger was primarily designed as a singleton, it is possible to 
 
 ```
 VAR
-  _newLogger: TcLogCore;
-  _logger: TcLog;
-  _myInt : INT := 10;
+	_newLogger: TcLogCore;
+	_logger: TcLog;
+	_myInt : INT := 10;
 END_VAR
 
 _newLogger
-  .MinimumLevel(LogLevels.Information)
-  .SetRollingInterval(RollingIntervals.Hourly)
-  .WriteToFile('c:\logs\', 'sensor_data.txt')
-  .DeleteLogFilesAfterDays(7)
-  .RunLogger();
-  
+	.MinimumLevel(LogLevels.Information)
+	.SetRollingInterval(RollingIntervals.Hourly)
+	.WriteToFile('c:\logs\', 'sensor_data.txt')
+	.DeleteLogFilesAfterDays(7)
+	.RunLogger();
+	
 // Bind the new logger to the TcLog instance
 _logger.SetLogger(_newLogger);
 
 _logger.AppendString('Sensor xy: ')
-  .AppendAny(_myInt)
-  .Information(''); 
+	.AppendAny(_myInt)
+	.Information('');	
 ```
 
 From now on `_logger` considers the configuration of `_newLogger`.

@@ -9,23 +9,23 @@ You would typically call `TcLogCore` once in your project and configure the logg
 Configure the core logger in your project:
 ```
 VAR
-  _coreLogger : TcLogCore(bufferSize := 100 * SIZEOF(BYTE) * MAX_STRINGLENGTH);
+	_coreLogger : TcLogCore(bufferSize := 100 * SIZEOF(BYTE) * MAX_STRINGLENGTH);
 END_VAR
 
 _coreLogger
-  .WriteToAds()
-    .WriteToFile('c:\logs\', 'sensor_data.txt')
-  .MinimumLevel(LogLevels.Debug)
-  .RunLogger();
+	.WriteToAds()
+	.WriteToFile('c:\logs\', 'sensor_data.txt')
+	.MinimumLevel(LogLevels.Debug)
+	.RunLogger();
 ```
 Then, maybe in a different POU, use `TcLog` to log messages:
 ```
 VAR
-  _logger : TcLog;
+	_logger : TcLog;
 END_VAR
 
-_logger.Debug('This is a debug message.');  
-_logger.Error('This is an error message.');   
+_logger.Debug('This is a debug message.');	
+_logger.Error('This is an error message.');		
 ```
 This will log both messages to both the ADS output and the file system.
 

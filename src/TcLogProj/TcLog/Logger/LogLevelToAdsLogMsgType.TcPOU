@@ -23,9 +23,5 @@ END_CASE
 
 LogLevelToAdsLogMsgType := _retVal;]]></ST>
     </Implementation>
-    <LineIds Name="LogLevelToAdsLogMsgType">
-      <LineId Id="53" Count="10" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

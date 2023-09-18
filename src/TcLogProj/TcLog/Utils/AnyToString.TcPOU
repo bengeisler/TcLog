@@ -58,9 +58,5 @@ ELSE
   AnyToString := ANY_TO_STRING(data.pValue^);
 END_IF]]></ST>
     </Implementation>
-    <LineIds Name="AnyToString">
-      <LineId Id="620" Count="35" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

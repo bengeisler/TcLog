@@ -198,11 +198,5 @@ END_IF
 
 ]]></ST>
     </Implementation>
-    <LineIds Name="TestWrapper_NET">
-      <LineId Id="2616" Count="16" />
-      <LineId Id="2754" Count="0" />
-      <LineId Id="2633" Count="119" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

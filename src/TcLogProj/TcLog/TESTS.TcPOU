@@ -14,9 +14,5 @@ END_VAR
 
 TestWrapper();]]></ST>
     </Implementation>
-    <LineIds Name="TESTS">
-      <LineId Id="3" Count="1" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

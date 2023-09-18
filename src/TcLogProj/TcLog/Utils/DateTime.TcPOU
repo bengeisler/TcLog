@@ -214,40 +214,5 @@ ToFormatString := formattedString;
 ]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="DateTime">
-      <LineId Id="365" Count="0" />
-      <LineId Id="345" Count="6" />
-      <LineId Id="366" Count="0" />
-      <LineId Id="352" Count="4" />
-      <LineId Id="367" Count="0" />
-      <LineId Id="359" Count="4" />
-      <LineId Id="368" Count="0" />
-      <LineId Id="364" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="DateTime.AsLocalFileTime.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="DateTime.AsLocalSystemTime.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="DateTime.AsLocalSystemTimeString.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="DateTime.AsUtcFileTime.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="DateTime.Done.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="DateTime.ReplaceFormatPlaceholder">
-      <LineId Id="40" Count="1" />
-      <LineId Id="3" Count="21" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="DateTime.ToFormatString">
-      <LineId Id="96" Count="28" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

@@ -87,31 +87,5 @@ Reset := THIS^;]]></ST>
         <ST><![CDATA[ToString := _workString;]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="StringBuilder">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="StringBuilder.Append">
-      <LineId Id="3" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="StringBuilder.AppendIf">
-      <LineId Id="3" Count="2" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="StringBuilder.InsertAtLocation">
-      <LineId Id="3" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="StringBuilder.PadLeft">
-      <LineId Id="3" Count="8" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="StringBuilder.Reset">
-      <LineId Id="3" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="StringBuilder.ToString">
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

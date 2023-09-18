@@ -146,9 +146,5 @@ IF _fileDelete.bError THEN
   Error.Info := Tc2_Standard.CONCAT('Deleting expired log file in specified directory failed. Error thrown by FB_FileDelete. Consult Beckhoff InfoSys. Internal Error: ', UDINT_TO_STRING(_fileDelete.nErrId));
 END_IF]]></ST>
     </Implementation>
-    <LineIds Name="DeleteOldFiles">
-      <LineId Id="2356" Count="111" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

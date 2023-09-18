@@ -288,47 +288,5 @@ IF requiredSize > _fifo.cbBuffer THEN
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="DynamicStringBuffer">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="DynamicStringBuffer.AddLine">
-      <LineId Id="3" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="DynamicStringBuffer.AddString">
-      <LineId Id="3" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="DynamicStringBuffer.AllocateBuffer">
-      <LineId Id="13" Count="1" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="DynamicStringBuffer.Busy.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="DynamicStringBuffer.Busy.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="DynamicStringBuffer.FB_exit">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="DynamicStringBuffer.FlushCache">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="DynamicStringBuffer.Init">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="DynamicStringBuffer.PersistToFile">
-      <LineId Id="1123" Count="127" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="DynamicStringBuffer.PopHead">
-      <LineId Id="3" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="DynamicStringBuffer.ResizeFifoBufferIfNecessary">
-      <LineId Id="3" Count="5" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

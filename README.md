@@ -1,4 +1,5 @@
 ![](documentation/images/TcLog_header.svg "TcLog_header")
+
 *Logging in TwinCAT with the on-board means is limited to the output as ADS event. The TcLog library presented here enables flexible logging to the file system.*
 
 It's usage is as simple as this: 
