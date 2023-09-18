@@ -213,47 +213,47 @@
 <tr>
 <td style="text-align: left;"><a name="FileName"></a>FileName</td>
 <td style="text-align: left;">Tc2_System.T_MaxString</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">File name where the logs should be written to. Should not include path.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a name="FilePath"></a>FilePath</td>
 <td style="text-align: left;">Tc2_System.T_MaxString</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">File path where the logs should be written to. Will be prefixed to <code>FileName</code></td>
 </tr>
 <tr>
 <td style="text-align: left;"><a name="IncludeInstancePath"></a>IncludeInstancePath</td>
 <td style="text-align: left;">BOOL</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">Whether to include the instance path of TcLog into the log message or not.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a name="WriteToAds"></a>WriteToAds</td>
 <td style="text-align: left;">BOOL</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">Whether to write the logs to ADS output or not.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a name="RollingInterval"></a>RollingInterval</td>
 <td style="text-align: left;"><a class="xref" href="RollingIntervals.html">TcLog.RollingIntervals</a></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">Rolling interval: when to create a new log file.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a name="MinimumLevel"></a>MinimumLevel</td>
 <td style="text-align: left;"><a class="xref" href="LogLevels.html">TcLog.LogLevels</a></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">What is the minimum log level that gets logged?</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a name="Delimiter"></a>Delimiter</td>
 <td style="text-align: left;">STRING(1)</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">Which delimiter should be used between the different parts of the log string?</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a name="LogFileLifespan"></a>LogFileLifespan</td>
 <td style="text-align: left;">UINT</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">When should old log files be deleted? Unit: days. Set it to <code>0</code> if log files should never be deleted.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><a name="TimestampFormat"></a>TimestampFormat</td>
 <td style="text-align: left;">STRING</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">Format of timestamp. See <code>TcLogCore.TimestampFormat</code> for formatting options.</td>
 </tr>
 </tbody>
 </table>
