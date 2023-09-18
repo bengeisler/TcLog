@@ -69,6 +69,3 @@ The code for log4TC has been published as open source on [GitHub](https://github
 
 ## Disclaimer
 This project is not affiliated with Beckhoff Automation GmbH & Co. KG and was first published in 2021 at [my blog](https://benediktgeisler.de/en/blog/tclog/).
-
-## Disclaimer
-This project is not affiliated with Beckhoff Automation GmbH & Co. KG and was first published in 2021 at [my blog](https://benediktgeisler.de/en/blog/tclog/).
