@@ -12,11 +12,13 @@
 /// automatically if enough memory is available.
 ///
 /// To set the inital buffer size to accomodate 100 messages, use it like this:
-/// ```
+///
+/// ```st
 /// VAR
 ///   myLogger: TcLogCore(BufferSize := 100 * SIZEOF(BYTE) * Tc2_System.MAX_STRING_LENGTH);
 /// END_VAR
 /// ```
+///
 {attribute 'hide_all_locals'}
 FUNCTION_BLOCK TcLogCore IMPLEMENTS ILogCore
 VAR
@@ -462,94 +464,5 @@ _config.FileName := fileName;
 WriteToFile REF= This^;]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="TcLogCore">
-      <LineId Id="3" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogCore.BuildLoggingConfiguration">
-      <LineId Id="3" Count="11" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogCore.Busy.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogCore.Busy.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogCore.Configuration.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogCore.DeleteLogFilesAfterDays">
-      <LineId Id="3" Count="3" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogCore.Error.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogCore.FB_init">
-      <LineId Id="3" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogCore.FB_reinit">
-      <LineId Id="3" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogCore.FlushCache">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogCore.IncludeInstancePath">
-      <LineId Id="3" Count="3" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogCore.LogCustomFormat">
-      <LineId Id="3" Count="5" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogCore.LogStandardFormat">
-      <LineId Id="64" Count="28" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogCore.MinimumLevel">
-      <LineId Id="3" Count="3" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogCore.RollingIntervalReached">
-      <LineId Id="3" Count="9" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogCore.RunLogger">
-      <LineId Id="296" Count="1" />
-      <LineId Id="364" Count="0" />
-      <LineId Id="300" Count="1" />
-      <LineId Id="365" Count="0" />
-      <LineId Id="302" Count="46" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogCore.SetDelimiter">
-      <LineId Id="3" Count="3" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogCore.SetRollingInterval">
-      <LineId Id="3" Count="3" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogCore.TimestampFormat">
-      <LineId Id="3" Count="3" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogCore.WriteToAds">
-      <LineId Id="3" Count="3" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogCore.WriteToFile">
-      <LineId Id="3" Count="0" />
-      <LineId Id="18" Count="0" />
-      <LineId Id="17" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="21" Count="1" />
-      <LineId Id="20" Count="0" />
-      <LineId Id="6" Count="1" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

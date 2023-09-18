@@ -77,8 +77,9 @@ AppendString REF= THIS^;]]></ST>
     <Method Name="AppendVariable" Id="{67339878-c4f6-4555-96b1-10fb6c84bab0}">
       <Declaration><![CDATA[/// Appends information about the given variable to the log string. 
 /// This method can be chained.
-/// Example: 
-/// ```
+/// Example:
+/// 
+/// ```st
 /// VAR
 ///   Logger: TcLog;
 /// 	 myInt : INT := 10;
@@ -86,6 +87,7 @@ AppendString REF= THIS^;]]></ST>
 /// END_VAR
 /// Logger.AppendVariable(myVarInfo, myInt);
 /// ```
+///
 METHOD AppendVariable : REFERENCE TO TcLog
 VAR_INPUT
   /// [VAR_INFO](https://infosys.beckhoff.com/index.php?content=../content/1031/tc3_plc_intro/3527777675.html&id=) of variable to be appended to log string.
@@ -348,65 +350,5 @@ END_IF
 _logDataInitialized := FALSE;]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="TcLog">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.AppendAny">
-      <LineId Id="3" Count="3" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.AppendString">
-      <LineId Id="3" Count="3" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.AppendVariable">
-      <LineId Id="86" Count="12" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.Debug">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.Error">
-      <LineId Id="3" Count="8" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.Fatal">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.Information">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.Init">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.InitializeLogData">
-      <LineId Id="3" Count="4" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.OnCondition">
-      <LineId Id="3" Count="3" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.SetLogger">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.ShortenInstancePath">
-      <LineId Id="3" Count="19" />
-    </LineIds>
-    <LineIds Name="TcLog.ToAdsLog">
-      <LineId Id="3" Count="5" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.ToCustomFormat">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLog.Warning">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
