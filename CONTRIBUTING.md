@@ -29,6 +29,8 @@ Please make sure that your pull request
 #### TwinCAT and Visual Studio 
 The project uses TwinCAT 3.1.4024.29 and Visual Studio 2019 with .NET 7.0. 
 
+Please use the recommended [Zeugwerk IDE settings.](https://doc.zeugwerk.dev/contribute/recom_xae_settings.html)
+
 #### Unit tests
 
 [TcUnit](https://tcunit.org/) is used for unit tests in plc project itself.
