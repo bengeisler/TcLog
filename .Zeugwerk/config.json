@@ -1,6 +1,6 @@
 {
   "fileversion": 1,
-  "solution": "TcLog.sln",
+  "solution": "src/TcLog.sln",
   "projects": [
     {
       "name": "TcLogProj",
@@ -10,7 +10,16 @@
           "name": "TcLog",
           "type": "Library",
           "frameworks": {},
-          "references": {},
+          "references": {
+            "*": [
+              "Tc2_Standard=*",
+              "Tc2_System=*",
+              "Tc2_Utilities=*",
+              "Tc3_DynamicMemory=*",
+              "Tc3_Modules=*",
+              "Base Interfaces=newest"
+            ]
+          },
           "repositories": [],
           "bindings": {},
           "patches": {
