@@ -18,7 +18,7 @@ jobs:
         with:
           username: ${{ secrets.ACTIONS_ZGWK_USERNAME }}
           password: ${{ secrets.ACTIONS_ZGWK_PASSWORD }}
-          filepath: "src/TcLogProj/TcLog/TcLog.plcproj"
+          filepath: "."
           doc-folder: "docs"
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
