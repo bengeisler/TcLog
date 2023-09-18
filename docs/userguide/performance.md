@@ -1,2 +1,0 @@
-# Performance
-The logger can persist up to 100 messages per plc cycle. If you log more than that, the persistance mechanism will spread over several plc cycles. When logging less than 100 messages per cycle, it takes roughly `1.5 * # of consecutive cycles with logging` cycles to persist the messages; when logging more than 100 messages per cycle, multiply that value by a factor of 3. 
