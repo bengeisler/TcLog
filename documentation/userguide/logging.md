@@ -1,4 +1,6 @@
 # Logging
+Next, we will look at the logging options of TcLog.
+
 ## Flexible logging
 TcLog implements a [StringBuilder](https://www.plccoder.com/fluent-code/) which makes it easy to build your own message text: 
 

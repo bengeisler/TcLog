@@ -14,7 +14,7 @@ END_VAR
 
 _coreLogger
 	.WriteToAds()
-    .WriteToFile('c:\logs\', 'sensor_data.txt')
+	.WriteToFile('c:\logs\', 'sensor_data.txt')
 	.MinimumLevel(LogLevels.Debug)
 	.RunLogger();
 ```

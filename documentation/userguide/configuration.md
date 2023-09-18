@@ -12,11 +12,11 @@ TcLog offers with `.IncludeInstancePath()` the possibility to include the locati
 
 ```
 _coreLogger
-	.WriteToAds()
-	.IncludeInstancePath()
-	.MinimumLevel(LogLevels.Warning)
-	.RunLogger();
-	
+  .WriteToAds()
+  .IncludeInstancePath()
+  .MinimumLevel(LogLevels.Warning)
+  .RunLogger();
+  
 _logger.Error('This is an error message.');
 ```
 
@@ -36,14 +36,14 @@ TcLog brings the option to store logs in the file system in the form of text fil
 
 ```
 _coreLogger
-	.IncludeInstancePath()
-	.MinimumLevel(LogLevels.Warning)
-	.WriteToFile('c:\logs\', 'test.txt')
-	.RunLogger();
-	
+  .IncludeInstancePath()
+  .MinimumLevel(LogLevels.Warning)
+  .WriteToFile('c:\logs\', 'test.txt')
+  .RunLogger();
+  
 _loggerTrig
-	.OnRisingEdge(_log)
-	.Error('rTrig Test');
+  .OnRisingEdge(_log)
+  .Error('rTrig Test');
 ```
 
 ![Logging to the file system](https://benediktgeisler.de/LogMessageInFiileSystem.png "Logging to the file system")

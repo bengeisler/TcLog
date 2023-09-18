@@ -3,29 +3,25 @@
   <POU Name="LogLevelToAdsLogMsgType" Id="{c5255ff0-b51b-42de-ab62-e7b30a9b316a}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION INTERNAL LogLevelToAdsLogMsgType : DWORD
 VAR_INPUT
-	logLevel : LogLevels;
+  logLevel : LogLevels;
 END_VAR
 VAR
-	_retVal : DWORD;
+  _retVal : DWORD;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[CASE logLevel OF
-	LogLevels.Debug, LogLevels.Information:
-		_retVal := Tc2_System.ADSLOG_MSGTYPE_HINT;
-	LogLevels.Warning:
-		_retVal := Tc2_System.ADSLOG_MSGTYPE_WARN;
-	LogLevels.Error, LogLevels.Fatal:
-		_retVal := Tc2_System.ADSLOG_MSGTYPE_ERROR;
-	ELSE
-		_retVal := Tc2_System.ADSLOG_MSGTYPE_HINT;
+  LogLevels.Debug, LogLevels.Information:
+    _retVal := Tc2_System.ADSLOG_MSGTYPE_HINT;
+  LogLevels.Warning:
+    _retVal := Tc2_System.ADSLOG_MSGTYPE_WARN;
+  LogLevels.Error, LogLevels.Fatal:
+    _retVal := Tc2_System.ADSLOG_MSGTYPE_ERROR;
+  ELSE
+    _retVal := Tc2_System.ADSLOG_MSGTYPE_HINT;
 END_CASE
 
 LogLevelToAdsLogMsgType := _retVal;]]></ST>
     </Implementation>
-    <LineIds Name="LogLevelToAdsLogMsgType">
-      <LineId Id="53" Count="10" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
