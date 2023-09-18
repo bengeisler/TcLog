@@ -9,51 +9,51 @@
     <Method Name="LogsManyMessagesForManyCycles" Id="{6b88134d-05db-4f48-b04c-63dc5fbbc234}">
       <Declaration><![CDATA[METHOD LogsManyMessagesForManyCycles
 VAR
-	result : STRING := '';
-	expected : STRING := '';
-	i : UDINT;
+  result : STRING := '';
+  expected : STRING := '';
+  i : UDINT;
 END_VAR
 VAR CONSTANT
-	Cycles : UDINT := 50;
-	Messages : UDINT := 50;
+  Cycles : UDINT := 50;
+  Messages : UDINT := 50;
 END_VAR
 VAR_INST
-	cycleCount : UDINT := 0;
-	logsManyMessagesForManyCyclesLogger : TcLogCore(BufferSize:=50 * 50 * 280); // Cycles * Messages * (max string length + fifo overhead (estimated))
-	logger : TcLog;
+  cycleCount : UDINT := 0;
+  logsManyMessagesForManyCyclesLogger : TcLogCore(BufferSize:=50 * 50 * 280); // Cycles * Messages * (max string length + fifo overhead (estimated))
+  logger : TcLog;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('LogsManyMessagesForManyCycles');
 
 logsManyMessagesForManyCyclesLogger
-	.WriteToFile('c:\UnitTest\', 'test.txt')
-	.RunLogger();
+  .WriteToFile('c:\UnitTest\', 'test.txt')
+  .RunLogger();
 logger.SetLogger(logsManyMessagesForManyCyclesLogger);
 
 IF cycleCount < Cycles THEN
-	FOR i:=0 TO Messages DO
-		logger
-			.AppendString('Cycle: ')
-			.AppendString(UDINT_TO_STRING(cycleCount))
-			.AppendString(', Message: ')
-			.AppendString(UDINT_TO_STRING(i))
-			.Error('');	
-	END_FOR
+  FOR i:=0 TO Messages DO
+    logger
+      .AppendString('Cycle: ')
+      .AppendString(UDINT_TO_STRING(cycleCount))
+      .AppendString(', Message: ')
+      .AppendString(UDINT_TO_STRING(i))
+      .Error(''); 
+  END_FOR
 END_IF
 cycleCount := cycleCount + 1;
 
 // Catch any occuring error message
 IF LEN(logsManyMessagesForManyCyclesLogger.Error.Info) > 0 THEN
-	result := logsManyMessagesForManyCyclesLogger.Error.Info;
+  result := logsManyMessagesForManyCyclesLogger.Error.Info;
 END_IF
 
 IF cycleCount > (Cycles * Messages * 2 + 4) THEN 
-	AssertEquals(Expected := expected,
-				 Actual := result,
-				 Message := result);
+  AssertEquals(Expected := expected,
+         Actual := result,
+         Message := result);
  
-	TEST_FINISHED();
+  TEST_FINISHED();
 END_IF]]></ST>
       </Implementation>
     </Method>

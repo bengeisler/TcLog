@@ -5,7 +5,7 @@ on:
       - main
     paths:
       - 'docs/**'
-      - 'TcLog/**'
+      - 'src/**'
   pull_request:
   workflow_dispatch:
 jobs:
@@ -18,7 +18,7 @@ jobs:
         with:
           username: ${{ secrets.ACTIONS_ZGWK_USERNAME }}
           password: ${{ secrets.ACTIONS_ZGWK_PASSWORD }}
-          filepath: "."
+          filepath: "src/TcLogProj/TcLog/TcLog.plcproj"
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
