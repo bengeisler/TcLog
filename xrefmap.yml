@@ -28,9 +28,6 @@ references:
 - uid: TcLog.LogLevels
   name: LogLevels
   href: reference/TcLog/Logger/_DataTypes/LogLevels.html
-- uid: TcLog.PlcTask
-  name: PlcTask
-  href: reference/TcLog/PlcTask.html
 - uid: TcLog.RollingIntervals
   name: RollingIntervals
   href: reference/TcLog/Logger/_DataTypes/RollingIntervals.html
@@ -43,6 +40,3 @@ references:
 - uid: TcLog.TcLogTrig
   name: TcLogTrig
   href: reference/TcLog/Logger/TcLogTrig.html
-- uid: TcLog.TESTS
-  name: TESTS
-  href: reference/TcLog/TESTS.html
