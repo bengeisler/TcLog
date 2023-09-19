@@ -217,10 +217,46 @@ The logger can be configured by calling its methods that set the configuration.<
 <p>When declaring an instance of TcLogCore, the ininital buffer size has to be set. If the buffer size is set too low, it will expand
 automatically if enough memory is available.</p>
 <p>To set the inital buffer size to accomodate 100 messages, use it like this:</p>
-<pre><code>VAR
+<pre><code class="lang-st">VAR
   myLogger: TcLogCore(BufferSize := 100 * SIZEOF(BYTE) * Tc2_System.MAX_STRING_LENGTH);
 END_VAR
 </code></pre>
+<h3 id="constructors">Constructor</h3>
+<p><a name="FB_init"></a></p>
+<h4 id="TcLog.TcLogCore.FB_init" data-uid="TcLog.TcLogCore.FB_init">FB_init</h4>
+<h5 class="decalaration">Declaration</h5>
+<pre><code class="lang-st">METHOD FB_init (
+ bInitRetains : BOOL,
+ bInCopyCode : BOOL,
+ bufferSize : DINT) : BOOL
+</code></pre>
+<h5 class="parameters">Inputs</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a name="bInitRetains"></a>bInitRetains</td>
+<td style="text-align: left;">BOOL</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><a name="bInCopyCode"></a>bInCopyCode</td>
+<td style="text-align: left;">BOOL</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><a name="bufferSize"></a>bufferSize</td>
+<td style="text-align: left;">DINT</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
 <h3 id="properties">Properties</h3>
 <p><a name="Busy"></a></p>
 <h4 id="TcLog.TcLogCore.Busy" data-uid="TcLog.TcLogCore.Busy">Busy</h4>
@@ -230,12 +266,348 @@ PROPERTY Busy : BOOL
 </code></pre>
 <p><code>Busy</code> evaluates to <code>TRUE</code> as long as the log file is kept open to append new log messages
 or there are pending messages in the queue to be written to the logfile.</p>
+<p><a name="Configuration"></a></p>
+<h4 id="TcLog.TcLogCore.Configuration" data-uid="TcLog.TcLogCore.Configuration">Configuration</h4>
+<h5 class="decalaration">Declaration</h5>
+<pre><code class="lang-st">{attribute 'monitoring':='variable'}
+PROPERTY Configuration : LoggingConfiguration
+</code></pre>
+<p>Returns the current configuration of the logger.</p>
+<p><a name="Error"></a></p>
+<h4 id="TcLog.TcLogCore.Error" data-uid="TcLog.TcLogCore.Error">Error</h4>
+<h5 class="decalaration">Declaration</h5>
+<pre><code class="lang-st">{attribute 'monitoring':='call'}
+PROPERTY Error : REFERENCE TO Error
+</code></pre>
+<p>Returns information about internal errors.</p>
 <h3 id="methods">Methods</h3>
 <p><a name="BuildLoggingConfiguration"></a></p>
 <h4 id="TcLog.TcLogCore.BuildLoggingConfiguration" data-uid="TcLog.TcLogCore.BuildLoggingConfiguration">BuildLoggingConfiguration</h4>
 <h5 class="decalaration">Declaration</h5>
 <pre><code class="lang-st">METHOD PRIVATE BuildLoggingConfiguration () : BOOL
 </code></pre>
+<p><a name="DeleteLogFilesAfterDays"></a></p>
+<h4 id="TcLog.TcLogCore.DeleteLogFilesAfterDays" data-uid="TcLog.TcLogCore.DeleteLogFilesAfterDays">DeleteLogFilesAfterDays</h4>
+<p>Configuration method which sets the lifespan of log files. Once exceeded, they will be deleted.</p>
+<h5 class="decalaration">Declaration</h5>
+<pre><code class="lang-st">METHOD DeleteLogFilesAfterDays (
+ lifespan : UINT) : REFERENCE TO TcLogCore
+</code></pre>
+<h5 class="parameters">Inputs</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a name="lifespan"></a>lifespan</td>
+<td style="text-align: left;">UINT</td>
+<td style="text-align: left;">Lifespan of logfiles in days.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="FB_reinit"></a></p>
+<h4 id="TcLog.TcLogCore.FB_reinit" data-uid="TcLog.TcLogCore.FB_reinit">FB_reinit</h4>
+<h5 class="decalaration">Declaration</h5>
+<pre><code class="lang-st">METHOD FB_reinit (
+ bufferSize : DINT) : BOOL
+</code></pre>
+<h5 class="parameters">Inputs</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a name="bufferSize"></a>bufferSize</td>
+<td style="text-align: left;">DINT</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<p><a name="FlushCache"></a></p>
+<h4 id="TcLog.TcLogCore.FlushCache" data-uid="TcLog.TcLogCore.FlushCache">FlushCache</h4>
+<p>Flushes the logging cache. All messages that have not yet been processed will be lost.</p>
+<h5 class="decalaration">Declaration</h5>
+<pre><code class="lang-st">METHOD FlushCache () : BOOL
+</code></pre>
+<p><a name="IncludeInstancePath"></a></p>
+<h4 id="TcLog.TcLogCore.IncludeInstancePath" data-uid="TcLog.TcLogCore.IncludeInstancePath">IncludeInstancePath</h4>
+<p>Configuration method. If this method is called, the instance path where the log
+messages has been triggered will be included in the log message.</p>
+<h5 class="decalaration">Declaration</h5>
+<pre><code class="lang-st">METHOD IncludeInstancePath () : REFERENCE TO TcLogCore
+</code></pre>
+<p><a name="LogCustomFormat"></a></p>
+<h4 id="TcLog.TcLogCore.LogCustomFormat" data-uid="TcLog.TcLogCore.LogCustomFormat">LogCustomFormat</h4>
+<p>Logger method. It should only be called from within objects that implement <code>ILog</code>.
+Logs data in custom format. No additional formatting will be done.</p>
+<h5 class="decalaration">Declaration</h5>
+<pre><code class="lang-st">METHOD LogCustomFormat (
+ data : Tc2_System.T_MaxString) : BOOL
+</code></pre>
+<h5 class="parameters">Inputs</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a name="data"></a>data</td>
+<td style="text-align: left;">Tc2_System.T_MaxString</td>
+<td style="text-align: left;">Data to be logged.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="LogStandardFormat"></a></p>
+<h4 id="TcLog.TcLogCore.LogStandardFormat" data-uid="TcLog.TcLogCore.LogStandardFormat">LogStandardFormat</h4>
+<p>Logger method. It should only be called from within objects that implement <code>ILog</code>.
+Logs in the standard format. This includes</p>
+<ul>
+<li>timestamp</li>
+<li>log level</li>
+<li>log message</li>
+<li>instance path of logging source (optional)
+The message will only be logged if the logging level exceeds the configured minimum logging level.</li>
+</ul>
+<h5 class="decalaration">Declaration</h5>
+<pre><code class="lang-st">METHOD LogStandardFormat (
+ data : Tc2_System.T_MaxString,
+ instancePath : Tc2_System.T_MaxString,
+ logLevel : LogLevels) : BOOL
+</code></pre>
+<h5 class="parameters">Inputs</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a name="data"></a>data</td>
+<td style="text-align: left;">Tc2_System.T_MaxString</td>
+<td style="text-align: left;">Data to be logged.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a name="instancePath"></a>instancePath</td>
+<td style="text-align: left;">Tc2_System.T_MaxString</td>
+<td style="text-align: left;">Instance path of calling logger to locate source of logging message.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a name="logLevel"></a>logLevel</td>
+<td style="text-align: left;"><a class="xref" href="_DataTypes/LogLevels.html">TcLog.LogLevels</a></td>
+<td style="text-align: left;">Log level of message.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="MinimumLevel"></a></p>
+<h4 id="TcLog.TcLogCore.MinimumLevel" data-uid="TcLog.TcLogCore.MinimumLevel">MinimumLevel</h4>
+<p>Configuration method.
+Sets the minimum log level. Log messages below this level
+will not be logged.</p>
+<h5 class="decalaration">Declaration</h5>
+<pre><code class="lang-st">METHOD MinimumLevel (
+ level : LogLevels) : REFERENCE TO TcLogCore
+</code></pre>
+<h5 class="parameters">Inputs</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a name="level"></a>level</td>
+<td style="text-align: left;"><a class="xref" href="_DataTypes/LogLevels.html">TcLog.LogLevels</a></td>
+<td style="text-align: left;">Minimum log level to be logged.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="RollingIntervalReached"></a></p>
+<h4 id="TcLog.TcLogCore.RollingIntervalReached" data-uid="TcLog.TcLogCore.RollingIntervalReached">RollingIntervalReached</h4>
+<h5 class="decalaration">Declaration</h5>
+<pre><code class="lang-st">{attribute 'hide_all_locals'}
+METHOD PRIVATE RollingIntervalReached (
+ currentUtcTime : Tc2_Utilities.TIMESTRUCT,
+ rollingInterval : RollingIntervals) : BOOL
+</code></pre>
+<h5 class="parameters">Inputs</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a name="currentUtcTime"></a>currentUtcTime</td>
+<td style="text-align: left;">Tc2_Utilities.TIMESTRUCT</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><a name="rollingInterval"></a>rollingInterval</td>
+<td style="text-align: left;"><a class="xref" href="_DataTypes/RollingIntervals.html">TcLog.RollingIntervals</a></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<p><a name="RunLogger"></a></p>
+<h4 id="TcLog.TcLogCore.RunLogger" data-uid="TcLog.TcLogCore.RunLogger">RunLogger</h4>
+<p>Cyclic method of Logger.
+This method has to be executed in every plc cycle and runs
+all internal methods that have to be executed cyclically.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This method should be the last method of <code>TcLogCore</code> to be called in each cycle.</p>
+</div>
+<h5 class="decalaration">Declaration</h5>
+<pre><code class="lang-st">{attribute 'hide_all_locals'}
+METHOD RunLogger () : BOOL
+</code></pre>
+<p><a name="SetDelimiter"></a></p>
+<h4 id="TcLog.TcLogCore.SetDelimiter" data-uid="TcLog.TcLogCore.SetDelimiter">SetDelimiter</h4>
+<p>Configuration method
+Sets delimiter between different columns of log file.</p>
+<h5 class="decalaration">Declaration</h5>
+<pre><code class="lang-st">METHOD SetDelimiter (
+ delimiter : STRING(1)) : REFERENCE TO TcLogCore
+</code></pre>
+<h5 class="parameters">Inputs</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a name="delimiter"></a>delimiter</td>
+<td style="text-align: left;">STRING(1)</td>
+<td style="text-align: left;">Delimiter between different columns of log file.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="SetRollingInterval"></a></p>
+<h4 id="TcLog.TcLogCore.SetRollingInterval" data-uid="TcLog.TcLogCore.SetRollingInterval">SetRollingInterval</h4>
+<p>Configuration method.
+Sets the rolling interval of the log file. Once the rolling interval
+expires, a file name with a new timestamp will be generated.</p>
+<h5 class="decalaration">Declaration</h5>
+<pre><code class="lang-st">METHOD SetRollingInterval (
+ interval : RollingIntervals) : REFERENCE TO TcLogCore
+</code></pre>
+<h5 class="parameters">Inputs</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a name="interval"></a>interval</td>
+<td style="text-align: left;"><a class="xref" href="_DataTypes/RollingIntervals.html">TcLog.RollingIntervals</a></td>
+<td style="text-align: left;">Rolling interval for log file. Once exceeded, a new log file will be created.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="TimestampFormat"></a></p>
+<h4 id="TcLog.TcLogCore.TimestampFormat" data-uid="TcLog.TcLogCore.TimestampFormat">TimestampFormat</h4>
+<p>Configuration method.
+Sets the format of the timestamp in the file name.</p>
+<p>The following format options are available:
+Y : year
+M : month
+D : day
+h : hour
+m : minute
+s : second
+i : millisecond</p>
+<p>Example: <em>YYMMDD-hh:mm:ss:iii</em>
+=&gt; <em>20210812-12:30:22:123</em></p>
+<h5 class="decalaration">Declaration</h5>
+<pre><code class="lang-st">METHOD TimestampFormat (
+ format : STRING) : REFERENCE TO TcLogCore
+</code></pre>
+<h5 class="parameters">Inputs</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a name="format"></a>format</td>
+<td style="text-align: left;">STRING</td>
+<td style="text-align: left;">Format the timestamp should have.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="WriteToAds"></a></p>
+<h4 id="TcLog.TcLogCore.WriteToAds" data-uid="TcLog.TcLogCore.WriteToAds">WriteToAds</h4>
+<p>Configuration method.
+If this method is called, the logs will be written to ADS.</p>
+<h5 class="decalaration">Declaration</h5>
+<pre><code class="lang-st">METHOD WriteToAds () : REFERENCE TO TcLogCore
+</code></pre>
+<p><a name="WriteToFile"></a></p>
+<h4 id="TcLog.TcLogCore.WriteToFile" data-uid="TcLog.TcLogCore.WriteToFile">WriteToFile</h4>
+<p>Configuration method.
+If this method is called, the logs will be persisted to the file system.</p>
+<h5 class="decalaration">Declaration</h5>
+<pre><code class="lang-st">METHOD WriteToFile (
+ path : Tc2_System.T_MaxString,
+ fileName : STRING) : REFERENCE TO TcLogCore
+</code></pre>
+<h5 class="parameters">Inputs</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a name="path"></a>path</td>
+<td style="text-align: left;">Tc2_System.T_MaxString</td>
+<td style="text-align: left;">File path the logs will be written to.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a name="fileName"></a>fileName</td>
+<td style="text-align: left;">STRING</td>
+<td style="text-align: left;">File name of the log file. Will automatically be prefixed by timestamp.</td>
+</tr>
+</tbody>
+</table>
 </article>
           </div>
           

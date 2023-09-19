@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "C:/jenkins/workspace/jobs/doc/documentation",
+  "source_base_path": "C:/jenkins/workspace/jobs/doc/docs",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -71,7 +71,7 @@
       "output": {
         ".html": {
           "relative_path": "reference/TcLog/Logger/TcLogCore.html",
-          "hash": "4IJs6eoS38GJVGQngQhCe9T/L8Iwz2ZUl9tkWV70xMA="
+          "hash": "NhE74ZDzeuIbLA/fQiYQgdft8ugh94M8kxfVq40cU8E="
         }
       },
       "is_incremental": false,
@@ -299,7 +299,7 @@
       "output": {
         ".html": {
           "relative_path": "userguide/getting_started.html",
-          "hash": "9f2lJnz+DDYo8cA0+EjiZrnyY7L9TUO2p2TWXRwF3GA="
+          "hash": "CnOZiVv/fYFX/PDN/b3iJ99AOXDmcTEC46pt3M1Y9fI="
         }
       },
       "is_incremental": false,
@@ -347,7 +347,7 @@
       "output": {
         ".html": {
           "relative_path": "userguide/logging.html",
-          "hash": "mNdTcAyJ1O4crj/ScIMnDQmKzTz0wkbQI8uC3KCuIDQ="
+          "hash": "r409tdg7m38EiJ+zpE7yeioncmq2pZ2ziq4wh9PzdcM="
         }
       },
       "is_incremental": false,
