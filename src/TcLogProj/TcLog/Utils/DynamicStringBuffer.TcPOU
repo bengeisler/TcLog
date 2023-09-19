@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="DynamicStringBuffer" Id="{660876ea-7fc3-4366-aa3c-17474f122e75}" SpecialFunc="None">
-    <Declaration><![CDATA[//{attribute 'hide_all_locals'}
+    <Declaration><![CDATA[{attribute 'hide_all_locals'}
 FUNCTION_BLOCK INTERNAL DynamicStringBuffer
 VAR_OUTPUT
   Error : Error; // Error information of this FB

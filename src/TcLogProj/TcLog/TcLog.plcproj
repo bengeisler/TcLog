@@ -56,12 +56,6 @@
     <Compile Include="Logger\_Tests\TestWrapper_NET.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PlcTask.TcTTO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="TESTS.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="StringBuilder\_Interfaces\ILimitedStringBuilder.TcIO">
       <SubType>Code</SubType>
     </Compile>
