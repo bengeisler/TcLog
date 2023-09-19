@@ -102,6 +102,7 @@ PROPERTY Done : BOOL
     <Method Name="ReplaceFormatPlaceholder" Id="{0cd85094-5af1-4c37-9111-0c2d17463a35}">
       <Declaration><![CDATA[// Replaces placeholders in format string by the actual time values.
 {attribute 'hide_all_locals'}
+{attribute 'hide'}
 METHOD PRIVATE ReplaceFormatPlaceholder : STRING
 VAR_INPUT
   format : STRING;
@@ -147,15 +148,16 @@ ReplaceFormatPlaceholder := Tc2_Standard.REPLACE(format, replaceString, length, 
     </Method>
     <Method Name="ToFormatString" Id="{8e5c5f29-5e99-4676-80b8-ceef73719a56}">
       <Declaration><![CDATA[/// Returns a formatted string containing the actual time information 
-/// Y : year
-/// M : month
-/// D : day
-/// h : hour 
-/// m : minute
-/// s : second
-/// i : millisecond
+/// - `Y` : year
+/// - `M` : month
+/// - `D` : day
+/// - `h` : hour 
+/// - `m` : minute
+/// - `s` : second
+/// - `i` : millisecond
 /// 
-/// Example: _YYMMDD-hh:mm:ss:iii_
+/// Example:    
+/// _YYMMDD-hh:mm:ss:iii_   
 /// => _20210812-12:30:22:123_
 {attribute 'hide_all_locals'}
 METHOD ToFormatString : Tc2_System.T_MaxString

@@ -18,7 +18,7 @@ And the output should look like this:
 
 As wrapper we use an function block that encapsulates `TcLog` and enforces the data input with the help of the inputs. Furthermore it implements the interface `ILog` which establishes the link between logger and base logger. 
 
-```
+```st
 FUNCTION_BLOCK UserLog IMPLEMENTS ILog
 VAR_INPUT
   Condition: BOOL;
@@ -57,7 +57,7 @@ The `.ToCustomFormat('')` method at the end of the chain causes the message to b
 
 The interface is implemented by passing the logger reference to the `TcLog` instance:
 
-```
+```st
 METHOD SetLogger : BOOL
 VAR_INPUT
   ref2Core : REFERENCE TO TcLogCore;
@@ -70,7 +70,7 @@ _logger.SetLogger(ref2Core);
 
 Somewhere in our program `TcLogCore` is called cyclically. If there is more than one instance of it, we can tell our logger which instance we want via `.SetLogger(Instance)`. Otherwise the configuration of the logger singleton is used. 
 
-```
+```st
 VAR
   _newLogger: TcLogCore;
   _rTrigLog : R_TRIG;

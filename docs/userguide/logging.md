@@ -4,7 +4,7 @@ Next, we will look at the logging options of TcLog.
 ## Flexible logging
 TcLog implements a [StringBuilder](https://www.plccoder.com/fluent-code/) which makes it easy to build your own message text: 
 
-```
+```st
 VAR
     _logger: TcLog;
 	_myInt : INT := 10;
@@ -29,7 +29,7 @@ The methods `Debug`, `Info`, `Warning`, `Error` and `Fatal` log the message with
 ## Conditional logging
 The most common use of logging will be in the form `IF ... THEN log() END_IF`. Therefore this query is already integrated in TcLog:
 
-```
+```st
 VAR
     _logger: TcLog;
 	_triggerLogging : R_TRIG;
@@ -45,7 +45,7 @@ _logger
 ## Logging on rising/falling edges
 Since a log message is usually to be sent once in the event of a *status change*, TcLog also provides a block for this purpose: `TcLogTrig`. In contrast to `TcLog`, a separate instance must be created for each use of this block, since the edge state is stored internally. The conditional execution can thus be further simplified:
 
-```
+```st
 VAR
 	_loggerTrig : TcLogTRIG;
     _log : BOOL;
@@ -61,9 +61,9 @@ Likewise, logging can be triggered on falling edges with `OnFallingEdge(cond)`.
 ## Use of multiple loggers
 Even though the logger was primarily designed as a singleton, it is possible to use multiple loggers. For example, sensor data can be collected cyclically and stored in a separate log file. To add another logger, an instance of `TcLogCore` must be created. This is then bound to the desired `TcLog` instance:
 
-```
+```st
 VAR
-	_newLogger: TcLogCore;
+	_newLogger: TcLogCore(bufferSize := 100 * (MAX_STRING_LENGTH + Constants.FifoOverhead));
 	_logger: TcLog;
 	_myInt : INT := 10;
 END_VAR

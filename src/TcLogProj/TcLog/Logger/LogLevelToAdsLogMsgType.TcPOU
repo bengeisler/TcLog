@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="LogLevelToAdsLogMsgType" Id="{c5255ff0-b51b-42de-ab62-e7b30a9b316a}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION INTERNAL LogLevelToAdsLogMsgType : DWORD
+    <Declaration><![CDATA[// Converts TcLog.LogLevels into Tc2_System.ADSLOG_MSGTYPEs.
+{attribute 'hide'}
+FUNCTION INTERNAL LogLevelToAdsLogMsgType : DWORD
 VAR_INPUT
   logLevel : LogLevels;
 END_VAR

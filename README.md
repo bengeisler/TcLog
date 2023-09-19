@@ -5,9 +5,10 @@
 It's usage is as simple as this: 
 
 Configure the core logger in your project:
-```
+
+```st
 VAR
-  _coreLogger : TcLogCore(bufferSize := 100 * SIZEOF(BYTE) * MAX_STRINGLENGTH);
+  _coreLogger : TcLogCore(bufferSize := 100 * (MAX_STRINGLENGTH + FifoOverhead));
 END_VAR
 
 _coreLogger
@@ -16,8 +17,10 @@ _coreLogger
   .MinimumLevel(LogLevels.Debug)
   .RunLogger();
 ```
+
 Then, maybe in a different POU, use `TcLog` to log messages:
-```
+
+```st
 VAR
   _logger: TcLog;
   _myInt : INT := 10;
@@ -31,6 +34,7 @@ _logger
   .AppendVariable(_myVarInfo, _myInt)
   .Error(''); 
 ```
+
 This will log both messages to both the ADS output and the file system.
 
 🚀 **Features** 🚀

@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="AnyToString" Id="{28d90234-855d-4077-b80b-97db8a8bae81}" SpecialFunc="None">
-    <Declaration><![CDATA[// Converts value of ANY to String.
+    <Declaration><![CDATA[/// Converts value of input data to string, where the input type can be any of 
+/// the standard data types.
 FUNCTION AnyToString : Tc2_System.T_MaxString
 VAR_INPUT
+  /// Input data
   data : ANY;
 END_VAR
 VAR

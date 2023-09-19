@@ -10,7 +10,7 @@ The message format can be adapted with several methods of `TcLogCore` that are d
 ### Including the instance path in the log message
 TcLog offers with `.IncludeInstancePath()` the possibility to include the location where the message was triggered into the message text:
 
-```
+```st
 _coreLogger
   .WriteToAds()
   .IncludeInstancePath()
@@ -25,7 +25,7 @@ _logger.Error('This is an error message.');
 ## Log to ADS output
 When adding the method `.WriteToAds()` to `TcLogCore`, the log messages are sent to the ADS output:
 
-```
+```st
 _coreLogger
     .WriteToAds()
     .RunLogger();
@@ -34,7 +34,7 @@ _coreLogger
 ## Log to file system
 TcLog brings the option to store logs in the file system in the form of text files. This option can be applied to `TcLogCore` via the method `.WriteToFile(path, filename)`: 
 
-```
+```st
 _coreLogger
   .IncludeInstancePath()
   .MinimumLevel(LogLevels.Warning)
@@ -87,7 +87,7 @@ After the configuration is complete, the logger is started with the method `RunL
 ## Using different verbosity levels
 Different scenarios may require different logging strategies. For example, you may want to log all messages with a log level of `Error` or higher in production, but all messages with a log level of `Debug` or higher in development. You can achieve this like this:
 
-```
+```st
 VAR
     _coreLogger : TcLogCore(bufferSize := 100 * SIZEOF(BYTE) * MAX_STRINGLENGTH);
     _logger : TcLog;

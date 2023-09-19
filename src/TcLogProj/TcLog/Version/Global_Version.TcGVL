@@ -4,6 +4,7 @@
     <Declaration><![CDATA[{attribute 'TcGenerated'}
 {attribute 'no-analysis'}
 {attribute 'linkalways'}
+{attribute 'hide'}
 // This function has been automatically generated from the project information.
 VAR_GLOBAL CONSTANT
 	{attribute 'const_non_replaced'}

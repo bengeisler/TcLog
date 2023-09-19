@@ -42,6 +42,7 @@ END_VAR
       <Declaration><![CDATA[// Builds logging configuration.
 // Required to provide a fluent interface.
 // Has to be called at the begin of each method that configures the logger.
+{attribute 'hide'}
 METHOD PRIVATE BuildLoggingConfiguration : BOOL
 ]]></Declaration>
       <Implementation>
@@ -125,7 +126,8 @@ PROPERTY Error : REFERENCE TO Error
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	bufferSize : DINT; // Buffer size for string buffer
+  /// Initial buffer size for the internal log message buffer
+	bufferSize : DINT;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -134,7 +136,8 @@ _logCache.Init(DINT_TO_UDINT(bufferSize));]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_reinit" Id="{7a4a2895-bc8f-4c5f-ae34-d121f2978f2a}">
-      <Declaration><![CDATA[METHOD FB_reinit : BOOL
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD FB_reinit : BOOL
 VAR_INPUT
 	bufferSize : DINT; // Buffer size for string buffer
 END_VAR
@@ -261,6 +264,7 @@ MinimumLevel REF=THIS^;]]></ST>
       <Declaration><![CDATA[// Checks the specified rolling interval for the file name.
 // Generates new file name if rolling intervall exceeded.
 {attribute 'hide_all_locals'}
+{attribute 'hide'}
 METHOD PRIVATE RollingIntervalReached : BOOL
 VAR_INPUT
 	currentUtcTime : Tc2_Utilities.TIMESTRUCT;  // Current system time as utc

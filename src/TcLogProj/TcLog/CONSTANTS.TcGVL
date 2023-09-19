@@ -3,7 +3,8 @@
   <GVL Name="Constants" Id="{98d3c9eb-cf89-468b-a8b6-e3b4bfd38910}" ParameterList="True">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL CONSTANT
-	BufferSize : INT := (100 * UDINT_TO_INT(Tc2_System.MAX_STRING_LENGTH));
+  FifoOverhead : INT := 10;
+	BufferSize : INT := (100 * (UDINT_TO_INT(Tc2_System.MAX_STRING_LENGTH) + FifoOverhead));
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

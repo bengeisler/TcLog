@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="DynamicStringBuffer" Id="{660876ea-7fc3-4366-aa3c-17474f122e75}" SpecialFunc="None">
-    <Declaration><![CDATA[{attribute 'hide_all_locals'}
+    <Declaration><![CDATA[//{attribute 'hide_all_locals'}
 FUNCTION_BLOCK INTERNAL DynamicStringBuffer
 VAR_OUTPUT
   Error : Error; // Error information of this FB
@@ -46,9 +46,9 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_dynamicMemoryBuffer.CreateBuffer(nSize:=bufferSize*SIZEOF(BYTE), bReset:=TRUE);
+        <ST><![CDATA[_dynamicMemoryBuffer.CreateBuffer(nSize:=bufferSize, bReset:=TRUE);
 _fifo.pBuffer := _dynamicMemoryBuffer.pBuffer;
-_fifo.cbBuffer := BufferSize*SIZEOF(BYTE);]]></ST>
+_fifo.cbBuffer := bufferSize;]]></ST>
       </Implementation>
     </Method>
     <Property Name="Busy" Id="{b23806d3-8c54-456d-b666-1c83eaca7b17}">
@@ -279,7 +279,7 @@ VAR
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[requiredSize := _fifo.cbSize + Tc2_System.MAX_STRING_LENGTH;
+        <ST><![CDATA[requiredSize := _fifo.cbSize + (Tc2_System.MAX_STRING_LENGTH + INT_TO_UDINT(Constants.FifoOverhead));
 
 IF requiredSize > _fifo.cbBuffer THEN
   _dynamicMemoryBuffer.Resize(nSize := requiredSize*SIZEOF(BYTE), bPreserve:=TRUE, bReset:=TRUE);

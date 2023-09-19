@@ -78,7 +78,8 @@ AppendString REF= THIS^;]]></ST>
       <Declaration><![CDATA[/// Appends information about the given variable to the log string. 
 /// This method can be chained.
 /// Example: 
-/// ```
+
+/// ```st
 /// VAR
 ///   Logger: TcLog;
 ///    myInt : INT := 10;
@@ -86,6 +87,7 @@ AppendString REF= THIS^;]]></ST>
 /// END_VAR
 /// Logger.AppendVariable(myVarInfo, myInt);
 /// ```
+///
 METHOD AppendVariable : REFERENCE TO TcLog
 VAR_INPUT
   /// [VAR_INFO](https://infosys.beckhoff.com/index.php?content=../content/1031/tc3_plc_intro/3527777675.html&id=) of variable to be appended to log string.
@@ -255,6 +257,7 @@ END_VAR
     <Method Name="ShortenInstancePath" Id="{b60d89ff-ac15-445d-94fa-fd767b6d287a}">
       <Declaration><![CDATA[// Helper method. Shortens the instance path by omitting superfluent information
 // such as concrete logger instance and plc/project names.
+{attribute 'hide'}
 METHOD PRIVATE ShortenInstancePath : Tc2_System.T_MaxString
 VAR_INPUT
   path : Tc2_System.T_MaxString; // Instance path to be shortened.
