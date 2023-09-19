@@ -28,6 +28,9 @@ VAR
   Persist_long_error_message_run : BOOL;
   Persist_long_error_message_data : T_MaxString;
   
+  Linebreak_is_included_when_log_message_has_maximum_length_run : BOOL;
+  Linebreak_is_included_when_log_message_has_maximum_length_data : T_MaxString;
+  
   Do_not_persist_logs_below_log_level_run : BOOL;
   
   Log_message_contains_instance_path_run : BOOL;
@@ -95,8 +98,17 @@ END_IF
 IF Persist_long_error_message_run THEN
   Persist_long_error_message_run := FALSE;
   _logger
-    .Error(Persist_long_error_message_data);
+    .ToCustomFormat(Persist_long_error_message_data);
 END_IF
+
+IF Linebreak_is_included_when_log_message_has_maximum_length_run THEN
+  Linebreak_is_included_when_log_message_has_maximum_length_run := FALSE;
+  _logger
+    .ToCustomFormat(Linebreak_is_included_when_log_message_has_maximum_length_data);
+  _logger
+    .ToCustomFormat(Linebreak_is_included_when_log_message_has_maximum_length_data);
+END_IF
+
 
 IF Do_not_persist_logs_below_log_level_run THEN
   Do_not_persist_logs_below_log_level_run := FALSE;

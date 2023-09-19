@@ -81,7 +81,7 @@ namespace TcLogTest.NET
         [Fact]
         public async void Persist_long_error_message()
         {
-            string message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquet orci sit amet massa placerat faucibus. Sed interdum fermentum eros. Maecenas accumsan rutrum ex, non varius orci scelerisque ac. Donec qui";
+            string message = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata";
             uint hRun = fixture.TcClient.CreateVariableHandle(mut + ".Persist_long_error_message_run");
             uint hData = fixture.TcClient.CreateVariableHandle(mut + ".Persist_long_error_message_data");
 
@@ -89,12 +89,31 @@ namespace TcLogTest.NET
             fixture.TcClient.WriteAny(hRun, true);
             await Task.Delay(1000);
             var files = Directory.GetFiles(path);
-            var fileContent = File.ReadAllLines(files[0]);
+            var fileContent = File.ReadAllText(files[0]);
 
-            Assert.Contains(message, fileContent[0]);
-            Assert.Contains("Error", fileContent[0]);
+            Assert.Equal($"{message[..254]}\r\n", fileContent);
 
-            //foreach (var f in files) File.Delete(f);
+            foreach (var f in files) File.Delete(f);
+            fixture.TcClient.DeleteVariableHandle(hRun);
+            fixture.TcClient.DeleteVariableHandle(hData);
+        }
+
+        [Fact]
+        public async void Linebreak_is_included_when_log_message_has_maximum_length()
+        {
+            string message = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata";
+            uint hRun = fixture.TcClient.CreateVariableHandle(mut + ".Linebreak_is_included_when_log_message_has_maximum_length_run");
+            uint hData = fixture.TcClient.CreateVariableHandle(mut + ".Linebreak_is_included_when_log_message_has_maximum_length_data");
+
+            fixture.TcClient.WriteAny(hData, message);
+            fixture.TcClient.WriteAny(hRun, true);
+            await Task.Delay(1000);
+            var files = Directory.GetFiles(path);
+            var fileContent = File.ReadAllText(files[0]);
+
+            Assert.Equal($"{message[..254]}\r\n{message[..254]}\r\n", fileContent);
+
+            foreach (var f in files) File.Delete(f);
             fixture.TcClient.DeleteVariableHandle(hRun);
             fixture.TcClient.DeleteVariableHandle(hData);
         }

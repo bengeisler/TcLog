@@ -25,7 +25,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[ResizeFifoBufferIfNecessary();
-_fifo.A_AddTail(putValue := Tc2_Standard.CONCAT(text, '$N')); ]]></ST>
+_fifo.A_AddTail(putValue := Tc2_Standard.CONCAT(Tc2_Standard.LEFT(text, 254), '$N')); ]]></ST>
       </Implementation>
     </Method>
     <Method Name="AddString" Id="{6405c45a-0cb8-4431-a2bb-9cf39dc1e728}">

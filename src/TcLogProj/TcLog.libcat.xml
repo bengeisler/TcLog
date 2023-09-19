@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LibraryCategories xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="LibraryCategories.xsd">
+	<LibraryCategory>
+		<Id>a008f0f9-813d-4727-ad9c-d60bc9412b1d</Id>
+		<Version>1.0.0.0</Version>
+		<DefaultName>TcLog</DefaultName>
+	</LibraryCategory>
+</LibraryCategories>

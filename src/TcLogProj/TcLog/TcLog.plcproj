@@ -23,6 +23,16 @@
     <DefaultNamespace>TcLog</DefaultNamespace>
     <Author>Benedikt Geisler</Author>
     <Description>TcLog provides logging functionality to TwinCAT.</Description>
+    <LibraryCategories>
+      <LibraryCategory>
+        <Id>{a008f0f9-813d-4727-ad9c-d60bc9412b1d}</Id>
+        <Version>1.0.0.0</Version>
+        <DefaultName>TcLog</DefaultName>
+      </LibraryCategory>
+    </LibraryCategories>
+    <SelectedLibraryCategories>
+      <Id>{a008f0f9-813d-4727-ad9c-d60bc9412b1d}</Id>
+    </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Logger\_Tests" />
