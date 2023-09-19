@@ -118,7 +118,7 @@
 <p>Next, we will look at the logging options of TcLog.</p>
 <h2 id="flexible-logging">Flexible logging</h2>
 <p>TcLog implements a <a href="https://www.plccoder.com/fluent-code/">StringBuilder</a> which makes it easy to build your own message text:</p>
-<pre><code>VAR
+<pre><code class="lang-st">VAR
     _logger: TcLog;
 	_myInt : INT := 10;
 	_myVarInfo : __SYSTEM.VAR_INFO := __VARINFO(_myInt);
@@ -137,7 +137,7 @@ _logger
 <p>The methods <code>Debug</code>, <code>Info</code>, <code>Warning</code>, <code>Error</code> and <code>Fatal</code> log the message with the respective log level. If you only want to log a simple string, you can pass it directly to the respective method, e.g. <code>_logger.Debug('This is a debug message.')</code>.</p>
 <h2 id="conditional-logging">Conditional logging</h2>
 <p>The most common use of logging will be in the form <code>IF ... THEN log() END_IF</code>. Therefore this query is already integrated in TcLog:</p>
-<pre><code>VAR
+<pre><code class="lang-st">VAR
     _logger: TcLog;
 	_triggerLogging : R_TRIG;
 	_log : BOOL;
@@ -150,7 +150,7 @@ _logger
 </code></pre>
 <h2 id="logging-on-risingfalling-edges">Logging on rising/falling edges</h2>
 <p>Since a log message is usually to be sent once in the event of a <em>status change</em>, TcLog also provides a block for this purpose: <code>TcLogTrig</code>. In contrast to <code>TcLog</code>, a separate instance must be created for each use of this block, since the edge state is stored internally. The conditional execution can thus be further simplified:</p>
-<pre><code>VAR
+<pre><code class="lang-st">VAR
 	_loggerTrig : TcLogTRIG;
     _log : BOOL;
 END_VAR
@@ -162,8 +162,8 @@ _loggerTrig
 <p>Likewise, logging can be triggered on falling edges with <code>OnFallingEdge(cond)</code>.</p>
 <h2 id="use-of-multiple-loggers">Use of multiple loggers</h2>
 <p>Even though the logger was primarily designed as a singleton, it is possible to use multiple loggers. For example, sensor data can be collected cyclically and stored in a separate log file. To add another logger, an instance of <code>TcLogCore</code> must be created. This is then bound to the desired <code>TcLog</code> instance:</p>
-<pre><code>VAR
-	_newLogger: TcLogCore;
+<pre><code class="lang-st">VAR
+	_newLogger: TcLogCore(bufferSize := 100 * (MAX_STRING_LENGTH + Constants.FifoOverhead));
 	_logger: TcLog;
 	_myInt : INT := 10;
 END_VAR

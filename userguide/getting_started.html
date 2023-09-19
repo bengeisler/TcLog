@@ -123,8 +123,8 @@
 <p>You would typically call <code>TcLogCore</code> once in your project and configure the logger behaviour. Then, you would use <code>TcLog</code> to log messages. Each call of <code>TcLog</code> then uses the same configuration specified with <code>TcLogCore</code>. While there is normally only one instance of <code>TcLogCore</code> in your project, you can create as many instances of <code>TcLog</code> as you like, typically one in each POU. Both <code>TcLog</code> and <code>TcLogCore</code> provide fluent interfaces to make configuration and log message creation as easy as possible.</p>
 <h2 id="example-usage">Example usage</h2>
 <p>Configure the core logger in your project:</p>
-<pre><code>VAR
-	_coreLogger : TcLogCore(bufferSize := 100 * SIZEOF(BYTE) * MAX_STRINGLENGTH);
+<pre><code class="lang-st">VAR
+	_coreLogger : TcLogCore(bufferSize := 100 * (MAX_STRINGLENGTH + FifoOverhead));
 END_VAR
 
 _coreLogger
@@ -134,7 +134,7 @@ _coreLogger
 	.RunLogger();
 </code></pre>
 <p>Then, maybe in a different POU, use <code>TcLog</code> to log messages:</p>
-<pre><code>VAR
+<pre><code class="lang-st">VAR
 	_logger : TcLog;
 END_VAR
 

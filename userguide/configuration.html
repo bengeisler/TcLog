@@ -122,7 +122,7 @@
 <p><code>TcLogCore</code> can be configured to use an arbitrary delimiter between the components of the log entry with <code>.SetDelimiter('|')</code>.</p>
 <h3 id="including-the-instance-path-in-the-log-message">Including the instance path in the log message</h3>
 <p>TcLog offers with <code>.IncludeInstancePath()</code> the possibility to include the location where the message was triggered into the message text:</p>
-<pre><code>_coreLogger
+<pre><code class="lang-st">_coreLogger
   .WriteToAds()
   .IncludeInstancePath()
   .MinimumLevel(LogLevels.Warning)
@@ -133,13 +133,13 @@ _logger.Error('This is an error message.');
 <p><img src="https://benediktgeisler.de/InstancePath.png" alt="Including the instance path" title="Including the instance path"></p>
 <h2 id="log-to-ads-output">Log to ADS output</h2>
 <p>When adding the method <code>.WriteToAds()</code> to <code>TcLogCore</code>, the log messages are sent to the ADS output:</p>
-<pre><code>_coreLogger
+<pre><code class="lang-st">_coreLogger
     .WriteToAds()
     .RunLogger();
 </code></pre>
 <h2 id="log-to-file-system">Log to file system</h2>
 <p>TcLog brings the option to store logs in the file system in the form of text files. This option can be applied to <code>TcLogCore</code> via the method <code>.WriteToFile(path, filename)</code>:</p>
-<pre><code>_coreLogger
+<pre><code class="lang-st">_coreLogger
   .IncludeInstancePath()
   .MinimumLevel(LogLevels.Warning)
   .WriteToFile('c:\logs\', 'test.txt')
@@ -183,7 +183,7 @@ _loggerTrig
 <p>After the configuration is complete, the logger is started with the method <code>RunLogger()</code> of <code>TcLogCore</code>.</p>
 <h2 id="using-different-verbosity-levels">Using different verbosity levels</h2>
 <p>Different scenarios may require different logging strategies. For example, you may want to log all messages with a log level of <code>Error</code> or higher in production, but all messages with a log level of <code>Debug</code> or higher in development. You can achieve this like this:</p>
-<pre><code>VAR
+<pre><code class="lang-st">VAR
     _coreLogger : TcLogCore(bufferSize := 100 * SIZEOF(BYTE) * MAX_STRINGLENGTH);
     _logger : TcLog;
     _isDevelopment : BOOL := TRUE;

@@ -100,9 +100,6 @@
                             <a class="">Logger</a>
                               
                               <ul class="nav level3">
-                                <li class="">
-                                  <a href="../../TcLog/Logger/LogLevelToAdsLogMsgType.html" title="LogLevelToAdsLogMsgType" class="">LogLevelToAdsLogMsgType</a>
-                                </li>
                                 <li class="active">
                                   <a href="../../TcLog/Logger/TcLog.html" title="TcLog" class="active">TcLog</a>
                                 </li>
@@ -154,18 +151,6 @@
                               </ul>  </li>
                           <li class="">
                             <span class="expand-stub"></span>
-                            <a class="">StringBuilder</a>
-                              
-                              <ul class="nav level3">
-                                <li class="">
-                                  <a href="../../TcLog/StringBuilder/_Interfaces/ILimitedStringBuilder.html" title="ILimitedStringBuilder" class="">ILimitedStringBuilder</a>
-                                </li>
-                                <li class="">
-                                  <a href="../../TcLog/StringBuilder/_Interfaces/IStringBuilder.html" title="IStringBuilder" class="">IStringBuilder</a>
-                                </li>
-                              </ul>  </li>
-                          <li class="">
-                            <span class="expand-stub"></span>
                             <a class="">Utils</a>
                               
                               <ul class="nav level3">
@@ -174,18 +159,6 @@
                                 </li>
                                 <li class="">
                                   <a href="../../TcLog/Utils/DateTime.html" title="DateTime" class="">DateTime</a>
-                                </li>
-                                <li class="">
-                                  <a href="../../TcLog/Utils/GetFileAgeInSeconds.html" title="GetFileAgeInSeconds" class="">GetFileAgeInSeconds</a>
-                                </li>
-                              </ul>  </li>
-                          <li class="">
-                            <span class="expand-stub"></span>
-                            <a class="">Version</a>
-                              
-                              <ul class="nav level3">
-                                <li class="">
-                                  <a href="../../TcLog/Version/Global_Version.html" title="Global_Version" class="">Global_Version</a>
                                 </li>
                               </ul>  </li>
                         </ul>  </li>
@@ -274,7 +247,7 @@ This method can be chained.</p>
 <p>Appends information about the given variable to the log string.
 This method can be chained.
 Example:</p>
-<pre><code>VAR
+<pre><code class="lang-st">VAR
   Logger: TcLog;
    myInt : INT := 10;
   myVarInfo : __SYSTEM.VAR_INFO := __VARINFO(myInt);
@@ -485,7 +458,8 @@ loggers with different configurations in one project.</p>
 <p><a name="ShortenInstancePath"></a></p>
 <h4 id="TcLog.TcLog.ShortenInstancePath" data-uid="TcLog.TcLog.ShortenInstancePath">ShortenInstancePath</h4>
 <h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">METHOD PRIVATE ShortenInstancePath (
+<pre><code class="lang-st">{attribute 'hide'}
+METHOD PRIVATE ShortenInstancePath (
  path : Tc2_System.T_MaxString) : Tc2_System.T_MaxString
 </code></pre>
 <h5 class="parameters">Inputs</h5>

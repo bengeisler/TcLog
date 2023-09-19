@@ -101,9 +101,6 @@
                               
                               <ul class="nav level3">
                                 <li class="">
-                                  <a href="../../TcLog/Logger/LogLevelToAdsLogMsgType.html" title="LogLevelToAdsLogMsgType" class="">LogLevelToAdsLogMsgType</a>
-                                </li>
-                                <li class="">
                                   <a href="../../TcLog/Logger/TcLog.html" title="TcLog" class="">TcLog</a>
                                 </li>
                                 <li class="">
@@ -154,18 +151,6 @@
                               </ul>  </li>
                           <li class="">
                             <span class="expand-stub"></span>
-                            <a class="">StringBuilder</a>
-                              
-                              <ul class="nav level3">
-                                <li class="">
-                                  <a href="../../TcLog/StringBuilder/_Interfaces/ILimitedStringBuilder.html" title="ILimitedStringBuilder" class="">ILimitedStringBuilder</a>
-                                </li>
-                                <li class="">
-                                  <a href="../../TcLog/StringBuilder/_Interfaces/IStringBuilder.html" title="IStringBuilder" class="">IStringBuilder</a>
-                                </li>
-                              </ul>  </li>
-                          <li class="">
-                            <span class="expand-stub"></span>
                             <a class="">Utils</a>
                               
                               <ul class="nav level3">
@@ -174,18 +159,6 @@
                                 </li>
                                 <li class="active">
                                   <a href="../../TcLog/Utils/DateTime.html" title="DateTime" class="active">DateTime</a>
-                                </li>
-                                <li class="">
-                                  <a href="../../TcLog/Utils/GetFileAgeInSeconds.html" title="GetFileAgeInSeconds" class="">GetFileAgeInSeconds</a>
-                                </li>
-                              </ul>  </li>
-                          <li class="">
-                            <span class="expand-stub"></span>
-                            <a class="">Version</a>
-                              
-                              <ul class="nav level3">
-                                <li class="">
-                                  <a href="../../TcLog/Version/Global_Version.html" title="Global_Version" class="">Global_Version</a>
                                 </li>
                               </ul>  </li>
                         </ul>  </li>
@@ -247,6 +220,7 @@ PROPERTY Done : BOOL
 <h4 id="TcLog.DateTime.ReplaceFormatPlaceholder" data-uid="TcLog.DateTime.ReplaceFormatPlaceholder">ReplaceFormatPlaceholder</h4>
 <h5 class="decalaration">Declaration</h5>
 <pre><code class="lang-st">{attribute 'hide_all_locals'}
+{attribute 'hide'}
 METHOD PRIVATE ReplaceFormatPlaceholder (
  format : STRING,
  length : INT,
@@ -281,15 +255,18 @@ METHOD PRIVATE ReplaceFormatPlaceholder (
 </table>
 <p><a name="ToFormatString"></a></p>
 <h4 id="TcLog.DateTime.ToFormatString" data-uid="TcLog.DateTime.ToFormatString">ToFormatString</h4>
-<p>Returns a formatted string containing the actual time information
-Y : year
-M : month
-D : day
-h : hour
-m : minute
-s : second
-i : millisecond</p>
-<p>Example: <em>YYMMDD-hh:mm:ss:iii</em>
+<p>Returns a formatted string containing the actual time information</p>
+<ul>
+<li><code>Y</code> : year</li>
+<li><code>M</code> : month</li>
+<li><code>D</code> : day</li>
+<li><code>h</code> : hour</li>
+<li><code>m</code> : minute</li>
+<li><code>s</code> : second</li>
+<li><code>i</code> : millisecond</li>
+</ul>
+<p>Example:<br>
+<em>YYMMDD-hh:mm:ss:iii</em><br>
 =&gt; <em>20210812-12:30:22:123</em></p>
 <h5 class="decalaration">Declaration</h5>
 <pre><code class="lang-st">{attribute 'hide_all_locals'}

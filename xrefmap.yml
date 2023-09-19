@@ -16,33 +16,18 @@ references:
 - uid: TcLog.ErrorCodes
   name: ErrorCodes
   href: reference/TcLog/Logger/_DataTypes/ErrorCodes.html
-- uid: TcLog.GetFileAgeInSeconds
-  name: GetFileAgeInSeconds
-  href: reference/TcLog/Utils/GetFileAgeInSeconds.html
-- uid: TcLog.Global_Version
-  name: Global_Version
-  href: reference/TcLog/Version/Global_Version.html
-- uid: TcLog.ILimitedStringBuilder
-  name: ILimitedStringBuilder
-  href: reference/TcLog/StringBuilder/_Interfaces/ILimitedStringBuilder.html
 - uid: TcLog.ILog
   name: ILog
   href: reference/TcLog/Logger/_Interfaces/ILog.html
 - uid: TcLog.ILogCore
   name: ILogCore
   href: reference/TcLog/Logger/_Interfaces/ILogCore.html
-- uid: TcLog.IStringBuilder
-  name: IStringBuilder
-  href: reference/TcLog/StringBuilder/_Interfaces/IStringBuilder.html
 - uid: TcLog.LoggingConfiguration
   name: LoggingConfiguration
   href: reference/TcLog/Logger/_DataTypes/LoggingConfiguration.html
 - uid: TcLog.LogLevels
   name: LogLevels
   href: reference/TcLog/Logger/_DataTypes/LogLevels.html
-- uid: TcLog.LogLevelToAdsLogMsgType
-  name: LogLevelToAdsLogMsgType
-  href: reference/TcLog/Logger/LogLevelToAdsLogMsgType.html
 - uid: TcLog.PlcTask
   name: PlcTask
   href: reference/TcLog/PlcTask.html

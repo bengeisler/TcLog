@@ -35,19 +35,7 @@
       "output": {
         ".html": {
           "relative_path": "reference/TcLog/Constants.html",
-          "hash": "8pvKOaabZJCMJYHVviwx8TUxAI+RNWR8KuISfEnAelM="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "reference/TcLog/Logger/LogLevelToAdsLogMsgType.md",
-      "output": {
-        ".html": {
-          "relative_path": "reference/TcLog/Logger/LogLevelToAdsLogMsgType.html",
-          "hash": "ENO2vfosaJaJVObVDftFtMwT+wdAnr5xPpRJozbQnD0="
+          "hash": "8du+vHZZUi2iYgFHrHSGalZJm+0gHvK06DiSlHU2wDo="
         }
       },
       "is_incremental": false,
@@ -59,7 +47,7 @@
       "output": {
         ".html": {
           "relative_path": "reference/TcLog/Logger/TcLog.html",
-          "hash": "CdJguhizAKF5XVzsToP0inyHBZ40/jM63YGhdnSgu/A="
+          "hash": "fTokTFXHnahpXeAbg8R5p3lhJP/QZZJrWB5K6R7WC/4="
         }
       },
       "is_incremental": false,
@@ -71,7 +59,7 @@
       "output": {
         ".html": {
           "relative_path": "reference/TcLog/Logger/TcLogCore.html",
-          "hash": "NhE74ZDzeuIbLA/fQiYQgdft8ugh94M8kxfVq40cU8E="
+          "hash": "iSUUp0hqmlG4013E+oHLuA1ItXrePi+6W/YHIIqHZ98="
         }
       },
       "is_incremental": false,
@@ -83,7 +71,7 @@
       "output": {
         ".html": {
           "relative_path": "reference/TcLog/Logger/TcLogTrig.html",
-          "hash": "A4r/3J9yFFFNE+/wLwac96kIVhWSr16ghCLDof09Qn8="
+          "hash": "xkD9qNKA0FCFB8sdZvpF0YjK9YrR/wmV+yzWRXicbK8="
         }
       },
       "is_incremental": false,
@@ -95,7 +83,7 @@
       "output": {
         ".html": {
           "relative_path": "reference/TcLog/Logger/_DataTypes/Error.html",
-          "hash": "RbktJbQ0W57Uxy0QbdS1ZlUiublHV9XuNbEDJbYMIqA="
+          "hash": "POVBFEPw6y/15xmaF1stdSBqF9NfYaZ1anYhvtNn5dM="
         }
       },
       "is_incremental": false,
@@ -107,7 +95,7 @@
       "output": {
         ".html": {
           "relative_path": "reference/TcLog/Logger/_DataTypes/ErrorCodes.html",
-          "hash": "MZ3jpzgz34ewRlmrw/ShJDOlQeIabfXFV0A5+kMQkdQ="
+          "hash": "+yiiNd0tBbrAiFo7sVFr2YnHdDXuOXd5rX95uweJT/4="
         }
       },
       "is_incremental": false,
@@ -119,7 +107,7 @@
       "output": {
         ".html": {
           "relative_path": "reference/TcLog/Logger/_DataTypes/LogLevels.html",
-          "hash": "ZRaOKDn4p6DuurvOxbcQQz/82/mtZomUdeIIgvoQ4Sc="
+          "hash": "740dlFyiP6xfyi4I2FVodqOi2naLXjdxoyACIuizz9M="
         }
       },
       "is_incremental": false,
@@ -131,7 +119,7 @@
       "output": {
         ".html": {
           "relative_path": "reference/TcLog/Logger/_DataTypes/LoggingConfiguration.html",
-          "hash": "YeVPd+vjBSTmioH3zCvfvEYEO+8MSLBKaB/r7ZfOdDQ="
+          "hash": "hkTz6sWugdupL4Kuf3s0kB5agK5D8PLuscrITfQYYV8="
         }
       },
       "is_incremental": false,
@@ -143,7 +131,7 @@
       "output": {
         ".html": {
           "relative_path": "reference/TcLog/Logger/_DataTypes/RollingIntervals.html",
-          "hash": "EwS4gp1SgsoVR5dSaCYiY6ty4XNZS8HgFchOf4H4t1M="
+          "hash": "FVGwKV9vfU8G0oQDz/kK4N+GhKcULs4TorjZBniEq1Q="
         }
       },
       "is_incremental": false,
@@ -155,7 +143,7 @@
       "output": {
         ".html": {
           "relative_path": "reference/TcLog/Logger/_Interfaces/ILog.html",
-          "hash": "lxehkFSvRz+4PO6oin/rxDB/YoOl43JTriayh05zAX0="
+          "hash": "937qB53zaaRx3/qy1/NqGwCKqhXOKJl1tGs55rUnxEw="
         }
       },
       "is_incremental": false,
@@ -167,7 +155,7 @@
       "output": {
         ".html": {
           "relative_path": "reference/TcLog/Logger/_Interfaces/ILogCore.html",
-          "hash": "v1AzLObKjDvz3xLOi3k18Bdpn8awtPxcRVSfIH5chHY="
+          "hash": "rW7frSKPdngQaWPPSVM2hsCXi9exqg5TS1REQZ4bqBk="
         }
       },
       "is_incremental": false,
@@ -179,31 +167,7 @@
       "output": {
         ".html": {
           "relative_path": "reference/TcLog/PlcTask.html",
-          "hash": "mckXMSDfU3MYTTO/anCxBWYtU+j294Ccd55LY2EBgFY="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "reference/TcLog/StringBuilder/_Interfaces/ILimitedStringBuilder.md",
-      "output": {
-        ".html": {
-          "relative_path": "reference/TcLog/StringBuilder/_Interfaces/ILimitedStringBuilder.html",
-          "hash": "bXik+TYVneiZcu5Jv2xN4c9AzYBVZ8rHIJU1kVzgRww="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "reference/TcLog/StringBuilder/_Interfaces/IStringBuilder.md",
-      "output": {
-        ".html": {
-          "relative_path": "reference/TcLog/StringBuilder/_Interfaces/IStringBuilder.html",
-          "hash": "SP5UEj6qpfbpH54oThSmfYije/CBeAV+qDVj0OEAefM="
+          "hash": "aGfHXq8+jw8l5BFOsZTcgwWdkgIKpFXktMrg/5E1YTo="
         }
       },
       "is_incremental": false,
@@ -215,7 +179,7 @@
       "output": {
         ".html": {
           "relative_path": "reference/TcLog/TESTS.html",
-          "hash": "214rxl4Gb67dZp40FDMdqiEBXNhZZH1gCdy+mlSBn8I="
+          "hash": "vZFnEoZlwtd1EO2frAwq6RnmNKEXBFXGnemMSlAurX0="
         }
       },
       "is_incremental": false,
@@ -227,7 +191,7 @@
       "output": {
         ".html": {
           "relative_path": "reference/TcLog/Utils/AnyToString.html",
-          "hash": "Ziwkfez6KokpIkohx6Iw0ad+e1ZUoyoE+JrCvGL16fo="
+          "hash": "ivOBhKNq8aJcxg64qckS048UBBAoDCURDGq8lz7aWUI="
         }
       },
       "is_incremental": false,
@@ -239,31 +203,7 @@
       "output": {
         ".html": {
           "relative_path": "reference/TcLog/Utils/DateTime.html",
-          "hash": "nB4t/v1FjLa0CQQT8OxWCKGrIEWYwbdKlAYOwYgOoU4="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "reference/TcLog/Utils/GetFileAgeInSeconds.md",
-      "output": {
-        ".html": {
-          "relative_path": "reference/TcLog/Utils/GetFileAgeInSeconds.html",
-          "hash": "OYjjG5uuAbQe36j1rS8RM+K4TnkmYDI//amcQ9B/RG4="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "reference/TcLog/Version/Global_Version.md",
-      "output": {
-        ".html": {
-          "relative_path": "reference/TcLog/Version/Global_Version.html",
-          "hash": "7lhgw0xM/+AO8yx7PnCqP3NDzHcP09wJ8d6MZkqyk5E="
+          "hash": "LWTjTGFyiA7COooiVRvHcrXt3NbRZMeE0CHa8b0gXoQ="
         }
       },
       "is_incremental": false,
@@ -275,7 +215,7 @@
       "output": {
         ".html": {
           "relative_path": "userguide/configuration.html",
-          "hash": "pwbbiewwLNtLH0c1S2luuNBPnoQ/sfx5rH+EiVdoaHk="
+          "hash": "aloadS2kMB9Pp67R94CkNJjNoX6ZJrtQ56W5GOZBVvk="
         }
       },
       "is_incremental": false,
@@ -287,7 +227,7 @@
       "output": {
         ".html": {
           "relative_path": "userguide/customization.html",
-          "hash": "ppkAz36PQhyT6ghKthQVOxsWePw9IQu3gYFJtp9CYbA="
+          "hash": "O0DsceiIVEkGp50ZJJpp68oygg7mdiHZxPPBiQyEFFY="
         }
       },
       "is_incremental": false,
@@ -299,7 +239,7 @@
       "output": {
         ".html": {
           "relative_path": "userguide/getting_started.html",
-          "hash": "CnOZiVv/fYFX/PDN/b3iJ99AOXDmcTEC46pt3M1Y9fI="
+          "hash": "1N0g4UWfctIz0plbTSDbCH03EcY3a2YnwCbM5DKJ3Qw="
         }
       },
       "is_incremental": false,
@@ -347,7 +287,7 @@
       "output": {
         ".html": {
           "relative_path": "userguide/logging.html",
-          "hash": "r409tdg7m38EiJ+zpE7yeioncmq2pZ2ziq4wh9PzdcM="
+          "hash": "GNXgsn6XjIakPicKipJbGLr5C731vebtFD9TOj8g+4M="
         }
       },
       "is_incremental": false,
@@ -380,7 +320,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 29,
+          "total_file_count": 24,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
