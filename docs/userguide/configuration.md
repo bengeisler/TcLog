@@ -20,7 +20,7 @@ _coreLogger
 _logger.Error('This is an error message.');
 ```
 
-![Including the instance path](https://benediktgeisler.de/InstancePath.png "Including the instance path")
+![Including the instance path](https://www.benediktgeisler.de/InstancePath.png "Including the instance path")
 
 ## Log to ADS output
 When adding the method `.WriteToAds()` to `TcLogCore`, the log messages are sent to the ADS output:
@@ -46,7 +46,7 @@ _loggerTrig
   .Error('rTrig Test');
 ```
 
-![Logging to the file system](https://benediktgeisler.de/LogMessageInFiileSystem.png "Logging to the file system")
+![Logging to the file system](https://www.benediktgeisler.de/LogMessageInFiileSystem.png "Logging to the file system")
 
 ### Timestamp
 The file name is additionally prefixed with the creation date of the log file. The format of the date can be defined arbitrarily by means of a format string. Example: 
@@ -89,7 +89,7 @@ Different scenarios may require different logging strategies. For example, you m
 
 ```st
 VAR
-    _coreLogger : TcLogCore(bufferSize := 100 * SIZEOF(BYTE) * MAX_STRINGLENGTH);
+    _coreLogger : TcLogCore(bufferSize := 100 * (Tc2_System.MAX_STRING_LENGTH + Constants.FifoOverhead));
     _logger : TcLog;
     _isDevelopment : BOOL := TRUE;
 END_VAR

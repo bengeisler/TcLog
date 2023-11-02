@@ -6,7 +6,7 @@ VAR_GLOBAL CONSTANT
   /// Fifo overhead needed to manage the string buffer
   FifoOverhead : INT := 10;
   /// Buffer size of temporary buffer used to persist all log messages in one cycle. 
-	BufferSize : INT := (100 * (UDINT_TO_INT(Tc2_System.MAX_STRING_LENGTH) + FifoOverhead));
+	BufferSize : INT := (100 * (UDINT_TO_INT(Tc2_System.Tc2_System.MAX_STRING_LENGTH) + FifoOverhead));
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

@@ -4,8 +4,8 @@
     <Declaration><![CDATA[{attribute 'hide'}
 FUNCTION INTERNAL GetFileAgeInSeconds : DINT
 VAR_INPUT
-  CurrentUtcTime : Tc2_Utilities.T_FILETIME;
-  FindFileEntry : Tc2_Utilities.ST_FindFileEntry;
+  currentUtcTime : Tc2_Utilities.T_FILETIME;
+  findFileEntry : Tc2_Utilities.ST_FindFileEntry;
 END_VAR
 VAR
   _timeLastWriteAccess : Tc2_Utilities.T_ULARGE_INTEGER;
@@ -18,12 +18,12 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[// Local file time
-_fileTimeAsULINT.dwLowPart := CurrentUtcTime.dwLowDateTime;
-_fileTimeAsULINT.dwHighPart := CurrentUtcTime.dwHighDateTime;
+_fileTimeAsULINT.dwLowPart := currentUtcTime.dwLowDateTime;
+_fileTimeAsULINT.dwHighPart := currentUtcTime.dwHighDateTime;
 
 // Write access is UTC
-_timeLastWriteAccess.dwLowPart := FindFileEntry.lastWriteTime.dwLowDateTime;
-_timeLastWriteAccess.dwHighPart := FindFileEntry.lastWriteTime.dwHighDateTime;
+_timeLastWriteAccess.dwLowPart := findFileEntry.lastWriteTime.dwLowDateTime;
+_timeLastWriteAccess.dwHighPart := findFileEntry.lastWriteTime.dwHighDateTime;
 _fileTimeDifference := UInt64Sub64(_fileTimeAsULINT, _timeLastWriteAccess);
 
 GetFileAgeInSeconds := LREAL_TO_DINT(UINT64_TO_LREAL(_fileTimeDifference)/(OneSecondInOneHundredNanoSecondsIntervals));]]></ST>

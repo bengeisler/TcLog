@@ -30,7 +30,7 @@ VAR
 END_VAR
 VAR_STAT
   {attribute 'hide'}
-  _loggerSingletonInstance : ILogCore; // Wires up TcLog ("Client") to TcLogCore ("Server") (Singleton-Behaviour)
+  s_loggerSingletonInstance : ILogCore; // Wires up TcLog ("Client") to TcLogCore ("Server") (Singleton-Behaviour)
 END_VAR
 VAR CONSTANT
   InvalidLoggerReference : UDINT := 0;
@@ -208,7 +208,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_loggerSingletonInstance := ref2Core;]]></ST>
+        <ST><![CDATA[s_loggerSingletonInstance := ref2Core;]]></ST>
       </Implementation>
     </Method>
     <Method Name="InitializeLogData" Id="{b4d317d9-a916-4484-9cf0-3391543593aa}">
@@ -221,7 +221,7 @@ METHOD PRIVATE InitializeLogData : BOOL
   _logConditionSatisfied := TRUE;
   _logData := '';
   _logDataInitialized := TRUE;
-  IF _usedLogger = 0 THEN _usedLogger := _loggerSingletonInstance; END_IF
+  IF _usedLogger = 0 THEN _usedLogger := s_loggerSingletonInstance; END_IF
 END_IF]]></ST>
       </Implementation>
     </Method>

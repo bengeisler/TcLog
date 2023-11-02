@@ -3,7 +3,7 @@
   <POU Name="TestWrapper_NET" Id="{32780ead-f361-4f91-ae5e-047717d14d80}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TestWrapper_NET
 VAR
-  _coreLogger : TcLogCore(BufferSize:=50 * 50 * (UDINT_TO_DINT(MAX_STRING_LENGTH) + INT_TO_DINT(Constants.FifoOverhead)));
+  _coreLogger : TcLogCore(BufferSize:=50 * 50 * (UDINT_TO_DINT(Tc2_System.MAX_STRING_LENGTH) + INT_TO_DINT(Constants.FifoOverhead)));
   _logger : TcLog;
   _flushCache : BOOL;
   

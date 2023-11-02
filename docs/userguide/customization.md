@@ -105,7 +105,7 @@ _myLog(
 
 As soon as logging is triggered via `_log`, the csv file and the entries in it are created:
 
-![Custom logging](https://benediktgeisler.de/CustomLogging.png "Custom logging")
+![Custom logging](https://www.benediktgeisler.de/CustomLogging.png "Custom logging")
 
 ## Use of custom loggers
 `TcLogCore` implements the `ILogCore` interface which defines the `LogCustomFormat` and `LogStandardFormat` methods. 

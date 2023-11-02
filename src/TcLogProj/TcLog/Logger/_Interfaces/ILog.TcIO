@@ -6,7 +6,7 @@
     <Method Name="SetLogger" Id="{d997efda-3f08-4614-802a-e86242c0eb02}">
       <Declaration><![CDATA[METHOD SetLogger : BOOL
 VAR_INPUT
-    Ref2Core : ILogCore;
+    ref2Core : ILogCore;
 END_VAR
 ]]></Declaration>
     </Method>

@@ -10,7 +10,7 @@ Configure the core logger in your project:
 
 ```st
 VAR
-	_coreLogger : TcLogCore(bufferSize := 100 * (MAX_STRINGLENGTH + FifoOverhead));
+	_coreLogger : TcLogCore(bufferSize := 100 * (Tc2_System.MAX_STRING_LENGTH + Constants.FifoOverhead));
 END_VAR
 
 _coreLogger

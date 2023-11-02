@@ -18,7 +18,7 @@ _logger
 	.AppendVariable(_myVarInfo, _myInt)
 	.Error('');	
 ```
-![Using a StringBuilder to generate the message text](https://benediktgeisler.de/StringBuilder_in_message_text.png "Using a StringBuilder to generate the message text")
+![Using a StringBuilder to generate the message text](https://www.benediktgeisler.de/StringBuilder_in_message_text.png "Using a StringBuilder to generate the message text")
 
 Thus any amount of information can be appended to the message without having to implement `TcLog` with a large number of input parameters, since TwinCAT (at least in version before build 4026.0) does not allow optional input parameters. 
 
@@ -63,7 +63,7 @@ Even though the logger was primarily designed as a singleton, it is possible to 
 
 ```st
 VAR
-	_newLogger: TcLogCore(bufferSize := 100 * (MAX_STRING_LENGTH + Constants.FifoOverhead));
+	_newLogger: TcLogCore(bufferSize := 100 * (Tc2_System.MAX_STRING_LENGTH + Constants.FifoOverhead));
 	_logger: TcLog;
 	_myInt : INT := 10;
 END_VAR
