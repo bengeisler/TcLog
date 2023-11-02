@@ -1,23 +1,20 @@
 ﻿<!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <html>
-  
+
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>DateTime | html </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="DateTime | html ">
-    <meta name="generator" content="docfx 2.58.9.0">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>DateTime </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="DateTime ">
     
-    <link rel="shortcut icon" href="../../../favicon.ico">
-    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
-    <link rel="stylesheet" href="../../../styles/docfx.css">
-    <link rel="stylesheet" href="../../../styles/main.css">
-    <link rel="stylesheet" href="../../../styles/highlight-default.css">
-    <link rel="stylesheet" href="../../../styles/featherlight.min.css" type="text/css">
-    <meta property="docfx:navrel" content="../../../toc">
-    <meta property="docfx:tocrel" content="../../toc">
+      <link rel="shortcut icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../../styles/docfx.css">
+      <link rel="stylesheet" href="../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../toc">
+      <meta property="docfx:tocrel" content="../../toc">
     
     
     
@@ -25,7 +22,7 @@
   <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
-        
+
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
           <div class="container">
             <div class="navbar-header">
@@ -35,7 +32,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              
+
               <a class="navbar-brand" href="../../../index.html">
                 <img id="logo" class="svg" src="../../../logo.svg" alt="">
               </a>
@@ -46,7 +43,7 @@
                   <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
                 </div>
               </form>
-                
+
                 <ul class="nav level1 navbar-nav">
                       <li>
                           <a href="../../../userguide/installation.html" title="User guide">User guide</a>
@@ -54,10 +51,11 @@
                       <li>
                           <a href="../../../reference/TcLog/Constants.html" title="API Reference">API Reference</a>
                       </li>
-                </ul>    </div>
+                </ul>
+            </div>
           </div>
         </nav>
-        
+
         <div class="subnav navbar navbar-default">
           <div class="container hide-when-search" id="breadcrumb">
             <ul class="breadcrumb">
@@ -79,26 +77,27 @@
               </div>
               <div class="sidetoc">
                 <div class="toc" id="toc">
-                  
+
                   <ul class="nav level1">
                     <li class="">
                       <span class="expand-stub"></span>
                       <a class="">TcLog</a>
-                        
+
                         <ul class="nav level2">
                           <li class="">
                             <span class="expand-stub"></span>
                             <a class="">Constants</a>
-                              
+
                               <ul class="nav level3">
                                 <li class="">
                                   <a href="../../TcLog/Constants.html" title="Constants" class="">Constants</a>
                                 </li>
-                              </ul>  </li>
+                              </ul>
+                          </li>
                           <li class="">
                             <span class="expand-stub"></span>
                             <a class="">Logger</a>
-                              
+
                               <ul class="nav level3">
                                 <li class="">
                                   <a href="../../TcLog/Logger/TcLog.html" title="TcLog" class="">TcLog</a>
@@ -130,11 +129,12 @@
                                 <li class="">
                                   <a href="../../TcLog/Logger/_Interfaces/ILogCore.html" title="ILogCore" class="">ILogCore</a>
                                 </li>
-                              </ul>  </li>
+                              </ul>
+                          </li>
                           <li class="">
                             <span class="expand-stub"></span>
                             <a class="">Utils</a>
-                              
+
                               <ul class="nav level3">
                                 <li class="">
                                   <a href="../../TcLog/Utils/AnyToString.html" title="AnyToString" class="">AnyToString</a>
@@ -142,9 +142,22 @@
                                 <li class="active">
                                   <a href="../../TcLog/Utils/DateTime.html" title="DateTime" class="active">DateTime</a>
                                 </li>
-                              </ul>  </li>
-                        </ul>  </li>
-                  </ul>        </div>
+                              </ul>
+                          </li>
+                          <li class="">
+                            <span class="expand-stub"></span>
+                            <a class="">Version</a>
+
+                              <ul class="nav level3">
+                                <li class="">
+                                  <a href="../../TcLog/Version/Global_Version.html" title="Global_Version" class="">Global_Version</a>
+                                </li>
+                              </ul>
+                          </li>
+                        </ul>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -154,89 +167,86 @@
             <article class="content wrap" id="_content" data-uid="TcLog.DateTime">
 <h1 id="datetime">DateTime</h1>
 
-<h6><strong>Namespace</strong>: <a class="xref" href="DateTime.html">TcLog</a></h6>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">{attribute: 'hide_all_locals'}
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="DateTime.html">TcLog</a></dd></dl>
+  
+  </div>
+Generate time data in different formats.
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">{attribute: 'hide_all_locals'}
 FUNCTION_BLOCK DateTime
-</code></pre>
-<p>Generate time data in different formats.</p>
-<h3 id="properties">Properties</h3>
-<p><a name="AsLocalFileTime"></a></p>
-<h4 id="TcLog.DateTime.AsLocalFileTime" data-uid="TcLog.DateTime.AsLocalFileTime">AsLocalFileTime</h4>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">{attribute 'monitoring':='variable'}
-PROPERTY AsLocalFileTime : Tc2_Utilities.T_FILETIME
-</code></pre>
+</code></pre></div>
+<h2 class="section" id="properties">Properties</h2>
+<h3 id="TcLog_DateTime_AsLocalFileTime" data-uid="TcLog.DateTime.AsLocalFileTime">
+AsLocalFileTime
+</h3><a name="AsLocalFileTime"></a>
 <p>Returns local time as <code>Tc2_Utilities.T_FILETIME</code>.</p>
-<p><a name="AsLocalSystemTime"></a></p>
-<h4 id="TcLog.DateTime.AsLocalSystemTime" data-uid="TcLog.DateTime.AsLocalSystemTime">AsLocalSystemTime</h4>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">{attribute 'monitoring':='variable'}
-PROPERTY AsLocalSystemTime : Tc2_Utilities.TIMESTRUCT
-</code></pre>
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">{attribute 'monitoring':='variable'}
+PROPERTY AsLocalFileTime : Tc2_Utilities.T_FILETIME
+</code></pre></div>
+<h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt>Tc2_Utilities.T_FILETIME</dt>
+    <dd></dd>
+  </dl>
+<h3 id="TcLog_DateTime_AsLocalSystemTime" data-uid="TcLog.DateTime.AsLocalSystemTime">
+AsLocalSystemTime
+</h3><a name="AsLocalSystemTime"></a>
 <p>Returns local time as <code>Tc2_Utilities.TIMESTRUCT</code>.</p>
-<p><a name="AsLocalSystemTimeString"></a></p>
-<h4 id="TcLog.DateTime.AsLocalSystemTimeString" data-uid="TcLog.DateTime.AsLocalSystemTimeString">AsLocalSystemTimeString</h4>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">{attribute 'monitoring':='variable'}
-PROPERTY AsLocalSystemTimeString : Tc2_System.T_MAXSTRING
-</code></pre>
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">{attribute 'monitoring':='variable'}
+PROPERTY AsLocalSystemTime : Tc2_Utilities.TIMESTRUCT
+</code></pre></div>
+<h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt>Tc2_Utilities.TIMESTRUCT</dt>
+    <dd></dd>
+  </dl>
+<h3 id="TcLog_DateTime_AsLocalSystemTimeString" data-uid="TcLog.DateTime.AsLocalSystemTimeString">
+AsLocalSystemTimeString
+</h3><a name="AsLocalSystemTimeString"></a>
 <p>Returns local time as string.</p>
-<p><a name="AsUtcFileTime"></a></p>
-<h4 id="TcLog.DateTime.AsUtcFileTime" data-uid="TcLog.DateTime.AsUtcFileTime">AsUtcFileTime</h4>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">{attribute 'monitoring':='variable'}
-PROPERTY AsUtcFileTime : Tc2_Utilities.T_FILETIME
-</code></pre>
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">{attribute 'monitoring':='variable'}
+PROPERTY AsLocalSystemTimeString : Tc2_System.T_MAXSTRING
+</code></pre></div>
+<h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt>Tc2_System.T_MAXSTRING</dt>
+    <dd></dd>
+  </dl>
+<h3 id="TcLog_DateTime_AsUtcFileTime" data-uid="TcLog.DateTime.AsUtcFileTime">
+AsUtcFileTime
+</h3><a name="AsUtcFileTime"></a>
 <p>Returns UTC time as <code>Tc2_Utilities.T_FILETIME</code>.</p>
-<p><a name="Done"></a></p>
-<h4 id="TcLog.DateTime.Done" data-uid="TcLog.DateTime.Done">Done</h4>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">{attribute 'monitoring':='call'}
-PROPERTY Done : BOOL
-</code></pre>
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">{attribute 'monitoring':='variable'}
+PROPERTY AsUtcFileTime : Tc2_Utilities.T_FILETIME
+</code></pre></div>
+<h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt>Tc2_Utilities.T_FILETIME</dt>
+    <dd></dd>
+  </dl>
+<h3 id="TcLog_DateTime_Done" data-uid="TcLog.DateTime.Done">
+Done
+</h3><a name="Done"></a>
 <p>When calling <code>DateTime</code> the first time, it takes some time until all time and timezone information is available.
 <code>Done</code> is <code>TRUE</code> for one cycle, once all the data is ready.</p>
-<h3 id="methods">Methods</h3>
-<p><a name="ReplaceFormatPlaceholder"></a></p>
-<h4 id="TcLog.DateTime.ReplaceFormatPlaceholder" data-uid="TcLog.DateTime.ReplaceFormatPlaceholder">ReplaceFormatPlaceholder</h4>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">{attribute 'hide_all_locals'}
-{attribute 'hide'}
-METHOD PRIVATE ReplaceFormatPlaceholder (
- format : STRING,
- length : INT,
- timeType : STRING(1)) : STRING
-</code></pre>
-<h5 class="parameters">Inputs</h5>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Type</th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><a name="format"></a>format</td>
-<td style="text-align: left;">STRING</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;"><a name="length"></a>length</td>
-<td style="text-align: left;">INT</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;"><a name="timeType"></a>timeType</td>
-<td style="text-align: left;">STRING(1)</td>
-<td style="text-align: left;"></td>
-</tr>
-</tbody>
-</table>
-<p><a name="ToFormatString"></a></p>
-<h4 id="TcLog.DateTime.ToFormatString" data-uid="TcLog.DateTime.ToFormatString">ToFormatString</h4>
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">{attribute 'monitoring':='call'}
+PROPERTY Done : BOOL
+</code></pre></div>
+<h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt>BOOL</dt>
+    <dd></dd>
+  </dl>
+<h2 class="section" id="methods">Methods</h2>
+<h3 id="TcLog.DateTime_ToFormatString" data-uid="TcLog.DateTime.ToFormatString">
+ToFormatString
+</h3><a name="ToFormatString"></a>
 <p>Returns a formatted string containing the actual time information</p>
 <ul>
 <li><code>Y</code> : year</li>
@@ -250,42 +260,40 @@ METHOD PRIVATE ReplaceFormatPlaceholder (
 <p>Example:<br>
 <em>YYMMDD-hh:mm:ss:iii</em><br>
 =&gt; <em>20210812-12:30:22:123</em></p>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">{attribute 'hide_all_locals'}
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">{attribute 'hide_all_locals'}
 METHOD ToFormatString (
  format : STRING) : Tc2_System.T_MaxString
-</code></pre>
-<h5 class="parameters">Inputs</h5>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Type</th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><a name="format"></a>format</td>
-<td style="text-align: left;">STRING</td>
-<td style="text-align: left;">Format the timestamp should have.</td>
-</tr>
-</tbody>
-</table>
+</code></pre></div>
+<h4 class="section">Inputs</h4><dl class="parameters">
+<a name="format"></a><dt><code>format</code> STRING<dd><p>Format the timestamp should have.</p></dd></dl>
+<h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt>Tc2_System.T_MaxString</dt>
+    <dd></dd>
+  </dl>
+
 </article>
           </div>
-          
+
           <div class="hidden-sm col-md-2" role="complementary">
             <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/bengeisler/TcLog/blob/f69995aea2524e92837a08df688b0718b1d6b570/docs\reference\TcLog\Utils\DateTime.md/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-                <h5>In This Article</h5>
+                <h5>In this article</h5>
                 <div></div>
               </nav>
             </div>
           </div>
         </div>
       </div>
-      
+
       <footer>
         <div class="grad-bottom"></div>
         <div class="footer">
@@ -293,66 +301,15 @@ METHOD ToFormatString (
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            Powered by <a href='https://zeugwerk.at'>Zeugwerk GmbH</a>
-            
+      
+      <span>Generated by <strong>DocFX</strong></span>
           </div>
         </div>
       </footer>
     </div>
-          
-    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+
+    <script type="text/javascript" src="../../../styles/docfx.vendor.min.js"></script>
     <script type="text/javascript" src="../../../styles/docfx.js"></script>
     <script type="text/javascript" src="../../../styles/main.js"></script>
-    
-    <!-- mermaid & featherlight & highlight support -->
-    <script type="text/javascript" src="../../../styles/mermaid.min.js"></script>
-    <script type="text/javascript" src="../../../styles/highlight.pack.js"></script>
-    <script type="text/javascript" src="../../../styles/highlight-iecst.min.js"></script>
-    <script type="text/javascript" src="../../../styles/jquery-latest.js"></script>
-    <script type="text/javascript" src="../../../styles/featherlight.min.js" charset="utf-8"></script>
-    <script>    
-        mermaid.initialize({
-            startOnLoad:false,
-            flowchart:{
-                useMaxWidth:true,
-                htmlLabels:true
-            },
-            sequence:{
-                useMaxWidth:true
-            },        
-        });
-    
-        $(document).ready(function() {
-            hljs.highlightAll(); 
-        
-            const elements = document.getElementsByClassName("lang-mermaid");
-            let index = 0;
-    
-            while (elements.length != 0) {
-                let element = elements[0];
-                mermaid.render('graph'+index, element.innerText, (svgGraph) => {                    
-                    element.parentElement.outerHTML = "<div class='mermaid'>" + svgGraph + "</div>";
-                });
-                $('#graph'+index).height("100%");
-                ++index;
-            }
-    
-            // featherlight initialization
-            // find all images, but not the logo, and add the lightbox
-            $('.gallery img').each(function(){
-                var $img = $(this);
-                var filename = $img.attr('src')
-                //add cursor
-                $img.css('cursor','zoom-in');
-                $img.css('cursor','-moz-zoom-in');
-                $img.css('cursor','-webkit-zoom-in');
-    
-                //add featherlight
-                $img.attr('alt', filename);
-                $img.featherlight(filename);
-            });
-        });
-    </script>
-    
   </body>
 </html>

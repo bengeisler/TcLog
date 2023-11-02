@@ -1,5 +1,4 @@
 {
-  "homepages": [],
   "source_base_path": "C:/jenkins/workspace/jobs/doc/docs",
   "xrefmap": "xrefmap.yml",
   "files": [
@@ -11,7 +10,6 @@
           "relative_path": "images/TcLog_header.svg"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
@@ -22,11 +20,9 @@
       "source_relative_path": "index.md",
       "output": {
         ".html": {
-          "relative_path": "index.html",
-          "hash": "Cn+IG+DJgPViT1ofcyJUaebUsi0xveeqfWnR6EXItHk="
+          "relative_path": "index.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
@@ -34,11 +30,9 @@
       "source_relative_path": "reference/TcLog/Constants.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Constants.html",
-          "hash": "R4f6xw4KHY7sB/KroHEIMxcaCJx+pwKfQClVx7ssx48="
+          "relative_path": "reference/TcLog/Constants.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
@@ -46,11 +40,9 @@
       "source_relative_path": "reference/TcLog/Logger/TcLog.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Logger/TcLog.html",
-          "hash": "rNvUQNyaJRR6AbIUVxlRVPJZN7mxZB/qOlvp11OOx+U="
+          "relative_path": "reference/TcLog/Logger/TcLog.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
@@ -58,11 +50,9 @@
       "source_relative_path": "reference/TcLog/Logger/TcLogCore.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Logger/TcLogCore.html",
-          "hash": "H7lQY13AYfgHwDJx08FNBnhCvloEgeOpqc+Qr8wCsT4="
+          "relative_path": "reference/TcLog/Logger/TcLogCore.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
@@ -70,11 +60,9 @@
       "source_relative_path": "reference/TcLog/Logger/TcLogTrig.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Logger/TcLogTrig.html",
-          "hash": "2PPi4Bsj9OefxGnHhgFTrCLY5bH2+/Z4NykD76NdWLk="
+          "relative_path": "reference/TcLog/Logger/TcLogTrig.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
@@ -82,11 +70,9 @@
       "source_relative_path": "reference/TcLog/Logger/_DataTypes/Error.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Logger/_DataTypes/Error.html",
-          "hash": "jNOoNWkLEauHJJJMW0jhXoH2HYD8qvDWA2hRVCgyvcM="
+          "relative_path": "reference/TcLog/Logger/_DataTypes/Error.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
@@ -94,11 +80,9 @@
       "source_relative_path": "reference/TcLog/Logger/_DataTypes/ErrorCodes.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Logger/_DataTypes/ErrorCodes.html",
-          "hash": "PqS9pdCBFQcGlPuXri00bX2IbEm84WsvnfnFA3j3Tho="
+          "relative_path": "reference/TcLog/Logger/_DataTypes/ErrorCodes.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
@@ -106,11 +90,9 @@
       "source_relative_path": "reference/TcLog/Logger/_DataTypes/LogLevels.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Logger/_DataTypes/LogLevels.html",
-          "hash": "Frg81bM4ASYv3F0LRKPqp+xeuLIcXDVxAlISaRdBINs="
+          "relative_path": "reference/TcLog/Logger/_DataTypes/LogLevels.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
@@ -118,11 +100,9 @@
       "source_relative_path": "reference/TcLog/Logger/_DataTypes/LoggingConfiguration.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Logger/_DataTypes/LoggingConfiguration.html",
-          "hash": "Z2n70jjUDPUdnvpBcd4ORfr+TxTgumRFFtOUkKFEIWY="
+          "relative_path": "reference/TcLog/Logger/_DataTypes/LoggingConfiguration.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
@@ -130,11 +110,9 @@
       "source_relative_path": "reference/TcLog/Logger/_DataTypes/RollingIntervals.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Logger/_DataTypes/RollingIntervals.html",
-          "hash": "BmExqOHeSSYiEmUmrh5civTW7goDN+P0UvHCwUjCmzw="
+          "relative_path": "reference/TcLog/Logger/_DataTypes/RollingIntervals.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
@@ -142,11 +120,9 @@
       "source_relative_path": "reference/TcLog/Logger/_Interfaces/ILog.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Logger/_Interfaces/ILog.html",
-          "hash": "fGYxDoqXSe/g6gjNiskoJKL5yW4RqdLHlSfwK1uMQEE="
+          "relative_path": "reference/TcLog/Logger/_Interfaces/ILog.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
@@ -154,11 +130,9 @@
       "source_relative_path": "reference/TcLog/Logger/_Interfaces/ILogCore.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Logger/_Interfaces/ILogCore.html",
-          "hash": "AR4ZUWwkfoWe2UkTOnxz6Ay14FT3OUn9u6zgeIAvFmI="
+          "relative_path": "reference/TcLog/Logger/_Interfaces/ILogCore.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
@@ -166,11 +140,9 @@
       "source_relative_path": "reference/TcLog/Utils/AnyToString.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Utils/AnyToString.html",
-          "hash": "UBltkeZbqhTzX0uhYDbvxy9f5TV+Z9Orjg9Iz0b19eQ="
+          "relative_path": "reference/TcLog/Utils/AnyToString.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
@@ -178,11 +150,19 @@
       "source_relative_path": "reference/TcLog/Utils/DateTime.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Utils/DateTime.html",
-          "hash": "C3f+MZ6CseNRgMSm+ftiybg97bMayelqW08MR/SkJAs="
+          "relative_path": "reference/TcLog/Utils/DateTime.html"
         }
       },
-      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/TcLog/Version/Global_Version.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/TcLog/Version/Global_Version.html"
+        }
+      },
       "version": ""
     },
     {
@@ -190,11 +170,9 @@
       "source_relative_path": "userguide/configuration.md",
       "output": {
         ".html": {
-          "relative_path": "userguide/configuration.html",
-          "hash": "aloadS2kMB9Pp67R94CkNJjNoX6ZJrtQ56W5GOZBVvk="
+          "relative_path": "userguide/configuration.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
@@ -202,11 +180,9 @@
       "source_relative_path": "userguide/customization.md",
       "output": {
         ".html": {
-          "relative_path": "userguide/customization.html",
-          "hash": "O0DsceiIVEkGp50ZJJpp68oygg7mdiHZxPPBiQyEFFY="
+          "relative_path": "userguide/customization.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
@@ -214,11 +190,9 @@
       "source_relative_path": "userguide/getting_started.md",
       "output": {
         ".html": {
-          "relative_path": "userguide/getting_started.html",
-          "hash": "1N0g4UWfctIz0plbTSDbCH03EcY3a2YnwCbM5DKJ3Qw="
+          "relative_path": "userguide/getting_started.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
@@ -226,11 +200,9 @@
       "source_relative_path": "userguide/installation.md",
       "output": {
         ".html": {
-          "relative_path": "userguide/installation.html",
-          "hash": "1tPJ5P2a5rEO+mCNcVUMYdxdI/V2zYSAvxj18D2KAVQ="
+          "relative_path": "userguide/installation.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
@@ -238,11 +210,9 @@
       "source_relative_path": "userguide/introduction.md",
       "output": {
         ".html": {
-          "relative_path": "userguide/introduction.html",
-          "hash": "cVuaDDhWJG1mT6kXQy1TX+gz1U9quS8bBIwGZrTLeK0="
+          "relative_path": "userguide/introduction.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
@@ -250,11 +220,9 @@
       "source_relative_path": "userguide/license.md",
       "output": {
         ".html": {
-          "relative_path": "userguide/license.html",
-          "hash": "Kou359aQXJIGJ5PVnQ87jzJp4eEDWpWzeoish7JYCVw="
+          "relative_path": "userguide/license.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
@@ -262,11 +230,9 @@
       "source_relative_path": "userguide/logging.md",
       "output": {
         ".html": {
-          "relative_path": "userguide/logging.html",
-          "hash": "GNXgsn6XjIakPicKipJbGLr5C731vebtFD9TOj8g+4M="
+          "relative_path": "userguide/logging.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
@@ -274,59 +240,12 @@
       "source_relative_path": "userguide/performance.md",
       "output": {
         ".html": {
-          "relative_path": "userguide/performance.html",
-          "hash": "FC0URvWJjHoUHyWTkTQruVbBeXyvzFOUCi5OuC36dPE="
+          "relative_path": "userguide/performance.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     }
   ],
-  "incremental_info": [
-    {
-      "status": {
-        "can_incremental": false,
-        "details": "Cannot build incrementally because last build info is missing.",
-        "incrementalPhase": "build",
-        "total_file_count": 0,
-        "skipped_file_count": 0,
-        "full_build_reason_code": "NoAvailableBuildCache"
-      },
-      "processors": {
-        "ConceptualDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build",
-          "total_file_count": 22,
-          "skipped_file_count": 0
-        },
-        "ResourceDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        }
-      }
-    },
-    {
-      "status": {
-        "can_incremental": false,
-        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
-        "incrementalPhase": "postProcessing",
-        "total_file_count": 0,
-        "skipped_file_count": 0
-      },
-      "processors": {}
-    }
-  ],
-  "version_info": {},
   "groups": [
     {
       "xrefmap": "xrefmap.yml"

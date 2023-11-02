@@ -16,18 +16,21 @@ references:
 - uid: TcLog.ErrorCodes
   name: ErrorCodes
   href: reference/TcLog/Logger/_DataTypes/ErrorCodes.html
+- uid: TcLog.Global_Version
+  name: Global_Version
+  href: reference/TcLog/Version/Global_Version.html
 - uid: TcLog.ILog
   name: ILog
   href: reference/TcLog/Logger/_Interfaces/ILog.html
 - uid: TcLog.ILogCore
   name: ILogCore
   href: reference/TcLog/Logger/_Interfaces/ILogCore.html
-- uid: TcLog.LoggingConfiguration
-  name: LoggingConfiguration
-  href: reference/TcLog/Logger/_DataTypes/LoggingConfiguration.html
 - uid: TcLog.LogLevels
   name: LogLevels
   href: reference/TcLog/Logger/_DataTypes/LogLevels.html
+- uid: TcLog.LoggingConfiguration
+  name: LoggingConfiguration
+  href: reference/TcLog/Logger/_DataTypes/LoggingConfiguration.html
 - uid: TcLog.RollingIntervals
   name: RollingIntervals
   href: reference/TcLog/Logger/_DataTypes/RollingIntervals.html

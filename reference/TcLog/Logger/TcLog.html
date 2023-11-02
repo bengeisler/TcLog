@@ -1,23 +1,20 @@
 ﻿<!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <html>
-  
+
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>TcLog | html </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="TcLog | html ">
-    <meta name="generator" content="docfx 2.58.9.0">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>TcLog </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="TcLog ">
     
-    <link rel="shortcut icon" href="../../../favicon.ico">
-    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
-    <link rel="stylesheet" href="../../../styles/docfx.css">
-    <link rel="stylesheet" href="../../../styles/main.css">
-    <link rel="stylesheet" href="../../../styles/highlight-default.css">
-    <link rel="stylesheet" href="../../../styles/featherlight.min.css" type="text/css">
-    <meta property="docfx:navrel" content="../../../toc">
-    <meta property="docfx:tocrel" content="../../toc">
+      <link rel="shortcut icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../../styles/docfx.css">
+      <link rel="stylesheet" href="../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../toc">
+      <meta property="docfx:tocrel" content="../../toc">
     
     
     
@@ -25,7 +22,7 @@
   <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
-        
+
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
           <div class="container">
             <div class="navbar-header">
@@ -35,7 +32,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              
+
               <a class="navbar-brand" href="../../../index.html">
                 <img id="logo" class="svg" src="../../../logo.svg" alt="">
               </a>
@@ -46,7 +43,7 @@
                   <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
                 </div>
               </form>
-                
+
                 <ul class="nav level1 navbar-nav">
                       <li>
                           <a href="../../../userguide/installation.html" title="User guide">User guide</a>
@@ -54,10 +51,11 @@
                       <li>
                           <a href="../../../reference/TcLog/Constants.html" title="API Reference">API Reference</a>
                       </li>
-                </ul>    </div>
+                </ul>
+            </div>
           </div>
         </nav>
-        
+
         <div class="subnav navbar navbar-default">
           <div class="container hide-when-search" id="breadcrumb">
             <ul class="breadcrumb">
@@ -79,26 +77,27 @@
               </div>
               <div class="sidetoc">
                 <div class="toc" id="toc">
-                  
+
                   <ul class="nav level1">
                     <li class="">
                       <span class="expand-stub"></span>
                       <a class="">TcLog</a>
-                        
+
                         <ul class="nav level2">
                           <li class="">
                             <span class="expand-stub"></span>
                             <a class="">Constants</a>
-                              
+
                               <ul class="nav level3">
                                 <li class="">
                                   <a href="../../TcLog/Constants.html" title="Constants" class="">Constants</a>
                                 </li>
-                              </ul>  </li>
+                              </ul>
+                          </li>
                           <li class="">
                             <span class="expand-stub"></span>
                             <a class="">Logger</a>
-                              
+
                               <ul class="nav level3">
                                 <li class="active">
                                   <a href="../../TcLog/Logger/TcLog.html" title="TcLog" class="active">TcLog</a>
@@ -130,11 +129,12 @@
                                 <li class="">
                                   <a href="../../TcLog/Logger/_Interfaces/ILogCore.html" title="ILogCore" class="">ILogCore</a>
                                 </li>
-                              </ul>  </li>
+                              </ul>
+                          </li>
                           <li class="">
                             <span class="expand-stub"></span>
                             <a class="">Utils</a>
-                              
+
                               <ul class="nav level3">
                                 <li class="">
                                   <a href="../../TcLog/Utils/AnyToString.html" title="AnyToString" class="">AnyToString</a>
@@ -142,9 +142,22 @@
                                 <li class="">
                                   <a href="../../TcLog/Utils/DateTime.html" title="DateTime" class="">DateTime</a>
                                 </li>
-                              </ul>  </li>
-                        </ul>  </li>
-                  </ul>        </div>
+                              </ul>
+                          </li>
+                          <li class="">
+                            <span class="expand-stub"></span>
+                            <a class="">Version</a>
+
+                              <ul class="nav level3">
+                                <li class="">
+                                  <a href="../../TcLog/Version/Global_Version.html" title="Global_Version" class="">Global_Version</a>
+                                </li>
+                              </ul>
+                          </li>
+                        </ul>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -154,16 +167,14 @@
             <article class="content wrap" id="_content" data-uid="TcLog.TcLog">
 <h1 id="tclog">TcLog</h1>
 
-<div class="implements"><h5>Implements</h5>
-<div><a class="xref" href="_Interfaces/ILog.html">TcLog.ILog</a></div>
-</div>
-<h6><strong>Namespace</strong>: <a class="xref" href="TcLog.html">TcLog</a></h6>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">{attribute 'hide_all_locals'}
-{attribute 'reflection'}
-FUNCTION_BLOCK TcLog IMPLEMENTS TcLog.ILog
-</code></pre>
-<p><code>TcLog</code> is the client side of the logger.</p>
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="TcLog.html">TcLog</a></dd></dl>
+  
+  </div>
+<dl class="typelist implements"><dt>Implements</dt><dd>
+<div><a class="xref" href="_Interfaces/ILog.html">ILog</a></div>
+</dd></dl>
+`TcLog` is the client side of the logger. 
 <p>It is used to send the logs to <code>TcLogCore</code>. Typically, it is instantiated
 once in each <code>FUNCTION_BLOCK</code> or <code>PROGRAM</code> where logging is done. The same
 instance can then be used for all logging within that POU.</p>
@@ -172,60 +183,48 @@ message without the need for external data type conversions or multiple chained 
 See the method section for more information.</p>
 <p>The last method to call after the log message has been built is one of ´[Debug|Information|Warning|Error|Fatal]<code>. This sets the log level of the message and sends it off to the log message queue of </code>TcLogCore` where it will
 be processed according to its configuration.</p>
-<h3 id="methods">Methods</h3>
-<p><a name="AppendAny"></a></p>
-<h4 id="TcLog.TcLog.AppendAny" data-uid="TcLog.TcLog.AppendAny">AppendAny</h4>
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">{attribute 'hide_all_locals'}
+{attribute 'reflection'}
+FUNCTION_BLOCK TcLog IMPLEMENTS TcLog.ILog
+</code></pre></div>
+<h2 class="section" id="methods">Methods</h2>
+<h3 id="TcLog.TcLog_AppendAny" data-uid="TcLog.TcLog.AppendAny">
+AppendAny
+</h3><a name="AppendAny"></a>
 <p>Appends any given data to the log string. The type of the provided data
 has to be one of the <a href="https://infosys.beckhoff.com/english.php?content=../content/1033/tc3_plc_intro/2529388939.html&amp;id=">standard data types</a>.
 This method can be chained.</p>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">METHOD AppendAny (
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">METHOD AppendAny (
  data : ANY) : REFERENCE TO TcLog
-</code></pre>
-<h5 class="parameters">Inputs</h5>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Type</th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><a name="data"></a>data</td>
-<td style="text-align: left;">ANY</td>
-<td style="text-align: left;">data to be appended to log string.</td>
-</tr>
-</tbody>
-</table>
-<p><a name="AppendString"></a></p>
-<h4 id="TcLog.TcLog.AppendString" data-uid="TcLog.TcLog.AppendString">AppendString</h4>
+</code></pre></div>
+<h4 class="section">Inputs</h4><dl class="parameters">
+<a name="data"></a><dt><code>data</code> ANY<dd><p>data to be appended to log string.</p></dd></dl>
+<h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt>REFERENCE TO <a class="xref" href="TcLog.html">TcLog</a></dt>
+    <dd></dd>
+  </dl>
+<h3 id="TcLog.TcLog_AppendString" data-uid="TcLog.TcLog.AppendString">
+AppendString
+</h3><a name="AppendString"></a>
 <p>Appends another string to the log message.
 This method can be chained.</p>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">METHOD AppendString (
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">METHOD AppendString (
  data : Tc2_System.T_MaxString) : REFERENCE TO TcLog
-</code></pre>
-<h5 class="parameters">Inputs</h5>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Type</th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><a name="data"></a>data</td>
-<td style="text-align: left;">Tc2_System.T_MaxString</td>
-<td style="text-align: left;">data to be appended to log string.</td>
-</tr>
-</tbody>
-</table>
-<p><a name="AppendVariable"></a></p>
-<h4 id="TcLog.TcLog.AppendVariable" data-uid="TcLog.TcLog.AppendVariable">AppendVariable</h4>
+</code></pre></div>
+<h4 class="section">Inputs</h4><dl class="parameters">
+<a name="data"></a><dt><code>data</code> Tc2_System.T_MaxString<dd><p>data to be appended to log string.</p></dd></dl>
+<h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt>REFERENCE TO <a class="xref" href="TcLog.html">TcLog</a></dt>
+    <dd></dd>
+  </dl>
+<h3 id="TcLog.TcLog_AppendVariable" data-uid="TcLog.TcLog.AppendVariable">
+AppendVariable
+</h3><a name="AppendVariable"></a>
 <p>Appends information about the given variable to the log string.
 This method can be chained.
 Example:</p>
@@ -236,318 +235,203 @@ Example:</p>
 END_VAR
 Logger.AppendVariable(myVarInfo, myInt);
 </code></pre>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">METHOD AppendVariable (
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">METHOD AppendVariable (
  varInfo : __SYSTEM.VAR_INFO,
  value : ANY) : REFERENCE TO TcLog
-</code></pre>
-<h5 class="parameters">Inputs</h5>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Type</th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><a name="varInfo"></a>varInfo</td>
-<td style="text-align: left;">__SYSTEM.VAR_INFO</td>
-<td style="text-align: left;"><a href="https://infosys.beckhoff.com/index.php?content=../content/1031/tc3_plc_intro/3527777675.html&amp;id=">VAR_INFO</a> of variable to be appended to log string.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><a name="value"></a>value</td>
-<td style="text-align: left;">ANY</td>
-<td style="text-align: left;">Value of variable to be appended to log string.</td>
-</tr>
-</tbody>
-</table>
-<p><a name="Debug"></a></p>
-<h4 id="TcLog.TcLog.Debug" data-uid="TcLog.TcLog.Debug">Debug</h4>
+</code></pre></div>
+<h4 class="section">Inputs</h4><dl class="parameters">
+<a name="varInfo"></a><dt><code>varInfo</code> __SYSTEM.VAR_INFO<dd><p>[VAR_INFO](https://infosys.beckhoff.com/index.php?content=../content/1031/tc3_plc_intro/3527777675.html&id=) of variable to be appended to log string.</p></dd><a name="value"></a><dt><code>value</code> ANY<dd><p>Value of variable to be appended to log string.</p></dd></dl>
+<h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt>REFERENCE TO <a class="xref" href="TcLog.html">TcLog</a></dt>
+    <dd></dd>
+  </dl>
+<h3 id="TcLog.TcLog_Debug" data-uid="TcLog.TcLog.Debug">
+Debug
+</h3><a name="Debug"></a>
 <p>Logs the log string in DEBUG level.</p>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">METHOD Debug (
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">METHOD Debug (
  message : Tc2_System.T_MaxString) : BOOL
-</code></pre>
-<h5 class="parameters">Inputs</h5>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Type</th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><a name="message"></a>message</td>
-<td style="text-align: left;">Tc2_System.T_MaxString</td>
-<td style="text-align: left;">Message to be appended to log string.</td>
-</tr>
-</tbody>
-</table>
-<p><a name="Error"></a></p>
-<h4 id="TcLog.TcLog.Error" data-uid="TcLog.TcLog.Error">Error</h4>
+</code></pre></div>
+<h4 class="section">Inputs</h4><dl class="parameters">
+<a name="message"></a><dt><code>message</code> Tc2_System.T_MaxString<dd><p>Message to be appended to log string.</p></dd></dl>
+<h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt>BOOL</dt>
+    <dd></dd>
+  </dl>
+<h3 id="TcLog.TcLog_Error" data-uid="TcLog.TcLog.Error">
+Error
+</h3><a name="Error"></a>
 <p>Logs the log string in ERROR level.</p>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">METHOD Error (
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">METHOD Error (
  message : Tc2_System.T_MaxString) : BOOL
-</code></pre>
-<h5 class="parameters">Inputs</h5>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Type</th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><a name="message"></a>message</td>
-<td style="text-align: left;">Tc2_System.T_MaxString</td>
-<td style="text-align: left;">Message to be appended to log string.</td>
-</tr>
-</tbody>
-</table>
-<p><a name="Fatal"></a></p>
-<h4 id="TcLog.TcLog.Fatal" data-uid="TcLog.TcLog.Fatal">Fatal</h4>
+</code></pre></div>
+<h4 class="section">Inputs</h4><dl class="parameters">
+<a name="message"></a><dt><code>message</code> Tc2_System.T_MaxString<dd><p>Message to be appended to log string.</p></dd></dl>
+<h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt>BOOL</dt>
+    <dd></dd>
+  </dl>
+<h3 id="TcLog.TcLog_Fatal" data-uid="TcLog.TcLog.Fatal">
+Fatal
+</h3><a name="Fatal"></a>
 <p>Logs the log string in FATAL level.</p>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">METHOD Fatal (
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">METHOD Fatal (
  message : Tc2_System.T_MaxString) : BOOL
-</code></pre>
-<h5 class="parameters">Inputs</h5>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Type</th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><a name="message"></a>message</td>
-<td style="text-align: left;">Tc2_System.T_MaxString</td>
-<td style="text-align: left;">Message to be appended to log string.</td>
-</tr>
-</tbody>
-</table>
-<p><a name="Information"></a></p>
-<h4 id="TcLog.TcLog.Information" data-uid="TcLog.TcLog.Information">Information</h4>
+</code></pre></div>
+<h4 class="section">Inputs</h4><dl class="parameters">
+<a name="message"></a><dt><code>message</code> Tc2_System.T_MaxString<dd><p>Message to be appended to log string.</p></dd></dl>
+<h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt>BOOL</dt>
+    <dd></dd>
+  </dl>
+<h3 id="TcLog.TcLog_Information" data-uid="TcLog.TcLog.Information">
+Information
+</h3><a name="Information"></a>
 <p>Logs the log string in INFORMATION level.</p>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">METHOD Information (
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">METHOD Information (
  message : Tc2_System.T_MaxString) : BOOL
-</code></pre>
-<h5 class="parameters">Inputs</h5>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Type</th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><a name="message"></a>message</td>
-<td style="text-align: left;">Tc2_System.T_MaxString</td>
-<td style="text-align: left;">Message to be appended to log string.</td>
-</tr>
-</tbody>
-</table>
-<p><a name="Init"></a></p>
-<h4 id="TcLog.TcLog.Init" data-uid="TcLog.TcLog.Init">Init</h4>
+</code></pre></div>
+<h4 class="section">Inputs</h4><dl class="parameters">
+<a name="message"></a><dt><code>message</code> Tc2_System.T_MaxString<dd><p>Message to be appended to log string.</p></dd></dl>
+<h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt>BOOL</dt>
+    <dd></dd>
+  </dl>
+<h3 id="TcLog.TcLog_Init" data-uid="TcLog.TcLog.Init">
+Init
+</h3><a name="Init"></a>
 <p>Initializes the reference to the core logger. Should only be called once from the core logger directly.</p>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">METHOD PUBLIC Init (
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">METHOD PUBLIC Init (
  ref2Core : ILogCore) : BOOL
-</code></pre>
-<h5 class="parameters">Inputs</h5>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Type</th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><a name="ref2Core"></a>ref2Core</td>
-<td style="text-align: left;"><a class="xref" href="_Interfaces/ILogCore.html">TcLog.ILogCore</a></td>
-<td style="text-align: left;">Reference to TcLoggerCore instance.</td>
-</tr>
-</tbody>
-</table>
-<p><a name="InitializeLogData"></a></p>
-<h4 id="TcLog.TcLog.InitializeLogData" data-uid="TcLog.TcLog.InitializeLogData">InitializeLogData</h4>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">METHOD PRIVATE InitializeLogData () : BOOL
-</code></pre>
-<p><a name="OnCondition"></a></p>
-<h4 id="TcLog.TcLog.OnCondition" data-uid="TcLog.TcLog.OnCondition">OnCondition</h4>
+</code></pre></div>
+<h4 class="section">Inputs</h4><dl class="parameters">
+<a name="ref2Core"></a><dt><code>ref2Core</code> <a class="xref" href="_Interfaces/ILogCore.html">ILogCore</a><dd><p>Reference to TcLoggerCore instance.</p></dd></dl>
+<h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt>BOOL</dt>
+    <dd></dd>
+  </dl>
+<h3 id="TcLog.TcLog_InitializeLogData" data-uid="TcLog.TcLog.InitializeLogData">
+InitializeLogData
+</h3><a name="InitializeLogData"></a>
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">METHOD PRIVATE InitializeLogData () : BOOL
+</code></pre></div>
+<h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt>BOOL</dt>
+    <dd></dd>
+  </dl>
+<h3 id="TcLog.TcLog_OnCondition" data-uid="TcLog.TcLog.OnCondition">
+OnCondition
+</h3><a name="OnCondition"></a>
 <p>Conditional execution of the log command. Only executes logging when Cond = TRUE.</p>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">METHOD OnCondition (
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">METHOD OnCondition (
  cond : BOOL) : REFERENCE TO TcLog
-</code></pre>
-<h5 class="parameters">Inputs</h5>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Type</th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><a name="cond"></a>cond</td>
-<td style="text-align: left;">BOOL</td>
-<td style="text-align: left;">Logs data only if this condition evaluates to TRUE.</td>
-</tr>
-</tbody>
-</table>
-<p><a name="SetLogger"></a></p>
-<h4 id="TcLog.TcLog.SetLogger" data-uid="TcLog.TcLog.SetLogger">SetLogger</h4>
+</code></pre></div>
+<h4 class="section">Inputs</h4><dl class="parameters">
+<a name="cond"></a><dt><code>cond</code> BOOL<dd><p>Logs data only if this condition evaluates to TRUE.</p></dd></dl>
+<h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt>REFERENCE TO <a class="xref" href="TcLog.html">TcLog</a></dt>
+    <dd></dd>
+  </dl>
+<h3 id="TcLog.TcLog_SetLogger" data-uid="TcLog.TcLog.SetLogger">
+SetLogger
+</h3><a name="SetLogger"></a>
 <p>Initializes the reference to the core logger. This enables you to use several
 loggers with different configurations in one project.</p>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">METHOD SetLogger (
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">METHOD SetLogger (
  ref2Core : ILogCore) : BOOL
-</code></pre>
-<h5 class="parameters">Inputs</h5>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Type</th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><a name="ref2Core"></a>ref2Core</td>
-<td style="text-align: left;"><a class="xref" href="_Interfaces/ILogCore.html">TcLog.ILogCore</a></td>
-<td style="text-align: left;">Reference to Core Logger</td>
-</tr>
-</tbody>
-</table>
-<p><a name="ShortenInstancePath"></a></p>
-<h4 id="TcLog.TcLog.ShortenInstancePath" data-uid="TcLog.TcLog.ShortenInstancePath">ShortenInstancePath</h4>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">{attribute 'hide'}
-METHOD PRIVATE ShortenInstancePath (
- path : Tc2_System.T_MaxString) : Tc2_System.T_MaxString
-</code></pre>
-<h5 class="parameters">Inputs</h5>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Type</th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><a name="path"></a>path</td>
-<td style="text-align: left;">Tc2_System.T_MaxString</td>
-<td style="text-align: left;"></td>
-</tr>
-</tbody>
-</table>
-<p><a name="ToAdsLog"></a></p>
-<h4 id="TcLog.TcLog.ToAdsLog" data-uid="TcLog.TcLog.ToAdsLog">ToAdsLog</h4>
+</code></pre></div>
+<h4 class="section">Inputs</h4><dl class="parameters">
+<a name="ref2Core"></a><dt><code>ref2Core</code> <a class="xref" href="_Interfaces/ILogCore.html">ILogCore</a><dd><p>Reference to Core Logger</p></dd></dl>
+<h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt>BOOL</dt>
+    <dd></dd>
+  </dl>
+<h3 id="TcLog.TcLog_ToAdsLog" data-uid="TcLog.TcLog.ToAdsLog">
+ToAdsLog
+</h3><a name="ToAdsLog"></a>
 <p>Logs directly to ADS log, ignoring the settings of the base logger.</p>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">METHOD ToAdsLog (
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">METHOD ToAdsLog (
  logLevel : LogLevels) : BOOL
-</code></pre>
-<h5 class="parameters">Inputs</h5>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Type</th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><a name="logLevel"></a>logLevel</td>
-<td style="text-align: left;"><a class="xref" href="_DataTypes/LogLevels.html">TcLog.LogLevels</a></td>
-<td style="text-align: left;">Log level in which message should be logged to ADS.</td>
-</tr>
-</tbody>
-</table>
-<p><a name="ToCustomFormat"></a></p>
-<h4 id="TcLog.TcLog.ToCustomFormat" data-uid="TcLog.TcLog.ToCustomFormat">ToCustomFormat</h4>
+</code></pre></div>
+<h4 class="section">Inputs</h4><dl class="parameters">
+<a name="logLevel"></a><dt><code>logLevel</code> <a class="xref" href="_DataTypes/LogLevels.html">LogLevels</a><dd><p>Log level in which message should be logged to ADS.</p></dd></dl>
+<h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt>BOOL</dt>
+    <dd></dd>
+  </dl>
+<h3 id="TcLog.TcLog_ToCustomFormat" data-uid="TcLog.TcLog.ToCustomFormat">
+ToCustomFormat
+</h3><a name="ToCustomFormat"></a>
 <p>Saves custom formatted log string.
 No addtitional information will be added, no formatting will be applied.</p>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">METHOD ToCustomFormat (
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">METHOD ToCustomFormat (
  message : Tc2_System.T_MaxString) : BOOL
-</code></pre>
-<h5 class="parameters">Inputs</h5>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Type</th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><a name="message"></a>message</td>
-<td style="text-align: left;">Tc2_System.T_MaxString</td>
-<td style="text-align: left;">Message to be appended to log string.</td>
-</tr>
-</tbody>
-</table>
-<p><a name="Warning"></a></p>
-<h4 id="TcLog.TcLog.Warning" data-uid="TcLog.TcLog.Warning">Warning</h4>
+</code></pre></div>
+<h4 class="section">Inputs</h4><dl class="parameters">
+<a name="message"></a><dt><code>message</code> Tc2_System.T_MaxString<dd><p>Message to be appended to log string.</p></dd></dl>
+<h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt>BOOL</dt>
+    <dd></dd>
+  </dl>
+<h3 id="TcLog.TcLog_Warning" data-uid="TcLog.TcLog.Warning">
+Warning
+</h3><a name="Warning"></a>
 <p>Logs the log string in WARNING level.</p>
-<h5 class="decalaration">Declaration</h5>
-<pre><code class="lang-st">METHOD Warning (
+<div class="codewrapper">
+    <pre><code class="lang-st hljs">METHOD Warning (
  message : Tc2_System.T_MaxString) : BOOL
-</code></pre>
-<h5 class="parameters">Inputs</h5>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Type</th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><a name="message"></a>message</td>
-<td style="text-align: left;">Tc2_System.T_MaxString</td>
-<td style="text-align: left;">Message to be appended to log string.</td>
-</tr>
-</tbody>
-</table>
+</code></pre></div>
+<h4 class="section">Inputs</h4><dl class="parameters">
+<a name="message"></a><dt><code>message</code> Tc2_System.T_MaxString<dd><p>Message to be appended to log string.</p></dd></dl>
+<h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt>BOOL</dt>
+    <dd></dd>
+  </dl>
+
 </article>
           </div>
-          
+
           <div class="hidden-sm col-md-2" role="complementary">
             <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/bengeisler/TcLog/blob/f69995aea2524e92837a08df688b0718b1d6b570/docs\reference\TcLog\Logger\TcLog.md/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-                <h5>In This Article</h5>
+                <h5>In this article</h5>
                 <div></div>
               </nav>
             </div>
           </div>
         </div>
       </div>
-      
+
       <footer>
         <div class="grad-bottom"></div>
         <div class="footer">
@@ -555,66 +439,15 @@ No addtitional information will be added, no formatting will be applied.</p>
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            Powered by <a href='https://zeugwerk.at'>Zeugwerk GmbH</a>
-            
+      
+      <span>Generated by <strong>DocFX</strong></span>
           </div>
         </div>
       </footer>
     </div>
-          
-    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+
+    <script type="text/javascript" src="../../../styles/docfx.vendor.min.js"></script>
     <script type="text/javascript" src="../../../styles/docfx.js"></script>
     <script type="text/javascript" src="../../../styles/main.js"></script>
-    
-    <!-- mermaid & featherlight & highlight support -->
-    <script type="text/javascript" src="../../../styles/mermaid.min.js"></script>
-    <script type="text/javascript" src="../../../styles/highlight.pack.js"></script>
-    <script type="text/javascript" src="../../../styles/highlight-iecst.min.js"></script>
-    <script type="text/javascript" src="../../../styles/jquery-latest.js"></script>
-    <script type="text/javascript" src="../../../styles/featherlight.min.js" charset="utf-8"></script>
-    <script>    
-        mermaid.initialize({
-            startOnLoad:false,
-            flowchart:{
-                useMaxWidth:true,
-                htmlLabels:true
-            },
-            sequence:{
-                useMaxWidth:true
-            },        
-        });
-    
-        $(document).ready(function() {
-            hljs.highlightAll(); 
-        
-            const elements = document.getElementsByClassName("lang-mermaid");
-            let index = 0;
-    
-            while (elements.length != 0) {
-                let element = elements[0];
-                mermaid.render('graph'+index, element.innerText, (svgGraph) => {                    
-                    element.parentElement.outerHTML = "<div class='mermaid'>" + svgGraph + "</div>";
-                });
-                $('#graph'+index).height("100%");
-                ++index;
-            }
-    
-            // featherlight initialization
-            // find all images, but not the logo, and add the lightbox
-            $('.gallery img').each(function(){
-                var $img = $(this);
-                var filename = $img.attr('src')
-                //add cursor
-                $img.css('cursor','zoom-in');
-                $img.css('cursor','-moz-zoom-in');
-                $img.css('cursor','-webkit-zoom-in');
-    
-                //add featherlight
-                $img.attr('alt', filename);
-                $img.featherlight(filename);
-            });
-        });
-    </script>
-    
   </body>
 </html>
