@@ -25,12 +25,12 @@ references:
 - uid: TcLog.ILogCore
   name: ILogCore
   href: reference/TcLog/Logger/_Interfaces/ILogCore.html
-- uid: TcLog.LogLevels
-  name: LogLevels
-  href: reference/TcLog/Logger/_DataTypes/LogLevels.html
 - uid: TcLog.LoggingConfiguration
   name: LoggingConfiguration
   href: reference/TcLog/Logger/_DataTypes/LoggingConfiguration.html
+- uid: TcLog.LogLevels
+  name: LogLevels
+  href: reference/TcLog/Logger/_DataTypes/LogLevels.html
 - uid: TcLog.RollingIntervals
   name: RollingIntervals
   href: reference/TcLog/Logger/_DataTypes/RollingIntervals.html
