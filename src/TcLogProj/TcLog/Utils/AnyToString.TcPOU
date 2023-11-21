@@ -9,6 +9,7 @@ VAR_INPUT
   data : ANY;
 END_VAR
 VAR
+  _anyInt : POINTER TO INT;
   _anyReal : POINTER TO REAL;
   _anyLReal : POINTER TO LREAL;
   _anyDateAndTime : POINTER TO DATE_AND_TIME;
@@ -22,7 +23,11 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_REAL THEN
+      <ST><![CDATA[IF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_INT THEN
+  _anyInt := data.pValue;
+  AnyToString := INT_TO_STRING(_anyInt^);
+  
+ELSIF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_REAL THEN
   _anyReal := data.pValue;
   AnyToString := REAL_TO_STRING(_anyReal^);
   
