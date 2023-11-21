@@ -148,20 +148,41 @@ TEST_FINISHED();]]></ST>
     <Method Name="ConvertAnyINTToString" Id="{03af596d-48bd-41ed-bda7-49b17c1fbeb2}">
       <Declaration><![CDATA[METHOD ConvertAnyINTToString : BOOL
 VAR
-  input : INT := 1;
-  result : STRING;
-  expected : STRING := '1';
+  results : ARRAY[1..7] OF STRING;
+  expectedValues : ARRAY[1..7] OF STRING := ['-32768', '-18000', '-1', '0', '1', '18000', '32767'];
+  inputs : ARRAY[1..7] OF INT := [-32768, -18000, -1, 0, 1, 18000, 32767];
+  i: INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('ConvertAnyINTToString');
- 
-result := AnyToString(input);
- 
-AssertEquals(Expected := expected,
-             Actual := result,
-             Message := FormatResult(expected, result));
- 
+
+FOR i := 1 TO 7 DO
+  results[i] := AnyToString(inputs[i]);
+END_FOR
+
+AssertEquals(Expected := expectedValues[1],
+             Actual := results[1],
+             Message := FormatResult(expectedValues[1], results[1])); 
+AssertEquals(Expected := expectedValues[2],
+             Actual := results[2],
+             Message := FormatResult(expectedValues[2], results[2]));           
+AssertEquals(Expected := expectedValues[3],
+             Actual := results[3],
+             Message := FormatResult(expectedValues[3], results[3])); 
+AssertEquals(Expected := expectedValues[4],
+             Actual := results[4],
+             Message := FormatResult(expectedValues[4], results[4]));        
+AssertEquals(Expected := expectedValues[5],
+             Actual := results[5],
+             Message := FormatResult(expectedValues[5], results[5])); 
+AssertEquals(Expected := expectedValues[6],
+             Actual := results[6],
+             Message := FormatResult(expectedValues[6], results[6]));        
+AssertEquals(Expected := expectedValues[7],
+             Actual := results[7],
+             Message := FormatResult(expectedValues[7], results[7])); 
+      
 TEST_FINISHED();]]></ST>
       </Implementation>
     </Method>
@@ -456,96 +477,5 @@ END_VAR
         <ST><![CDATA[FormatResult := Tc2_Standard.CONCAT('Conversion failed. Expected: ', Tc2_Standard.CONCAT(Expected, Tc2_Standard.CONCAT(' - Result: ', Result)));]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="ConvertAnyToString_TEST">
-      <LineId Id="3" Count="18" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyByteToString">
-      <LineId Id="17" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyDateAndTimeToString">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyDateToString">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyDINTToString">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyDTToString">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyDWordToString">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyINTToString">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyLINTToString">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyLRealToString">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyLWordToString">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyRealToString">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnySINTToString">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyStringToString">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyTimeToString">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyTODToString">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyUDINTToString">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyUINTToString">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyULINTToString">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyUSINTToString">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyWordToString">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.ConvertAnyWStringToString">
-      <LineId Id="3" Count="7" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="ConvertAnyToString_TEST.FormatResult">
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
