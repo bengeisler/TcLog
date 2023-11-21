@@ -28,19 +28,21 @@ ConvertAnyWStringToString();]]></ST>
     <Method Name="ConvertAnyByteToString" Id="{6a4de533-1ff4-4300-bd1b-aa9dee141478}">
       <Declaration><![CDATA[METHOD ConvertAnyByteToString : BOOL
 VAR
-  input : BYTE := 1;
-  result : STRING;
-  expected : STRING := '1';
+  inputs : ARRAY[1..4] OF BYTE := [0, 1, 128, 255];
+  expectedValues : ARRAY[1..4] OF STRING := ['0', '1', '128', '255'];
+  results : ARRAY[1..4] OF STRING;
+  i: INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('ConvertAnyByteToString');
  
-result := AnyToString(input);
- 
-AssertEquals(Expected := expected,
-             Actual := result,
-             Message := FormatResult(expected, result));
+FOR i := 1 TO 4 DO
+  results[i] := AnyToString(inputs[i]);
+  AssertEquals(Expected := expectedValues[i],
+             Actual := results[i],
+             Message := FormatResult(expectedValues[i], results[i])); 
+END_FOR
  
 TEST_FINISHED();]]></ST>
       </Implementation>
@@ -88,20 +90,22 @@ TEST_FINISHED();]]></ST>
     <Method Name="ConvertAnyDINTToString" Id="{9bf59e16-f1e6-45ac-a807-e1d1de1d7a2c}">
       <Declaration><![CDATA[METHOD ConvertAnyDINTToString : BOOL
 VAR
-  input : DINT := 1;
-  result : STRING;
-  expected : STRING := '1';
+  inputs : ARRAY[1..7] OF DINT := [-2147483648, -1073741824, -1, 0, 1, 1073741824, 2147483647];
+  expectedValues : ARRAY[1..7] OF STRING := ['-2147483648', '-1073741824', '-1', '0', '1', '1073741824', '2147483647'];
+  results : ARRAY[1..7] OF STRING;
+  i: INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('ConvertAnyDINTToString');
  
-result := AnyToString(input);
- 
-AssertEquals(Expected := expected,
-             Actual := result,
-             Message := FormatResult(expected, result));
- 
+FOR i := 1 TO 7 DO
+  results[i] := AnyToString(inputs[i]);
+  AssertEquals(Expected := expectedValues[i],
+             Actual := results[i],
+             Message := FormatResult(expectedValues[i], results[i])); 
+END_FOR
+
 TEST_FINISHED();]]></ST>
       </Implementation>
     </Method>
@@ -128,19 +132,21 @@ TEST_FINISHED();]]></ST>
     <Method Name="ConvertAnyDWordToString" Id="{4f8362c2-1bc1-4575-a937-4e7d8af79721}">
       <Declaration><![CDATA[METHOD ConvertAnyDWordToString : BOOL
 VAR
-  input : DWORD := 1;
-  result : STRING;
-  expected : STRING := '1';
+  inputs : ARRAY[1..4] OF DWORD := [0, 1, 2147483647, 4294967295];
+  expectedValues : ARRAY[1..4] OF STRING := ['0', '1', '2147483647', '4294967295'];
+  results : ARRAY[1..4] OF STRING;
+  i: INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('ConvertAnyDWordToString');
  
-result := AnyToString(input);
- 
-AssertEquals(Expected := expected,
-             Actual := result,
-             Message := FormatResult(expected, result));
+FOR i := 1 TO 4 DO
+  results[i] := AnyToString(inputs[i]);
+  AssertEquals(Expected := expectedValues[i],
+             Actual := results[i],
+             Message := FormatResult(expectedValues[i], results[i])); 
+END_FOR
  
 TEST_FINISHED();]]></ST>
       </Implementation>
@@ -148,9 +154,9 @@ TEST_FINISHED();]]></ST>
     <Method Name="ConvertAnyINTToString" Id="{03af596d-48bd-41ed-bda7-49b17c1fbeb2}">
       <Declaration><![CDATA[METHOD ConvertAnyINTToString : BOOL
 VAR
-  results : ARRAY[1..7] OF STRING;
-  expectedValues : ARRAY[1..7] OF STRING := ['-32768', '-18000', '-1', '0', '1', '18000', '32767'];
   inputs : ARRAY[1..7] OF INT := [-32768, -18000, -1, 0, 1, 18000, 32767];
+  expectedValues : ARRAY[1..7] OF STRING := ['-32768', '-18000', '-1', '0', '1', '18000', '32767'];
+  results : ARRAY[1..7] OF STRING;
   i: INT;
 END_VAR
 ]]></Declaration>
@@ -159,29 +165,10 @@ END_VAR
 
 FOR i := 1 TO 7 DO
   results[i] := AnyToString(inputs[i]);
+  AssertEquals(Expected := expectedValues[i],
+             Actual := results[i],
+             Message := FormatResult(expectedValues[i], results[i])); 
 END_FOR
-
-AssertEquals(Expected := expectedValues[1],
-             Actual := results[1],
-             Message := FormatResult(expectedValues[1], results[1])); 
-AssertEquals(Expected := expectedValues[2],
-             Actual := results[2],
-             Message := FormatResult(expectedValues[2], results[2]));           
-AssertEquals(Expected := expectedValues[3],
-             Actual := results[3],
-             Message := FormatResult(expectedValues[3], results[3])); 
-AssertEquals(Expected := expectedValues[4],
-             Actual := results[4],
-             Message := FormatResult(expectedValues[4], results[4]));        
-AssertEquals(Expected := expectedValues[5],
-             Actual := results[5],
-             Message := FormatResult(expectedValues[5], results[5])); 
-AssertEquals(Expected := expectedValues[6],
-             Actual := results[6],
-             Message := FormatResult(expectedValues[6], results[6]));        
-AssertEquals(Expected := expectedValues[7],
-             Actual := results[7],
-             Message := FormatResult(expectedValues[7], results[7])); 
       
 TEST_FINISHED();]]></ST>
       </Implementation>
@@ -189,19 +176,21 @@ TEST_FINISHED();]]></ST>
     <Method Name="ConvertAnyLINTToString" Id="{8e7df9bc-31be-419d-beb5-aa1f224ebdc7}">
       <Declaration><![CDATA[METHOD ConvertAnyLINTToString : BOOL
 VAR
-  input : LINT := 1;
-  result : STRING;
-  expected : STRING := '1';
+  inputs : ARRAY[1..7] OF LINT := [-2147483648, -18000, -1, 0, 1, 18000, 2147483648];
+  expectedValues : ARRAY[1..7] OF STRING := ['-2147483648', '-18000', '-1', '0', '1', '18000', '2147483648'];
+  results : ARRAY[1..7] OF STRING;
+  i: INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('ConvertAnyLINTToString');
  
-result := AnyToString(input);
- 
-AssertEquals(Expected := expected,
-             Actual := result,
-             Message := FormatResult(expected, result));
+FOR i := 1 TO 7 DO
+  results[i] := AnyToString(inputs[i]);
+  AssertEquals(Expected := expectedValues[i],
+             Actual := results[i],
+             Message := FormatResult(expectedValues[i], results[i])); 
+END_FOR
  
 TEST_FINISHED();]]></ST>
       </Implementation>
@@ -209,19 +198,21 @@ TEST_FINISHED();]]></ST>
     <Method Name="ConvertAnyLRealToString" Id="{42351668-e462-4446-aac6-670516acb622}">
       <Declaration><![CDATA[METHOD ConvertAnyLRealToString : BOOL
 VAR
-  input : REAL := 1.0;
-  result : STRING;
-  expected : STRING := '1.0';
+  inputs : ARRAY[1..5] OF LREAL := [-1.7976931348623157E+308, -4.94065645841247E-324, 0, 1, 4.94065645841247E-324, 7976931348623157E+308];
+  expectedValues : ARRAY[1..5] OF STRING := ['-1.7976931348623157E+308', '-4.94065645841247E-324', '0', '4.94065645841247E-324', '1.7976931348623157E+308'];
+  results : ARRAY[1..5] OF STRING;
+  i: INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('ConvertAnyRealToString');
  
-result := AnyToString(input);
- 
-AssertEquals(Expected := expected,
-             Actual := result,
-             Message := FormatResult(expected, result));
+FOR i := 1 TO 5 DO
+  results[i] := AnyToString(inputs[i]);
+  AssertEquals(Expected := expectedValues[i],
+             Actual := results[i],
+             Message := FormatResult(expectedValues[i], results[i])); 
+END_FOR
  
 TEST_FINISHED();]]></ST>
       </Implementation>
@@ -229,39 +220,43 @@ TEST_FINISHED();]]></ST>
     <Method Name="ConvertAnyLWordToString" Id="{db8455a2-4fe9-44ea-81da-61701a6999c0}">
       <Declaration><![CDATA[METHOD ConvertAnyLWordToString : BOOL
 VAR
-  input : LWORD := 1;
-  result : STRING;
-  expected : STRING := '1';
+  inputs : ARRAY[1..4] OF LWORD := [0, 1, 2147483647, 4294967295];
+  expectedValues : ARRAY[1..4] OF STRING := ['0', '1', '2147483647', '4294967295'];
+  results : ARRAY[1..4] OF STRING;
+  i: INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('ConvertAnyLWordToString');
  
-result := AnyToString(input);
- 
-AssertEquals(Expected := expected,
-             Actual := result,
-             Message := FormatResult(expected, result));
- 
+FOR i := 1 TO 4 DO
+  results[i] := AnyToString(inputs[i]);
+  AssertEquals(Expected := expectedValues[i],
+             Actual := results[i],
+             Message := FormatResult(expectedValues[i], results[i])); 
+END_FOR
+
 TEST_FINISHED();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ConvertAnyRealToString" Id="{7dde6cfd-c6ff-45c1-80bc-3da59350d708}">
       <Declaration><![CDATA[METHOD ConvertAnyRealToString : BOOL
 VAR
-  input : LREAL := 1.0;
-  result : STRING;
-  expected : STRING := '1.0';
+  inputs : ARRAY[1..5] OF LREAL := [-3.402823E+308, -1, 0, 1, 3.402823E+308];
+  expectedValues : ARRAY[1..5] OF STRING := ['-1.7976931348623157E+308', '-4.94065645841247E-324', '0', '4.94065645841247E-324', '1.7976931348623157E+308'];
+  results : ARRAY[1..5] OF STRING;
+  i: INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('ConvertAnyLRealToString');
  
-result := AnyToString(input);
- 
-AssertEquals(Expected := expected,
-             Actual := result,
-             Message := FormatResult(expected, result));
+FOR i := 1 TO 5 DO
+  results[i] := AnyToString(inputs[i]);
+  AssertEquals(Expected := expectedValues[i],
+             Actual := results[i],
+             Message := FormatResult(expectedValues[i], results[i])); 
+END_FOR
  
 TEST_FINISHED();]]></ST>
       </Implementation>
