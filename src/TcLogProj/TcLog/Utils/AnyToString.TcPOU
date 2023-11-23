@@ -9,7 +9,17 @@ VAR_INPUT
   data : ANY;
 END_VAR
 VAR
+  _anyByte : POINTER TO BYTE;
+  _anyUSINT : POINTER TO USINT;
   _anyInt : POINTER TO INT;
+  _anyUInt : POINTER TO UINT;
+  _anyUDInt : POINTER TO UDINT;
+  _anySInt : POINTER TO SINT;
+  _anyDInt : POINTER TO DINT;
+  _anyLInt : POINTER TO LINT;
+  _anyULInt : POINTER TO ULINT;
+  _anyWord : POINTER TO WORD;
+  _anyLWord : POINTER TO LWORD;
   _anyReal : POINTER TO REAL;
   _anyLReal : POINTER TO LREAL;
   _anyDateAndTime : POINTER TO DATE_AND_TIME;
@@ -23,9 +33,49 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_INT THEN
+      <ST><![CDATA[IF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_BYTE THEN
+  _anyByte := data.pValue;
+  AnyToString := BYTE_TO_STRING(_anyByte^);
+    
+ELSIF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_INT THEN
   _anyInt := data.pValue;
   AnyToString := INT_TO_STRING(_anyInt^);
+    
+ELSIF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_UINT THEN
+  _anyUInt := data.pValue;
+  AnyToString := UINT_TO_STRING(_anyUInt^);
+    
+ELSIF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_UDINT THEN
+  _anyUDInt := data.pValue;
+  AnyToString := UDINT_TO_STRING(_anyUDInt^);
+    
+ELSIF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_SINT THEN
+  _anySInt := data.pValue;
+  AnyToString := SINT_TO_STRING(_anySInt^);
+    
+ELSIF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_USINT THEN
+  _anyUSInt := data.pValue;
+  AnyToString := USINT_TO_STRING(_anyUSInt^);
+    
+ELSIF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_DINT THEN
+  _anyDInt := data.pValue;
+  AnyToString := DINT_TO_STRING(_anyDInt^);
+    
+ELSIF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_LINT THEN
+  _anyLInt := data.pValue;
+  AnyToString := LINT_TO_STRING(_anyLInt^);
+      
+ELSIF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_ULINT THEN
+  _anyULInt := data.pValue;
+  AnyToString := ULINT_TO_STRING(_anyULInt^);
+  
+ELSIF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_WORD THEN
+  _anyWord := data.pValue;
+  AnyToString := WORD_TO_STRING(_anyWord^);
+    
+ELSIF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_LWORD THEN
+  _anyLWord := data.pValue;
+  AnyToString := LWORD_TO_STRING(_anyLWord^);
   
 ELSIF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_REAL THEN
   _anyReal := data.pValue;
@@ -62,7 +112,7 @@ ELSIF data.TypeClass = __SYSTEM.TYPE_CLASS.TYPE_TIMEOFDAY THEN
   AnyToString := TOD_TO_STRING(_anyTOD^);
   
 ELSE
-  AnyToString := ANY_TO_STRING(data.pValue^);
+  AnyToString := TO_STRING(data.pValue^);
 END_IF]]></ST>
     </Implementation>
   </POU>
