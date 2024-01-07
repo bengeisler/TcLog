@@ -32,6 +32,7 @@ VAR
 	_config : LoggingConfiguration; // Logging configuration. Is set by invoking configuration methods.
 	_error : Error; // Contains information about internal error.
 	_busy : BOOL; // Logger is busy, typically with writing logs to the file system.
+  _timeInfoReady : BOOL := FALSE; // Set to true once the time information is available
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -313,6 +314,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[// Generate time data (shared state)
 dateTime();
+IF dateTime.Done THEN _timeInfoReady := TRUE; END_IF
 
 _localTimeAsSystemTime := dateTime.AsLocalSystemTime;
 _localTimeAsString := dateTime.AsLocalSystemTimeString;
@@ -339,6 +341,7 @@ END_IF
 		
 // Persist logging messages to file
 _logCache.PersistToFile(
+  TimeInfoReady,
 	fileNameStringBuilder
 		.Reset()
 		.Append(_config.FilePath)
@@ -402,6 +405,20 @@ _config.RollingInterval := interval;
 SetRollingInterval REF= THIS^;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="TimeInfoReady" Id="{b76a0ec9-7958-4ad1-9f57-6632e2828ea1}">
+      <Declaration><![CDATA[/// `TimeInfoReady` evaluates to `TRUE` once the time information used by determine
+/// the timestamp for the message is available.
+{attribute 'monitoring':='call'}
+PROPERTY TimeInfoReady : BOOL]]></Declaration>
+      <Get Name="Get" Id="{98f342b2-5e83-4e9b-9a60-9eecedc01f2b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TimeInfoReady := _timeInfoReady;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="TimestampFormat" Id="{ae9acdda-63d0-4143-b862-4bb5f08b434d}">
       <Declaration><![CDATA[/// Configuration method.
 /// Sets the format of the timestamp in the file name. 

@@ -100,6 +100,7 @@ END_VAR
       <Declaration><![CDATA[{attribute 'hide_all_locals'}
 METHOD PersistToFile : BOOL
 VAR_INPUT
+  enable: BOOL; // TRUE starts persistence mechanism
   fileName : Tc2_System.T_MaxString; // File name including its path
 END_VAR
 VAR_INST
@@ -136,7 +137,7 @@ END_VAR
 // *** I D L E ***
 IF state = PersistToFileState.Idle THEN
   lockFileWriteToForceRisingEdge := FALSE;
-  IF _fifo.nCount > 0 THEN 
+  IF _fifo.nCount > 0 AND enable THEN 
     lockFileWriteToForceRisingEdge := FALSE;
     state := PersistToFileState.OpenFile;
   END_IF

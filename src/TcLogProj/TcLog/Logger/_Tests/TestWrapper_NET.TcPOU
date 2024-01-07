@@ -4,6 +4,8 @@
     <Declaration><![CDATA[FUNCTION_BLOCK TestWrapper_NET
 VAR
   _coreLogger : TcLogCore(BufferSize:=50 * 50 * (UDINT_TO_DINT(Tc2_System.MAX_STRING_LENGTH) + INT_TO_DINT(Constants.FifoOverhead)));
+  _coreLoggerFirstCycle : TcLogCore(BufferSize:=50 * 50 * (UDINT_TO_DINT(Tc2_System.MAX_STRING_LENGTH) + INT_TO_DINT(Constants.FifoOverhead)));
+  _loggerFirstCycle : TcLog;
   _logger : TcLog;
   _flushCache : BOOL;
   
@@ -13,6 +15,7 @@ VAR
   _cycles : INT;
   _i : INT;
   _persistenceTimeStaysWithinBounds : F_TRIG;
+  _isFirstCycle: BOOL := TRUE;
   
   // Exchanged variables with .NET tests
   FilePath : STRING;
@@ -58,6 +61,7 @@ VAR
   
   Persistance_time_stays_within_bounds : BOOL;
   Duration_in_cylces : DINT := 1;
+  
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -206,6 +210,25 @@ IF Persistance_time_stays_within_bounds THEN
     CycleCount := CycleCount + 1;
   END_IF
 END_IF
+
+// Check first cpu cycle
+_coreLoggerFirstCycle
+  .IncludeInstancePath()
+  .MinimumLevel(LogLevels.Warning)
+  .SetDelimiter(Delimiter)
+  .SetRollingInterval(RollingIntervals.Hourly)
+  .DeleteLogFilesAfterDays(1)
+  .TimestampFormat('_YYYYMMDD-hh-mm-ss_')
+  .WriteToAds()
+  .WriteToFile('C:\UnitTestFirstCycle\', 'firstCycle.txt')
+  .RunLogger();
+_loggerFirstCycle.SetLogger(_coreLoggerFirstCycle);
+
+IF _isFirstCycle THEN
+  _loggerFirstCycle.Error('Log in first cycle');
+  _isFirstCycle := FALSE;
+END_IF
+
 
 
 ]]></ST>

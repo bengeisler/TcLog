@@ -18,7 +18,7 @@
     <Company>Benedikt Geisler</Company>
     <Released>true</Released>
     <Title>TcLog</Title>
-    <ProjectVersion>0.3.1.0</ProjectVersion>
+    <ProjectVersion>0.4.0.0</ProjectVersion>
     <CombineIds>false</CombineIds>
     <DefaultNamespace>TcLog</DefaultNamespace>
     <Author>Benedikt Geisler</Author>
