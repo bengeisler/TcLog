@@ -1,45 +1,45 @@
 ### YamlMime:XRefMap
 sorted: true
 references:
-- uid: TcLog.AnyToString
+- uid: TcLogLib.AnyToString
   name: AnyToString
-  href: reference/TcLog/Utils/AnyToString.html
-- uid: TcLog.Constants
+  href: reference/TcLogLib/Utils/AnyToString.html
+- uid: TcLogLib.Constants
   name: Constants
-  href: reference/TcLog/Constants.html
-- uid: TcLog.DateTime
+  href: reference/TcLogLib/Constants.html
+- uid: TcLogLib.DateTime
   name: DateTime
-  href: reference/TcLog/Utils/DateTime.html
-- uid: TcLog.Error
+  href: reference/TcLogLib/Utils/DateTime.html
+- uid: TcLogLib.Error
   name: Error
-  href: reference/TcLog/Logger/_DataTypes/Error.html
-- uid: TcLog.ErrorCodes
+  href: reference/TcLogLib/Logger/_DataTypes/Error.html
+- uid: TcLogLib.ErrorCodes
   name: ErrorCodes
-  href: reference/TcLog/Logger/_DataTypes/ErrorCodes.html
-- uid: TcLog.Global_Version
+  href: reference/TcLogLib/Logger/_DataTypes/ErrorCodes.html
+- uid: TcLogLib.Global_Version
   name: Global_Version
-  href: reference/TcLog/Version/Global_Version.html
-- uid: TcLog.ILog
+  href: reference/TcLogLib/Version/Global_Version.html
+- uid: TcLogLib.ILog
   name: ILog
-  href: reference/TcLog/Logger/_Interfaces/ILog.html
-- uid: TcLog.ILogCore
+  href: reference/TcLogLib/Logger/_Interfaces/ILog.html
+- uid: TcLogLib.ILogCore
   name: ILogCore
-  href: reference/TcLog/Logger/_Interfaces/ILogCore.html
-- uid: TcLog.LoggingConfiguration
+  href: reference/TcLogLib/Logger/_Interfaces/ILogCore.html
+- uid: TcLogLib.LoggingConfiguration
   name: LoggingConfiguration
-  href: reference/TcLog/Logger/_DataTypes/LoggingConfiguration.html
-- uid: TcLog.LogLevels
+  href: reference/TcLogLib/Logger/_DataTypes/LoggingConfiguration.html
+- uid: TcLogLib.LogLevels
   name: LogLevels
-  href: reference/TcLog/Logger/_DataTypes/LogLevels.html
-- uid: TcLog.RollingIntervals
+  href: reference/TcLogLib/Logger/_DataTypes/LogLevels.html
+- uid: TcLogLib.RollingIntervals
   name: RollingIntervals
-  href: reference/TcLog/Logger/_DataTypes/RollingIntervals.html
-- uid: TcLog.TcLog
+  href: reference/TcLogLib/Logger/_DataTypes/RollingIntervals.html
+- uid: TcLogLib.TcLog
   name: TcLog
-  href: reference/TcLog/Logger/TcLog.html
-- uid: TcLog.TcLogCore
+  href: reference/TcLogLib/Logger/TcLog.html
+- uid: TcLogLib.TcLogCore
   name: TcLogCore
-  href: reference/TcLog/Logger/TcLogCore.html
-- uid: TcLog.TcLogTrig
+  href: reference/TcLogLib/Logger/TcLogCore.html
+- uid: TcLogLib.TcLogTrig
   name: TcLogTrig
-  href: reference/TcLog/Logger/TcLogTrig.html
+  href: reference/TcLogLib/Logger/TcLogTrig.html

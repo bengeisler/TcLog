@@ -23,7 +23,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "4AxtBzuvwJLIA4vIAN3kwkiNWJdevFsYRuYyA0j1tnE="
+          "hash": "45aA9wRvW5NJH2xLzX7FDl6Tod5VlFfVQowPxAtd4Vw="
         }
       },
       "is_incremental": false,
@@ -31,11 +31,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "reference/TcLog/Constants.md",
+      "source_relative_path": "reference/TcLogLib/Constants.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Constants.html",
-          "hash": "CyM3x4UZPdZAMxw31kceJAriLmtsWS42yAAxsyZf5Sc="
+          "relative_path": "reference/TcLogLib/Constants.html",
+          "hash": "DGcrZSMceinpOvc2KidYijW2Dd3PZfwLAKXwiFIIn40="
         }
       },
       "is_incremental": false,
@@ -43,11 +43,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "reference/TcLog/Logger/TcLog.md",
+      "source_relative_path": "reference/TcLogLib/Logger/TcLog.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Logger/TcLog.html",
-          "hash": "WJXMIwZ6oVe+/m7I6sfmiCKMU1w39uhe9fHJF8KagwQ="
+          "relative_path": "reference/TcLogLib/Logger/TcLog.html",
+          "hash": "yY+Cw4U149fhMPXvaSy3ZkAHWFgMx0+5QSIZqfajmFU="
         }
       },
       "is_incremental": false,
@@ -55,11 +55,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "reference/TcLog/Logger/TcLogCore.md",
+      "source_relative_path": "reference/TcLogLib/Logger/TcLogCore.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Logger/TcLogCore.html",
-          "hash": "YI1fWcnrxsfp0V1Zfmz6Y7xcHmpQkLSb66BJCNWsBhk="
+          "relative_path": "reference/TcLogLib/Logger/TcLogCore.html",
+          "hash": "4ITks33TziUAg1566an8kzBQg3VxIohe0r5uh10Zyko="
         }
       },
       "is_incremental": false,
@@ -67,11 +67,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "reference/TcLog/Logger/TcLogTrig.md",
+      "source_relative_path": "reference/TcLogLib/Logger/TcLogTrig.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Logger/TcLogTrig.html",
-          "hash": "qp7nPiH8YohKQBBL8ni5r23DTpzI0RztAKPdinVD1Mw="
+          "relative_path": "reference/TcLogLib/Logger/TcLogTrig.html",
+          "hash": "otmPjNznooahKQFCzvWRyMsWwFY+uvBX+/IPUytECGc="
         }
       },
       "is_incremental": false,
@@ -79,11 +79,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "reference/TcLog/Logger/_DataTypes/Error.md",
+      "source_relative_path": "reference/TcLogLib/Logger/_DataTypes/Error.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Logger/_DataTypes/Error.html",
-          "hash": "kcEt9JyzZLVH3LIc0MYvh86YGJgeG2GHj2SBbk2rPrg="
+          "relative_path": "reference/TcLogLib/Logger/_DataTypes/Error.html",
+          "hash": "fPNTzWkcFaJFUfU34x6fy2Xmm9bHMuaBCZvnonl7m0Y="
         }
       },
       "is_incremental": false,
@@ -91,11 +91,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "reference/TcLog/Logger/_DataTypes/ErrorCodes.md",
+      "source_relative_path": "reference/TcLogLib/Logger/_DataTypes/ErrorCodes.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Logger/_DataTypes/ErrorCodes.html",
-          "hash": "AdcoWeqdJZY+d5nUJxaJFMYz3WRlP7XNFKzgzW0qQZU="
+          "relative_path": "reference/TcLogLib/Logger/_DataTypes/ErrorCodes.html",
+          "hash": "LURY8NBmwmZe5JPX8SECUWuntA6gjX1sQ75Z/80wtfg="
         }
       },
       "is_incremental": false,
@@ -103,11 +103,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "reference/TcLog/Logger/_DataTypes/LogLevels.md",
+      "source_relative_path": "reference/TcLogLib/Logger/_DataTypes/LogLevels.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Logger/_DataTypes/LogLevels.html",
-          "hash": "RwNgrtxoXnLDHPe72hYfeaVvXppLMf19oRKxo2ipVK8="
+          "relative_path": "reference/TcLogLib/Logger/_DataTypes/LogLevels.html",
+          "hash": "BGcrsHZ3XwLV7jeqJyfcLi0pOInlXRqCxV/wOQcmp3A="
         }
       },
       "is_incremental": false,
@@ -115,11 +115,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "reference/TcLog/Logger/_DataTypes/LoggingConfiguration.md",
+      "source_relative_path": "reference/TcLogLib/Logger/_DataTypes/LoggingConfiguration.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Logger/_DataTypes/LoggingConfiguration.html",
-          "hash": "Ddzo6GrohUomRdpOs77Cjhkch6fcN0K12gkd3p3zP7s="
+          "relative_path": "reference/TcLogLib/Logger/_DataTypes/LoggingConfiguration.html",
+          "hash": "Sc+1hwBxBFvrlFgm/hYY15Dj/4rUHZpgSOqWeYjj5rU="
         }
       },
       "is_incremental": false,
@@ -127,11 +127,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "reference/TcLog/Logger/_DataTypes/RollingIntervals.md",
+      "source_relative_path": "reference/TcLogLib/Logger/_DataTypes/RollingIntervals.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Logger/_DataTypes/RollingIntervals.html",
-          "hash": "haTK8FtUunJbZPnb7hl7j+C3/feBkLvQhxM/1feNCQM="
+          "relative_path": "reference/TcLogLib/Logger/_DataTypes/RollingIntervals.html",
+          "hash": "anUz+/Zh1f4Y5PyVQieP1EeXe1qhRbaZWpYvcDaDsZk="
         }
       },
       "is_incremental": false,
@@ -139,11 +139,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "reference/TcLog/Logger/_Interfaces/ILog.md",
+      "source_relative_path": "reference/TcLogLib/Logger/_Interfaces/ILog.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Logger/_Interfaces/ILog.html",
-          "hash": "Vtx2hxQn4yxFrdesDfhDxYCfxbxsaMP8q7WNHs0uIP4="
+          "relative_path": "reference/TcLogLib/Logger/_Interfaces/ILog.html",
+          "hash": "28YwtFolMRcUo1v296Y9r0LGcLY5n5OvT0D8CmVW0e0="
         }
       },
       "is_incremental": false,
@@ -151,11 +151,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "reference/TcLog/Logger/_Interfaces/ILogCore.md",
+      "source_relative_path": "reference/TcLogLib/Logger/_Interfaces/ILogCore.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Logger/_Interfaces/ILogCore.html",
-          "hash": "gBeZ7AX2TA/swEDAUT/yGohZFe2hGQ3OiNLrzXvhcxc="
+          "relative_path": "reference/TcLogLib/Logger/_Interfaces/ILogCore.html",
+          "hash": "ylxJS8a78G1D3/t0Ts9Uvu44IpyrNRSnoXU991cjafI="
         }
       },
       "is_incremental": false,
@@ -163,11 +163,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "reference/TcLog/Utils/AnyToString.md",
+      "source_relative_path": "reference/TcLogLib/Utils/AnyToString.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Utils/AnyToString.html",
-          "hash": "iDz120Me6HzbKVfnJqsK/N2R+hKqriS259iVmR+d8gk="
+          "relative_path": "reference/TcLogLib/Utils/AnyToString.html",
+          "hash": "umnI6kuIAyujUJ+fyYV1G5wBix6J++kGn51TRbvRhvE="
         }
       },
       "is_incremental": false,
@@ -175,11 +175,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "reference/TcLog/Utils/DateTime.md",
+      "source_relative_path": "reference/TcLogLib/Utils/DateTime.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Utils/DateTime.html",
-          "hash": "+cvBORivDKDym7j5YHuaRPwpdQ/zyV1Mvl24vr3PxQc="
+          "relative_path": "reference/TcLogLib/Utils/DateTime.html",
+          "hash": "BgBlWgimyKzMsBGMoIRmNC7e1lkm4fRgqfxPFONHM2k="
         }
       },
       "is_incremental": false,
@@ -187,11 +187,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "reference/TcLog/Version/Global_Version.md",
+      "source_relative_path": "reference/TcLogLib/Version/Global_Version.md",
       "output": {
         ".html": {
-          "relative_path": "reference/TcLog/Version/Global_Version.html",
-          "hash": "Ak67JrtU2FpfFl6XPOBp9a1BdR3MkmNESQ6gg2mdWJ4="
+          "relative_path": "reference/TcLogLib/Version/Global_Version.html",
+          "hash": "rRKXF8GawHWmIo4lN/n+NT5pDeoKrRxs3ibS65QuIkE="
         }
       },
       "is_incremental": false,
@@ -203,7 +203,7 @@
       "output": {
         ".html": {
           "relative_path": "userguide/configuration.html",
-          "hash": "Icj7k5eRB6rtt3xoNc5ocCMKjGAdhcxq4UPnga22Qps="
+          "hash": "BQmWtuS7scmGAoAfOCnZcaUNaIxk8iK6j8/Kx3grjMs="
         }
       },
       "is_incremental": false,
@@ -215,7 +215,7 @@
       "output": {
         ".html": {
           "relative_path": "userguide/customization.html",
-          "hash": "VvM3UM1OIMdIMG+a2rFDZV7/S13N4J48HbDtc6GTeBg="
+          "hash": "EEammQk5ACf2rVolObSQDzmCtzjV/Z38cw1FT7eGIh8="
         }
       },
       "is_incremental": false,
@@ -227,7 +227,7 @@
       "output": {
         ".html": {
           "relative_path": "userguide/getting_started.html",
-          "hash": "MAlr/ZsfcVwY+Tfs1FJCXpC1z4WkYq77hUEe5JbWqKo="
+          "hash": "Maz7NQRh/hzrkxELS3wsLdeyRpOuMkBC9FExnIIeF6k="
         }
       },
       "is_incremental": false,
@@ -239,7 +239,7 @@
       "output": {
         ".html": {
           "relative_path": "userguide/installation.html",
-          "hash": "nMb8yAGfERJgYD9KrVwsJWYt3inXIeW4H7QqAO5aNok="
+          "hash": "CnlKhGO1iONIoekqxaWmPh1fAjfW2KGb3cMTgtQ2raE="
         }
       },
       "is_incremental": false,
@@ -251,7 +251,7 @@
       "output": {
         ".html": {
           "relative_path": "userguide/introduction.html",
-          "hash": "VBzKWKOs4hRlseGVrkXaW32g8qehQ/vk/TfS3AJU9qM="
+          "hash": "K3TKPj7aQd2iFqX31+xnrLfDpqOKFNzm2ezpWx4n6OE="
         }
       },
       "is_incremental": false,
@@ -263,7 +263,7 @@
       "output": {
         ".html": {
           "relative_path": "userguide/license.html",
-          "hash": "p8jqoJcJVp4bPJKy/0rHg4MOSg0FpYY4vuCzcDVsu+8="
+          "hash": "Fz9EQ6jAIY7jGO8wFruMBf8ClAGr1Exk0ejTW79jvB4="
         }
       },
       "is_incremental": false,
@@ -275,7 +275,7 @@
       "output": {
         ".html": {
           "relative_path": "userguide/logging.html",
-          "hash": "J/TVgBsl8T5812KZOZNdSsyMS3c+CkMOLpDca/Xxfdo="
+          "hash": "qZ0sSzpu+X0nqOYIa23GuGghX3vYv8DFn9+JTOkEiy8="
         }
       },
       "is_incremental": false,
@@ -287,7 +287,7 @@
       "output": {
         ".html": {
           "relative_path": "userguide/performance.html",
-          "hash": "DyfXZK1Nle5mhDP60RDQmRIOyBlFZOxOKtGBZtNDY8w="
+          "hash": "OweMqJM1B+LQa4BifU+o8cJJ1/5lUBhcULTlMIgki9k="
         }
       },
       "is_incremental": false,
