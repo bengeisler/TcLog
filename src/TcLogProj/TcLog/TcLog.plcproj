@@ -18,9 +18,9 @@
     <Company>Benedikt Geisler</Company>
     <Released>true</Released>
     <Title>TcLog</Title>
-    <ProjectVersion>0.4.0.0</ProjectVersion>
+    <ProjectVersion>0.5.0.0</ProjectVersion>
     <CombineIds>false</CombineIds>
-    <DefaultNamespace>TcLog</DefaultNamespace>
+    <DefaultNamespace>TcLogLib</DefaultNamespace>
     <Author>Benedikt Geisler</Author>
     <Description>TcLog provides logging functionality to TwinCAT.</Description>
     <LibraryCategories>
