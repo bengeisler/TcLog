@@ -8,7 +8,7 @@ Configure the core logger in your project:
 
 ```st
 VAR
-  _coreLogger : TcLogCore(bufferSize := 100 * (Tc2_System.MAX_STRING_LENGTH + Constants.FifoOverhead));
+  _coreLogger : TcLog.TcLogCore(bufferSize := 100 * (Tc2_System.MAX_STRING_LENGTH + TcLog.Constants.FifoOverhead));
 END_VAR
 
 _coreLogger
@@ -22,7 +22,7 @@ Then, maybe in a different POU, use `TcLog` to log messages:
 
 ```st
 VAR
-  _logger: TcLog;
+  _logger: TcLog.TcLog;
   _myInt : INT := 10;
   _myVarInfo : __SYSTEM.VAR_INFO := __VARINFO(_myInt);
 END_VAR
