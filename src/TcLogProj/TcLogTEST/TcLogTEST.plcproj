@@ -39,7 +39,6 @@
     </PlaceholderReference>
     <PlaceholderReference Include="TcLog">
       <DefaultResolution>TcLog, * (Benedikt Geisler)</DefaultResolution>
-      <Namespace>TcLog</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcUnit">
       <DefaultResolution>TcUnit, * (www.tcunit.org)</DefaultResolution>

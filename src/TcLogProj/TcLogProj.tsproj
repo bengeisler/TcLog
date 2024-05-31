@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.29">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.56">
 	<Project ProjectGUID="{84E2C694-C6B7-48C0-A46A-93E9E79E1E4B}" Target64Bit="true" ShowHideConfigurations="#x3c7">
 		<System>
 			<Settings MaxCpus="8" NonWinCpus="4" Packages="4">
@@ -13,7 +13,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{534B7BB3-9B49-4F2B-86CC-2317930EA23D}" Name="TcLog" PrjFilePath="TcLog\TcLog.plcproj" TmcFilePath="TcLog\TcLog.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcLog\TcLog.tmc">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcLog\TcLog.tmc" TmcHash="{D6DE6DA2-A301-E892-90C0-691124362E04}">
 					<Name>TcLog Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
@@ -25,12 +25,12 @@
 				</Instance>
 			</Project>
 			<Project GUID="{39E514BF-8337-4E82-99CA-D7D99BEEE7FE}" Name="TcLogTEST" PrjFilePath="TcLogTEST\TcLogTEST.plcproj" TmcFilePath="TcLogTEST\TcLogTEST.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcLogTEST\TcLogTEST.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcLogTEST\TcLogTEST.tmc" TmcHash="{F4588DAC-3B4B-3F9E-E665-3B5E40794185}">
 					<Name>TcLogTEST Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
 						<Context>
-							<Id NeedCalleeCall="true">0</Id>
+							<Id>0</Id>
 							<Name>PlcTask</Name>
 							<ManualConfig>
 								<OTCID>#x02010040</OTCID>
