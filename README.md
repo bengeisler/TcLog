@@ -8,13 +8,13 @@ Configure the core logger in your project:
 
 ```st
 VAR
-  _coreLogger : TcLogCore(bufferSize := 100 * (Tc2_System.MAX_STRING_LENGTH + Constants.FifoOverhead));
+  _coreLogger : TcLogLib.TcLogCore(bufferSize := 100 * (Tc2_System.MAX_STRING_LENGTH + TcLogLib.Constants.FifoOverhead));
 END_VAR
 
 _coreLogger
   .WriteToAds()
   .WriteToFile('c:\logs\', 'sensor_data.txt')
-  .MinimumLevel(LogLevels.Debug)
+  .MinimumLevel(TcLogLib.LogLevels.Debug)
   .RunLogger();
 ```
 
@@ -22,7 +22,7 @@ Then, maybe in a different POU, use `TcLog` to log messages:
 
 ```st
 VAR
-  _logger: TcLog;
+  _logger: TcLogLib.TcLog;
   _myInt : INT := 10;
   _myVarInfo : __SYSTEM.VAR_INFO := __VARINFO(_myInt);
 END_VAR
