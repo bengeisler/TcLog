@@ -241,6 +241,25 @@ _logConditionSatisfied := cond;
 OnCondition REF= THIS^;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="OnRaisedCondition" Id="{1cf2a600-d151-438b-8c88-62c666a56a4c}">
+      <Declaration><![CDATA[/// Conditional execution of the log command. Only executes logging when Cond = TRUE.
+METHOD OnRaisedCondition : REFERENCE TO TcLog
+VAR_INPUT
+  /// Logs data only if this condition evaluates to TRUE.
+  cond : BOOL; 
+END_VAR
+VAR_INST
+    rtrig : R_TRIG;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[InitializeLogData();
+
+rtrig(CLK:=cond);
+_logConditionSatisfied := rtrig.Q;
+
+OnRaisedCondition REF= THIS^;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="SetLogger" Id="{46b10db2-eb0c-4fd5-9093-9efc1bae8abd}">
       <Declaration><![CDATA[/// Initializes the reference to the core logger. This enables you to use several
 /// loggers with different configurations in one project.
