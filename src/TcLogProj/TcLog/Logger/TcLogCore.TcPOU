@@ -128,12 +128,12 @@ VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
   /// Initial buffer size for the internal log message buffer
-	bufferSize : DINT;
+	bufferSize : UDINT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_loggingSingleton.Init(THIS^);
-_logCache.Init(DINT_TO_UDINT(bufferSize));]]></ST>
+_logCache.Init(bufferSize);]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_reinit" Id="{7a4a2895-bc8f-4c5f-ae34-d121f2978f2a}">
