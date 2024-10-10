@@ -60,7 +60,7 @@ See the [installation guide](https://bengeisler.github.io/TcLog/userguide/instal
 Get quickly up and running with TcLog: [Get Started](https://bengeisler.github.io/TcLog/userguide/getting_started.html)
 
 ## API reference
-Find the full API reference [here](https://bengeisler.github.io/TcLog/reference/TcLog/Constants.html).
+Find the full API reference [here](https://bengeisler.github.io/TcLog/reference/TcLogLib/Constants.html).
 
 ## License
 The library is licensed under the [MIT License](LICENSE).
