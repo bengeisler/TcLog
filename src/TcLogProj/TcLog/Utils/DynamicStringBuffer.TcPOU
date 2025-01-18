@@ -118,13 +118,13 @@ VAR_INST
   currentBufferPos : UDINT;
   fifoHeadString : Tc2_System.T_MaxString;
   fifoHeadLength : UDINT;
-  fifoHeadBytes : ARRAY[0..Tc2_System.Tc2_System.MAX_STRING_LENGTH] OF BYTE;
+  fifoHeadBytes : ARRAY[0..Tc2_System.MAX_STRING_LENGTH] OF BYTE;
   i : UINT;
 END_VAR
 VAR CONSTANT
   NetId : STRING := '';
   Timeout : TIME := DEFAULT_ADS_TIMEOUT;
-  MaxLogsPerCycle : UINT := DINT_TO_UINT(CONSTANTS.BufferSize / UDINT_TO_DINT(Tc2_System.MAX_STRING_LENGTH));
+  MaxLogsPerCycle : UINT := UDINT_TO_UINT(CONSTANTS.BufferSize / Tc2_System.MAX_STRING_LENGTH);
   MaxBufferPosition : UDINT := (SIZEOF(buffer)-Tc2_System.MAX_STRING_LENGTH);
 END_VAR
 ]]></Declaration>
@@ -280,7 +280,7 @@ VAR
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[requiredSize := _fifo.cbSize + (Tc2_System.Tc2_System.MAX_STRING_LENGTH + INT_TO_UDINT(Constants.FifoOverhead));
+        <ST><![CDATA[requiredSize := _fifo.cbSize + (Tc2_System.MAX_STRING_LENGTH + Constants.FifoOverhead);
 
 IF requiredSize > _fifo.cbBuffer THEN
   _dynamicMemoryBuffer.Resize(nSize := requiredSize*SIZEOF(BYTE), bPreserve:=TRUE, bReset:=TRUE);

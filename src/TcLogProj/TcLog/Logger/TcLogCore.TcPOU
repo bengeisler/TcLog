@@ -15,7 +15,7 @@
 ///
 /// ```st
 /// VAR
-///   myLogger: TcLogCore(BufferSize := 100 * (Tc2_System.Tc2_System.MAX_STRING_LENGTH * Constants.FifoOverhead));
+///   myLogger: TcLogCore(BufferSize := 100 * (Tc2_System.MAX_STRING_LENGTH * Constants.FifoOverhead));
 /// END_VAR
 /// ```
 ///
