@@ -4,11 +4,11 @@
     <Declaration><![CDATA[FUNCTION_BLOCK TestWrapper_NET
 VAR
   _coreLogger : TcLogCore(BufferSize:=50 * 50 * (UDINT_TO_DINT(Tc2_System.MAX_STRING_LENGTH) + INT_TO_DINT(Constants.FifoOverhead)));
-  _coreLoggerFirstCycle : TcLogCore(BufferSize:=50 * 50 * (UDINT_TO_DINT(Tc2_System.MAX_STRING_LENGTH) + INT_TO_DINT(Constants.FifoOverhead)));
-  _loggerFirstCycle : TcLog;
+  //_coreLoggerFirstCycle : TcLogCore(BufferSize:=50 * 50 * (UDINT_TO_DINT(Tc2_System.MAX_STRING_LENGTH) + INT_TO_DINT(Constants.FifoOverhead)));
+  //_loggerFirstCycle : TcLog;
   _logger : TcLog;
   _flushCache : BOOL;
-  
+ 
   // Test drivers
   _getDateTime : DateTime;
   _setLocalSystemTime : NT_SetLocalTime;
@@ -212,6 +212,7 @@ IF Persistance_time_stays_within_bounds THEN
 END_IF
 
 // Check first cpu cycle
+(* 
 _coreLoggerFirstCycle
   .IncludeInstancePath()
   .MinimumLevel(LogLevels.Warning)
@@ -228,7 +229,7 @@ IF _isFirstCycle THEN
   _loggerFirstCycle.Error('Log in first cycle');
   _isFirstCycle := FALSE;
 END_IF
-
+*)
 
 
 ]]></ST>

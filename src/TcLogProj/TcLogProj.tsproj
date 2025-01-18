@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.56">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.64">
 	<Project ProjectGUID="{84E2C694-C6B7-48C0-A46A-93E9E79E1E4B}" Target64Bit="true" ShowHideConfigurations="#x3c7">
 		<System>
 			<Settings MaxCpus="8" NonWinCpus="4" Packages="4">
@@ -25,7 +25,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{39E514BF-8337-4E82-99CA-D7D99BEEE7FE}" Name="TcLogTEST" PrjFilePath="TcLogTEST\TcLogTEST.plcproj" TmcFilePath="TcLogTEST\TcLogTEST.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcLogTEST\TcLogTEST.tmc" TmcHash="{F4588DAC-3B4B-3F9E-E665-3B5E40794185}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcLogTEST\TcLogTEST.tmc" TmcHash="{23E3E190-5374-880C-51F0-368C66C0D7E0}">
 					<Name>TcLogTEST Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
