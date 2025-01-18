@@ -57,13 +57,5 @@ IF cycleCount > (Cycles * Messages * 2 + 4) THEN
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="DynamicStringBuffer_TEST">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="DynamicStringBuffer_TEST.LogsManyMessagesForManyCycles">
-      <LineId Id="3" Count="18" />
-      <LineId Id="29" Count="10" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

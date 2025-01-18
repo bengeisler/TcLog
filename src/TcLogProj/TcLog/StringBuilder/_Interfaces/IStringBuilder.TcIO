@@ -29,9 +29,9 @@ END_VAR
     <Method Name="PadLeft" Id="{c4fcdbc5-50e6-479f-bc91-2aff2727bcfd}">
       <Declaration><![CDATA[METHOD PadLeft : IStringBuilder
 VAR_INPUT
-    Text : Tc2_System.T_MaxString; // Text to append to current build string
-    Length : INT; // Total length of text + padding
-    Char : STRING(1); // Character to be padded left of text
+    text : Tc2_System.T_MaxString; // Text to append to current build string
+    length : INT; // Total length of text + padding
+    c : STRING(1); // Character to be padded left of text
 END_VAR
 ]]></Declaration>
     </Method>

@@ -49,16 +49,5 @@ SUPER^.OnCondition(rTrig.Q);
 OnRisingEdge REF= THIS^;]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="TcLogTrig">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogTrig.OnFallingEdge">
-      <LineId Id="3" Count="3" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="TcLogTrig.OnRisingEdge">
-      <LineId Id="3" Count="3" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

@@ -52,7 +52,7 @@ InsertAtLocation  := THIS^;]]></ST>
 VAR_INPUT
   text : Tc2_System.T_MaxString; // Text to append to current build string
   length : INT; // Total length of text + padding
-  char : STRING(1); // Character to be padded left of text
+  c : STRING(1); // Character to be padded left of text
 END_VAR
 VAR
   i : INT;
@@ -63,7 +63,7 @@ END_VAR
         <ST><![CDATA[// Add left padding
 padLength := Tc2_Standard.LEN(text) - length;
 FOR i := 1 TO padLength DO
-  _workString:= Tc2_Standard.CONCAT(_workString, char);
+  _workString:= Tc2_Standard.CONCAT(_workString, c);
 END_FOR
 
 // Add text

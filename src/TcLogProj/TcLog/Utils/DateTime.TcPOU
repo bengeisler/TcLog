@@ -167,7 +167,7 @@ VAR_INPUT
 END_VAR
 VAR_INST
   inputString : STRING;
-  char : STRING(1);
+  c : STRING(1);
   formattedString : Tc2_System.T_MaxString;
 END_VAR
 VAR
@@ -188,15 +188,15 @@ END_VAR
 inputString := format;
 
 WHILE Tc2_Standard.LEN(inputString) > 0 DO
-  char := Tc2_Standard.LEFT(inputString, 1);
+  c := Tc2_Standard.LEFT(inputString, 1);
   
-  IF    char = 'Y' THEN   year := year + 1;
-  ELSIF char = 'M' THEN month := month + 1;
-  ELSIF char = 'D' THEN day := day + 1;
-  ELSIF char = 'h' THEN hour := hour + 1;
-  ELSIF char = 'm' THEN minute := minute + 1;
-  ELSIF char = 's' THEN   second := second + 1;
-  ELSIF char = 'i' THEN   millisecond := millisecond + 1;
+  IF    c = 'Y' THEN year := year + 1;
+  ELSIF c = 'M' THEN month := month + 1;
+  ELSIF c = 'D' THEN day := day + 1;
+  ELSIF c = 'h' THEN hour := hour + 1;
+  ELSIF c = 'm' THEN minute := minute + 1;
+  ELSIF c = 's' THEN second := second + 1;
+  ELSIF c = 'i' THEN millisecond := millisecond + 1;
   END_IF
   
   inputString := Tc2_Standard.DELETE(inputString, 1, 1);

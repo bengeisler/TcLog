@@ -55,16 +55,5 @@ END_IF
 ]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="DateTime_TEST">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="DateTime_TEST.CheckStringFormat">
-      <LineId Id="3" Count="2" />
-      <LineId Id="44" Count="0" />
-      <LineId Id="6" Count="0" />
-      <LineId Id="45" Count="0" />
-      <LineId Id="7" Count="27" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

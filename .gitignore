@@ -17,6 +17,7 @@
 *.project.~u
 *.tsproj.bak
 *.xti.bak
+*.~u
 .DS_Store
 LineIDs.dbg
 LineIDs.dbg.bak

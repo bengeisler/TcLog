@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.64">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.12">
 	<Project ProjectGUID="{84E2C694-C6B7-48C0-A46A-93E9E79E1E4B}" Target64Bit="true" ShowHideConfigurations="#x3c7">
 		<System>
-			<Settings MaxCpus="8" NonWinCpus="4" Packages="4">
+			<Settings MaxCpus="8" NonWinCpus="4">
 				<Cpu CpuId="7"/>
 			</Settings>
 			<Tasks>
@@ -13,7 +13,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{534B7BB3-9B49-4F2B-86CC-2317930EA23D}" Name="TcLog" PrjFilePath="TcLog\TcLog.plcproj" TmcFilePath="TcLog\TcLog.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcLog\TcLog.tmc" TmcHash="{D6DE6DA2-A301-E892-90C0-691124362E04}">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{620517A8-354C-4728-A340-8BE03FFB40BF}" TmcPath="TcLog\TcLog.tmc">
 					<Name>TcLog Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
@@ -25,7 +25,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{39E514BF-8337-4E82-99CA-D7D99BEEE7FE}" Name="TcLogTEST" PrjFilePath="TcLogTEST\TcLogTEST.plcproj" TmcFilePath="TcLogTEST\TcLogTEST.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcLogTEST\TcLogTEST.tmc" TmcHash="{23E3E190-5374-880C-51F0-368C66C0D7E0}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{7AFB45A1-FC30-86EF-5006-0F4C1CD43FA2}" TmcPath="TcLogTEST\TcLogTEST.tmc">
 					<Name>TcLogTEST Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>

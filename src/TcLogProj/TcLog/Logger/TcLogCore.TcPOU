@@ -136,18 +136,6 @@ END_VAR
 _logCache.Init(bufferSize);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="FB_reinit" Id="{7a4a2895-bc8f-4c5f-ae34-d121f2978f2a}">
-      <Declaration><![CDATA[{attribute 'hide'}
-METHOD FB_reinit : BOOL
-VAR_INPUT
-	bufferSize : DINT; // Buffer size for string buffer
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[_loggingSingleton.Init(THIS^);
-_logCache.Init(DINT_TO_UDINT(bufferSize));]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="FlushCache" Id="{d85421f8-abe8-45dc-a84c-3e5e5c8a80e5}">
       <Declaration><![CDATA[/// Flushes the logging cache. All messages that have not yet been processed will be lost.
 METHOD FlushCache : BOOL
