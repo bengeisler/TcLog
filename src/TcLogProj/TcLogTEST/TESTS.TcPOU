@@ -3,16 +3,16 @@
   <POU Name="TESTS" Id="{379526ca-9719-4af5-b69e-537f4c5508c9}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM TESTS
 VAR
+  TestWrapper : TestWrapper_NET;
   DateTime_TEST : DateTime_TEST;
   HelperFunctions_TEST : ConvertAnyToString_TEST;
   DynamicStringBuffer_TEST : DynamicStringBuffer_TEST;
-  TestWrapper : TestWrapper_NET();
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[TcUnit.RUN();
+      <ST><![CDATA[TestWrapper();
 
-TestWrapper();]]></ST>
+TcUnit.RUN();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

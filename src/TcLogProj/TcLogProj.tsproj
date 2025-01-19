@@ -13,7 +13,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{534B7BB3-9B49-4F2B-86CC-2317930EA23D}" Name="TcLog" PrjFilePath="TcLog\TcLog.plcproj" TmcFilePath="TcLog\TcLog.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{620517A8-354C-4728-A340-8BE03FFB40BF}" TmcPath="TcLog\TcLog.tmc">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{408B7A7B-3713-A84F-3B0B-7BE87073AC61}" TmcPath="TcLog\TcLog.tmc">
 					<Name>TcLog Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
@@ -25,7 +25,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{39E514BF-8337-4E82-99CA-D7D99BEEE7FE}" Name="TcLogTEST" PrjFilePath="TcLogTEST\TcLogTEST.plcproj" TmcFilePath="TcLogTEST\TcLogTEST.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{7AFB45A1-FC30-86EF-5006-0F4C1CD43FA2}" TmcPath="TcLogTEST\TcLogTEST.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{85D8F0CD-71C2-C784-A363-F4273DF81E94}" TmcPath="TcLogTEST\TcLogTEST.tmc">
 					<Name>TcLogTEST Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>

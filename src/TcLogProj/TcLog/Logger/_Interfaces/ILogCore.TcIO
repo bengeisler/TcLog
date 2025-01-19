@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <Itf Name="ILogCore" Id="{80275ac4-af95-4848-b7cc-155c017cbebe}">
-    <Declaration><![CDATA[INTERFACE ILogCore
+    <Declaration><![CDATA[INTERFACE ILogCore EXTENDS __System.IQueryInterface
 ]]></Declaration>
     <Method Name="LogCustomFormat" Id="{b161fcb9-2570-4c24-9235-7852fced6136}">
       <Declaration><![CDATA[// Logger method.

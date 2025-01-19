@@ -392,22 +392,23 @@ namespace TcLogTest.NET
             fixture.TcClient.DeleteVariableHandle(hDurationInCycles);
         }
 
-        //[Fact]
-        //public void Persistence_in_first_cpu_cycle_has_correct_time_data_in_filename()
-        //{
-        //    var files = Directory.GetFiles("C:\\UnitTestFirstCycle\\");
-        //    var year = DateTime.Now.Year;
-        //    var month = DateTime.Now.Month;
-        //    var day = DateTime.Now.Day;
+        [Fact]
+        public void Persistence_in_first_cpu_cycle_has_correct_time_data_in_filename()
+        {
+            var files = Directory.GetFiles("C:\\UnitTestFirstCycle\\");
+            var year = DateTime.Now.Year;
+            var month = DateTime.Now.Month;
+            var day = DateTime.Now.Day;
 
-        //    foreach (var f in files) { 
-        //        Assert.DoesNotContain("1970", f);
-        //        Assert.Contains(year.ToString(), f);
-        //        Assert.Contains(month.ToString(), f);
-        //        Assert.Contains(day.ToString(), f);
-        //    }
+            foreach (var f in files)
+            {
+                Assert.DoesNotContain("1970", f);
+                Assert.Contains(year.ToString(), f);
+                Assert.Contains(month.ToString(), f);
+                Assert.Contains(day.ToString(), f);
+            }
 
-        //    foreach (var f in files) File.Delete(f);
-        //}
+            foreach (var f in files) File.Delete(f);
+        }
     }
 }

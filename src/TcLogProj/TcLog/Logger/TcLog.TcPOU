@@ -208,7 +208,9 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[s_loggerSingletonInstance := ref2Core;]]></ST>
+        <ST><![CDATA[IF s_loggerSingletonInstance = 0 THEN
+	s_loggerSingletonInstance := ref2Core;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="InitializeLogData" Id="{b4d317d9-a916-4484-9cf0-3391543593aa}">

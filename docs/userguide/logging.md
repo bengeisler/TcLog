@@ -84,3 +84,5 @@ _logger.AppendString('Sensor xy: ')
 ```
 
 From now on `_logger` considers the configuration of `_newLogger`.
+
+> **Note**: If you use multiple loggers, TcLog will always take the **first** initialized logger as default logger. Take this into account if you use multiple loggers.
