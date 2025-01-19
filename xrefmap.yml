@@ -16,9 +16,6 @@ references:
 - uid: TcLogLib.ErrorCodes
   name: ErrorCodes
   href: reference/TcLogLib/Logger/_DataTypes/ErrorCodes.html
-- uid: TcLogLib.Global_Version
-  name: Global_Version
-  href: reference/TcLogLib/Version/Global_Version.html
 - uid: TcLogLib.ILog
   name: ILog
   href: reference/TcLogLib/Logger/_Interfaces/ILog.html
