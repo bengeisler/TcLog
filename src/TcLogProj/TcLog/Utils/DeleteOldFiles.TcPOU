@@ -29,12 +29,15 @@ VAR
   _fileNameToDelete : Tc2_System.T_MaxString;
   _commandType : Tc2_Utilities.E_EnumCmdType;
   _fileDeleted : BOOL;
+  _startFileDelete: BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[// State machine to delete all due files.
 // It first enumerates all files in the specified directory
 // and then deletes all files that have overpassed the specified due date
+_startFileDelete := FALSE;
+
 CASE _state OF
   DeleteFilesState.Idle:
     IF StartScan THEN
@@ -89,6 +92,7 @@ CASE _state OF
   
   DeleteFilesState.DeleteFile:
     _fileNameToDelete := Tc2_Standard.CONCAT(FilePath, _listOfFiles[_deleteFileIndex].sFileName);
+    _startFileDelete := TRUE;
     
     IF _fileDeleteBusy.Q THEN
       _deleteFileIndex := _deleteFileIndex + 1;
@@ -118,15 +122,15 @@ _enumFindFileList(sNetId := '',
        pFindList := ADR(_listOfFiles),
        cbFindList := SIZEOF(_listOfFiles),
        tTimeout := T#10S);
-
+       
 _enumBusy(CLK:=_enumFindFileList.bBusy);
 
 // Delete files
 _fileDelete(sNetId := '',
              sPathName := _fileNameToDelete,
-             bExecute := (_state = DeleteFilesState.DeleteFile),
+             bExecute := _startFileDelete,
              tTimeout := T#10S);
-        
+
 _fileDeleteBusy(CLK := _fileDelete.bBusy);
 
 // Error handling

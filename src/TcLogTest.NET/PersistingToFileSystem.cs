@@ -200,10 +200,21 @@ namespace TcLogTest.NET
             var files = Directory.GetFiles(path);
             foreach (var f in files) File.Delete(f);
 
+            await SetTime("2021-08-17-19:59:58.300", "2021-08-17-19:59:");
+            await Task.Delay(3000);
+            fixture.TcClient.WriteAny(hRun, true);
+            await Task.Delay(6000);
+
+            await SetTime("2021-08-17-20:59:58.300", "2021-08-17-20:59:");
+            await Task.Delay(3000);
+            fixture.TcClient.WriteAny(hRun, true);
+            await Task.Delay(6000);
+
             await SetTime("2021-08-17-21:59:58.300", "2021-08-17-21:59:");
             await Task.Delay(3000);
             fixture.TcClient.WriteAny(hRun, true);
-            await Task.Delay(2000);
+            await Task.Delay(6000);
+
             await SetTime("2021-08-19-23:59:58.100", "2021-08-19-23:59:");
             await Task.Delay(4000);
             files = Directory.GetFiles(path);
