@@ -1,6 +1,6 @@
 # This script prepares the library for release. 
 # It takes a single parameter: the version number.
-# Usage: .\save_library.ps1 -version "1.0.0"
+# Usage: .\release_library.ps1 -version "1.0.0"
 # It: 
 # - removes the TcUnit reference from the project
 # - sets the version number
