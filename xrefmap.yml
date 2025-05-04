@@ -1,6 +1,9 @@
 ### YamlMime:XRefMap
 sorted: true
 references:
+- uid: TcLog
+  name: TcLog
+  href: reference/TcLogLib.html
 - uid: TcLogLib.AnyToString
   name: AnyToString
   href: reference/TcLogLib/Utils/AnyToString.html
@@ -22,12 +25,12 @@ references:
 - uid: TcLogLib.ILogCore
   name: ILogCore
   href: reference/TcLogLib/Logger/_Interfaces/ILogCore.html
-- uid: TcLogLib.LoggingConfiguration
-  name: LoggingConfiguration
-  href: reference/TcLogLib/Logger/_DataTypes/LoggingConfiguration.html
 - uid: TcLogLib.LogLevels
   name: LogLevels
   href: reference/TcLogLib/Logger/_DataTypes/LogLevels.html
+- uid: TcLogLib.LoggingConfiguration
+  name: LoggingConfiguration
+  href: reference/TcLogLib/Logger/_DataTypes/LoggingConfiguration.html
 - uid: TcLogLib.RollingIntervals
   name: RollingIntervals
   href: reference/TcLogLib/Logger/_DataTypes/RollingIntervals.html
