@@ -5,7 +5,9 @@
 VAR
   _coreLogger : TcLogCore(BufferSize:=50 * 50 * (Tc2_System.MAX_STRING_LENGTH + Constants.FifoOverhead));
   _coreLoggerFirstCycle : TcLogCore(BufferSize:=50 * 50 * (Tc2_System.MAX_STRING_LENGTH + Constants.FifoOverhead));
+  _coreLoggerFirstCycleValidTimestampOnly : TcLogCore(BufferSize:=50 * 50 * (Tc2_System.MAX_STRING_LENGTH + Constants.FifoOverhead));
   _loggerFirstCycle : TcLog;
+  _loggerFirstCycleValidTimestampOnly : TcLog;
   _logger : TcLog;
   _flushCache : BOOL;
  
@@ -225,8 +227,22 @@ _coreLoggerFirstCycle
   .RunLogger();
 _loggerFirstCycle.SetLogger(_coreLoggerFirstCycle);
 
+_coreLoggerFirstCycleValidTimestampOnly
+  .IncludeInstancePath()
+  .MinimumLevel(LogLevels.Warning)
+  .SetDelimiter(Delimiter)
+  .SetRollingInterval(RollingIntervals.Hourly)
+  .DeleteLogFilesAfterDays(1)
+  .TimestampFormat('_YYYYMMDD-hh-mm-ss_')
+  .WriteToAds()
+  .WriteToFile('C:\UnitTestFirstCycle\', 'firstCycleValidTimestampOnly.txt')
+  .ValidTimestampsOnly()
+  .RunLogger();
+_loggerFirstCycleValidTimestampOnly.SetLogger(_coreLoggerFirstCycleValidTimestampOnly);
+
 IF _isFirstCycle THEN
   _loggerFirstCycle.Error('Log in first cycle');
+  _loggerFirstCycleValidTimestampOnly.Error('Log in first cycle');
   _isFirstCycle := FALSE;
 END_IF
 

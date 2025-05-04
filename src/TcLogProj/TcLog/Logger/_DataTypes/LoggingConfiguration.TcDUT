@@ -22,6 +22,8 @@ STRUCT
 	LogFileLifespan : UINT;
   /// Format of timestamp. See `TcLogCore.TimestampFormat` for formatting options.
 	TimestampFormat : STRING;
+  /// Log only valid timestamps (skip log messages during time initialization (first few cycles)
+  	ValidTimestampsOnly: BOOL;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

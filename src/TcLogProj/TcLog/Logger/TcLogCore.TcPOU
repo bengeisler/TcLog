@@ -59,6 +59,7 @@ METHOD PRIVATE BuildLoggingConfiguration : BOOL
 	_config.IncludeInstancePath := FALSE;
 	_config.LogFileLifespan := 0;
 	_config.TimestampFormat := 'YYYYMMDD_hhmm_';
+	_config.ValidTimestampsOnly := FALSE;
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -167,12 +168,14 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF _config.WriteToAds THEN 
-	Tc2_System.ADSLOGSTR(ADSLOG_MSGTYPE_LOG OR ADSLOG_MSGTYPE_HINT, data, ''); 
-END_IF
-
-IF _config.FileName <> '' THEN 
-	_logCache.AddLine(data);
+        <ST><![CDATA[IF(TimeInfoReady OR NOT _config.ValidTimestampsOnly) THEN 
+	IF _config.WriteToAds THEN 
+		Tc2_System.ADSLOGSTR(ADSLOG_MSGTYPE_LOG OR ADSLOG_MSGTYPE_HINT, data, ''); 
+	END_IF
+	
+	IF _config.FileName <> '' THEN 
+		_logCache.AddLine(data);
+	END_IF
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -199,7 +202,7 @@ VAR_INST
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF LogLevel >= _config.MinimumLevel THEN
+        <ST><![CDATA[IF LogLevel >= _config.MinimumLevel AND (TimeInfoReady OR NOT _config.ValidTimestampsOnly)  THEN
 	IF _config.WriteToAds THEN 
 		Tc2_System.ADSLOGSTR(
 			ADSLOG_MSGTYPE_LOG OR LogLevelToAdsLogMsgType(logLevel), 
@@ -434,6 +437,20 @@ END_VAR
 _config.TimestampFormat := format;
 
 TimestampFormat REF= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ValidTimestampsOnly" Id="{409f643f-85e2-41a7-9e55-2bbe083441e9}">
+      <Declaration><![CDATA[/// Configuration method. If this method is called, only valid timestamps are logged.
+/// Note that using this configuration will skip logging anything during the first few PLC cycles, 
+/// as TwinCAT needs a few cycles to initialize its time information.
+METHOD ValidTimestampsOnly : REFERENCE TO TcLogCore
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[BuildLoggingConfiguration();
+
+_config.ValidTimestampsOnly := TRUE;
+
+ValidTimestampsOnly REF= This^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="WriteToAds" Id="{0ac63c1b-765b-40a5-b132-bcc3d18f2f34}">

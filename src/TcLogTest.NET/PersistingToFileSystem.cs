@@ -406,6 +406,10 @@ namespace TcLogTest.NET
                 Assert.Contains(year.ToString(), f);
                 Assert.Contains(month.ToString(), f);
                 Assert.Contains(day.ToString(), f);
+
+                // No file will be created if option ValidTimestampsOnly is set
+                // as the first PLC cycle will not yet have valid time information
+                Assert.DoesNotContain("firstCycleValidTimestampOnly", f);
             }
 
             foreach (var f in files) File.Delete(f);
