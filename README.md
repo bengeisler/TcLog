@@ -68,6 +68,8 @@ The library is licensed under the [MIT License](LICENSE).
 ## Contributing
 Contributions are welcome. Please see the [contribution guide](CONTRIBUTING.md) for details.
 
+Create a library release by running `.\release_library.ps1 -version "major.minor.patch"` from the `tools` folder. This removes the dependency on `TcUnit` and sets the lib version.
+
 ## Further ways of logging in TwinCAT
 With [log4TC](https://mbc-engineering.github.io/log4TC/index.html) there is another logging option for TwinCAT.  This enables structured logging, but an additional Windows service must be installed, which communicates with the PLC library. `TcLog` on the other hand comes as a pure PLC library. 
 The code for log4TC has been published as open source on [GitHub](https://github.com/mbc-engineering/log4TC/releases).
