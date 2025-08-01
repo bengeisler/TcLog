@@ -1,9 +1,6 @@
 ### YamlMime:XRefMap
 sorted: true
 references:
-- uid: TcLog
-  name: TcLog
-  href: reference/TcLogLib.html
 - uid: TcLogLib.AnyToString
   name: AnyToString
   href: reference/TcLogLib/Utils/AnyToString.html

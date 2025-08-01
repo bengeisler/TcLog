@@ -24,16 +24,6 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "reference/TcLogLib.md",
-      "output": {
-        ".html": {
-          "relative_path": "reference/TcLogLib.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "reference/TcLogLib/Constants.md",
       "output": {
         ".html": {
